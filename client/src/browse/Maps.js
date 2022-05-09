@@ -7,13 +7,18 @@ const mapStyles = {
 };
 
 const dummy = [
-  {name: "NE", position: {lat: 30.5491288, lng: -97.5811418}},
-{name: "NW", position: {lat: 30.5491288, lng: -97.9111418}},
-{name: "SW", position: {lat: 30.1491288, lng: -97.9111418}},
-{name: "SE", position: {lat: 30.1491288, lng: -97.5811418}},
-]
+  { name: "NE", position: { lat: 30.5491288, lng: -97.5811418 } },
+  { name: "NW", position: { lat: 30.5491288, lng: -97.9111418 } },
+  { name: "SW", position: { lat: 30.1491288, lng: -97.9111418 } },
+  { name: "SE", position: { lat: 30.1491288, lng: -97.5811418 } },
+];
 
-
+const clickHandler = () => {
+  console.log("click");
+};
+const hoverHandler = () => {
+  console.log("hover");
+};
 
 class GoogleMaps extends Component {
   constructor() {
@@ -36,8 +41,16 @@ class GoogleMaps extends Component {
           }}
         >
           <Marker onClick={this.onMarkerClick} name={"Mark & Katie's House"} />
-          {dummy.map((pin, idx) => {
-            return <Marker title={pin.name} key={idx} position={pin.position}/>
+          {this.props.data.map((item, idx) => {
+            return (
+              <Marker
+                data={item}
+                onClick={clickHandler}
+                onMouseover={hoverHandler}
+                key={idx}
+                position={{lat: item.lat, lng: item.lng}}
+              />
+            );
           })}
         </Map>
       </div>
@@ -46,5 +59,5 @@ class GoogleMaps extends Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: 'AIzaSyC9uXEew2Nzx-ZbP4HMYBHvifaYh2sCsVM'
+  apiKey: "AIzaSyC9uXEew2Nzx-ZbP4HMYBHvifaYh2sCsVM",
 })(GoogleMaps);

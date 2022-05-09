@@ -10,10 +10,6 @@ const Map = (props) => {
     console.log(map, maps);
   };
 
-  useEffect(() => {
-
-  }, [props.lat])
-
   const mapOptions = {
     disableDefaultUI: true,
     mapTypeControl: true,
@@ -46,31 +42,16 @@ const Map = (props) => {
         options={mapOptions}
         hoverDistance={25}
       >
-        <MapMarker
-          lat={props.lat}
-          lng={props.lng}
-          text="Mark & Katie's House"
-        />
-        <MapMarker
-          lat={props.lat + 0.35}
-          lng={props.lng + 0.25}
-          text="NORTHEAST"
-        />
-        <MapMarker
-          lat={props.lat + 0.35}
-          lng={props.lng - 0.08}
-          text="NORTHWEST"
-        />
-        <MapMarker
-          lat={props.lat - 0.05}
-          lng={props.lng - 0.08}
-          text="SOUTHWEST"
-        />
-        <MapMarker
-          lat={props.lat - 0.05}
-          lng={props.lng + 0.25}
-          text="SOUTHEAST"
-        />
+        {props.data.map((item, idx) => {
+          return (
+            <MapMarker
+              key={idx}
+              data={item}
+              lat={item.lat}
+              lng={item.lng}
+            />
+          );
+        })}
       </GoogleMapReact>
     </div>
   );
