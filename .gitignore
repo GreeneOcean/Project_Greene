@@ -1,4 +1,6 @@
 ## SPECIFIC FILES
+client/node_modules
+server/node_modules
 client/dist/bundle.js
 
 ## Ignore Visual Studio temporary files, build results, and
