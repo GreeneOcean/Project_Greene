@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from "react-router-dom"
 import { PageContainer } from '../styles/index.js';
-import { TagsContainer } from '../components/TagsContainer.js';
+import TagsContainer from '../components/TagsContainer.js';
 
 function Donate({ state, dispatch, init }) {
   const { donate, dev } = state;
@@ -45,9 +45,23 @@ function Donate({ state, dispatch, init }) {
     setState(e.target.name, e.target.value);
   };
 
-  const alert = (e) => {
-    console.log('ALERT:', e.target);
+  const addTag = () => {
+    const newTags = tags.slice().concat([tag]);
+    setTags(newTags);
+    setTag('');
   };
+
+  const handleKeyDown = (e) => {
+    if (e.code === 'Enter') {
+      e.preventDefault();
+      addTag();
+    }
+  };
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    addTag();
+  }
 
   return (
     <div>
@@ -72,7 +86,8 @@ function Donate({ state, dispatch, init }) {
 
         <label htmlFor="tag">
           Tags
-          <input type="text" name="tag" id="tag" value={tag} onChange={handleChange}/>
+          <input type="text" name="tag" id="tag" value={tag} onChange={handleChange} onKeyDown={handleKeyDown}/>
+          <button onClick={handleClick}>+</button>
           <TagsContainer tags={tags}/>
         </label>
       </form>
