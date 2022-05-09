@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { StateContext, DispatchContext } from './appState/index.js';
+import { StateContext, DispatchContext } from '../appState/index.js';
 import { Routes, Route, Link } from "react-router-dom";
 import Auth from './pages/Auth'
 import Browse from './pages/Browse'
@@ -8,7 +8,7 @@ import Donate from './pages/Donate'
 import Home from './pages/Home'
 import Item from './pages/Item'
 import Transactions from './pages/Transactions'
-import api from './api'
+import api from '../api'
 
 
 function App() {
