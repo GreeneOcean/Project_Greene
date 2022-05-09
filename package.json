@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/positivefx/starterTemplate.git"
+    "url": "git+https://github.com/GreeneOcean/Project_Greene.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/positivefx/starterTemplate/issues"
+    "url": "https://github.com/GreeneOcean/Project_Greene/issues"
   },
-  "homepage": "https://github.com/positivefx/starterTemplate#readme",
+  "homepage": "https://github.com/GreeneOcean/Project_Greene#readMe",
   "devDependencies": {
     "@babel/cli": "^7.17.10",
     "@babel/core": "^7.17.10",
