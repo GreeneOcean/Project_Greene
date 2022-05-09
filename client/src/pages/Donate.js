@@ -3,6 +3,14 @@ import styled from 'styled-components';
 import { Link } from "react-router-dom"
 import { PageContainer } from '../styles/index.js';
 import TagsContainer from '../components/TagsContainer.js';
+import ToggleSwitch from '../components/ToggleSwitch.js';
+import ImageUploader from '../components/ImageUploader.js';
+
+const categories = [
+  'Clothing',
+  'Food',
+  'Toys'
+];
 
 function Donate({ state, dispatch, init }) {
   const { donate, dev } = state;
@@ -65,6 +73,9 @@ function Donate({ state, dispatch, init }) {
     addTag();
   }
 
+  const uploadImage = (e) => {
+  };
+
   return (
     <div>
       <form>
@@ -81,8 +92,9 @@ function Donate({ state, dispatch, init }) {
         <label htmlFor="category">
           Category
           <select name="category" id="category" value={category} onChange={handleChange}>
-            <option>Food</option>
-            <option>Toys</option>
+            {categories.map((category, i) => {
+              return <option key={i} value={category}>{category}</option>
+            })}
           </select>
         </label>
 
@@ -91,6 +103,13 @@ function Donate({ state, dispatch, init }) {
           <input type="text" name="tag" id="tag" value={tag} onChange={handleChange} onKeyDown={handleKeyDown}/>
           <button onClick={handleClick}>+</button>
           <TagsContainer tags={tags}/>
+        </label>
+
+        <ToggleSwitch on="Charity only" off="Available to everyone" defaultValue={true} onChange={setCharityOnly}/>
+
+        <label htmlFor="photo">
+          Add a Photo
+          <ImageUploader upload={uploadImage}/>
         </label>
       </form>
     </div>
