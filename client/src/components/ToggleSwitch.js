@@ -28,7 +28,7 @@ const ToggleSwitchOff = styled.span`
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: #999;
   border-radius: .8em;
 
   &:before {
