@@ -3,8 +3,15 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+## MAC files ##
+.DS_Store
+
+## NPM ##
+npm
+npm-debug.log
+
 # User-specific files
-*.rsuser
+:*.rsuser
 *.suo
 *.user
 *.userosscache
@@ -349,6 +356,5 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 
-*/.DS_Store
-*/node_modules
+
 
