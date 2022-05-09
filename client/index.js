@@ -13,4 +13,4 @@ const Stack =
 </BrowserRouter>
 )
 
-ReactDOM.render(document.getElementById('root')).render(Stack)
+ReactDOM.render(Stack, document.getElementById('root'));
