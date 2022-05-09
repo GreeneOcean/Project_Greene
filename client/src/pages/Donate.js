@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from "react-router-dom"
-
+import { PageContainer } from '../styles/index.js';
 
 function Donate({ state, dispatch, init }) {
   const { donate, dev } = state
@@ -29,16 +29,6 @@ function Donate({ state, dispatch, init }) {
   );
 }
 
-
-const PageContainer = styled.div`
-  width: 50%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  background-color: rgb(20, 20, 20);
-`
 
     // dispatch({
     //   type: 'GET_DONATIONS',
