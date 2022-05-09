@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
+const SwitchContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
 const Switch = styled.label`
   position: relative;
   display: inline-block;
   width: 3em;
   height: 1.6em;
+  margin-right: .4em;
 `;
 
 const InvisibleCheckbox = styled.input`
@@ -54,14 +61,20 @@ const ToggleSwitch = ({on='', off='', defaultValue=false, onChange=()=>{}}) => {
     setValue(!value);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.code === 'Enter') {
+      toggle();
+    }
+  };
+
   return (
-    <>
-    <Switch>
+    <SwitchContainer>
+    <Switch tabIndex="0" onKeyDown={toggle}>
       <InvisibleCheckbox name="charityOnly" type="checkbox" checked={defaultValue} isChecked={value} onChange={toggle}/>
       {value ? <ToggleSwitchOn/> : <ToggleSwitchOff/>}
     </Switch>
     <span>{value ? on : off}</span>
-    </>
+    </SwitchContainer>
   );
 };
 
