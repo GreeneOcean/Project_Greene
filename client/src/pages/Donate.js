@@ -1,11 +1,10 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from "react-router-dom"
 import { PageContainer } from '../styles/index.js';
 
 function Donate({ state, dispatch, init }) {
-  const { donate, dev } = state
-
+  const { donate, dev } = state;
   useEffect(() => {
     init()
     .then(res => {
@@ -16,16 +15,47 @@ function Donate({ state, dispatch, init }) {
         payload: res
       })
     })
-  }, [])
+  }, []);
+
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [category, setCategory] = useState('');
+  const [tag, setTag] = useState('');
+
+  const handleChange = (e) => {
+  };
+
+  const alert = (e) => {
+    console.log('ALERT:', e.target);
+  };
 
   return (
-      <PageContainer >
-        <h3>Donate</h3>
-        <p>{`DonateData: ${state.DonateData}`} </p>
-        <Link to="/">Home</Link>
-        <Link to="/Auth">Auth</Link>
-        <Link to="/Transactions">Transactions</Link>
-      </PageContainer>
+    <div>
+      <form>
+        <label htmlFor="title">
+          Title
+          <input type="text" name="title" id="title" value={title} onChange={handleChange}/>
+        </label>
+
+        <label htmlFor="description">
+          Description
+          <textarea name="description" id="description" value={description} onChange={handleChange}/>
+        </label>
+
+        <label htmlFor="category">
+          Category
+          <select name="category" id="category" value={category} onChange={handleChange}>
+            <option>Food</option>
+            <option>Toys</option>
+          </select>
+        </label>
+
+        <label htmlFor="tags">
+          Tags
+          <input type="text" name="tags" id="tags" value={tag} onChange={handleChange} onSubmit={alert}/>
+        </label>
+      </form>
+    </div>
   );
 }
 
