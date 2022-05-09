@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from "react-router-dom"
 import { PageContainer } from '../styles/index.js';
+import { TagsContainer } from '../components/TagsContainer.js';
 
 function Donate({ state, dispatch, init }) {
   const { donate, dev } = state;
@@ -21,8 +22,27 @@ function Donate({ state, dispatch, init }) {
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
   const [tag, setTag] = useState('');
+  const [tags, setTags] = useState([]);
+  const [charityOnly, setCharityOnly] = useState(true);
+  const [photo, setPhoto] = useState(null);
+
+  const setState = (field, data) => {
+    const states = {
+      title: setTitle,
+      description: setDescription,
+      category: setCategory,
+      tag: setTag,
+      tags: setTags,
+      charityOnly: setCharityOnly,
+      photo: setPhoto,
+    };
+
+    let set = states[field];
+    set(data);
+  };
 
   const handleChange = (e) => {
+    setState(e.target.name, e.target.value);
   };
 
   const alert = (e) => {
@@ -50,9 +70,10 @@ function Donate({ state, dispatch, init }) {
           </select>
         </label>
 
-        <label htmlFor="tags">
+        <label htmlFor="tag">
           Tags
-          <input type="text" name="tags" id="tags" value={tag} onChange={handleChange} onSubmit={alert}/>
+          <input type="text" name="tag" id="tag" value={tag} onChange={handleChange}/>
+          <TagsContainer tags={tags}/>
         </label>
       </form>
     </div>
