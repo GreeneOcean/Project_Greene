@@ -6,7 +6,7 @@ const PORT = 3000;
 const app = express();
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, '../dist')));
+app.use(express.static(path.join(__dirname, '../client/dist')));
 
 
 app.get('/Auth', (req, res) => {
