@@ -46,9 +46,11 @@ function Donate({ state, dispatch, init }) {
   };
 
   const addTag = () => {
-    const newTags = tags.slice().concat([tag]);
-    setTags(newTags);
-    setTag('');
+    if (tag.length > 0 && !tags.includes(tag)) {
+      const newTags = tags.slice().concat([tag]);
+      setTags(newTags);
+      setTag('');
+    }
   };
 
   const handleKeyDown = (e) => {
