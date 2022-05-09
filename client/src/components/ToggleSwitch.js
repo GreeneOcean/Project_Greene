@@ -31,7 +31,7 @@ const ToggleSwitchOff = styled.span`
   background-color: #999;
   border-radius: .8em;
 
-  &:before {
+  :before {
     position: absolute;
     content: "";
     height: 1.2em;
@@ -46,7 +46,7 @@ const ToggleSwitchOff = styled.span`
 const ToggleSwitchOn = styled(ToggleSwitchOff)`
   background-color: green;
 
-  &:before {
+  :before {
     -webkit-transform: translateX(1.4em);
     -ms-transform: translateX(1.4em);
     transform: translateX(1.4em);
