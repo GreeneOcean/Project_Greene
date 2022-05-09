@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Link } from "react-router-dom"
+import { useLinkClickHandler } from "react-router-dom"
 import { PageContainer } from '../styles/index.js';
 import TagsContainer from '../components/TagsContainer.js';
 import ToggleSwitch from '../components/ToggleSwitch.js';
@@ -11,6 +11,14 @@ const categories = [
   'Food',
   'Toys'
 ];
+
+const ButtonBox = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 2em;
+`;
 
 function Donate({ state, dispatch, init }) {
   const { donate, dev } = state;
@@ -76,6 +84,16 @@ function Donate({ state, dispatch, init }) {
   const uploadImage = (e) => {
   };
 
+  const cancel = (e) => {
+    e.preventDefault();
+    useLinkClickHandler('Home');
+  };
+
+  const submitForm = (e) => {
+    e.preventDefault();
+
+  };
+
   return (
     <div>
       <form>
@@ -112,6 +130,11 @@ function Donate({ state, dispatch, init }) {
           <ImageUploader upload={uploadImage}/>
         </label>
       </form>
+
+      <ButtonBox>
+        <button name="cancel" onClick={cancel}></button>
+        <button name="post" onClick={submitForm}></button>
+      </ButtonBox>
     </div>
   );
 }
