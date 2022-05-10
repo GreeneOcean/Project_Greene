@@ -7,10 +7,29 @@ import ToggleSwitch from '../components/ToggleSwitch.js';
 import ImageUploader from '../components/ImageUploader.js';
 
 const categories = [
+  'Accessories',
+  'Arts & Crafts',
+  'Baby',
   'Books',
   'Clothing',
+  'Education',
+  'Electronics',
   'Food',
-  'Toys'
+  'Garden',
+  'Home & Furniture',
+  'Jewelry',
+  'Kitchenware',
+  'Movies',
+  'Music',
+  'Musical Instruments',
+  'Office & Stationery',
+  'Personal Care',
+  'Pet Supplies',
+  'Sports',
+  'Tools',
+  'Toys',
+  'Video Games',
+  'Other'
 ];
 
 const ButtonBox = styled.div`
