@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 
-import Map from "./Map.js";
-import Maps from "./Maps.js";
-import ItemList from "./ItemList.js";
-// import GET from "/Users/markalperin/Desktop/Project_Greene/server/DB/get.js";
+import Map from "./maps/Map.js";
+import Maps from "./maps/Maps.js";
+import ItemList from "./list/ItemList.js";
+
+const Container = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+`;
 
 const BrowsePage = (props) => {
   const [lat, setLat] = useState(null);
@@ -11,15 +16,13 @@ const BrowsePage = (props) => {
   const [itemData, setItemData] = useState([]);
   const [displayData, setDisplayData] = useState([]);
   const [position, setPosition] = useState({});
-  const [toggle, setToggle] = useState(false);
+  const [toggleMap, setToggleMap] = useState(true);
+  const [selectedItem, setSelectedItem] = useState(null);
 
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.watchPosition(function (position) {
-        console.log("Latitude is :", position.coords.latitude);
         setLat(position.coords.latitude);
-        // setPosition(position.lat = position.coords.latitude);
-        console.log("Longitude is :", position.coords.longitude);
         setLng(position.coords.longitude);
       });
     }
@@ -35,26 +38,45 @@ const BrowsePage = (props) => {
           temp.push(res[i]);
         }
         setItemData(temp);
-        setDisplayData(temp)
+        setDisplayData(temp);
       });
   }, []);
 
-  const toggleMap = () => {
-    setToggle(!toggle);
+  const toggleMapHandler = () => {
+    setToggleMap(!toggleMap);
   };
 
   return (
     <div>
       <div>
         <p>This is the filter bar</p>
-        <button onClick={toggleMap}>Toggle map</button>
+        <button onClick={toggleMapHandler}>Toggle map</button>
       </div>
-      <div>
-      {toggle && <Map data={itemData} lat={lat} lng={lng} />}
-      {!toggle && <Maps data={itemData} lat={lat} lng={lng} />}
-      <ItemList items={displayData}/>
-      </div>
-
+      <Container>
+        {toggleMap && (
+          <Map
+            data={itemData}
+            selectedItem={selectedItem}
+            setSelectedItem={setSelectedItem}
+            lat={lat}
+            lng={lng}
+          />
+        )}
+        {!toggleMap && (
+          <Maps
+            data={itemData}
+            selectedItem={selectedItem}
+            setSelectedItem={setSelectedItem}
+            lat={lat}
+            lng={lng}
+          />
+        )}
+        <ItemList
+          items={itemData}
+          selectedItem={selectedItem}
+          setSelectedItem={setSelectedItem}
+        />
+      </Container>
     </div>
   );
 };
