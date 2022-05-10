@@ -2,12 +2,19 @@ import React, {useEffect, useState} from "react";
 import styled from 'styled-components';
 
 
-const Cell = () =>{
-
+const Cell = (props) =>{
+  console.log('cell props', props)
 
   return (
 
-    <Container>WHAT</Container>
+    <Container>
+
+      <div>PHOTO: {props.item.pictures}</div>
+      <div>PRODUCT INFO: {props.item.title} {props.item.category} {props.item.description} </div>
+      <div>USER INFO: {props.user.first_name} {props.user.last_name} {props.user.user_name}</div>
+      {}
+
+    </Container>
 
   )
 }

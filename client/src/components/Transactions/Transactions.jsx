@@ -142,31 +142,27 @@
 
   const Transactions = () =>{
     const [group, setGroup] = useState('both');
-    const [status, setStatus] = useState('unclaimed');
-    const [items, setItems] = useState('x');
+    const [status, setStatus] = useState('approved');
+    const [items, setItems] = useState([]);
 
 
     const filter = () => {
-      console.log('DDD', data)
 
       var newItems = [];
 
       if (group === 'both') {
         data.interested.forEach(item => {
           if (item.state === status) {
-            console.log('inner inner', status, item)
             newItems.push(item);
           }
         });
         data.received.forEach(item => {
           if (item.state === status) {
-            console.log('inner inner', status, item)
             newItems.push(item);
           }
         });
         data.donated.forEach(item => {
           if (item.state === status) {
-            console.log('inner inner', status, item)
             newItems.push(item);
           }
         });
@@ -183,14 +179,13 @@
           }
         });
       }
-      console.log(newItems)
       setItems(newItems)
     }
 
 
     useEffect(() => {
       filter();
-    }, [setGroup, setStatus])
+    }, [group, status]);
 
     return (
 
@@ -207,8 +202,14 @@
             <button onClick={() => setStatus('donated')}>History</button>
           </div>
           <div>
+            {
+              items.map((item, i) => {
+                return (
+                  <Cell user={data} item={item} key={i}/>
+                )
+              })
 
-            <Cell />
+            }
           </div>
         </TransactionContainer>
 
