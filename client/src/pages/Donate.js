@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useLinkClickHandler } from "react-router-dom"
-import { PageContainer } from '../styles/index.js';
+import { ButtonL, ButtonM, ButtonS } from '../styles/buttons.js';
 import TagsContainer from '../components/TagsContainer.js';
 import ToggleSwitch from '../components/ToggleSwitch.js';
 import ImageUploader from '../components/ImageUploader.js';
@@ -31,6 +31,24 @@ const categories = [
   'Video Games',
   'Other'
 ];
+
+const PageContainer = styled.div`
+  width: 70%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+  color: black;
+`;
+
+const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  width: 80%;
+`;
 
 const ButtonBox = styled.div`
   width: 100%;
@@ -114,8 +132,8 @@ function Donate({ state, dispatch, init }) {
   };
 
   return (
-    <div>
-      <form>
+    <PageContainer>
+      <StyledForm>
         <label htmlFor="title">
           Title
           <input type="text" name="title" id="title" value={title} onChange={handleChange} />
@@ -152,13 +170,13 @@ function Donate({ state, dispatch, init }) {
           Click to add or drag in a photo
           <ImageUploader upload={uploadImage} />
         </label>
-      </form>
+      </StyledForm>
 
       <ButtonBox>
-        <button name="cancel" onClick={cancel}>Cancel</button>
-        <button name="post" onClick={submitForm}>List Donation</button>
+        <ButtonS name="cancel" onClick={cancel}>Cancel</ButtonS>
+        <ButtonS name="post" onClick={submitForm}>List Donation</ButtonS>
       </ButtonBox>
-    </div>
+    </PageContainer>
   );
 }
 
