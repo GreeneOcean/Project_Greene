@@ -9,9 +9,12 @@ const app = express();
 app.use(express.json());
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
+<<<<<<< HEAD
 
 
 const { db } = require('./DB/index')
+=======
+>>>>>>> 5892e46d911436459f9879e7c158829d5ce5d060
 
 
 app.get('/Auth', (req, res) => {

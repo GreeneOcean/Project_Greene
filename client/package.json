@@ -1,37 +1,21 @@
 {
-  "name": "fec",
+  "name": "greene_ocean_client",
   "version": "0.1.0",
-  "private": true,
   "dependencies": {
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
+    "@babel/plugin-transform-runtime": "^7.17.10",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-icons": "^4.3.1",
     "react-router-dom": "^6.3.0",
     "styled-components": "^5.3.5"
   },
   "scripts": {
     "build:dev": "webpack --config webpack.dev.js --watch .",
-    "build:prod": "webpack  --config webpack.prod.js",
-    "build:staging": "env-cmd -f .env.src.staging npm run build:prod"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "build": "webpack  --config webpack.prod.js"
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",
+    "@babel/plugin-transform-runtime": "^7.17.10",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "@testing-library/jest-dom": "^5.16.3",
