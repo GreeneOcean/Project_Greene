@@ -7,7 +7,7 @@ const AppContainer = styled.div`
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  background-color: rgb(20, 20, 20);
+  background-color: var(--color4);
 `;
 
 const LoadingContainer = styled.div`
@@ -37,6 +37,8 @@ const PageContainer = styled.div`
   justify-content: center;
   background-color: rgb(20, 20, 20);
 `;
+
+
 
 export {
   AppContainer,
