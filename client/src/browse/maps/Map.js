@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import GoogleMapReact from "google-map-react";
 
 import MapMarker from "./MapMarker.js";
-// require("dotenv").config();
+require("dotenv").config();
 
 const Map = (props) => {
 
@@ -25,8 +25,7 @@ const Map = (props) => {
     // Important! Always set the container height explicitly
     <div style={{ height: "600px", width: "750px" }}>
       <GoogleMapReact
-        // bootstrapURLKeys={{ key: process.env.GOOGLE_MAPS_API_KEY }}
-        bootstrapURLKeys={{ key: "AIzaSyC9uXEew2Nzx-ZbP4HMYBHvifaYh2sCsVM" }}
+        bootstrapURLKeys={{ key: process.env.GOOGLE_MAPS_API_KEY }}
         defaultCenter={{ lat: 42.55, lng: -99.86 }}
         center={{
           lat: props.lat,
