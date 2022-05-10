@@ -150,7 +150,7 @@
       console.log('DDD', data)
 
       var newItems = [];
-      
+
       if (group === 'both') {
         data.interested.forEach(item => {
           if (item.state === status) {
@@ -183,19 +183,14 @@
           }
         });
       }
-
-
-
       console.log(newItems)
       setItems(newItems)
-
-
-
-
     }
 
 
-
+    useEffect(() => {
+      filter();
+    }, [setGroup, setStatus])
 
     return (
 
@@ -210,7 +205,6 @@
             <button onClick={() => setStatus('claimed')}>Claimed</button>
             <button onClick={() => setStatus('unclaimed')}>Unclaimed</button>
             <button onClick={() => setStatus('donated')}>History</button>
-            <button onClick={() => filter()}>Test</button>
           </div>
           <div>
 
