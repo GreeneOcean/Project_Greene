@@ -1,5 +1,7 @@
 import React, { useState, useContext } from "react";
+import styled from "styled-components";
 
+import MarkerCard from "./MarkerCard.js";
 import { RiMapPin2Fill } from "react-icons/ri";
 // import {FaMapMarkerAlt } from "react-icons/fa";
 const MapMarker = (props) => {
@@ -10,25 +12,25 @@ const MapMarker = (props) => {
       ? { color: "cyan", cursor: "pointer", height: "25px", width: "25px" }
       : { color: "blue", height: "25px", width: "25px" };
 
-  // {props.selectedItem === props.item.id ? "red" : "blue"}
   const clickHandler = () => {
-    console.log(props.item.id);
     props.setSelectedItem(props.item.id);
   };
 
-  const hoverHandler = () => {
-    console.log("hoverhover");
-  };
   return (
     <div>
       <RiMapPin2Fill
-        onClick={clickHandler}
-        onMouseover={hoverHandler}
+        onClick={() => {
+          props.setSelectedItem(props.item.id);
+        }}
         style={style}
       />
-      {props.$hover && <p>{props.item.id}</p>}
+      {props.$hover && <MarkerCard item={props.item} />}
     </div>
   );
 };
 
 export default MapMarker;
+
+const StyledDiv = styled.div`
+  display: flex;
+`;

@@ -3,26 +3,12 @@ import styled from "styled-components";
 
 import ItemCard from "./ItemCard.js";
 
-const Container = styled.div`
-  scroll-behavior: smooth;
-  height: 600px;
-  width: 550px;
-  background-color: yellow;
-  display: flex;
-  overflow: scroll;
-  display: flex;
-  flex-wrap: wrap;
-`;
-
 const ItemList = (props) => {
 
   useEffect(() => {
     if (props.selectedItem) {
-      let myElement = document.getElementById(props.selectedItem.toString())
-      console.log("myElement: ", myElement);
-      let topPos = myElement.offsetTop;
-      console.log("topPos: ", topPos);
-      document.getElementById("itemList").scrollTop = topPos - 155;
+      const myElement = document.getElementById(props.selectedItem.toString())
+      document.getElementById("itemList").scrollTop = myElement.offsetTop - 130;
     }
   }, [props.selectedItem]);
 
@@ -43,3 +29,14 @@ const ItemList = (props) => {
 };
 
 export default ItemList;
+
+const Container = styled.div`
+  scroll-behavior: smooth;
+  height: 600px;
+  width: 550px;
+  background-color: yellow;
+  display: flex;
+  overflow: scroll;
+  display: flex;
+  flex-wrap: wrap;
+`;

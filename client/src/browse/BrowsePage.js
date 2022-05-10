@@ -4,19 +4,13 @@ import styled from "styled-components";
 import Map from "./maps/Map.js";
 import Maps from "./maps/Maps.js";
 import ItemList from "./list/ItemList.js";
-
-const Container = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-`;
+import FilterBar from "./filterBar/FilterBar.js";
 
 const BrowsePage = (props) => {
   const [lat, setLat] = useState(null);
   const [lng, setLng] = useState(null);
   const [itemData, setItemData] = useState([]);
-  const [displayData, setDisplayData] = useState([]);
-  const [position, setPosition] = useState({});
-  const [toggleMap, setToggleMap] = useState(true);
+  const [filteredItems, setFilteredItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
 
   useEffect(() => {
@@ -38,41 +32,28 @@ const BrowsePage = (props) => {
           temp.push(res[i]);
         }
         setItemData(temp);
-        setDisplayData(temp);
+        setFilteredItems(temp);
       });
   }, []);
 
-  const toggleMapHandler = () => {
-    setToggleMap(!toggleMap);
-  };
-
   return (
     <div>
-      <div>
-        <p>This is the filter bar</p>
-        <button onClick={toggleMapHandler}>Toggle map</button>
-      </div>
+      <FilterBar
+        itemData={itemData}
+        setSelectedItem={setSelectedItem}
+        setFilteredItems={setFilteredItems}
+      />
       <Container>
-        {toggleMap && (
-          <Map
-            data={itemData}
-            selectedItem={selectedItem}
-            setSelectedItem={setSelectedItem}
-            lat={lat}
-            lng={lng}
-          />
-        )}
-        {!toggleMap && (
-          <Maps
-            data={itemData}
-            selectedItem={selectedItem}
-            setSelectedItem={setSelectedItem}
-            lat={lat}
-            lng={lng}
-          />
-        )}
+        <Map
+          data={filteredItems}
+          selectedItem={selectedItem}
+          setSelectedItem={setSelectedItem}
+          lat={lat}
+          lng={lng}
+        />
+
         <ItemList
-          items={itemData}
+          items={filteredItems}
           selectedItem={selectedItem}
           setSelectedItem={setSelectedItem}
         />
@@ -82,3 +63,8 @@ const BrowsePage = (props) => {
 };
 
 export default BrowsePage;
+
+const Container = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+`;

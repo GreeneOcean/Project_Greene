@@ -5,7 +5,6 @@ import { BsCardImage } from "react-icons/bs";
 
 const ItemCard = (props) => {
   const clickHandler = () => {
-    console.log("clickclick: ");
     props.setSelectedItem(props.item.id);
   };
 
@@ -30,6 +29,7 @@ const ItemCard = (props) => {
 
 const Container = styled.div`
   min-width: 150px;
+  max-width: 150px;
   height: 150px;
   margin: 10px;
   cursor: pointer;
