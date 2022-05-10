@@ -1,11 +1,22 @@
 
 const BASE_URL = `http://localhost:3000`
 
-function buildEndpoint(endpoint, params) {
-  return `${BASE_URL}${endpoint}`
+
+function addQueries(queries) {
+  return Object.entries(queries).reduce((memo, keyVal) => {
+    const [ key, value ] = keyVal
+    memo +=  `${key}=${value}&`
+    return memo
+  }, '?')
 }
 
-function buildGetOptions(endpoint, params = {}) {
+
+
+function buildEndpoint(endpoint, queries) {
+  return queries ? `${BASE_URL}${endpoint}${addQueries(queries)}` : `${BASE_URL}${endpoint}`
+}
+
+function buildGetOptions(endpoint, params) {
   return [
     buildEndpoint(endpoint, params),
     {
@@ -18,7 +29,7 @@ function buildGetOptions(endpoint, params = {}) {
 }
 
 
-function buildPostOptions(endpoint, params = {}, data = {}) {
+function buildPostOptions(endpoint, data = {}, params) {
   return [
     buildEndpoint(endpoint, params),
     {
@@ -39,42 +50,56 @@ function runFetch(url, options) {
 }
 
 
-function get(endpoint, params) {
-  return runFetch(...buildGetOptions(endpoint, params))
+function get(endpoint, queries) {
+  return runFetch(...buildGetOptions(endpoint, queries))
 }
 
-function getAuth(params) {
-  return get('/Auth', params)
+function getData(path, queries) {
+  return get('/data' + path, queries)
+}
+get.data = getData
+get.local = {}
+get.local.charities = ((queries) => get.data('/local/users', queries))
+get.local.donations = ((queries) => get.data('/local/donations', queries))
+
+
+get.user = ((queries) => get.data())
+
+
+
+
+function getAuth(queries) {
+  return get('/Auth', queries)
 }
 get.Auth = getAuth
 
-function getBrowse(params) {
-  return get('/Browse', params)
+function getBrowse(queries) {
+  return get('/Browse', queries)
 }
 get.Browse = getBrowse
-function getDonate(params) {
-  return get('/Donate', params)
+function getDonate(queries) {
+  return get('/Donate', queries)
 }
 get.Donate = getDonate
 
-function getHome(params) {
-  return get('/Home', params)
+function getHome(queries) {
+  return get('/Home', queries)
 }
 get.Home = getHome
 
-function getItem(params) {
-  return get('/Item', params)
+function getItem(queries) {
+  return get('/Item', queries)
 }
 get.Item = getItem
 
-function getTransactions(params) {
-  return get('/Transactions', params)
+function getTransactions(queries) {
+  return get('/Transactions', queries)
 }
 get.Transactions = getTransactions
 
 
 
-function post(endpoint, params, data) {
+function post(endpoint, data, params) {
   return runFetch(...buildPostOptions(endpoint, params, data))
 }
 

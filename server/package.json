@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server:dev": "node index.js"
+    "server:dev": "nodemon index.js",
+    "hydrate": "env-cmd -f hydrate/hydrate.config node hydrate/hydrate.js"
   },
   "author": "",
   "license": "ISC",

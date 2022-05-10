@@ -18,11 +18,11 @@ POST.user = async (newUser) => {
   return await POST(newUser, 'users')
 }
 
-POST.claimable = async (newDonation) => {
+POST.donations = async (newDonation) => {
   return await POST(newDonation, 'donations')
 }
 
-POST.claimed = async (newClaim) => {
+POST.donated = async (newDonated) => {
   return await POST(newClaim, 'donated')
 }
 

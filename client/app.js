@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { StateContext, DispatchContext } from './appState/index.js';
 import { Routes, Route, Link } from "react-router-dom";
@@ -16,6 +16,18 @@ function App() {
   const [state] = useContext(StateContext);
   const { dev } = state
   dev.logs && console.log('App state', state)
+
+  useEffect(() => {
+    const query = {
+      lat: 30.281785180813568,
+      lng: -97.9005011705492,
+      count: 250,
+    }
+    api.get.local.donations(query)
+    .then(res => console.log(`api.get.local.donations() res`, res))
+  }, [])
+
+
 
   return (
     <AppContainer >
