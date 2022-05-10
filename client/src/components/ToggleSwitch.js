@@ -69,7 +69,7 @@ const ToggleSwitch = ({on='', off='', defaultValue=false, onChange=()=>{}}) => {
 
   return (
     <SwitchContainer>
-    <Switch tabIndex="0" onKeyDown={toggle}>
+    <Switch tabIndex="0" onKeyDown={handleKeyDown}>
       <InvisibleCheckbox name="charityOnly" type="checkbox" checked={defaultValue} isChecked={value} onChange={toggle}/>
       {value ? <ToggleSwitchOn/> : <ToggleSwitchOff/>}
     </Switch>
