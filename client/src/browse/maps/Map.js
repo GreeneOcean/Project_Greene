@@ -5,16 +5,13 @@ import MapMarker from "./MapMarker.js";
 // require("dotenv").config();
 
 const Map = (props) => {
-  const handleApiLoaded = async (map, maps) => {
-    console.log(map, maps);
-  };
 
   const mapOptions = {
     disableDefaultUI: true,
     mapTypeControl: true,
     streetViewControl: false,
     scollWheel: true,
-    zoomControlOptions: true,
+    // zoomControl: true, // Todo: zoom control buggy
     styles: [
       {
         featureType: "poi",
@@ -38,7 +35,6 @@ const Map = (props) => {
         defaultZoom={12}
         zoom={props.lat ? 12 : 4}
         yesIWantToUseGoogleMapApiInternals
-        onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
         options={mapOptions}
         hoverDistance={25}
       >

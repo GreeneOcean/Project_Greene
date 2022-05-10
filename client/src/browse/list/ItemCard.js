@@ -16,13 +16,24 @@ const ItemCard = (props) => {
         backgroundColor: props.selectedItem === props.item.id ? "red" : "blue",
       }}
     >
-      {props.item.pictures && <img src={item.pictures[0]} />}
-      {!props.item.pictures && <BsCardImage />}
-      <p>{props.item.title}</p>
-      <p>{props.item.description}</p>
-      {props.item.tag.map((tag, idx) => {
-        return <p key={idx}>{tag}</p>;
-      })}
+      <div style={{display: "flex", justifyContent: "space-between"}}>
+        {props.item.pictures && <img src={item.pictures[0]} />}
+        {!props.item.pictures && <BsCardImage />}
+        {props.selectedItem === props.item.id && (
+          <button
+            onClick={() => {
+              console.log("functionality not yet implemented");
+            }}
+          >
+            Add to cart
+          </button>
+        )}
+        </div>
+        <p>{props.item.title}</p>
+        <p>{props.item.description}</p>
+        {props.item.tag.map((tag, idx) => {
+          return <p key={idx}>{tag}</p>;
+        })}
     </Container>
   );
 };

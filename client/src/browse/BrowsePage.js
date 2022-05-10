@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import Map from "./maps/Map.js";
-import Maps from "./maps/Maps.js";
 import ItemList from "./list/ItemList.js";
 import FilterBar from "./filterBar/FilterBar.js";
 
@@ -26,7 +25,6 @@ const BrowsePage = (props) => {
     fetch("http://localhost:3000/local")
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
         const temp = [];
         for (let i = 0; i < res.length; i += 100) {
           temp.push(res[i]);

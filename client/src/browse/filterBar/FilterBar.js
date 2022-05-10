@@ -4,7 +4,6 @@ import styled from "styled-components";
 const FilterBar = (props) => {
   const [tags, setTags] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [distance, setDistance] = useState(100);
 
   useEffect(() => {
     const newCategories = props.itemData.reduce(
@@ -12,10 +11,8 @@ const FilterBar = (props) => {
         unique.includes(item.category) ? unique : [...unique, item.category],
       []
     );
-    // newCategories.unshift('--Choose Category--')
     setCategories(newCategories);
 
-    // const newTags = ['--Choose Tag--']
     const newTags = [];
     props.itemData.forEach((item) => {
       item.tag.forEach((tag) => {
@@ -29,7 +26,7 @@ const FilterBar = (props) => {
 
   const filterItems = () => {
     let filteredItems = props.itemData;
-    if (document.getElementById("distance").value) {
+    if (document.getElementById("distance").value !== "--Select Distance--") {
       filteredItems = filteredItems.filter((item) => {
         return item.distance <= document.getElementById("distance").value;
       });
@@ -55,7 +52,7 @@ const FilterBar = (props) => {
   return (
     <BarForm>
       <select id="distance" onChange={filterItems}>
-        <option value={null}>--Select Distance--</option>
+        <option>--Select Distance--</option>
         <option value={5}>5 miles</option>
         <option value={10}>10 miles</option>
         <option value={25}>25 miles</option>
