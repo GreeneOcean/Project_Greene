@@ -33,6 +33,7 @@ const runHydration = async (numUserGen, randGen = randGenNums, print = false) =>
   numClaimables += donations.length
   await sql`INSERT INTO users ${ sql(users) }`
   await sql`INSERT INTO donations ${ sql(donations) }`
+
 }
 
 
