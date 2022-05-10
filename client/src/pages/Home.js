@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from "react-router-dom"
-
+import { PageContainer } from '../styles/index.js';
 
 function Home({ state, dispatch, init }) {
 
@@ -38,26 +38,6 @@ function Home({ state, dispatch, init }) {
       </PageContainer>
   );
 }
-
-
-const PageContainer = styled.div`
-  width: 95%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: space-around;
-  background-color: rgb(20, 20, 20);
-
-  p {
-    font-size: 12px;
-  }
-
-`
-
-
-
-
 
 
 export default Home;
