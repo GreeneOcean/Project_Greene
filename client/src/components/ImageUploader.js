@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BsPlusSquareDotted } from 'react-icons/bs'
+import { BiLoaderCircle } from 'react-icons/bi';
 import styled from 'styled-components';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage } from '../firebase/index.js';
@@ -14,14 +15,29 @@ const UploadContainer = styled.div`
   display: grid;
   justify-content: center;
   align-content: center;
+  box-sizing: content-box;
+`;
+
+const ImageInput = styled.input`
+  height: inherit;
+  width: inherit;
+  border-radius: inherit;
+  position: absolute;
+  opacity: 0;
+`;
+
+const PreviewImage = styled.img`
+  height: inherit;
 `;
 
 const ImageUploader = ({upload}) => {
   const [image, setImage] = useState(null);
   const [imageURL, setImageURL] = useState(null);
+  const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     if (image) {
+      setUploading(true);
       let imageRef = ref(storage, `images/${image.name}`);
       uploadBytes(imageRef, image).then((data) => {
         return getDownloadURL(data.ref);
@@ -32,6 +48,9 @@ const ImageUploader = ({upload}) => {
       .catch(() => {
         setImage(null);
         console.error('Encountered a problem uploading the image');
+      })
+      .finally(() => {
+        setUploading(false);
       });
     }
   }, [image]);
@@ -43,17 +62,18 @@ const ImageUploader = ({upload}) => {
   if (image) {
     return (
     <UploadContainer>
-      <img src={imageURL}/>
+      {
+      uploading
+        ? <BiLoaderCircle />
+        : <PreviewImage src={imageURL}/>
+      }
     </UploadContainer>
     );
-    // return <UploadContainer><img src=""></img></UploadContainer>;
   } else {
     return (
       <UploadContainer>
-          <label>
-            <BsPlusSquareDotted/>
-            <input type="file" onChange={uploadImage}/>
-          </label>
+          <BsPlusSquareDotted/>
+          <ImageInput type="file" onChange={uploadImage}/>
       </UploadContainer>
     );
   }
