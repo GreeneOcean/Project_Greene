@@ -7,6 +7,7 @@ import ToggleSwitch from '../components/ToggleSwitch.js';
 import ImageUploader from '../components/ImageUploader.js';
 
 const categories = [
+  'Books',
   'Clothing',
   'Food',
   'Toys'
@@ -24,19 +25,19 @@ function Donate({ state, dispatch, init }) {
   const { donate, dev } = state;
   useEffect(() => {
     init()
-    .then(res => {
-      dev.logs && console.log(`\nDonate API init res`, res)
-      dev.logs && console.log('Donate state', state)
-      dispatch({
-        type: `DONATE_INIT`,
-        payload: res
+      .then(res => {
+        dev.logs && console.log(`\nDonate API init res`, res)
+        dev.logs && console.log('Donate state', state)
+        dispatch({
+          type: `DONATE_INIT`,
+          payload: res
+        })
       })
-    })
   }, []);
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState(null);
   const [tag, setTag] = useState('');
   const [tags, setTags] = useState([]);
   const [charityOnly, setCharityOnly] = useState(true);
@@ -91,7 +92,6 @@ function Donate({ state, dispatch, init }) {
 
   const submitForm = (e) => {
     e.preventDefault();
-
   };
 
   return (
@@ -99,51 +99,55 @@ function Donate({ state, dispatch, init }) {
       <form>
         <label htmlFor="title">
           Title
-          <input type="text" name="title" id="title" value={title} onChange={handleChange}/>
+          <input type="text" name="title" id="title" value={title} onChange={handleChange} />
         </label>
 
         <label htmlFor="description">
           Description
-          <textarea name="description" id="description" value={description} onChange={handleChange}/>
+          <textarea name="description" id="description" value={description} onChange={handleChange} />
         </label>
 
         <label htmlFor="category">
           Category
-          <select name="category" id="category" value={category} onChange={handleChange}>
-            {categories.map((category, i) => {
-              return <option key={i} value={category}>{category}</option>
-            })}
+          <select name="category" id="category" value={category} onChange={handleChange} required>
+            {
+              ([<option key={'none'} value={null} selected>Select a Category</option>])
+              .concat(
+                categories.map((category, i) => {
+                  return <option key={i} value={category}>{category}</option>
+                }))
+            }
           </select>
         </label>
 
         <label htmlFor="tag">
           Tags
-          <input type="text" name="tag" id="tag" value={tag} onChange={handleChange} onKeyDown={handleKeyDown}/>
+          <input type="text" name="tag" id="tag" value={tag} onChange={handleChange} onKeyDown={handleKeyDown} />
           <button onClick={handleClick}>+</button>
-          <TagsContainer tags={tags}/>
+          <TagsContainer tags={tags} />
         </label>
 
-        <ToggleSwitch on="Charity only" off="Available to everyone" defaultValue={true} onChange={setCharityOnly}/>
+        <ToggleSwitch on="Charity only" off="Available to everyone" defaultValue={true} onChange={setCharityOnly} />
 
         <label htmlFor="photo">
           Add a Photo
-          <ImageUploader upload={uploadImage}/>
+          <ImageUploader upload={uploadImage} />
         </label>
       </form>
 
       <ButtonBox>
-        <button name="cancel" onClick={cancel}></button>
-        <button name="post" onClick={submitForm}></button>
+        <button name="cancel" onClick={cancel}>Cancel</button>
+        <button name="post" onClick={submitForm}>List Donation</button>
       </ButtonBox>
     </div>
   );
 }
 
 
-    // dispatch({
-    //   type: 'GET_DONATIONS',
-    //   payload: { donate: [2, 3, 4, 5, 6, 7, 8] }
-    // })
-    // {/* {donate.map((val, ind) => <p key={ind} >{val.toString()}</p>)} */}
+// dispatch({
+//   type: 'GET_DONATIONS',
+//   payload: { donate: [2, 3, 4, 5, 6, 7, 8] }
+// })
+// {/* {donate.map((val, ind) => <p key={ind} >{val.toString()}</p>)} */}
 
 export default Donate;
