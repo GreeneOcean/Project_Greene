@@ -2,6 +2,7 @@
 
   import React, {useEffect, useState} from "react";
   import Cell from './Cell.jsx'
+  import styled from 'styled-components';
 
 //   -- STATE POSSIBILITIES:
 // -- unclaimed
@@ -140,39 +141,65 @@
   }
 
   const Transactions = () =>{
-    const [group, setGroup] = useState('');
-    const [status, setStatus] = useState('');
-    const [items, setItems] = useState();
+    const [group, setGroup] = useState('both');
+    const [status, setStatus] = useState('unclaimed');
+    const [items, setItems] = useState('x');
 
-    console.log(data.donated)
 
-    var newGroup = [];
+    const filter = () => {
+      console.log('DDD', data)
 
-    if (group === 'both') {
-      data.interested.forEach(item => {
-        if (item.state === status) {
-          newGroup.push(item);
-        }
-      });
-    } else if (group === 'received') {
-      data.received.forEach(item => {
-        if (item.state === status) {
-          newGroup.push(item);
-        }
-      });
-    } else if (group === 'donations') {
-      data.donated.forEach(item => {
-        if (item.state === status) {
-          newGroup.push(item);
-        }
-      });
+      var newItems = [];
+      
+      if (group === 'both') {
+        data.interested.forEach(item => {
+          if (item.state === status) {
+            console.log('inner inner', status, item)
+            newItems.push(item);
+          }
+        });
+        data.received.forEach(item => {
+          if (item.state === status) {
+            console.log('inner inner', status, item)
+            newItems.push(item);
+          }
+        });
+        data.donated.forEach(item => {
+          if (item.state === status) {
+            console.log('inner inner', status, item)
+            newItems.push(item);
+          }
+        });
+      } else if (group === 'received') {
+        data.received.forEach(item => {
+          if (item.state === status) {
+            newItems.push(item);
+          }
+          });
+      } else if (group === 'donations') {
+        data.donated.forEach(item => {
+          if (item.state === status) {
+            newItems.push(item);
+          }
+        });
+      }
+
+
+
+      console.log(newItems)
+      setItems(newItems)
+
+
+
+
     }
 
-    setGroup(newGroup);
+
 
 
     return (
-        <div>
+
+        <TransactionContainer>
           <div>
             <button onClick={() => setGroup('both')}>Both</button>
             <button onClick={() => setGroup('received')}>Received</button>
@@ -183,17 +210,24 @@
             <button onClick={() => setStatus('claimed')}>Claimed</button>
             <button onClick={() => setStatus('unclaimed')}>Unclaimed</button>
             <button onClick={() => setStatus('donated')}>History</button>
+            <button onClick={() => filter()}>Test</button>
           </div>
           <div>
 
             <Cell />
           </div>
-
-        </div>
+        </TransactionContainer>
 
     )
   }
 
-  export default Transactions;
+const TransactionContainer = styled.div`
+width: 100%;
+height: 100%;
+display: flex;
+flex-direction: column;
+background-color: grey;
+`
 
+export default Transactions;
 
