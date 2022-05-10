@@ -7,8 +7,6 @@ function Chat ({socket, username, room}) {
   const sendMessage = async () => {
     if(currentMessage !== "") {
       const messageData = {
-        room: room,
-        author: username,
         message: currentMessage,
         time:
           new Date(Date.now()).getHours() +
