@@ -49,18 +49,3 @@ function ApprovalList() {
 
 export default ApprovalList;
 
-{/* <label>
-{helpfulClick ? (
-  eachReview.helpfulness + 1
-) : (
-  <HiThumbUp onClick={() => handleHelpful(true)} />
-)}
-</label>
-
-<label>
-{notHelpfulClick ? (
-  - 1
-) : (
-  <HiThumbDown onClick={() => handleHelpful(false)} />
-)}
-</label> */}
