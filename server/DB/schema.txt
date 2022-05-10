@@ -1,0 +1,65 @@
+CREATE DATABASE blue_ocean_dev;
+
+CREATE EXTENSION earthdistance CASCADE;
+
+DROP TABLE IF EXISTS base CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS items CASCADE;
+DROP TABLE IF EXISTS ratings CASCADE;
+
+CREATE TABLE base (
+  lat DOUBLE PRECISION NOT NULL,
+  lng DOUBLE PRECISION NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT Now(),
+  updated_at TIMESTAMPTZ DEFAULT Now()
+);
+
+
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY NOT NULL,
+  last_name TEXT NOT NULL,
+  user_name TEXT UNIQUE NOT NULL,
+  first_name TEXT NOT NULL,
+  charity_state TEXT DEFAULT 'false'
+) INHERITS (base);
+
+-- STATE POSSIBILITIES:
+-- false
+-- true
+-- denied
+
+CREATE TABLE donations (
+  id SERIAL PRIMARY KEY NOT NULL,
+  posted_by TEXT NOT NULL,
+  taken_by TEXT,
+  pictures TEXT[],
+  tag TEXT[],
+  title TEXT NOT NULL,
+  category TEXT NOT NULL,
+  description TEXT NOT NULL,
+  approved_user INT,
+  charity_only BOOL DEFAULT false,
+  interested_users TEXT[],
+  state TEXT DEFAULT 'unclaimed'
+) INHERITS (base);
+
+-- STATE POSSIBILITIES:
+-- unclaimed
+-- claimed
+-- approved
+-- donated
+
+CREATE TABLE ratings (
+  id SERIAL PRIMARY KEY NOT NULL,
+  rated_user_id INT NOT NULL,
+  posted_by_id INT NOT NULL,
+  message TEXT NOT NULL,
+  value INT NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT Now(),
+  updated_at TIMESTAMPTZ DEFAULT Now()
+);
+
+CREATE INDEX users_id ON users USING hash(id);
+CREATE INDEX users_user_name ON users USING hash(user_name);
+CREATE INDEX donations_id ON donations USING hash(id);
+CREATE INDEX base_lat_lng ON base (lat, lng);
