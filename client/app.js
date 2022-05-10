@@ -8,7 +8,7 @@ import Donate from './pages/Donate'
 import Home from './pages/Home'
 import Item from './pages/Item'
 import Transactions from './pages/Transactions'
-import api from './api'
+import api from './api/index'
 
 
 function App() {
@@ -18,19 +18,37 @@ function App() {
   dev.logs && console.log('App state', state)
 
   useEffect(() => {
+
     const query = {
       lat: 30.281785180813568,
       lng: -97.9005011705492,
       count: 250,
     }
-    api.get.local.donations(query)
-    .then(res => console.log(`api.get.local.donations() res`, res))
+    api.get.location()
+    .then(locationRes => {
+      return api.get.local.donations({ ...locationRes, count: 250 })
+      .then(apiRes => {
+        dispatch({
+          type: `USER_INIT`,
+          payload: { ...state.user, ...locationRes, local: apiRes }})
+        })
+    })
+
+
   }, [])
 
 
 
   return (
     <AppContainer >
+      <LinkContainer>
+        <Link to="/">Home</Link>
+        <Link to="/Auth">Auth</Link>
+        <Link to="/Browse">Browse</Link>
+        <Link to="/Donate">Donate</Link>
+        <Link to="/Item">Item</Link>
+        <Link to="/Transactions">Transactions</Link>
+      </LinkContainer>
       <Routes>
         <Route
           path="/"
@@ -109,6 +127,16 @@ const LoadingContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: rgb(30, 30, 30);
+`
+
+const LinkContainer = styled.div`
+  width: 95%;
+  height: 10%;
+  padding: .5em;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
   background-color: rgb(30, 30, 30);
 
 `

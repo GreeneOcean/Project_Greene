@@ -6,23 +6,38 @@ export const DispatchContext = React.createContext([null, () => {}]);
 export const StateContext = React.createContext([{}]);
 
 
+const circleRef = (keys, state) => {
+  keys.forEach(keyA => {
+    const ref = state[keyA]
+    Object.entries(state).forEach(keyValues => {
+      const [keyB, values] = keyValues
+      if ( keyA !== keyB ) {
+        values[keyA] = ref
+      }
+    })
+  })
+}
+
+
+const initUser = {
+  userName: 'Tim',
+  lat: null,
+  lng: null,
+}
+
 const initAppState = {
-  dev: { logs: false },
+  dev: { logs: true },
   Auth: { AuthData: false, },
   Browse: { BrowseData: false },
   Donate: { DonateData: false },
   Home: { HomeData: false },
   Item: { ItemData: false },
   Transactions: { TransactionsData: false },
-  user: { userName: 'Tim' },
+  user: initUser,
 }
+circleRef([ 'dev', 'user' ], initAppState)
 
-initAppState.Auth.dev = initAppState.dev
-initAppState.Browse.dev = initAppState.dev
-initAppState.Donate.dev = initAppState.dev
-initAppState.Home.dev = initAppState.dev
-initAppState.Item.dev = initAppState.dev
-initAppState.Transactions.dev = initAppState.dev
+
 
 const AppContextProvider = ({ children }) => {
 

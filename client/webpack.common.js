@@ -1,17 +1,17 @@
 const path = require("path");
 const webpack = require('webpack')
 
-// const environmentVariables = [
-//   "BASE_URL",
-// ];
+const environmentVariables = [
+  "IP_KEY",
+];
 
 
 module.exports = {
   entry: path.resolve(__dirname,  "index.js"),
 
-  // plugins: [
-  //   new webpack.EnvironmentPlugin(environmentVariables)
-  // ],
+  plugins: [
+    new webpack.EnvironmentPlugin(environmentVariables)
+  ],
 
   module: {
     rules: [

@@ -1,4 +1,6 @@
 
+import { getLocation } from './location'
+
 const BASE_URL = `http://localhost:3000`
 
 
@@ -53,6 +55,8 @@ function runFetch(url, options) {
 function get(endpoint, queries) {
   return runFetch(...buildGetOptions(endpoint, queries))
 }
+
+get.location = getLocation
 
 function getData(path, queries) {
   return get('/data' + path, queries)

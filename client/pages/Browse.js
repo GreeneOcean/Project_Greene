@@ -24,9 +24,6 @@ function Browse({ state, user, dispatch, init }) {
       <PageContainer >
         <h3>Browse</h3>
         <p>{`BrowseData: ${state.BrowseData}`} </p>
-        <Link to="/">Home</Link>
-        <Link to="/Item">Item</Link>
-        <Link to="/Auth">Auth</Link>
       </PageContainer>
   );
 }

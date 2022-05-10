@@ -15,12 +15,22 @@ CREATE TABLE base (
 );
 
 
+CREATE TABLE sessions (
+  id TEXT PRIMARY KEY NOT NULL,
+  user_id INT,
+  password TEXT,
+  created_at TIMESTAMPTZ DEFAULT Now(),
+  updated_at TIMESTAMPTZ DEFAULT Now()
+);
+
 CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
   last_name TEXT NOT NULL,
   user_name TEXT UNIQUE NOT NULL,
   first_name TEXT NOT NULL,
-  charity_state TEXT DEFAULT 'false'
+  charity_state TEXT DEFAULT 'false',
+  session_id TEXT NOT NULL,
+  password TEXT NOT NULL
 ) INHERITS (base);
 
 -- STATE POSSIBILITIES:

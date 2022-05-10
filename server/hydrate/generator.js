@@ -1,4 +1,5 @@
 const { randInt } = require('./utilities.js');
+const auth = require('../auth/index')
 
 
 
@@ -153,6 +154,7 @@ const genRandUser = (id, donoRange = 4) => {
     user_name,
     lat,
     lng,
+    password: auth.create('shalom')
     charity_state: charity_states[randInt(charity_states.length)],
   };
 };

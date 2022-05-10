@@ -1,5 +1,9 @@
 const express = require('express');
 const path = require('path');
+const cookieParser = require('cookie-parser')
+
+const { db } = require('./DB/index')
+const auth = require('./auth/index')
 
 const PORT = 3000;
 
@@ -7,12 +11,13 @@ const PORT = 3000;
 
 const app = express();
 app.use(express.json());
-
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
 
-const { db } = require('./DB/index')
+app.use( auth.session )
 
+//////
 
 app.get('/Auth', (req, res) => {
   console.log(`Request at ${`/Auth`}`)
@@ -30,6 +35,7 @@ app.get('/Donate', (req, res) => {
 })
 
 app.get('/Home', (req, res) => {
+  console.log('HOME req.session', req.session)
   console.log(`Request at ${`/Home`}`)
   res.status(200).send({ HomeData: true })
 })

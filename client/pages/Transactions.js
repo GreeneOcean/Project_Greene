@@ -21,10 +21,7 @@ function Transaction({ state, dispatch, init }) {
       <PageContainer >
         <h3>Transaction</h3>
         <p>{`TransactionsData: ${state.TransactionsData}`} </p>
-        <Link to="/">Home</Link>
-        <Link to="/Donate">Donate</Link>
-        <Link to="/Item">Item</Link>
-        <Link to="/Auth">Auth</Link>
+
       </PageContainer>
   );
 }

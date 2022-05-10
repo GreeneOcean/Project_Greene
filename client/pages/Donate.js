@@ -22,9 +22,6 @@ function Donate({ state, dispatch, init }) {
       <PageContainer >
         <h3>Donate</h3>
         <p>{`DonateData: ${state.DonateData}`} </p>
-        <Link to="/">Home</Link>
-        <Link to="/Auth">Auth</Link>
-        <Link to="/Transactions">Transactions</Link>
       </PageContainer>
   );
 }

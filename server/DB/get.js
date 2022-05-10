@@ -27,7 +27,7 @@ const getUser = async ({ userName }) => {
   }
 }
 
-getUser({ userName: 'not2not' })
+// getUser({ userName: 'not2not' })
 
 
 const getLocal = async (latPosition, lngPosition, range = 10, count = 100, table = 'donations') => {
@@ -58,11 +58,14 @@ const getLocal = async (latPosition, lngPosition, range = 10, count = 100, table
 getLocal.donations = (({ lat, lng, range, count }) => getLocal(lat, lng, range, count, 'donations'))
 getLocal.users = (({ lat, lng, range, count }) => getLocal(lat, lng, range, count, 'users'))
 
-
+const session = async (sessionId) => {
+  return sql`SELECT * FROM sessions AS s WHERE s.id = ${sessionId}`
+}
 
 const GET = {
   user: getUser,
   local: getLocal,
+  session
 }
 
 module.exports = GET

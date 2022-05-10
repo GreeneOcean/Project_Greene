@@ -21,9 +21,6 @@ function Auth({ state, dispatch, init }) {
       <PageContainer >
         <h3>Auth</h3>
         <p>{`AuthData: ${state.AuthData}`} </p>
-        <Link to="/">Home</Link>
-        <Link to="/Donate">Donate</Link>
-        <Link to="/Item">Item</Link>
       </PageContainer>
   );
 }
