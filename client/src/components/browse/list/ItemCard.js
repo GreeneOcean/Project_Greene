@@ -1,16 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
-import Link from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
+import { DispatchContext } from "../../../appState/index";
 import { BsCardImage } from "react-icons/bs";
 
 const ItemCard = ({ item, selectedItem, setSelectedItem }) => {
+  const [, dispatch] = useContext(DispatchContext);
+
+  const navigate = useNavigate();
+
   const selectItemHandler = () => {
     setSelectedItem(item.id);
   };
 
   const claimClickHandler = () => {
-    // send itemdata to state, global
+    dispatch({ type: "ADD_ITEM", payload: item });
+    navigate('/Item', {replace: true});
   };
 
   return (
@@ -60,8 +66,6 @@ const StyledImage = styled.img`
   width: 100%;
 `;
 
-{
-  /* <Link to={"/Item"}>
-<button onClick={claimClickHandler}>View</button>
-</Link> */
-}
+
+
+
