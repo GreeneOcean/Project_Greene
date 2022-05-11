@@ -10,6 +10,7 @@ import Item from './pages/Item'
 import Transactions from './pages/Transactions'
 import api from './api/index'
 import { AppContainer, LoadingContainer, Footer } from './styles/index.js';
+import config from '../config.js';
 
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
   useEffect(() => {
 
     api.get.location(dispatch)
-    const user = { userName: process.env.USERNAME, attempt: 'shalom' }
+    const user = { userName: config.USERNAME, attempt: 'shalom' }
     api.get.login.user(user, dispatch)
 
 
