@@ -66,6 +66,10 @@ const ButtonBox = styled.div`
   padding: 2em;
 `;
 
+const ErrorMessage = styled.div`
+  color: red;
+`;
+
 function Donate({ state, dispatch, init }) {
   const { donate, dev } = state;
   useEffect(() => {
@@ -87,6 +91,7 @@ function Donate({ state, dispatch, init }) {
   const [tags, setTags] = useState([]);
   const [charityOnly, setCharityOnly] = useState(true);
   const [photo, setPhoto] = useState(null);
+  const [invalid, setInvalid] = useState(false);
 
   const setState = (field, data) => {
     const states = {
@@ -151,12 +156,39 @@ function Donate({ state, dispatch, init }) {
       charity_only: charityOnly,
       pictures: photo ? [photo] : []
     };
-    api.post('/AddDonation', null, data);
+
+    if (validate(data)) {
+      api.post('/AddDonation', null, data);
+    } else {
+      setInvalid(true);
+    }
+  };
+
+  const validate = (data) => {
+    if (data.title.length < 1) {
+      return false;
+    } else if (data.description.length < 1) {
+      return false;
+    } else if (data.category === null) {
+      return false;
+    } else if (data.user_name === null) {
+      return false;
+    } else if (data.lat === null || data.lng === null) {
+      return false;
+    }
+    return true;
   };
 
   return (
     <PageContainer>
       <h2>Tell us about your donation</h2>
+      {
+        invalid
+        ? <ErrorMessage>
+          <span>Please complete all required fields.</span>
+        </ErrorMessage>
+        : null
+      }
       <StyledForm>
         <FieldSection htmlFor="title">
           <span>Listing Title</span>
