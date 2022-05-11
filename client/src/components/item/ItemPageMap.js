@@ -36,7 +36,7 @@ const Map = ({ lat, lng }) => {
         options={mapOptions}
         hoverDistance={25}
       >
-        {/* <RiMapPin2Fill lat={lat} lng={lng} /> */}
+        <RiMapPin2Fill lat={lat} lng={lng} style={{color: "blue", height: "25px", width: "25px"}}/>
       </GoogleMapReact>
     </MapContainer>
   );
