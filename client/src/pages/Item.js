@@ -4,11 +4,12 @@ import { Link } from "react-router-dom";
 
 import { PageContainer } from "../styles/index.js";
 import ItemPagePhoto from "../components/item/ItemPagePhoto";
+import TextDisplay from "../components/item/TextDisplay";
 
 function Item({ state, dispatch, init }) {
   const { dev } = state;
 
-  console.log('itemState: ', state.pictures);
+  console.log("itemState: ", state.interested_users);
 
   useEffect(() => {
     init().then((res) => {
@@ -21,20 +22,27 @@ function Item({ state, dispatch, init }) {
     });
   }, []);
 
-
-
   return (
-    <PageContainer >
+    <PageContainer>
       <ItemPageContainer>
-      <ItemPagePhoto pictures={state.pictures}/>
+        <ItemPagePhoto pictures={state.pictures} />
+        <TextDisplay
+          title={state.title}
+          category={state.category}
+          description={state.description}
+          distance={state.distance}
+          charity={state.charity}
+          posted_by={state.posted_by}
+          interested_users={state.interested_users}
+        />
       </ItemPageContainer>
-
     </PageContainer>
   );
 }
-
+// {`${Math.ceil(distance)} ${
+//   distance > 1 ? "miles" : "mile"
+// } from you`}
 export default Item;
-
 
 const ItemPageContainer = styled.div`
   display: flex;
