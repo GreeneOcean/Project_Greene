@@ -12,9 +12,7 @@ const ItemCard = (props) => {
     <ItemContainer
       id={props.item.id}
       onClick={clickHandler}
-      style={{
-        backgroundColor: props.selectedItem === props.item.id ? "red" : "blue",
-      }}
+      isSelected={props.selectedItem === props.item.id}
     >
       <div style={{display: "flex", justifyContent: "space-between"}}>
         {props.item.pictures && <img src={item.pictures[0]} />}
@@ -44,6 +42,7 @@ const ItemContainer = styled.div`
   height: 150px;
   margin: 10px;
   cursor: pointer;
+  background-color: ${({ isSelected } => isSelected ? "red" : "blue" )};
 `;
 
 export default ItemCard;
