@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { PageContainer } from "../styles/index.js";
 import ItemPagePhoto from "../components/item/ItemPagePhoto";
 import TextDisplay from "../components/item/TextDisplay";
+import ItemPageMap from "../components/item/ItemPageMap"
 
 function Item({ state, dispatch, init }) {
   const { dev } = state;
@@ -36,6 +37,8 @@ function Item({ state, dispatch, init }) {
           interested_users={state.interested_users}
         />
       </ItemPageContainer>
+      <ItemPageMap lat={state.lat} lng = {state.lng} />
+
     </PageContainer>
   );
 }
