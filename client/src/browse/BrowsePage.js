@@ -41,7 +41,7 @@ const BrowsePage = (props) => {
         setSelectedItem={setSelectedItem}
         setFilteredItems={setFilteredItems}
       />
-      <Container>
+      <BrowsePageContainer>
         <Map
           data={filteredItems}
           selectedItem={selectedItem}
@@ -55,14 +55,14 @@ const BrowsePage = (props) => {
           selectedItem={selectedItem}
           setSelectedItem={setSelectedItem}
         />
-      </Container>
+      </BrowsePageContainer>
     </div>
   );
 };
 
 export default BrowsePage;
 
-const Container = styled.div`
+const BrowsePageContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
 `;
