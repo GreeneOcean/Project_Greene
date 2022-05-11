@@ -1,3 +1,5 @@
+const { sql } = require('../DB/connect')
+
 const randInt = (max, type = 'floor') => {
   if (type === 'floor') {
     return Math.floor(Math.random() * max)

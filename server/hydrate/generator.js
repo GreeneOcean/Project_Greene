@@ -1,4 +1,5 @@
 const { randInt } = require('./utilities.js');
+const auth = require('../auth/index')
 
 
 
@@ -42,7 +43,10 @@ const userNameFrags = [
 'clothes',
 'shits',
 'lol',
+<<<<<<< HEAD
 'butts',
+=======
+>>>>>>> f871d0b06c585268ee9603efd82ad7c4f9378d25
 'mgee',
 'this',
 'is',
@@ -56,12 +60,11 @@ const userNameFrags = [
 'even',
 'looking',
 'im',
-'not',
-'a',
-'butt'
+
 ]
 
-const charity_states = ['true', 'false', 'denied']
+const photos = ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6V_R6WMnHzN5bpexR-vQ1tNickx9phBGTHA&usqp=CAU',]
+const charity_states = ['true', 'false', 'pending', 'denied']
 
 // Mark Alperin  4:48 PM
 // NE: lat: 30.5491288, lng: -97.5811418
@@ -120,6 +123,7 @@ const genRandDonationForUser = (userId, lat, lng) => {
     category: categorys[( randInt(categorysL) )],
     tag: [ tags[( randInt(tagsL) )] ],
     charity_only: !!randInt(1, 'round'),
+    pictures: photos,
     interested_users: [],
     lat,
     lng,
@@ -153,6 +157,7 @@ const genRandUser = (id, donoRange = 4) => {
     user_name,
     lat,
     lng,
+    password: auth.create('shalom'),
     charity_state: charity_states[randInt(charity_states.length)],
   };
 };

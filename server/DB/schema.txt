@@ -3,6 +3,7 @@ CREATE DATABASE blue_ocean_dev;
 CREATE EXTENSION earthdistance CASCADE;
 
 DROP TABLE IF EXISTS base CASCADE;
+DROP TABLE IF EXISTS sessions CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS items CASCADE;
 DROP TABLE IF EXISTS ratings CASCADE;
@@ -15,18 +16,28 @@ CREATE TABLE base (
 );
 
 
+CREATE TABLE sessions (
+  id TEXT PRIMARY KEY NOT NULL,
+  user_name TEXT,
+  created_at TIMESTAMPTZ DEFAULT Now(),
+  updated_at TIMESTAMPTZ DEFAULT Now()
+);
+
 CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
   last_name TEXT NOT NULL,
   user_name TEXT UNIQUE NOT NULL,
   first_name TEXT NOT NULL,
-  charity_state TEXT DEFAULT 'false'
+  charity_state TEXT DEFAULT 'false',
+  session_id TEXT,
+  password TEXT NOT NULL
 ) INHERITS (base);
 
 -- STATE POSSIBILITIES:
 -- false
 -- true
 -- denied
+
 
 CREATE TABLE donations (
   id SERIAL PRIMARY KEY NOT NULL,
