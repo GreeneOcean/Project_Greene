@@ -2,6 +2,11 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from "react-router-dom"
 import { PageContainer } from '../styles/index.js';
+import Nav from '../components/Nav';
+
+import FilterBar from "../components/browse/filterBar/FilterBar"
+import Map from "../components/browse/maps/Map"
+import ItemList from "../components/browse/list/ItemList"
 
 import FilterBar from "../components/browse/filterBar/FilterBar"
 import Map from "../components/browse/maps/Map"
@@ -59,4 +64,8 @@ export default Browse;
 const BrowsePageContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
+<<<<<<< HEAD
 `;
+=======
+`;
+>>>>>>> f088cd8a04d737997a52c4e0a03d568a64d24852

@@ -3,32 +3,31 @@ import styled from 'styled-components';
 import { Link } from "react-router-dom"
 
 import { PageContainer } from '../styles/index.js';
+import Carousel from '../components/Carousel.js';
 import HomeItemsWidget from '../components/item/HomeItemsWidget';
 
 function Home({ state, dispatch, init }) {
-
   const { dev, user, HomeData } = state
   const { lat, lng, local } = user
 
 
 
   useEffect(() => {
-    init()
-    .then(res => {
-      dev.logs && console.log(`\nHome API init res`, res)
-      dev.logs && console.log('Home state', state)
+    init().then((res) => {
+      dev.logs && console.log(`\nHome API init res`, res);
+      dev.logs && console.log('Home state', state);
       dispatch({
         type: `HOME_INIT`,
-        payload: res
-      })
-    })
-  }, [])
+        payload: res,
+      });
+    });
+  }, []);
 
   const toggleDevLogs = (e) => {
     dispatch({
-      type: 'TOGGLE_LOGS'
-    })
-  }
+      type: 'TOGGLE_LOGS',
+    });
+  };
 
   return (
       <PageContainer >
@@ -42,6 +41,5 @@ function Home({ state, dispatch, init }) {
       </PageContainer>
   );
 }
-
 
 export default Home;
