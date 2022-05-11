@@ -1,9 +1,4 @@
-import React, { useEffect, useRef } from "react";
-// import io from "socket.io-client";
-
-// const socket = io("/webRTCPeers", {
-//   path: "/"
-// });
+import React, { useState, useEffect, useRef } from "react";
 
 const VideoPlayer = ({ socket }) => {
   const localVideoRef = useRef();
@@ -11,9 +6,29 @@ const VideoPlayer = ({ socket }) => {
   const pc = useRef(new RTCPeerConnection(null));
   const textRef = useRef();
 
+  const [offerVisible, setOfferVisible] = useState(true);
+  const [answerVisible, setAnswerVisible] = useState(false);
+  const [status, setStatus] = useState("Make a call now");
+
   useEffect(() => {
-    socket.on("connection-success", (success) => {
-      console.log("🥶", success);
+    // socket.on("connection-success", (success) => {
+    //   console.log("🥶", success);
+    // });
+
+    socket.on("sdp", (data) => {
+      pc.current.setRemoteDescription(new RTCSessionDescription(data.sdp));
+      // textRef.current.value = JSON.stringify(data.sdp);
+      if (data.sdp.type === "offer") {
+        setOfferVisible(false);
+        setAnswerVisible(true);
+        setStatus("Incoming call....");
+      } else {
+        setStatus("call established");
+      }
+    });
+
+    socket.on("candidate", (candidate) => {
+      pc.current.addIceCandidate(new RTCIceCandidate(candidate));
     });
 
     const constraints = {
@@ -31,10 +46,13 @@ const VideoPlayer = ({ socket }) => {
       .catch((e) => {
         console.log("getUserMedica error", e);
       });
+
     const _pc = new RTCPeerConnection(null);
+
     _pc.onicecandidate = (e) => {
       if (e.candidate) {
         console.log(JSON.stringify(e.candidate));
+        socket.emit("candidate", e.candidate);
       }
     };
 
@@ -56,9 +74,10 @@ const VideoPlayer = ({ socket }) => {
         offerToReceiveVideo: 1
       })
       .then((sdp) => {
-        console.log("💀", JSON.stringify(sdp));
         pc.current.setLocalDescription(sdp);
-        socket.emit("sdp", sdp);
+        socket.emit("sdp", { sdp });
+        setOfferVisible(false);
+        setStatus("calling...");
       })
       .catch((err) => {
         console.log(err);
@@ -72,24 +91,31 @@ const VideoPlayer = ({ socket }) => {
         offerToReceiveVideo: 1
       })
       .then((sdp) => {
-        console.log(JSON.stringify(sdp));
         pc.current.setLocalDescription(sdp);
+        socket.emit("sdp", { sdp });
+        setAnswerVisible(false);
+        setStatus("Call established");
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  const setRemoteDescription = () => {
-    const sdp = JSON.parse(textRef.current.value);
-    console.log(sdp);
-    pc.current.setRemoteDescription(new RTCSessionDescription(sdp));
-  };
-
-  const addCandidate = () => {
-    const candidate = JSON.parse(textRef.current.value);
-    console.log("adding candidate");
-    pc.current.addIceCandidate(new RTCIceCandidate(candidate));
+  const showHideButtons = () => {
+    if (offerVisible) {
+      return (
+        <div>
+          <button onClick={createOffer}>Call</button>
+        </div>
+      );
+    }
+    if (answerVisible) {
+      return (
+        <div>
+          <button onClick={createAnswer}>Answer</button>
+        </div>
+      );
+    }
   };
 
   return (
@@ -106,15 +132,11 @@ const VideoPlayer = ({ socket }) => {
         autoPlay
       ></video>
       <br />
-      <button onClick={createOffer}>Create offer</button>
+
+      {showHideButtons()}
+      <div>{status}</div>
+      {/* <textarea ref={textRef}></textarea> */}
       <br />
-      <button onClick={createAnswer}>Create Answer</button>
-      <br />
-      <textarea ref={textRef}></textarea>
-      <br />
-      <button onClick={setRemoteDescription}>Set Remote description</button>
-      <br />
-      <button onClick={addCandidate}>Add candidates</button>
     </div>
   );
 };

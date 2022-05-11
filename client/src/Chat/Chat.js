@@ -47,16 +47,12 @@ function Chat({ socket }) {
           onChange={(event) => {
             setCurrentMessage(event.target.value);
           }}
-          onKeyPress={(event) => {
+          onKeyDown={(event) => {
             event.key === "Enter" && sendMessage();
           }}
         ></input>
         <button onClick={sendMessage}>&#9658;</button>
         <VideoPlayer socket={socket} />
-
-        {/* <Options>
-          <Notifications />
-        </Options> */}
       </div>
     </div>
   );

@@ -27,18 +27,21 @@ io.on("connection", (socket) => {
     socket.broadcast.emit("receive_message", data);
   });
 
-  socket.broadcast.emit("connection-success", {
-    status: "connection-success",
-    socketId: socket.id
-  });
+  // socket.broadcast.emit("connection-success", {
+  //   status: "connection-success",
+  //   socketId: socket.id
+  // });
 
   socket.on("disconnect", () => {
     console.log("User disconnected 🥸", socket.id);
   });
 
   socket.on("sdp", (data) => {
-    console.log("😧", data);
     socket.broadcast.emit("sdp", data);
+  });
+
+  socket.on("candidate", (data) => {
+    socket.broadcast.emit("candidate", data);
   });
 });
 
