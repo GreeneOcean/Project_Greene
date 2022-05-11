@@ -9,7 +9,7 @@ const ItemCard = (props) => {
   };
 
   return (
-    <Container
+    <ItemContainer
       id={props.item.id}
       onClick={clickHandler}
       style={{
@@ -34,11 +34,11 @@ const ItemCard = (props) => {
         {props.item.tag.map((tag, idx) => {
           return <p key={idx}>{tag}</p>;
         })}
-    </Container>
+    </ItemContainer>
   );
 };
 
-const Container = styled.div`
+const ItemContainer = styled.div`
   min-width: 150px;
   max-width: 150px;
   height: 150px;

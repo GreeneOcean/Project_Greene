@@ -13,7 +13,7 @@ const ItemList = (props) => {
   }, [props.selectedItem]);
 
   return (
-    <Container id="itemList">
+    <ItemListContainer id="itemList">
       {props.items.map((item, idx) => {
         return (
           <ItemCard
@@ -24,13 +24,13 @@ const ItemList = (props) => {
           />
         );
       })}
-    </Container>
+    </ItemListContainer>
   );
 };
 
 export default ItemList;
 
-const Container = styled.div`
+const ItemListContainer = styled.div`
   scroll-behavior: smooth;
   height: 600px;
   width: 550px;

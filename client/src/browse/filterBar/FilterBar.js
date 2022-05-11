@@ -50,7 +50,7 @@ const FilterBar = (props) => {
   };
 
   return (
-    <BarForm>
+    <FilterBarForm>
       <select id="distance" onChange={filterItems}>
         <option>--Select Distance--</option>
         <option value={5}>5 miles</option>
@@ -72,13 +72,13 @@ const FilterBar = (props) => {
         ))}
       </select>
       <button type="reset" onClick={clearFilter}>Clear</button>
-    </BarForm>
+    </FilterBarForm>
   );
 };
 
 export default FilterBar;
 
-const BarForm = styled.form`
+const FilterBarForm = styled.form`
   display: flex;
   margin: 10px;
 `;

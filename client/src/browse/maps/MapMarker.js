@@ -31,6 +31,3 @@ const MapMarker = (props) => {
 
 export default MapMarker;
 
-const StyledDiv = styled.div`
-  display: flex;
-`;

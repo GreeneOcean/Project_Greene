@@ -4,17 +4,17 @@ import styled from "styled-components";
 
 const MarkerCard = (props) => {
   return (
-    <Card>
+    <MapMiniCard>
       <p>{props.item.category}</p>
       <p>{props.item.title}</p>
       <p>{props.item.description}</p>
-    </Card>
+    </MapMiniCard>
   );
 };
 
 export default MarkerCard;
 
-const Card = styled.div`
+const MapMiniCard = styled.div`
   min-width: 80px;
   max-width: 80px;
   height: 35px
