@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 const AppContainer = styled.div`
   width: 100%;
-  height: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -30,7 +29,7 @@ const Footer = styled.footer`
 
 const PageContainer = styled.div`
   width: 90%;
-  height: 100%;
+  height: 100vh;
   display: flex;
   align-items: center;
   flex-direction: column;

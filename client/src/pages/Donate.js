@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useLinkClickHandler } from "react-router-dom"
+import { PageContainer } from '../styles/index.js';
 import { ButtonL, ButtonM, ButtonS } from '../styles/buttons.js';
 import TagsContainer from '../components/TagsContainer.js';
 import ToggleSwitch from '../components/ToggleSwitch.js';
@@ -33,17 +34,17 @@ const categories = [
   'Other'
 ];
 
-const PageContainer = styled.div`
-  width: 70%;
-  padding: 1em 0;
-  overflow-y: scroll;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: flex-start;
-  background-color: white;
-  color: black;
-`;
+// const PageContainer = styled.div`
+//   position: relative;
+//   width: 100%;
+//   padding: 1em 0;
+//   display: flex;
+//   align-items: center;
+//   flex-direction: column;
+//   justify-content: flex-start;
+//   background-color: white;
+//   color: black;
+// `;
 
 const StyledForm = styled.form`
   display: flex;
@@ -188,7 +189,7 @@ function Donate({ state, dispatch, init }) {
   };
 
   return (
-    <PageContainer>
+    <div id="genericDiv">
       <h2>Tell us about your donation</h2>
       {
         invalid
@@ -243,7 +244,7 @@ function Donate({ state, dispatch, init }) {
         <ButtonS name="cancel" onClick={cancel}>Cancel</ButtonS>
         <ButtonS name="post" onClick={submitForm}>List Donation</ButtonS>
       </ButtonBox>
-    </PageContainer>
+    </div>
   );
 }
 
