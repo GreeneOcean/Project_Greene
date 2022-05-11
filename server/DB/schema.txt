@@ -18,8 +18,7 @@ CREATE TABLE base (
 
 CREATE TABLE sessions (
   id TEXT PRIMARY KEY NOT NULL,
-  user_id INT,
-  password TEXT,
+  user_name TEXT,
   created_at TIMESTAMPTZ DEFAULT Now(),
   updated_at TIMESTAMPTZ DEFAULT Now()
 );

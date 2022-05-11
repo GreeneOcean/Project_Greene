@@ -51,20 +51,20 @@ export function getLocation() {
 
 export function locationByIp() {
   locationLogs && console.log(`Fetcing location by IP`)
-  if (process.env.IP_KEY) {
-    return fetch(`https://api.geoapify.com/v1/ipinfo?apiKey=${process.env.IP_KEY}`)
-    .then(resp => resp.json())
-    .then((userLocationData) => {
-      locationLogs && console.log({userLocationData});
-      const { location } = userLocationData
-      return { lat: location.latitude, lng: location.longitude  }
-    })
-    .catch(err => locationLogs && console.log(`IP location fetch err ${err.message}`))
-  }
-  else {
+  // if (process.env.IP_KEY) {
+  //   return fetch(`https://api.geoapify.com/v1/ipinfo?apiKey=${process.env.IP_KEY}`)
+  //   .then(resp => resp.json())
+  //   .then((userLocationData) => {
+  //     locationLogs && console.log({userLocationData});
+  //     const { location } = userLocationData
+  //     return { lat: location.latitude, lng: location.longitude  }
+  //   })
+  //   .catch(err => locationLogs && console.log(`IP location fetch err ${err.message}`))
+  // }
+  // else {
     return new Promise((res, rej) => res({
       lat: 30.281785180813568,
       lng: -97.9005011705492,
     }))
-  }
+  // }
 }

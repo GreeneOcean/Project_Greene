@@ -1,4 +1,4 @@
-const { session } = require('./session')
+const { session, sessionEnd } = require('./session')
 const { sql } = require('../DB/connect.js')
 let crypto;
 try {
@@ -10,24 +10,37 @@ try {
 const salt = 'butts'
 
 const hashPassword = (password) => {
-  return crypto.createHash('sha256', password + salt).digest('hex');
+  return crypto.createHash('sha256', salt)
+  .update(password)
+  .digest('hex');
 }
-// const test = hashPassword('read')
-// console.log({ test })
+
 
 
 const checkPassword = (passwordToMatch, savedPassword) => {
-  passwordToMatch = crypto.createHash('sha256', passwordToMatch + salt).digest('hex');
+  passwordToMatch = crypto.createHash('sha256', salt)
+    .update(passwordToMatch)
+    .digest('hex');
+  // console.log({ passwordToMatch, savedPassword })
   return passwordToMatch === savedPassword
 }
 
 
 const checkUser = async (user) => {
-  const { userId, attempt } = user
+  const { userId, userName, attempt } = user
   try {
-    const getPassword = await sql`SELECT password FROM sessions WHERE id = ${userId}`
-    const savedPassword = getPassword[0].password
-    return checkPassword(attempt, savedPassword)
+    if (userId) {
+      const getPassword = await sql`SELECT user_name, password FROM users WHERE id = ${userId}`
+      const savedPassword = getPassword[0].password
+      // console.log({ savedPassword, attempt })
+      return [getPassword[0].user_name,  checkPassword(attempt, savedPassword) ]
+    }
+    else {
+      const getPassword = await sql`SELECT password FROM users WHERE user_name = ${userName}`
+      const savedPassword = getPassword[0].password
+      // console.log({ savedPassword, attempt })
+      return [userName,  checkPassword(attempt, savedPassword) ]
+    }
   }
   catch (err) {
     console.log('err in checkUser', err.message)
@@ -37,4 +50,10 @@ const checkUser = async (user) => {
 
 // console.log(checkPassword('read', test))
 
-module.exports = { session, user: checkUser, create: hashPassword }
+const testUser = async () => {
+  const res = await checkUser({ userId: 5, attempt: 'shalom' })
+  // console.log({ res })
+}
+// testUser()
+
+module.exports = { session, sessionEnd, user: checkUser, create: hashPassword }

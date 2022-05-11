@@ -6,6 +6,7 @@ function reducer(state, action) {
 
   const { type, payload } = action
   const { dev } = state
+  // console.log({ type, payload })
   dev.logs && console.log('user REDUCER', state, type, payload)
   switch (type) {
 
@@ -14,8 +15,7 @@ function reducer(state, action) {
       Object.entries(payload).forEach(keyValue => {
         state[keyValue[0]] = keyValue[1]
       })
-
-      return { ...state };
+      return state;
 
     default:
       return state;

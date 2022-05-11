@@ -1,8 +1,17 @@
 const { sql } = require('./connect')
 
+const userFields = [
+ 'id',
+ 'last_name',
+ 'user_name',
+ 'first_name',
+ 'charity_state',
+]
+
+//ARRAY(SELECT id FROM donations AS d WHERE ${userName} = d.posted_by AND d.interested_user IS NULL) AS unclaimed,
 const getUser = async ({ userName }) => {
   try {
-    const res = await sql`SELECT *,
+    const res = await sql`SELECT ${ sql(userFields) },
     ARRAY(SELECT id FROM donations AS d WHERE ${userName} = ANY(d.interested_users)) AS interested,
     ARRAY(SELECT id FROM donations AS d WHERE ${userName} = d.taken_by) AS received,
     ARRAY(SELECT id FROM donations AS d WHERE ${userName} = d.posted_by) AS donated
@@ -11,6 +20,7 @@ const getUser = async ({ userName }) => {
     const user = res[0]
     const { interested, received, donated } = user
     const donatedRes = await Promise.all([
+      // sql`SELECT * FROM donations AS d WHERE d.id = ANY(${unclaimed})`,
       sql`SELECT * FROM donations AS d WHERE d.id = ANY(${interested})`,
       sql`SELECT * FROM donations AS d WHERE d.id = ANY(${received})`,
       sql`SELECT * FROM donations AS d WHERE d.id = ANY(${donated})`,

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
-import { StateContext, DispatchContext } from '../appState/index.js';
+import { StateContext, DispatchContext } from './appState/index.js';
 import { Routes, Route, Link } from "react-router-dom";
 import Auth from './pages/Auth'
 import Browse from './pages/Browse'
@@ -8,7 +8,7 @@ import Donate from './pages/Donate'
 import Home from './pages/Home'
 import Item from './pages/Item'
 import Transactions from './pages/Transactions'
-import api from '../api'
+import api from './api/index'
 import { AppContainer, LoadingContainer, Footer } from './styles/index.js';
 
 
@@ -17,27 +17,16 @@ function App() {
   const [state] = useContext(StateContext);
   const { dev } = state
   dev.logs && console.log('App state', state)
+  console.log('App state', state)
 
   useEffect(() => {
 
-    const query = {
-      lat: 30.281785180813568,
-      lng: -97.9005011705492,
-      count: 250,
-    }
-    api.get.location()
-    .then(locationRes => {
-      return api.get.local.donations({ ...locationRes, count: 250 })
-      .then(apiRes => {
-        dispatch({
-          type: `USER_INIT`,
-          payload: { ...state.user, ...locationRes, local: apiRes }})
-        })
-    })
+    api.get.location(dispatch)
+    const user = { userName: 'coolprovenot', attempt: 'shalom' }
+    api.get.login.user(user, dispatch)
 
 
   }, [])
-
 
 
   return (

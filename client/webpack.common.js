@@ -5,9 +5,8 @@ const environmentVariables = [
   "IP_KEY",
 ];
 
-
 module.exports = {
-  entry: path.resolve(__dirname,  "index.js"),
+  entry: "/src/index.js",
 
   plugins: [
     new webpack.EnvironmentPlugin(environmentVariables)

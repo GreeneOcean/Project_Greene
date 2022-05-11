@@ -1,38 +1,66 @@
 const {v4 : uuidv4} = require('uuid')
-const { db } = require('../DB/index')
+const DB  = require('../DB/index')
 
+
+const newSession = async (req, res) => {
+  const newSessionId = uuidv4()
+  res.cookie('sessionId', newSessionId, { maxAge: 900000, httpOnly: true });
+  const user_name  = req.query.userName || null
+  const newSession = { id: newSessionId, user_name }
+  req.session = newSession
+  return DB.POST.session(newSession)
+}
 
 const session =  async (req, res, next) => {
 
   try {
-
-    if(req.cookies.sessionId) {
-      // console.log('found session', req.cookies.sessionId)
-      const id = req.cookies.sessionId
-      const connectionGET = await db.GET.session(id)
-      req.session = connectionGET[0]
+    const { sessionId } = req.cookies
+    // console.log('sesh cookies', sessionId)
+    if( sessionId ) {
+      const [ sessionRes ] = await DB.GET.session(sessionId)
+      // console.log('sesh db res', sessionRes)
+      if ( sessionRes ) {
+        req.session = sessionRes
+        const { user_name } = sessionRes
+        if ( user_name ) {
+          req.user = await DB.GET.user({ user_name })
+        }
+      }
+      else {
+        await newSession (req, res)
+      }
       next()
     }
 
     else {
-      const newSessionId = uuidv4()
-      res.cookie('sessionId', newSessionId, { maxAge: 900000, httpOnly: true });
-      const user_id  = req.query.userId || null
-      const newSession = { id: newSessionId, user_id, password:'butts' }
-      req.session = newSession
-      const connectionPOST = db.POST.session(newSession)
+      await newSession(req, res)
       next()
     }
 
   } catch(err) {
-
     console.log(err, 'Err in GET Cookie Session')
-
   }
-
 }
 
 
-module.exports = { session }
+const sessionEnd = async (req, res, next) => {
+
+  res.on('finish', async () => {
+
+    const updatedSession = req.session
+    // console.log('sesh end sesh', { updatedSession })
+    const { user } = req
+    // console.log('sesh end user', { user })
+    if ( user ) {
+      updatedSession.user_name = user.user_name
+      DB.PUT.session(updatedSession)
+    }
+
+  });
+  next();
+
+}
+
+module.exports = { session, sessionEnd }
 
 

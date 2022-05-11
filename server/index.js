@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser')
 
-const { db } = require('./DB/index')
+const DB = require('./DB/index')
 const auth = require('./auth/index')
 
 const PORT = 3000;
@@ -14,59 +14,79 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
-
 app.use( auth.session )
+app.use( auth.sessionEnd );
 
 //////
+app.get('/user/login', async(req, res) => {
+  try {
+    // console.log('get user/login', req.query)
+    const [ userName, isAuthed ] = await auth.user(req.query)
+    if ( isAuthed ) {
+      const userData = await DB.GET.user({ userName })
+      req.user = userData
+      res.status(200).send({ user: userData })
+    }
+    else {
+      res.status(200).send({ user: null })
+    }
+
+  } catch(err) {
+    console.log('Auth user error ', err.message)
+  }
+})
+
 
 app.get('/Auth', (req, res) => {
-  console.log(`Request at ${`/Auth`}`)
+  //console.log(`Request at ${`/Auth`}`)
   res.status(200).send({ AuthData: true })
 })
 
 app.get('/Browse', (req, res) => {
-  console.log(`Request at ${`/Browse`}`)
+  //console.log(`Request at ${`/Browse`}`)
   res.status(200).send({ BrowseData: true })
 })
 
 app.get('/Donate', (req, res) => {
-  console.log(`Request at ${`/Donate`}`)
+  //console.log(`Request at ${`/Donate`}`)
   res.status(200).send({ DonateData: true })
 })
 
 app.get('/Home', (req, res) => {
-  console.log('HOME req.session', req.session)
-  console.log(`Request at ${`/Home`}`)
+  // //console.log('HOME req.session', req.session)
+  //console.log(`Request at ${`/Home`}`)
   res.status(200).send({ HomeData: true })
 })
 
 app.get('/Item', (req, res) => {
-  console.log(`Request at ${`/Item`}`)
+  //console.log(`Request at ${`/Item`}`)
   res.status(200).send({ ItemData: true })
 })
 
 app.get('/Transactions', (req, res) => {
-  console.log(`Request at ${`/Transactions`}`)
+  //console.log(`Request at ${`/Transactions`}`)
   res.status(200).send({ TransactionsData: true })
 })
+
+
 
 /////////
 
 app.get('/data/*', async (req, res) => {
 
-  console.log(`Request at ${`/`}`)
+  // console.log(`Request at ${`/`}`)
   const reqPath = req.path.split('/').filter(str => !!str.length)
   reqPath[0] = 'GET'
   const params = req.query
 
   try {
-    var query = db;
+    var query = DB;
     reqPath.forEach(route => {
       query = query[route]
     })
-    console.log({ params })
-    console.log({ reqPath })
-    console.log({ query })
+    // console.log({ params })
+    // console.log({ reqPath })
+    // console.log({ query })
     const dbRes = await query(params)
     // console.log({ dbRes })
     res.status(200).send(dbRes)
@@ -76,7 +96,6 @@ app.get('/data/*', async (req, res) => {
     res.status(500).send({ error: true })
   }
 })
-
 
 
 app.post('/AddDonation:charityID', (req, res) => {

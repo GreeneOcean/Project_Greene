@@ -1,23 +1,24 @@
 const { sql } = require('./connect');
 
-// const PUT = async (newData, table) => {
-//   try {
-//     if (!Array.isArray(newData)) {
-//       newData = [ newData ]
-//     }
-//     const res = await sql`UPDATE ${sql(table)} ${ sql(newData) }`
-//     console.log('PUT res for', table, res)
-//     return res
-//   } catch(err) {
-//     console.log('PUT err for', table, err.message, 'for ', newData)
-//     return {}
-//   }
-// }
+const PUT = async (newData, table) => {
+  try {
+    // if (!Array.isArray(newData)) {
+    //   newData = [ newData ]
+    // }
+    console.log({ newData })
+    const res = await sql`UPDATE ${sql(table)} SET ${ sql(newData) }`
+    console.log('PUT res for', table, res)
+    return res
+  } catch(err) {
+    console.log('PUT err for', table, err.message, 'for ', newData)
+    return {}
+  }
+}
 
-const updateInterestInDonation = async (userId, donationId) => {
+const updateInterestInDonation = async (username, donationID) => {
 
   try {
-    const res = await sql``
+    const res = await sql`UPDATE donations SET interested_users = ${username}::text WHERE id = ${donationID}`
     console.log('updateInterestInDonation res ', res)
     return res[0]
   } catch(err) {
@@ -26,10 +27,10 @@ const updateInterestInDonation = async (userId, donationId) => {
   }
 }
 
-const updateApproveUserClaim = async (userId, donationId, state) => {
+const updateApproveUserClaim = async (username, donationID, state) => {
   //state: claimed, pending, approved, completed,
   try {
-    const res = await sql``
+    const res = await sql`UPDATE donations SET taken_by = ${username}, state = ${state} WHERE id = ${donationID}`
     console.log('updateApproveUserClaim res ', res)
     return res[0]
   } catch(err) {
@@ -38,14 +39,32 @@ const updateApproveUserClaim = async (userId, donationId, state) => {
   }
 }
 
-const updateAdminApproveUser = async (userId, state) => {
+const updateAdminApproveUser = async (username, state) => {
 
   try {
-    const res = await sql`UPDATE users SET is_charity = ${state}`
+    const res = await sql`UPDATE users SET is_charity = ${state} WHERE user_name = ${username}`
     console.log('updateAdminApproveUser res ', res)
     return res[0]
   } catch(err) {
-    console.log('updateAdminApproveUser err', err.message, 'for id', userId)
+    console.log('updateAdminApproveUser err', err.message, 'for username', username)
     return {}
   }
 }
+
+
+PUT.session = (async (updatedSession) => {
+  delete updatedSession.id
+  updatedSession.user_name = updatedSession.user_name || null
+  return await PUT(updatedSession, 'sessions')
+})
+
+PUT.users = (async (updatedUser) => {
+  return await PUT(updatedUser, 'users')
+})
+
+
+PUT.donations = (async (updatedDonation) => {
+  return await PUT(updatedDonation, 'donations')
+})
+
+module.exports = PUT

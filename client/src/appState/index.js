@@ -11,22 +11,26 @@ const circleRef = (keys, state) => {
     const ref = state[keyA]
     Object.entries(state).forEach(keyValues => {
       const [keyB, values] = keyValues
-      if ( keyA !== keyB ) {
+      if ( keys.indexOf(keyB) === -1 ) {
         values[keyA] = ref
       }
     })
   })
 }
 
+const initDev = {
+  logs: false
+}
 
 const initUser = {
-  userName: 'Tim',
+  user_name: null,
   lat: null,
   lng: null,
+  dev: initDev
 }
 
 const initAppState = {
-  dev: { logs: true },
+  dev: initDev,
   Auth: { AuthData: false, },
   Browse: { BrowseData: false },
   Donate: { DonateData: false },
