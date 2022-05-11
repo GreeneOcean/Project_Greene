@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import MarkerCard from "./MarkerCard.js";
 import { RiMapPin2Fill } from "react-icons/ri";
-// import {FaMapMarkerAlt } from "react-icons/fa";
+
 const MapMarker = (props) => {
   const style =
     props.selectedItem === props.item.id
