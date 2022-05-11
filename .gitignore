@@ -10,6 +10,15 @@ client/config.js
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+## MAC files ##
+.DS_Store
+
+## NPM ##
+npm
+npm-debug.log
+
+# User-specific files
+:*.rsuser
 # User-specific files
 *.rsuser
 *.suo
@@ -17,6 +26,7 @@ client/config.js
 *.userosscache
 *.sln.docstates
 
+# User-specific files (MonoDevelop/Xamarin Studio)
 # User-specific files (MonoDevelop/Xagmarin Studio)
 *.userprefs
 
@@ -355,3 +365,6 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+
+.env.config
