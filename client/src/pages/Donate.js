@@ -94,7 +94,7 @@ function Donate({ state, dispatch, init }) {
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [category, setCategory] = useState(null);
+  const [category, setCategory] = useState('');
   const [tag, setTag] = useState('');
   const [tags, setTags] = useState([]);
   const [charityOnly, setCharityOnly] = useState(true);
@@ -177,7 +177,7 @@ function Donate({ state, dispatch, init }) {
       return false;
     } else if (data.description.length < 1) {
       return false;
-    } else if (data.category === null) {
+    } else if (data.category.length < 1) {
       return false;
     } else if (data.user_name === null) {
       return false;
@@ -212,7 +212,7 @@ function Donate({ state, dispatch, init }) {
           <span>Category <Asterisk/></span>
           <select name="category" id="category" value={category} onChange={handleChange} required>
             {
-              ([<option key={'none'} value={null} selected>Select a Category</option>])
+              ([<option key={'none'} value={''}>Select a Category</option>])
               .concat(
                 categories.map((category, i) => {
                   return <option key={i} value={category}>{category}</option>
