@@ -140,7 +140,17 @@ function Donate({ state, dispatch, init }) {
 
   const submitForm = (e) => {
     e.preventDefault();
+    console.log('location', state.user);
     //console.log(title, description, category, tags, charityOnly, photo);
+    api.post('/AddDonation', null, {
+      user: state.user,
+      title: title,
+      description: description,
+      category: category,
+      tags: tags,
+      charity_only: charityOnly,
+      photo: photo
+    });
   };
 
   return (
