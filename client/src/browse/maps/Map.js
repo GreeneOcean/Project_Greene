@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import GoogleMapReact from "google-map-react";
 
 import MapMarker from "./MapMarker.js";
-require("dotenv").config();
+
 
 const Map = (props) => {
 
@@ -11,7 +11,6 @@ const Map = (props) => {
     mapTypeControl: true,
     streetViewControl: false,
     scollWheel: true,
-    // zoomControl: true, // Todo: zoom control buggy
     styles: [
       {
         featureType: "poi",
