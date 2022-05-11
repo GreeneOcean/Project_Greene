@@ -1,8 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom'
+import React from "react";
+import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
-import App from './app';
-import AppContextProvider from './appState/index.js';
+import App from "./app";
+import AppContextProvider from "./appState/index.js";
 
 const Stack = (
   <BrowserRouter>
@@ -12,4 +12,4 @@ const Stack = (
   </BrowserRouter>
 );
 
-ReactDOM.render(Stack, document.getElementById('root'));
+ReactDOM.render(Stack, document.getElementById("root"));
