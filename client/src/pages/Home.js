@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { PageContainer } from "../styles/index.js";
 import Carousel from "../components/Carousel.js";
+import Chat from "../Chat/Chat";
 
 function Home({ state, dispatch, init }) {
   const { dev, user, HomeData } = state;
@@ -35,6 +36,7 @@ function Home({ state, dispatch, init }) {
         }`}{" "}
       </p>
       <p>{`number of local: ${local ? local.length : "loading"}`}</p>
+
       <button onClick={toggleDevLogs}>Toggle logs</button>
     </PageContainer>
   );

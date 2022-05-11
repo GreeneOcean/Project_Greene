@@ -7,7 +7,7 @@ import { PageContainer } from "../styles/index.js";
 function Item({ state, dispatch, init }) {
   const { dev } = state;
 
-  console.log('itemState: ', state);
+  console.log("itemState: ", state);
 
   useEffect(() => {
     init().then((res) => {
@@ -15,15 +15,13 @@ function Item({ state, dispatch, init }) {
       dev.logs && console.log("Item state", state);
       dispatch({
         type: `ITEM_INIT`,
-        payload: res,
+        payload: res
       });
     });
   }, []);
 
-
-
   return (
-    <PageContainer >
+    <PageContainer>
       <h3>Item</h3>
     </PageContainer>
   );
