@@ -5,13 +5,15 @@ import homeReducer from './home'
 import itemReducer from './item'
 import transactionsReducer from './transactions'
 import devReducer from './dev'
-
+import userReducer from './user'
 
 
 function reducer(state, action) {
   const { Auth, Browse, Donate, Home, Item, Transactions, user, dev } = state
 
+
   state.dev = devReducer(dev, action)
+  state.user = userReducer(user, action)
   state.Auth = authReducer(Auth, action)
   state.Browse = browseReducer(Browse, action)
   state.Donate = donateReducer(Donate, action)
