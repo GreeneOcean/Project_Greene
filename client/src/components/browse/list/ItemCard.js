@@ -25,12 +25,12 @@ const ItemCard = ({ item, selectedItem, setSelectedItem }) => {
       onClick={selectItemHandler}
       isSelected={selectedItem === item.id}
     >
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <InnerItemContainer>
         <PhotoDiv>
           {item.pictures && <StyledImage src={item.pictures[0]} />}
           {!item.pictures && <BsCardImage />}
         </PhotoDiv>
-      </div>
+      </InnerItemContainer>
       <p>{item.title}</p>
       <p>{item.description}</p>
       {item.tag.map((tag, idx) => {
@@ -66,6 +66,9 @@ const StyledImage = styled.img`
   width: 100%;
 `;
 
-
+const InnerItemContainer = styled.div`
+  display: "flex";
+  justify-content: "space-between" ;
+`;
 
 
