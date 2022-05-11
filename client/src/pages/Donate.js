@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useLinkClickHandler } from "react-router-dom"
-import { PageContainer } from '../styles/index.js';
 import { ButtonL, ButtonM, ButtonS } from '../styles/buttons.js';
 import TagsContainer from '../components/TagsContainer.js';
 import ToggleSwitch from '../components/ToggleSwitch.js';
@@ -33,18 +32,6 @@ const categories = [
   'Video Games',
   'Other'
 ];
-
-// const PageContainer = styled.div`
-//   position: relative;
-//   width: 100%;
-//   padding: 1em 0;
-//   display: flex;
-//   align-items: center;
-//   flex-direction: column;
-//   justify-content: flex-start;
-//   background-color: white;
-//   color: black;
-// `;
 
 const StyledForm = styled.form`
   display: flex;
@@ -189,7 +176,7 @@ function Donate({ state, dispatch, init }) {
   };
 
   return (
-    <div id="genericDiv">
+    <div id="donation-page-container">
       <h2>Tell us about your donation</h2>
       {
         invalid
