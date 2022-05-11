@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { StateContext, DispatchContext } from '../appState/index.js';
 import { Routes, Route, Link } from "react-router-dom";
+import Nav from './components/Nav';
 import Auth from './pages/Auth'
 import Browse from './pages/Browse'
 import Donate from './pages/Donate'
@@ -20,6 +21,7 @@ function App() {
 
   return (
     <AppContainer >
+      <Nav />
       <Routes>
         <Route
           path="/"

@@ -17,6 +17,11 @@ function buildGetOptions(endpoint, params = {}) {
   ]
 }
 
+function getLogin(query) {
+  return runFetch(...buildGetOptions('/user/login', query))
+}
+get.login = getLogin
+
 
 function buildPostOptions(endpoint, params = {}, data = {}) {
   return [

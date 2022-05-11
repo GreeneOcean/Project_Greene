@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from "react-router-dom"
 import { PageContainer } from '../styles/index.js';
-
+import Nav from '../components/Nav';
 
 function Item({ state, dispatch, init }) {
   const { dev } = state
@@ -20,14 +20,9 @@ function Item({ state, dispatch, init }) {
   }, [])
 
   return (
-      <PageContainer >
-        <h3>Item</h3>
-        <p>{`ItemData: ${state.ItemData}`} </p>
-        <Link to="/">Home</Link>
-        <Link to="/Donate">Donate</Link>
-        <Link to="/Auth">Auth</Link>
-        <Link to="/Browse">Browse</Link>
-      </PageContainer>
+    <PageContainer >
+      <h3>Item</h3>
+    </PageContainer>
   );
 }
 

@@ -7,7 +7,7 @@ const AppContainer = styled.div`
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  background-color: var(--color4);
+  background-color: white;
 `;
 
 const LoadingContainer = styled.div`
@@ -16,7 +16,7 @@ const LoadingContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgb(30, 30, 30);
+  background-color: white;
 `;
 
 const Footer = styled.footer`
@@ -25,7 +25,7 @@ const Footer = styled.footer`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgb(35, 35, 35);
+  background-color: white;
 `;
 
 const PageContainer = styled.div`
@@ -35,7 +35,7 @@ const PageContainer = styled.div`
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  background-color: rgb(20, 20, 20);
+  background-color: white;
 `;
 
 
