@@ -23,10 +23,9 @@ function Item({ state, dispatch, init }) {
 
 
   return (
-      <PageContainer >
-        <h3>Item</h3>
-        <p>{`ItemData: ${state.ItemData}`} </p>
-      </PageContainer>
+    <PageContainer >
+      <h3>Item</h3>
+    </PageContainer>
   );
 }
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from "react-router-dom"
 import { PageContainer } from '../styles/index.js';
+import Nav from '../components/Nav';
 
 import FilterBar from "../components/browse/filterBar/FilterBar"
 import Map from "../components/browse/maps/Map"
@@ -29,6 +30,15 @@ function Browse({ state, user, dispatch, init }) {
   }, [])
 
   return (
+<<<<<<< HEAD
+    <PageContainer >
+      <h3>Browse</h3>
+      <p>{`BrowseData: ${state.BrowseData}`} </p>
+      <Link to="/">Home</Link>
+      <Link to="/Item">Item</Link>
+      <Link to="/Auth">Auth</Link>
+    </PageContainer>
+=======
     <div>
       <FilterBar
         itemData={state.user.local}
@@ -51,6 +61,7 @@ function Browse({ state, user, dispatch, init }) {
         />
       </BrowsePageContainer>
     </div>
+>>>>>>> dev
   );
 };
 
