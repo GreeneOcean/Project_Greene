@@ -14,7 +14,7 @@ app.use(express.static(path.join(__dirname, "../client/dist")));
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "*",
     methods: ["GET", "POST"]
   }
 });
@@ -26,11 +26,6 @@ io.on("connection", (socket) => {
     console.log(data);
     socket.broadcast.emit("receive_message", data);
   });
-
-  // socket.broadcast.emit("connection-success", {
-  //   status: "connection-success",
-  //   socketId: socket.id
-  // });
 
   socket.on("disconnect", () => {
     console.log("User disconnected 🥸", socket.id);

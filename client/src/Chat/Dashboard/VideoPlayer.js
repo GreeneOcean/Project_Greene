@@ -11,10 +11,6 @@ const VideoPlayer = ({ socket }) => {
   const [status, setStatus] = useState("Make a call now");
 
   useEffect(() => {
-    // socket.on("connection-success", (success) => {
-    //   console.log("🥶", success);
-    // });
-
     socket.on("sdp", (data) => {
       pc.current.setRemoteDescription(new RTCSessionDescription(data.sdp));
       // textRef.current.value = JSON.stringify(data.sdp);
