@@ -5,7 +5,6 @@ import { PageContainer } from '../styles/index.js';
 import TagsContainer from '../components/TagsContainer.js';
 import ToggleSwitch from '../components/ToggleSwitch.js';
 import ImageUploader from '../components/ImageUploader.js';
-import Nav from '../components/Nav';
 
 const categories = [
   'Accessories',

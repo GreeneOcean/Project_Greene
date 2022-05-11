@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from "react-router-dom"
 import { PageContainer } from '../styles/index.js';
-import Nav from '../components/Nav';
 
 function Item({ state, dispatch, init }) {
   const { dev } = state

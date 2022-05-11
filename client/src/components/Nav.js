@@ -1,17 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import styled, {css} from 'styled-components';
-import Search from './Search';
+import styled, { css } from 'styled-components';
 import { TiThMenu } from 'react-icons/ti';
 import { GiBoxUnpacking } from 'react-icons/gi';
-import { AiOutlineClose, AiOutlineUser, AiOutlineUnorderedList, AiOutlinePlusCircle } from 'react-icons/ai';
-import {CgArrowsExchange} from 'react-icons/cg';
+import { GrUserAdmin } from 'react-icons/gr';
+import { CgArrowsExchange } from 'react-icons/cg';
 import { BiMessageRounded } from 'react-icons/bi';
+import {
+  AiOutlineClose,
+  AiOutlineUser,
+  AiOutlineUnorderedList,
+  AiOutlinePlusCircle,
+} from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import Search from './Search';
 
 const Nav = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [isGreene, setIsGreene] = useState(false);
-  const [menu, setMenu] = useState(false)
+  const [menu, setMenu] = useState(false);
 
   useEffect(() => {
     const sideMenu = document.getElementById('sideMenu');
@@ -20,41 +26,40 @@ const Nav = () => {
     } else {
       sideMenu.style.transform = 'translate(100%,0)';
     }
-  }, [menu])
+  }, [menu]);
 
   return (
     <>
-    <NavContainer>
-      <Link
-        to="/"
-        style={{
-          color: 'white',
-        }}
-      >
-        <GiBoxUnpacking
+      <NavContainer>
+        <Link
+          to="/"
+          style={{
+            color: 'white',
+          }}
+        >
+          <GiBoxUnpacking
+            style={{
+              color: 'white',
+              padding: '0 1em',
+              width: '4em',
+              height: 'auto',
+            }}
+          />
+        </Link>
+        <Search />
+        <TiThMenu
           style={{
             color: 'white',
             padding: '0 1em',
             width: '4em',
             height: 'auto',
+            cursor: 'pointer',
+          }}
+          onClick={() => {
+            setMenu(!menu);
           }}
         />
-      </Link>
-      <Search />
-      <TiThMenu
-        style={{
-          color: 'white',
-          padding: '0 1em',
-          width: '4em',
-          height: 'auto',
-          cursor: 'pointer',
-        }}
-
-        onClick={() => {
-          setMenu(!menu)
-        }}
-      />
-      {/* <div style={{ justifyContent: 'end', marginRight: '2 rem' }}>
+        {/* <div style={{ justifyContent: 'end', marginRight: '2 rem' }}>
         {loggedIn ? (
           <ButtonSM type="submit" onClick={() => console.log('Transactions')}>
             Transactions
@@ -72,26 +77,28 @@ const Nav = () => {
             null
           )}
       </div> */}
-      {/* <ul>
+        {/* <ul>
               <li>link1</li>
               <li>link2</li>
               <li>link3</li>
               <li>Login AUTH Link</li>
             </ul> */}
-    </NavContainer>
+      </NavContainer>
       <SideMenu id="sideMenu" display={menu}>
-      <div style={{width:'100%', display:'flex', justifyContent:'end'}}>
-        <AiOutlineClose style={{
-          width:'1.8em',
-          height:'auto',
-          color: 'black',
-          cursor: 'pointer'
-        }}
-        onClick={() => {
-          setMenu(!menu)
-        }}/>
-      </div>
-      {/* {loggedIn ? (
+        <div style={{ width: '100%', display: 'flex', justifyContent: 'end' }}>
+          <AiOutlineClose
+            style={{
+              width: '1.8em',
+              height: 'auto',
+              color: 'black',
+              cursor: 'pointer',
+            }}
+            onClick={() => {
+              setMenu(!menu);
+            }}
+          />
+        </div>
+        {/* {loggedIn ? (
           <ButtonSM type="submit" onClick={() => console.log('Transactions')}>
             Transactions
           </ButtonSM>
@@ -107,44 +114,53 @@ const Nav = () => {
           ) : (
             null
           )} */}
-          <div>
-            {loggedIn ? (
-              <>
-                <StyledLink>
-                  <CgArrowsExchange />
+        <div>
+          {loggedIn ? (
+            <>
+              <StyledLink>
+                <CgArrowsExchange />
                 <Link onClick={() => console.log('Transactions')}>
                   Transactions
                 </Link>
-                </StyledLink>
-                <StyledLink>
-                  <BiMessageRounded />
-                <Link to="/">Messages</Link>
-                </StyledLink>
-              </>
-            ) : (
-              <StyledLink>
-                <AiOutlineUser/><Link to="/Auth">Log in</Link>
               </StyledLink>
-            )}
+              <StyledLink>
+                <BiMessageRounded />
+                <Link to="/">Messages</Link>
+              </StyledLink>
+            </>
+          ) : (
             <StyledLink>
-              <AiOutlineUnorderedList />
-              <Link to="/Browse">Browse</Link>
+              <AiOutlineUser />
+              <Link to="/Auth">Log in</Link>
             </StyledLink>
+          )}
+          {isGreene && (
             <StyledLink>
-              <AiOutlinePlusCircle />
-              <Link to="/Donate">Donate</Link>
+              <GrUserAdmin />
+              <Link to="/Admin">Admin</Link>
             </StyledLink>
-          </div>
-        </SideMenu>
-      </>
+          )}
+          <StyledLink>
+            <AiOutlineUnorderedList />
+            <Link to="/Browse">Browse</Link>
+          </StyledLink>
+          <StyledLink>
+            <AiOutlinePlusCircle />
+            <Link to="/Donate">Donate</Link>
+          </StyledLink>
+        </div>
+      </SideMenu>
+    </>
   );
 };
 
 // width:  ${({display}) => display ? '20%' : '0'};
 
 const SideMenu = styled.div`
-  position:absolute;
-  right:0;
+  min-width: 230px;
+  top: 0;
+  position: absolute;
+  right: 0;
   width: 20%;
   max-width: 300px;
   height: 100vh;
@@ -198,11 +214,10 @@ const ButtonSM = styled.button`
 `;
 
 const StyledLink = styled.div`
-
   padding: 0.1em 0;
   transition: all 0.5s;
 
-  :hover{
+  :hover {
     padding: 0.1em 1em;
   }
 
@@ -223,6 +238,5 @@ const StyledLink = styled.div`
 // const MenuIcons = css`
 //   color:blue;
 // `;
-
 
 export default Nav;
