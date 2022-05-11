@@ -2,11 +2,8 @@ import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-<<<<<<< HEAD
-=======
 import { PageContainer } from "../styles/index.js";
 
->>>>>>> f088cd8a04d737997a52c4e0a03d568a64d24852
 function Item({ state, dispatch, init }) {
   const { dev } = state;
 

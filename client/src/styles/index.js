@@ -29,7 +29,7 @@ const Footer = styled.footer`
 `;
 
 const PageContainer = styled.div`
-  width: 90%;
+  width: 50%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -37,8 +37,6 @@ const PageContainer = styled.div`
   justify-content: center;
   background-color: white;
 `;
-
-
 
 export {
   AppContainer,
