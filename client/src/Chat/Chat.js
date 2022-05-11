@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import VideoPlayer from "./Dashboard/VideoPlayer";
+// import Notifications from "./Dashboard/Notifications";
+// import Options from "./Dashboard/Options";
 
 function Chat({ socket }) {
   const [currentMessage, setCurrentMessage] = useState("");
@@ -21,10 +24,11 @@ function Chat({ socket }) {
 
   useEffect(() => {
     socket.on("receive_message", (data) => {
-      console.log(data);
+      console.log("😁", data);
       setMessageList((list) => [...list, data]);
     });
   }, [socket]);
+
   return (
     <div>
       <div className="chat-header">
@@ -48,6 +52,11 @@ function Chat({ socket }) {
           }}
         ></input>
         <button onClick={sendMessage}>&#9658;</button>
+        <VideoPlayer socket={socket} />
+
+        {/* <Options>
+          <Notifications />
+        </Options> */}
       </div>
     </div>
   );

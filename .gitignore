@@ -1,6 +1,7 @@
 ## SPECIFIC FILES
 client/node_modules
 server/node_modules
+# server/config.env
 client/dist/bundle.js
 .DS_Store
 

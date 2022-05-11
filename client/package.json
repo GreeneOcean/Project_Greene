@@ -7,9 +7,11 @@
     "react-dom": "^17.0.1",
     "react-icons": "^4.3.1",
     "react-router-dom": "^6.3.0",
+    "simple-peer": "^9.11.1",
     "socket.io-client": "^4.5.0",
     "styled-components": "^5.3.5"
   },
+  "proxy": "http://localhost:8080",
   "scripts": {
     "build:dev": "webpack --config webpack.dev.js --watch .",
     "build": "webpack  --config webpack.prod.js"

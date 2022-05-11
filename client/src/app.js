@@ -30,7 +30,6 @@ function App() {
             <Home state={state.Home} dispatch={dispatch} init={api.get.Home} />
           }
         />
-
         <Route
           path="Auth"
           element={
@@ -75,6 +74,7 @@ function App() {
             />
           }
         />
+        <Route path="Chat" element={<Chat socket={socket} />} />
       </Routes>
       <Footer>
         <small>{"\u00a9 2022 Greene Inc. All rights reserved."}</small>
