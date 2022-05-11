@@ -247,11 +247,4 @@ function Donate({ state, dispatch, init }) {
   );
 }
 
-
-// dispatch({
-//   type: 'GET_DONATIONS',
-//   payload: { donate: [2, 3, 4, 5, 6, 7, 8] }
-// })
-// {/* {donate.map((val, ind) => <p key={ind} >{val.toString()}</p>)} */}
-
 export default Donate;
