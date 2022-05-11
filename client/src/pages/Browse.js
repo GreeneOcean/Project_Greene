@@ -30,15 +30,6 @@ function Browse({ state, user, dispatch, init }) {
   }, [])
 
   return (
-<<<<<<< HEAD
-    <PageContainer >
-      <h3>Browse</h3>
-      <p>{`BrowseData: ${state.BrowseData}`} </p>
-      <Link to="/">Home</Link>
-      <Link to="/Item">Item</Link>
-      <Link to="/Auth">Auth</Link>
-    </PageContainer>
-=======
     <div>
       <FilterBar
         itemData={state.user.local}
@@ -61,7 +52,6 @@ function Browse({ state, user, dispatch, init }) {
         />
       </BrowsePageContainer>
     </div>
->>>>>>> dev
   );
 };
 
