@@ -44,7 +44,7 @@ const ToggleSwitchOff = styled.span`
 `;
 
 const ToggleSwitchOn = styled(ToggleSwitchOff)`
-  background-color: green;
+  background-color: var(--color1);
 
   :before {
     -webkit-transform: translateX(1.4em);
