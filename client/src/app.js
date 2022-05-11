@@ -22,7 +22,7 @@ function App() {
   useEffect(() => {
 
     api.get.location(dispatch)
-    const user = { userName: 'coolprovenot', attempt: 'shalom' }
+    const user = { userName: process.env.USERNAME, attempt: 'shalom' }
     api.get.login.user(user, dispatch)
 
 
