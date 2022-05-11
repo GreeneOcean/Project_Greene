@@ -3,11 +3,12 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 import { PageContainer } from "../styles/index.js";
+import ItemPagePhoto from "../components/item/ItemPagePhoto";
 
 function Item({ state, dispatch, init }) {
   const { dev } = state;
 
-  console.log('itemState: ', state);
+  console.log('itemState: ', state.pictures);
 
   useEffect(() => {
     init().then((res) => {
@@ -24,9 +25,18 @@ function Item({ state, dispatch, init }) {
 
   return (
     <PageContainer >
-      <h3>Item</h3>
+      <ItemPageContainer>
+      <ItemPagePhoto pictures={state.pictures}/>
+      </ItemPageContainer>
+
     </PageContainer>
   );
 }
 
 export default Item;
+
+
+const ItemPageContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+`;
