@@ -1,4 +1,4 @@
-const BASE_URL = `http://localhost:8080`;
+const BASE_URL = `http://localhost:3000`;
 
 function buildEndpoint(endpoint, params) {
   return `${BASE_URL}${endpoint}`;
@@ -15,6 +15,11 @@ function buildGetOptions(endpoint, params = {}) {
     }
   ];
 }
+
+function getLogin(query) {
+  return runFetch(...buildGetOptions("/user/login", query));
+}
+get.login = getLogin;
 
 function buildPostOptions(endpoint, params = {}, data = {}) {
   return [

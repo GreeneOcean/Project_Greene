@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { PageContainer } from "../styles/index.js";
+import Nav from "../components/Nav";
 
 function Transaction({ state, dispatch, init }) {
   const { dev } = state;
@@ -19,7 +20,6 @@ function Transaction({ state, dispatch, init }) {
   return (
     <PageContainer>
       <h3>Transaction</h3>
-      <p>{`TransactionsData: ${state.TransactionsData}`} </p>
     </PageContainer>
   );
 }

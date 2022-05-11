@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from "react-router-dom"
 import { PageContainer } from '../styles/index.js';
+import Nav from '../components/Nav';
 
 import FilterBar from "../components/browse/filterBar/FilterBar"
 import Map from "../components/browse/maps/Map"
