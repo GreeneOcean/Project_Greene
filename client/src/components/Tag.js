@@ -9,7 +9,7 @@ const TagSpan = styled.span`
   margin-right: .3em;
 `;
 
-const Tag = ({tag, id, onClick=()=>{} }) => {
+const Tag = ({tag, id, onClick}) => {
   return (
     <TagSpan id={id} onClick={onClick}>{tag}</TagSpan>
   );

@@ -10,11 +10,11 @@ const TagBox = styled.div`
   flex-wrap: wrap;
 `;
 
-const TagsContainer = ({tags}) => {
+const TagsContainer = ({tags, onClick = () => {} }) => {
   return (
     <TagBox>
       {tags.map((tag, i) => {
-        return <Tag key={i} id={'tag-' + i} tag={tag}/>;
+        return <Tag key={i} id={'tag-' + i} tag={tag} onClick={onClick}/>;
       })}
     </TagBox>
   );

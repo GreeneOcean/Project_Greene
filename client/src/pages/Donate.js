@@ -114,6 +114,12 @@ function Donate({ state, dispatch, init }) {
     }
   };
 
+  const removeTag = (e) => {
+    let tagIndex = e.target.id.slice(4);
+    const newTags = tags.slice(0, tagIndex).concat(tags.slice(tagIndex + 1));
+    setTags(newTags);
+  };
+
   const handleKeyDown = (e) => {
     if (e.code === 'Enter') {
       e.preventDefault();
@@ -143,7 +149,7 @@ function Donate({ state, dispatch, init }) {
       <h2>Tell us about your donation</h2>
       <StyledForm>
         <FieldSection htmlFor="title">
-          <span>Title</span>
+          <span>Listing Title</span>
           <input type="text" name="title" id="title" value={title} onChange={handleChange} />
         </FieldSection>
 
@@ -166,12 +172,13 @@ function Donate({ state, dispatch, init }) {
         </FieldSection>
 
         <FieldSection htmlFor="tag">
-          <span>Tags</span>
+          <span>Add tags</span>
           <span>
             <input type="text" name="tag" id="tag" value={tag} onChange={handleChange} onKeyDown={handleKeyDown} />
             <button onClick={handleClick}>+</button>
           </span>
-          <TagsContainer tags={tags} />
+          {tags.length > 0 ? <span>Click to remove</span> : null}
+          <TagsContainer tags={tags} onClick={removeTag}/>
         </FieldSection>
 
         <ToggleSwitch on="Charity only" off="Available to everyone" defaultValue={true} onChange={setCharityOnly} />
