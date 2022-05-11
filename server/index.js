@@ -24,6 +24,13 @@ app.get('/user/login', async(req, res) => {
     if ( isAuthed ) {
       const userData = await DB.GET.user({ userName })
       req.user = userData
+      if ( userData.id === 1 ) {
+        userData.admin = true
+        userData.pendingList = await DB.GET.charities.pending()
+      }
+      else {
+        userData.admin = false
+      }
       res.status(200).send({ user: userData })
     }
     else {
@@ -62,8 +69,6 @@ app.get('/Transactions', (req, res) => {
 
 
 
-/////////
-
 app.get('/data/*', async (req, res) => {
 
   const reqPath = req.path.split('/').filter(str => !!str.length)
@@ -85,31 +90,126 @@ app.get('/data/*', async (req, res) => {
 })
 
 
-app.post('/AddDonation:charityID', (req, res) => {
-  console.log(`Request at ${`/AddDonation:charityID`}`)
-  res.status(201).send({ TransactionsData: true })
+
+
+
+
+app.post('/donation', async (req, res) => {
+  try {
+    console.log(`POST Request at ${`/donation`}`)
+    const newDonation = req.body
+    const addRes = await DB.POST.donation(newDonation)
+    res.status(201).send({ posted: true })
+
+  } catch(err) {
+    console.log(`POST donation res ${err.message} `)
+    res.status(500).send({ posted: false })
+  }
 })
 
-app.post('/AddReview:userID', (req, res) => {
-  console.log(`Request at ${`/AddReview:userID`}`)
-  res.status(201).send({ TransactionsData: true })
+
+app.put('/donation', async (req, res) => {
+  try {
+    console.log(`PUT Request at ${`/donation`}`)
+    const updatedUser = req.body
+    const addRes = await DB.PUT.donation(updatedUser)
+    res.status(201).send({ posted: true })
+
+  } catch(err) {
+    console.log(`POST donation res ${err.message} `)
+    res.status(500).send({ posted: false })
+  }
 })
 
-app.put('/InterestInDonation/:userID', (req, res) => {
-  //NEED TO GET ITEM ID TOO
-  console.log(`Request at ${`/InterestInDonation/:userID`}`)
-  res.status(204).send({ TransactionsData: true })
+
+
+
+
+app.post('/user', async (req, res) => {
+  try {
+    console.log(`POST Request at ${`/user`}`)
+    const newUser = req.body
+    newUser.password = auth.hashPassword(newUser.password)
+    const addRes = await DB.POST.user(newUser)
+    res.status(201).send({ posted: true })
+
+  } catch(err) {
+    console.log(`POST donation res ${err.message} `)
+    res.status(500).send({ posted: false })
+  }
 })
 
-app.put('/ApproveUserClaim/:userID', (req, res) => {
-   //NEED TO GET ITEM ID TOO
-  console.log(`Request at ${`/ApproveUserClaim/:userID`}`)
-  res.status(204).send({ TransactionsData: true })
+
+app.put('/user', async (req, res) => {
+  try {
+    console.log(`PUT Request at ${`/user`}`)
+    const updatedUser = req.body
+    const addRes = await DB.PUT.user(updatedUser)
+    res.status(201).send({ posted: true })
+
+  } catch(err) {
+    console.log(`POST donation res ${err.message} `)
+    res.status(500).send({ posted: false })
+  }
 })
 
-app.put('/AdminApproveUser/:userID', (req, res) => {
-  console.log(`Request at ${`/AdminApproveUser/:userID`}`)
-  res.status(204).send({ TransactionsData: true })
+
+
+
+app.post('/review', async (req, res) => {
+  try {
+    const newReview = req.body
+    const addRes = await DB.POST.review(newReview)
+    console.log(`Request at ${`/review`}`)
+    res.status(201).send({ posted: true, post: newReview })
+
+  } catch(err) {
+    console.log(`POST review res ${err.message}`)
+    res.status(500).send({ posted: false, post: req.body })
+  }
+})
+
+app.put('/InterestInDonation', async (req, res) => {
+  try {
+    const newInterestInDonation = req.body
+    // const addRes
+    console.log(`Request at ${`/InterestInDonation`}`)
+    res.status(204).send({ TransactionsData: true })
+
+  } catch(err) {
+    console.log(`PUT interest donation res ${err.message}`)
+    res.status(500).send({ posted: false })
+  }
+
+})
+
+app.put('/ApproveUserClaim', async (req, res) => {
+  try {
+    const newApproveUserClaim = req.body
+    // const addRes
+    console.log(`Request at ${`/ApproveUserClaim`}`)
+    res.status(204).send({ TransactionsData: true })
+
+  } catch(err) {
+    console.log(`PUT approve user claim res ${err.message}`)
+    res.status(500).send({ posted: false })
+  }
+
+})
+
+app.put('/AdminApproveUser', async (req, res) => {
+  try {
+    const newAdminApproveUser = req.body
+    // const addRes
+    console.log(`Request at ${`/AdminApproveUser`}`)
+    res.status(204).send({ TransactionsData: true })
+
+  } catch(err) {
+    console.log(`PUT admin approve user res ${err.message}`)
+    res.status(500).send({ posted: false })
+  }
+
+
 })
 
 

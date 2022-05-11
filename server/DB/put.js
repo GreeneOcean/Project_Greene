@@ -12,7 +12,10 @@ const PUT = async (newData, table) => {
 const updateInterestInDonation = async (username, donationID) => {
 
   try {
-    const res = await sql`UPDATE donations SET interested_users = ${username}::text WHERE id = ${donationID}`
+    const res = await sql`
+    UPDATE donations
+    SET interested_users = array_append(interested_users, ${username})
+    WHERE id = ${donationID} AND  ${username} != ALL(interested_users)`
     console.log('updateInterestInDonation res ', res)
     return res[0]
   } catch(err) {
@@ -33,6 +36,8 @@ const updateApproveUserClaim = async (username, donationID, state) => {
   }
 }
 
+
+
 const updateAdminApproveUser = async (username, state) => {
 
   try {
@@ -52,13 +57,17 @@ PUT.session = (async (updatedSession) => {
   return await PUT(updatedSession, 'sessions')
 })
 
-PUT.users = (async (updatedUser) => {
+PUT.user = (async (updatedUser) => {
   return await PUT(updatedUser, 'users')
 })
 
 
-PUT.donations = (async (updatedDonation) => {
+
+PUT.donation = (async (updatedDonation) => {
   return await PUT(updatedDonation, 'donations')
 })
+
+
+
 
 module.exports = PUT

@@ -10,14 +10,38 @@ const titles = ['this probably doenst match', 'chinos', 'My old things', 'LIKE N
 // description TEXT NOT NULL,
 const descriptions = ['even cooler', 'super cool', 'Just need to get rid of', 'Regifted ughhh']
 // category TEXT NOT NULL,
-const categorys = ['toy', 'shoes', 'Pants', 'Shirt', 'Jumpa', 'Undies o_o', 'Jacket']
+const categories = [
+  'Accessories',
+  'Arts & Crafts',
+  'Baby',
+  'Books',
+  'Clothing',
+  'Education',
+  'Electronics',
+  'Food',
+  'Garden',
+  'Home & Furniture',
+  'Jewelry',
+  'Kitchenware',
+  'Movies',
+  'Music',
+  'Musical Instruments',
+  'Office & Stationery',
+  'Personal Care',
+  'Pet Supplies',
+  'Sports',
+  'Tools',
+  'Toys',
+  'Video Games',
+  'Other'
+];
 // tag TEXT NOT NULL,
 const tags = ['charity', 'individual']
 
 const claimableLengths = {
   titlesL: titles.length,
   descriptionsL: descriptions.length,
-  categorysL: categorys.length,
+  categoriesL: categories.length,
   tagsL: tags.length,
 }
 
@@ -41,7 +65,7 @@ const userNameFrags = [
 'take',
 'my',
 'clothes',
-'shits',
+'shirts',
 'lol',
 'mgee',
 'this',
@@ -111,12 +135,12 @@ const genRandUserName = (maxNumberOfFrags = 3) => {
 
 
 const genRandDonationForUser = (userId, lat, lng) => {
-  const { titlesL, descriptionsL, categorysL, tagsL, locationsL, } = claimableLengths
+  const { titlesL, descriptionsL, categoriesL, tagsL, locationsL, } = claimableLengths
   return {
     posted_by: userId,
     title: titles[( randInt(titlesL) )],
     description: descriptions[( randInt(descriptionsL) )],
-    category: categorys[( randInt(categorysL) )],
+    category: categories[( randInt(categoriesL) )],
     tag: [ tags[( randInt(tagsL) )] ],
     charity_only: !!randInt(1, 'round'),
     pictures: photos,
@@ -229,12 +253,12 @@ module.exports.all = genAll
 
 
 // const genRandDonationForUser = (userId, lat, lng) => {
-//   const { titlesL, descriptionsL, categorysL, tagsL, locationsL, } = claimableLengths
+//   const { titlesL, descriptionsL, categoriesL, tagsL, locationsL, } = claimableLengths
 //   return {
 //     posted_by: userId,
 //     title: titles[( randInt(titlesL) )],
 //     description: descriptions[( randInt(descriptionsL) )],
-//     category: categorys[( randInt(categorysL) )],
+//     category: categorys[( randInt(categoriesL) )],
 //     tag: [ tags[( randInt(tagsL) )] ],
 //     charity_only: !!randInt(1, 'round'),
 //     interested: [],
@@ -303,12 +327,12 @@ module.exports.all = genAll
 
 
 // const genRandDonatedForUser = (userId, lat, lng) => {
-//   const { titlesL, descriptionsL, categorysL, tagsL, locationsL, } = claimableLengths
+//   const { titlesL, descriptionsL, categoriesL, tagsL, locationsL, } = claimableLengths
 //   return {
 //     posted_by: userId,
 //     title: titles[( randInt(titlesL) )],
 //     description: descriptions[( randInt(descriptionsL) )],
-//     category: categorys[( randInt(categorysL) )],
+//     category: categorys[( randInt(categoriesL) )],
 //     tag: [ tags[( randInt(tagsL) )] ],
 //     charity_only: !!randInt(1, 'round'),
 //     lat,

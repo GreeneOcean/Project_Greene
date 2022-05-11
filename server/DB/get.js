@@ -68,11 +68,32 @@ const session = async (sessionId) => {
   return sql`SELECT * FROM sessions AS s WHERE s.id = ${sessionId}`
 }
 
+const getAdminCharitiesByState = async (state) => {
+  try {
+    const pendingList = await sql`SELECT user_name FROM users WHERE charity_state = ${state}`
+    return pendingList
+  } catch(err) {
+    console.log('getAdminPendingList', err.message)
+  }
+}
+
+
+
+const charities = async () => {
+  return await getAdminCharitiesByState('true')
+}
+
+charities.pending = (() => getAdminCharitiesByState('pending'))
+charities.denied = (() => getAdminCharitiesByState('denied'))
+
 const GET = {
   user: getUser,
   local: getLocal,
-  session
+  session,
+  charities,
 }
+
+
 
 module.exports = GET
 
