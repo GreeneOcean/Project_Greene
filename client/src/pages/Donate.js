@@ -143,7 +143,9 @@ function Donate({ state, dispatch, init }) {
     console.log('location', state.user);
     //console.log(title, description, category, tags, charityOnly, photo);
     api.post('/AddDonation', null, {
-      user: state.user,
+      username: state.user.user_name,
+      lat: state.user.lat,
+      lng: state.user.lng,
       title: title,
       description: description,
       category: category,
