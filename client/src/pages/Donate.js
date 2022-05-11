@@ -150,7 +150,7 @@ function Donate({ state, dispatch, init }) {
         <ToggleSwitch on="Charity only" off="Available to everyone" defaultValue={true} onChange={setCharityOnly} />
 
         <label htmlFor="photo">
-          Add a Photo
+          Click to add or drag in a photo
           <ImageUploader upload={uploadImage} />
         </label>
       </form>

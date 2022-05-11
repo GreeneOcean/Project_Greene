@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
-import { StateContext, DispatchContext } from '../appState/index.js';
+import { StateContext, DispatchContext } from './appState/index.js';
 import { Routes, Route, Link } from "react-router-dom";
 import Nav from './components/Nav';
 import Auth from './pages/Auth'
@@ -9,8 +9,9 @@ import Donate from './pages/Donate'
 import Home from './pages/Home'
 import Item from './pages/Item'
 import Transactions from './pages/Transactions'
-import api from '../api'
+import api from './api/index'
 import { AppContainer, LoadingContainer, Footer } from './styles/index.js';
+import config from '../config.js';
 
 
 function App() {
@@ -18,6 +19,17 @@ function App() {
   const [state] = useContext(StateContext);
   const { dev } = state
   dev.logs && console.log('App state', state)
+  console.log('App state', state)
+
+  useEffect(() => {
+
+    api.get.location(dispatch)
+    const user = { userName: config.USERNAME, attempt: 'shalom' }
+    api.get.login.user(user, dispatch)
+
+
+  }, [])
+
 
   return (
     <AppContainer >
