@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-const FilterBar = (props) => {
+const FilterBar = ({ itemData, setSelectedItem, setFilteredItems }) => {
   const [tags, setTags] = useState([]);
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    const newCategories = props.itemData.reduce(
+    const newCategories = itemData.reduce(
       (unique, item) =>
         unique.includes(item.category) ? unique : [...unique, item.category],
       []
@@ -14,7 +14,7 @@ const FilterBar = (props) => {
     setCategories(newCategories);
 
     const newTags = [];
-    props.itemData.forEach((item) => {
+    itemData.forEach((item) => {
       item.tag.forEach((tag) => {
         if (!newTags.includes(tag)) {
           newTags.push(tag);
@@ -22,10 +22,10 @@ const FilterBar = (props) => {
       });
     });
     setTags(newTags);
-  }, [props.itemData]);
+  }, [itemData]);
 
   const filterItems = () => {
-    let filteredItems = props.itemData;
+    let filteredItems = itemData;
     if (document.getElementById("distance").value !== "--Select Distance--") {
       filteredItems = filteredItems.filter((item) => {
         return item.distance <= document.getElementById("distance").value;
@@ -41,12 +41,12 @@ const FilterBar = (props) => {
         return item.tag.includes(document.getElementById("tag").value);
       });
     }
-    props.setFilteredItems(filteredItems);
+    setFilteredItems(filteredItems);
   };
 
   const clearFilter = () => {
-    props.setFilteredItems(props.itemData);
-    props.setSelectedItem(null);
+    setFilteredItems(itemData);
+    setSelectedItem(null);
   };
 
   return (
@@ -71,7 +71,9 @@ const FilterBar = (props) => {
           <option key={idx}>{tag}</option>
         ))}
       </select>
-      <button type="reset" onClick={clearFilter}>Clear</button>
+      <button type="reset" onClick={clearFilter}>
+        Clear
+      </button>
     </FilterBarForm>
   );
 };

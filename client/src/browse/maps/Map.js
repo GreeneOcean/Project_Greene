@@ -3,9 +3,7 @@ import GoogleMapReact from "google-map-react";
 
 import MapMarker from "./MapMarker.js";
 
-
-const Map = ({lat, lng, data, selectedItem, setSelectedItem}) => {
-
+const Map = ({ lat, lng, data, selectedItem, setSelectedItem }) => {
   const mapOptions = {
     disableDefaultUI: true,
     mapTypeControl: true,
@@ -24,7 +22,7 @@ const Map = ({lat, lng, data, selectedItem, setSelectedItem}) => {
     // Important! Always set the container height explicitly
     <div style={{ height: "600px", width: "750px" }}>
       <GoogleMapReact
-        bootstrapURLKeys={{ key: 'todo: make env-cmd functionality' }}
+        bootstrapURLKeys={{ key: "todo: make env-cmd functionality" }}
         defaultCenter={{ lat: 42.55, lng: -99.86 }}
         center={{
           lat: lat,

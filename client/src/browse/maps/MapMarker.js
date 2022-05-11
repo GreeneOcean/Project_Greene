@@ -4,30 +4,29 @@ import styled from "styled-components";
 import MarkerCard from "./MarkerCard.js";
 import { RiMapPin2Fill } from "react-icons/ri";
 
-const MapMarker = (props) => {
+const MapMarker = ({ item, selectedItem, $hover, setSelectedItem }) => {
   const style =
-    props.selectedItem === props.item.id
+    selectedItem === item.id
       ? { color: "red", height: "25px", width: "25px" }
-      : props.$hover
+      : $hover
       ? { color: "cyan", cursor: "pointer", height: "25px", width: "25px" }
       : { color: "blue", height: "25px", width: "25px" };
 
   const clickHandler = () => {
-    props.setSelectedItem(props.item.id);
+    setSelectedItem(item.id);
   };
 
   return (
     <div>
       <RiMapPin2Fill
         onClick={() => {
-          props.setSelectedItem(props.item.id);
+          setSelectedItem(item.id);
         }}
         style={style}
       />
-      {props.$hover && <MarkerCard item={props.item} />}
+      {$hover && <MarkerCard item={item} />}
     </div>
   );
 };
 
 export default MapMarker;
-

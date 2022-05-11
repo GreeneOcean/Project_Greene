@@ -1,13 +1,12 @@
-import React from 'react'
+import React from "react";
 import styled from "styled-components";
 
-
-const MarkerCard = (props) => {
+const MarkerCard = ({ item }) => {
   return (
     <MapMiniCard>
-      <p>{props.item.category}</p>
-      <p>{props.item.title}</p>
-      <p>{props.item.description}</p>
+      <p>{item.category}</p>
+      <p>{item.title}</p>
+      <p>{item.description}</p>
     </MapMiniCard>
   );
 };

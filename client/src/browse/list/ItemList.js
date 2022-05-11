@@ -1,13 +1,12 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import ItemCard from "./ItemCard.js";
 
-const ItemList = ({items, selectedItem, setSelectedItem}) => {
-
+const ItemList = ({ items, selectedItem, setSelectedItem }) => {
   useEffect(() => {
     if (selectedItem) {
-      const myElement = document.getElementById(selectedItem.toString())
+      const myElement = document.getElementById(selectedItem.toString());
       document.getElementById("itemList").scrollTop = myElement.offsetTop - 130;
     }
   }, [selectedItem]);
