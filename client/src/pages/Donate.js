@@ -34,11 +34,12 @@ const categories = [
 
 const PageContainer = styled.div`
   width: 70%;
-  height: 100%;
+  padding: 1em 0;
+  overflow-y: scroll;
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   background-color: white;
   color: black;
 `;
@@ -48,6 +49,12 @@ const StyledForm = styled.form`
   flex-direction: column;
   justify-content: left;
   width: 80%;
+`;
+
+const FieldSection = styled.label`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 `;
 
 const ButtonBox = styled.div`
@@ -133,19 +140,20 @@ function Donate({ state, dispatch, init }) {
 
   return (
     <PageContainer>
+      <h2>Tell us about your donation</h2>
       <StyledForm>
-        <label htmlFor="title">
-          Title
+        <FieldSection htmlFor="title">
+          <span>Title</span>
           <input type="text" name="title" id="title" value={title} onChange={handleChange} />
-        </label>
+        </FieldSection>
 
-        <label htmlFor="description">
-          Description
+        <FieldSection htmlFor="description">
+          <span>Description</span>
           <textarea name="description" id="description" value={description} onChange={handleChange} />
-        </label>
+        </FieldSection>
 
-        <label htmlFor="category">
-          Category
+        <FieldSection htmlFor="category">
+          <span>Category</span>
           <select name="category" id="category" value={category} onChange={handleChange} required>
             {
               ([<option key={'none'} value={null} selected>Select a Category</option>])
@@ -155,21 +163,23 @@ function Donate({ state, dispatch, init }) {
                 }))
             }
           </select>
-        </label>
+        </FieldSection>
 
-        <label htmlFor="tag">
-          Tags
-          <input type="text" name="tag" id="tag" value={tag} onChange={handleChange} onKeyDown={handleKeyDown} />
-          <button onClick={handleClick}>+</button>
+        <FieldSection htmlFor="tag">
+          <span>Tags</span>
+          <span>
+            <input type="text" name="tag" id="tag" value={tag} onChange={handleChange} onKeyDown={handleKeyDown} />
+            <button onClick={handleClick}>+</button>
+          </span>
           <TagsContainer tags={tags} />
-        </label>
+        </FieldSection>
 
         <ToggleSwitch on="Charity only" off="Available to everyone" defaultValue={true} onChange={setCharityOnly} />
 
-        <label htmlFor="photo">
-          Click to add or drag in a photo
+        <FieldSection htmlFor="photo">
+          <span>Click to add or drag in a photo</span>
           <ImageUploader upload={uploadImage} />
-        </label>
+        </FieldSection>
       </StyledForm>
 
       <ButtonBox>
