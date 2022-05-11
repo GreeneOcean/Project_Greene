@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { StateContext, DispatchContext } from '../../appState';
+import { StateContext, DispatchContext } from '../appState';
 import styled from 'styled-components';
-import api from '../../api';
+import api from '../api';
 import { ButtonMD, LogSignButton } from '../styles/buttons';
 import { AuthInput } from '../styles/input';
 

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
-import { StateContext, DispatchContext } from './appState/index.js';
+import { StateContext, DispatchContext } from './appState';
 import { Routes, Route, Link } from "react-router-dom";
 import Nav from './components/Nav';
 import Auth from './pages/Auth'
