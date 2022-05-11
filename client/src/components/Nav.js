@@ -167,6 +167,8 @@ const NavContainer = styled.nav`
   align-items: center;
   font-size: 1.2rem;
   background: #37782c;
+  position: fixed;
+  top: 0;
 `;
 
 const Logo = styled.div`
