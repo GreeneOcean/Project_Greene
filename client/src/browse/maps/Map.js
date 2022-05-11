@@ -4,7 +4,7 @@ import GoogleMapReact from "google-map-react";
 import MapMarker from "./MapMarker.js";
 
 
-const Map = (props) => {
+const Map = ({lat, lng, data, selectedItem, setSelectedItem}) => {
 
   const mapOptions = {
     disableDefaultUI: true,
@@ -27,24 +27,24 @@ const Map = (props) => {
         bootstrapURLKeys={{ key: 'todo: make env-cmd functionality' }}
         defaultCenter={{ lat: 42.55, lng: -99.86 }}
         center={{
-          lat: props.lat,
-          lng: props.lng,
+          lat: lat,
+          lng: lng,
         }}
         defaultZoom={12}
-        zoom={props.lat ? 12 : 4}
+        zoom={lat ? 12 : 4}
         yesIWantToUseGoogleMapApiInternals
         options={mapOptions}
         hoverDistance={25}
       >
-        {props.data.map((item, idx) => {
+        {data.map((item, idx) => {
           return (
             <MapMarker
               key={idx}
               item={item}
               lat={item.lat}
               lng={item.lng}
-              setSelectedItem={props.setSelectedItem}
-              selectedItem={props.selectedItem}
+              setSelectedItem={setSelectedItem}
+              selectedItem={selectedItem}
             />
           );
         })}

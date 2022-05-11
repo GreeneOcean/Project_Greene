@@ -5,7 +5,7 @@ import Map from "./maps/Map.js";
 import ItemList from "./list/ItemList.js";
 import FilterBar from "./filterBar/FilterBar.js";
 
-const BrowsePage = (props) => {
+const BrowsePage = () => {
   const [lat, setLat] = useState(null);
   const [lng, setLng] = useState(null);
   const [itemData, setItemData] = useState([]);

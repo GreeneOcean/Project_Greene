@@ -3,21 +3,21 @@ import styled from "styled-components";
 
 import { BsCardImage } from "react-icons/bs";
 
-const ItemCard = (props) => {
+const ItemCard = ({setSelectedItem, item, selectedItem}) => {
   const clickHandler = () => {
-    props.setSelectedItem(props.item.id);
+    setSelectedItem(item.id);
   };
 
   return (
     <ItemContainer
-      id={props.item.id}
+      id={item.id}
       onClick={clickHandler}
-      isSelected={props.selectedItem === props.item.id}
+      isSelected={selectedItem === item.id}
     >
       <div style={{display: "flex", justifyContent: "space-between"}}>
-        {props.item.pictures && <img src={item.pictures[0]} />}
-        {!props.item.pictures && <BsCardImage />}
-        {props.selectedItem === props.item.id && (
+        {item.pictures && <img src={item.pictures[0]} />}
+        {!item.pictures && <BsCardImage />}
+        {selectedItem === item.id && (
           <button
             onClick={() => {
               console.log("functionality not yet implemented");
@@ -27,9 +27,9 @@ const ItemCard = (props) => {
           </button>
         )}
         </div>
-        <p>{props.item.title}</p>
-        <p>{props.item.description}</p>
-        {props.item.tag.map((tag, idx) => {
+        <p>{item.title}</p>
+        <p>{item.description}</p>
+        {item.tag.map((tag, idx) => {
           return <p key={idx}>{tag}</p>;
         })}
     </ItemContainer>

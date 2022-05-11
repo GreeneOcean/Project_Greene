@@ -3,24 +3,24 @@ import styled from "styled-components";
 
 import ItemCard from "./ItemCard.js";
 
-const ItemList = (props) => {
+const ItemList = ({items, selectedItem, setSelectedItem}) => {
 
   useEffect(() => {
-    if (props.selectedItem) {
-      const myElement = document.getElementById(props.selectedItem.toString())
+    if (selectedItem) {
+      const myElement = document.getElementById(selectedItem.toString())
       document.getElementById("itemList").scrollTop = myElement.offsetTop - 130;
     }
-  }, [props.selectedItem]);
+  }, [selectedItem]);
 
   return (
     <ItemListContainer id="itemList">
-      {props.items.map((item, idx) => {
+      {items.map((item, idx) => {
         return (
           <ItemCard
             item={item}
             key={idx}
-            selectedItem={props.selectedItem}
-            setSelectedItem={props.setSelectedItem}
+            selectedItem={selectedItem}
+            setSelectedItem={setSelectedItem}
           />
         );
       })}
