@@ -2,13 +2,7 @@ const { sql } = require('./connect');
 
 const PUT = async (newData, table) => {
   try {
-    // if (!Array.isArray(newData)) {
-    //   newData = [ newData ]
-    // }
-    console.log({ newData })
-    const res = await sql`UPDATE ${sql(table)} SET ${ sql(newData) }`
-    console.log('PUT res for', table, res)
-    return res
+    return await sql`UPDATE ${sql(table)} SET ${ sql(newData) }`
   } catch(err) {
     console.log('PUT err for', table, err.message, 'for ', newData)
     return {}

@@ -43,7 +43,6 @@ const userNameFrags = [
 'clothes',
 'shits',
 'lol',
-'butts',
 'mgee',
 'this',
 'is',
@@ -57,9 +56,7 @@ const userNameFrags = [
 'even',
 'looking',
 'im',
-'not',
-'a',
-'butt'
+
 ]
 
 const photos = ['https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6V_R6WMnHzN5bpexR-vQ1tNickx9phBGTHA&usqp=CAU',]

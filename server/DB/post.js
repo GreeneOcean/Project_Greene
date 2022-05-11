@@ -30,11 +30,5 @@ POST.session = async (newSession) => {
   return await POST(newSession, 'sessions')
 }
 
-// const genRand = require('./generator')
-// const test = async () => {
-//   const res = await POST.user(genRand.user(23423))
-//   console.log('test res', res)
-// }
-// let p = test()
 
 module.exports = POST

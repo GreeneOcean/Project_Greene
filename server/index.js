@@ -17,10 +17,9 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use( auth.session )
 app.use( auth.sessionEnd );
 
-//////
+
 app.get('/user/login', async(req, res) => {
   try {
-    // console.log('get user/login', req.query)
     const [ userName, isAuthed ] = await auth.user(req.query)
     if ( isAuthed ) {
       const userData = await DB.GET.user({ userName })
@@ -38,33 +37,26 @@ app.get('/user/login', async(req, res) => {
 
 
 app.get('/Auth', (req, res) => {
-  //console.log(`Request at ${`/Auth`}`)
   res.status(200).send({ AuthData: true })
 })
 
 app.get('/Browse', (req, res) => {
-  //console.log(`Request at ${`/Browse`}`)
   res.status(200).send({ BrowseData: true })
 })
 
 app.get('/Donate', (req, res) => {
-  //console.log(`Request at ${`/Donate`}`)
   res.status(200).send({ DonateData: true })
 })
 
 app.get('/Home', (req, res) => {
-  // //console.log('HOME req.session', req.session)
-  //console.log(`Request at ${`/Home`}`)
   res.status(200).send({ HomeData: true })
 })
 
 app.get('/Item', (req, res) => {
-  //console.log(`Request at ${`/Item`}`)
   res.status(200).send({ ItemData: true })
 })
 
 app.get('/Transactions', (req, res) => {
-  //console.log(`Request at ${`/Transactions`}`)
   res.status(200).send({ TransactionsData: true })
 })
 
@@ -74,7 +66,6 @@ app.get('/Transactions', (req, res) => {
 
 app.get('/data/*', async (req, res) => {
 
-  // console.log(`Request at ${`/`}`)
   const reqPath = req.path.split('/').filter(str => !!str.length)
   reqPath[0] = 'GET'
   const params = req.query
@@ -84,11 +75,7 @@ app.get('/data/*', async (req, res) => {
     reqPath.forEach(route => {
       query = query[route]
     })
-    // console.log({ params })
-    // console.log({ reqPath })
-    // console.log({ query })
     const dbRes = await query(params)
-    // console.log({ dbRes })
     res.status(200).send(dbRes)
 
   } catch(err) {

@@ -16,7 +16,6 @@ const getUser = async ({ userName }) => {
     ARRAY(SELECT id FROM donations AS d WHERE ${userName} = d.taken_by) AS received,
     ARRAY(SELECT id FROM donations AS d WHERE ${userName} = d.posted_by) AS donated
     FROM users AS u WHERE u.user_name = ${userName};`
-    // console.log('getUser res ', res)
     const user = res[0]
     const { interested, received, donated } = user
     const donatedRes = await Promise.all([
@@ -25,11 +24,9 @@ const getUser = async ({ userName }) => {
       sql`SELECT * FROM donations AS d WHERE d.id = ANY(${received})`,
       sql`SELECT * FROM donations AS d WHERE d.id = ANY(${donated})`,
     ])
-    // console.log({donatedRes})
     user.interested = donatedRes[0]
     user.received = donatedRes[1]
     user.donated = donatedRes[2]
-    // console.log(user.donated)
     return user
   } catch(err) {
     console.log('getUser err', err.message, 'for id', userName)
@@ -37,7 +34,6 @@ const getUser = async ({ userName }) => {
   }
 }
 
-// getUser({ userName: 'not2not' })
 
 
 const getLocal = async (latPosition, lngPosition, range = 10, count = 100, table = 'donations') => {
@@ -81,4 +77,3 @@ const GET = {
 module.exports = GET
 
 
-// CREATE INDEX    ON base (point(lng, lat) <@> point(lng, lat))

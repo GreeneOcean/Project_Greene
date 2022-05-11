@@ -7,7 +7,7 @@ try {
   console.log('crypto support is disabled!');
 }
 
-const salt = 'butts'
+const salt = 'IB_SY_DB'
 
 const hashPassword = (password) => {
   return crypto.createHash('sha256', salt)
@@ -19,9 +19,7 @@ const hashPassword = (password) => {
 
 const checkPassword = (passwordToMatch, savedPassword) => {
   passwordToMatch = crypto.createHash('sha256', salt)
-    .update(passwordToMatch)
-    .digest('hex');
-  // console.log({ passwordToMatch, savedPassword })
+    .update(passwordToMatch).digest('hex');
   return passwordToMatch === savedPassword
 }
 
@@ -32,13 +30,11 @@ const checkUser = async (user) => {
     if (userId) {
       const getPassword = await sql`SELECT user_name, password FROM users WHERE id = ${userId}`
       const savedPassword = getPassword[0].password
-      // console.log({ savedPassword, attempt })
       return [getPassword[0].user_name,  checkPassword(attempt, savedPassword) ]
     }
     else {
       const getPassword = await sql`SELECT password FROM users WHERE user_name = ${userName}`
       const savedPassword = getPassword[0].password
-      // console.log({ savedPassword, attempt })
       return [userName,  checkPassword(attempt, savedPassword) ]
     }
   }
@@ -48,12 +44,5 @@ const checkUser = async (user) => {
   }
 }
 
-// console.log(checkPassword('read', test))
-
-const testUser = async () => {
-  const res = await checkUser({ userId: 5, attempt: 'shalom' })
-  // console.log({ res })
-}
-// testUser()
 
 module.exports = { session, sessionEnd, user: checkUser, create: hashPassword }

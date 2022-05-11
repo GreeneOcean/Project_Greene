@@ -14,11 +14,10 @@ const newSession = async (req, res) => {
 const session =  async (req, res, next) => {
 
   try {
+
     const { sessionId } = req.cookies
-    // console.log('sesh cookies', sessionId)
     if( sessionId ) {
       const [ sessionRes ] = await DB.GET.session(sessionId)
-      // console.log('sesh db res', sessionRes)
       if ( sessionRes ) {
         req.session = sessionRes
         const { user_name } = sessionRes
@@ -48,9 +47,7 @@ const sessionEnd = async (req, res, next) => {
   res.on('finish', async () => {
 
     const updatedSession = req.session
-    // console.log('sesh end sesh', { updatedSession })
     const { user } = req
-    // console.log('sesh end user', { user })
     if ( user ) {
       updatedSession.user_name = user.user_name
       DB.PUT.session(updatedSession)
