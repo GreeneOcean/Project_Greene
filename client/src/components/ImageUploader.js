@@ -30,7 +30,7 @@ const PreviewImage = styled.img`
   height: inherit;
 `;
 
-const ImageUploader = ({upload}) => {
+const ImageUploader = ({upload = () => {} }) => {
   const [image, setImage] = useState(null);
   const [imageURL, setImageURL] = useState(null);
   const [uploading, setUploading] = useState(false);
@@ -44,6 +44,7 @@ const ImageUploader = ({upload}) => {
       })
       .then((url) => {
         setImageURL(url);
+        upload(url);
       })
       .catch(() => {
         setImage(null);

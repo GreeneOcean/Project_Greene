@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 const StyledButton = css`
   border-radius: 30px;
   border: 2px;
+  border-style: solid;
   border-color: var(--color1);
   padding: 10px 15px;
   cursor: pointer;
@@ -31,3 +32,5 @@ const ButtonS = styled.button`
   ${StyledButton}
   font-size: 1em;
 `;
+
+export { ButtonL, ButtonM, ButtonS };
