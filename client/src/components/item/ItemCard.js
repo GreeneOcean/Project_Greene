@@ -41,9 +41,9 @@ const ItemCard = (props) => {
 export default ItemCard;
 
 const Container = styled.div`
-  min-width: 150px;
-  max-width: 150px;
-  height: 150px;
+  min-width: 120px;
+  max-width: 120px;
+  height: 120px;
   margin: 10px;
   cursor: pointer;
 `;
