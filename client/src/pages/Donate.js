@@ -66,9 +66,17 @@ const ButtonBox = styled.div`
   padding: 2em;
 `;
 
+const StyledAsterisk = styled.span`
+  color: red;
+`;
+const Asterisk = () => {
+  return (<StyledAsterisk>*</StyledAsterisk>);
+}
+
 const ErrorMessage = styled.div`
   color: red;
 `;
+
 
 function Donate({ state, dispatch, init }) {
   const { donate, dev } = state;
@@ -191,17 +199,17 @@ function Donate({ state, dispatch, init }) {
       }
       <StyledForm>
         <FieldSection htmlFor="title">
-          <span>Listing Title</span>
+          <span>Listing Title <Asterisk/></span>
           <input type="text" name="title" id="title" value={title} onChange={handleChange} />
         </FieldSection>
 
         <FieldSection htmlFor="description">
-          <span>Description</span>
+          <span>Description <Asterisk/></span>
           <textarea name="description" id="description" value={description} onChange={handleChange} />
         </FieldSection>
 
         <FieldSection htmlFor="category">
-          <span>Category</span>
+          <span>Category <Asterisk/></span>
           <select name="category" id="category" value={category} onChange={handleChange} required>
             {
               ([<option key={'none'} value={null} selected>Select a Category</option>])
