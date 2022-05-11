@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { StateContext, DispatchContext } from './appState/index.js';
 import { Routes, Route, Link } from "react-router-dom";
+import Nav from './components/Nav';
 import Auth from './pages/Auth'
 import Browse from './pages/Browse'
 import Donate from './pages/Donate'
@@ -10,6 +11,7 @@ import Item from './pages/Item'
 import Transactions from './pages/Transactions'
 import api from './api/index'
 import { AppContainer, LoadingContainer, Footer } from './styles/index.js';
+import config from '../config.js';
 
 
 function App() {
@@ -22,7 +24,7 @@ function App() {
   useEffect(() => {
 
     api.get.location(dispatch)
-    const user = { userName: 'coolprovenot', attempt: 'shalom' }
+    const user = { userName: config.USERNAME, attempt: 'shalom' }
     api.get.login.user(user, dispatch)
 
 
@@ -31,6 +33,7 @@ function App() {
 
   return (
     <AppContainer >
+      <Nav />
       <Routes>
         <Route
           path="/"
