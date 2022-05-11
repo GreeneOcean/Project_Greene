@@ -21,18 +21,6 @@ const BrowsePage = (props) => {
     }
   }, []);
 
-  useEffect(() => {
-    fetch("http://localhost:3000/local")
-      .then((res) => res.json())
-      .then((res) => {
-        const temp = [];
-        for (let i = 0; i < res.length; i += 100) {
-          temp.push(res[i]);
-        }
-        setItemData(temp);
-        setFilteredItems(temp);
-      });
-  }, []);
 
   return (
     <div>
