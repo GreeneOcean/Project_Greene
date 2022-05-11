@@ -37,6 +37,5 @@ const ItemListContainer = styled.div`
   background-color: yellow;
   display: flex;
   overflow: scroll;
-  display: flex;
   flex-wrap: wrap;
 `;
