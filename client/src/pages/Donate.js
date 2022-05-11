@@ -5,6 +5,7 @@ import { ButtonL, ButtonM, ButtonS } from '../styles/buttons.js';
 import TagsContainer from '../components/TagsContainer.js';
 import ToggleSwitch from '../components/ToggleSwitch.js';
 import ImageUploader from '../components/ImageUploader.js';
+import api from '../api/index.js';
 
 const categories = [
   'Accessories',
@@ -132,9 +133,6 @@ function Donate({ state, dispatch, init }) {
     addTag();
   }
 
-  const uploadImage = (e) => {
-  };
-
   const cancel = (e) => {
     e.preventDefault();
     useLinkClickHandler('Home');
@@ -142,6 +140,7 @@ function Donate({ state, dispatch, init }) {
 
   const submitForm = (e) => {
     e.preventDefault();
+    //console.log(title, description, category, tags, charityOnly, photo);
   };
 
   return (
@@ -185,7 +184,7 @@ function Donate({ state, dispatch, init }) {
 
         <FieldSection htmlFor="photo">
           <span>Click to add or drag in a photo</span>
-          <ImageUploader upload={uploadImage} />
+          <ImageUploader upload={setPhoto} />
         </FieldSection>
       </StyledForm>
 
