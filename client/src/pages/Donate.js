@@ -178,7 +178,7 @@ function Donate({ state, dispatch, init }) {
             <button onClick={handleClick}>+</button>
           </span>
           {tags.length > 0 ? <span>Click to remove</span> : null}
-          <TagsContainer tags={tags} onClick={removeTag}/>
+          <TagsContainer tags={tags} onClick={removeTag} clickable={true}/>
         </FieldSection>
 
         <ToggleSwitch on="Charity only" off="Available to everyone" defaultValue={true} onChange={setCharityOnly} />

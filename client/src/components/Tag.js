@@ -9,10 +9,28 @@ const TagSpan = styled.span`
   margin-right: .3em;
 `;
 
-const Tag = ({tag, id, onClick}) => {
-  return (
-    <TagSpan id={id} onClick={onClick}>{tag}</TagSpan>
-  );
+const ClickableTagSpan = styled(TagSpan)`
+  :hover, :focus {
+    background: var(--color3);
+  }
+`;
+
+const Tag = ({tag, id, onClick, clickable=false}) => {
+  const handleKeyDown = (e) => {
+    if (e.code === 'Enter') {
+      onClick(e);
+    }
+  }
+
+  if (clickable) {
+    return (
+      <ClickableTagSpan id={id} onClick={onClick} onKeyDown={handleKeyDown} tabIndex="0">{tag}</ClickableTagSpan>
+    );
+  } else {
+    return (
+      <TagSpan id={id}>{tag}</TagSpan>
+    );
+  }
 };
 
 export default Tag;
