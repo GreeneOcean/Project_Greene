@@ -31,7 +31,7 @@ body {
   height: 100%;
   background-color: rgb(247, 193, 18);
   font-family: 'Open Sans', sans-serif;
-  color: green;
+  color: white;
   --color1: #00933D;
   --color2: #00796F;
   --color3: #00586B;
@@ -52,9 +52,6 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
-
-
-
 `
 
 export default ThemeProvider
