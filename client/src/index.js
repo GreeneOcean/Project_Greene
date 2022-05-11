@@ -12,8 +12,4 @@ const Stack = (
   </BrowserRouter>
 );
 
-<<<<<<< HEAD
 ReactDOM.render(Stack, document.getElementById("root"));
-=======
-ReactDOM.render(Stack, document.getElementById('root'));
->>>>>>> f088cd8a04d737997a52c4e0a03d568a64d24852

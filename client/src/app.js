@@ -3,28 +3,16 @@ import io from "socket.io-client";
 import styled from "styled-components";
 import { StateContext, DispatchContext } from "./appState/index.js";
 import { Routes, Route, Link } from "react-router-dom";
-<<<<<<< HEAD
+import Nav from "./components/Nav";
 import Auth from "./pages/Auth";
 import Browse from "./pages/Browse";
 import Donate from "./pages/Donate";
 import Home from "./pages/Home";
 import Item from "./pages/Item";
 import Transactions from "./pages/Transactions";
-import Chat from "./Chat/Chat";
 import api from "./api/index";
 import { AppContainer, LoadingContainer, Footer } from "./styles/index.js";
-=======
-import Nav from './components/Nav';
-import Auth from './pages/Auth'
-import Browse from './pages/Browse'
-import Donate from './pages/Donate'
-import Home from './pages/Home'
-import Item from './pages/Item'
-import Transactions from './pages/Transactions'
-import api from './api/index'
-import { AppContainer, LoadingContainer, Footer } from './styles/index.js';
-import config from '../config.js';
->>>>>>> f088cd8a04d737997a52c4e0a03d568a64d24852
+import config from "../config.js";
 
 const socket = io.connect("http://localhost:8080");
 
@@ -36,17 +24,13 @@ function App() {
   console.log("App state", state);
 
   useEffect(() => {
-
-    api.get.location(dispatch)
-    const user = { userName: config.USERNAME, attempt: 'shalom' }
-    api.get.login.user(user, dispatch)
-
-
-  }, [])
-
+    api.get.location(dispatch);
+    const user = { userName: config.USERNAME, attempt: "shalom" };
+    api.get.login.user(user, dispatch);
+  }, []);
 
   return (
-    <AppContainer >
+    <AppContainer>
       <Nav />
       <Routes>
         <Route
@@ -99,7 +83,7 @@ function App() {
             />
           }
         />
-        <Route path="Chat" element={<Chat socket={socket} />} />
+        {/* <Route path="Chat" element={<Chat socket={socket} />} /> */}
       </Routes>
       <Footer>
         <small>{"\u00a9 2022 Greene Inc. All rights reserved."}</small>
