@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState, useEffect, useContext } from 'react';
 import { StateContext, DispatchContext } from '../../appState';
 import styled from 'styled-components';
@@ -25,6 +26,18 @@ const SignUp = ({ handleClickOther }) => {
   };
 
   const handleUserTextChange = (e) => {
+=======
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import api from '../../api';
+
+const SignUp = ({ handleClickOther }) => {
+  const [userText, setUserText] = useState('');
+  const [passText, setPassText] = useState('');
+  const [confPassText, setConfPassText] = useState('');
+
+  const handleUserChange = (e) => {
+>>>>>>> f088cd8a04d737997a52c4e0a03d568a64d24852
     setUserText(e.target.value);
   };
 
@@ -36,6 +49,7 @@ const SignUp = ({ handleClickOther }) => {
     setConfPassText(e.target.value);
   };
 
+<<<<<<< HEAD
   const handleCharityClick = () => {
     setCharityStatus(!charityStatus);
   };
@@ -64,10 +78,23 @@ const SignUp = ({ handleClickOther }) => {
         // .then(res => dispatch({ type: 'type from reducer case', payload: res.data}))
         .catch((err) => console.log(err));
     }
+=======
+  const handleSignUp = () => {
+    api.get
+      .login({
+        userId: userText,
+        attempt: passText,
+        charity: '',
+      })
+      .then((res) => console.log(res))
+      // .then(res => dispatch(, payload))
+      .catch((err) => console.log(err));
+>>>>>>> f088cd8a04d737997a52c4e0a03d568a64d24852
   };
 
   return (
     <>
+<<<<<<< HEAD
       <h1
         style={{
           paddingBottom: '15px',
@@ -124,21 +151,76 @@ const SignUp = ({ handleClickOther }) => {
         type="password"
         autoComplete="off"
         maxLength="150"
+=======
+      <h1>Create a new account</h1>
+      <input
+        id="search"
+        type="search"
+        autoComplete="off"
+        maxLength="150"
+        style={{
+          height: '40px',
+          width: '400px',
+          borderRadius: '6px',
+          padding: '12px',
+          backgroundColor: 'rgb(245,245,245)',
+          transition: 'all 0.5s',
+          cursor: 'text',
+          marginBottom: '15px',
+        }}
+        value={userText}
+        onChange={handleUserChange}
+        placeholder={'Create your Username'}
+      />
+      <input
+        id="search"
+        type="password"
+        autoComplete="off"
+        maxLength="150"
+        style={{
+          height: '40px',
+          width: '400px',
+          borderRadius: '6px',
+          padding: '12px',
+          backgroundColor: 'rgb(245,245,245)',
+          transition: 'all 0.5s',
+          cursor: 'text',
+          marginBottom: '15px',
+        }}
+>>>>>>> f088cd8a04d737997a52c4e0a03d568a64d24852
         value={passText}
         onChange={handlePassChange}
         placeholder={'Create your Password'}
       />
+<<<<<<< HEAD
       <AuthInput
         id="confPassword"
         className="search"
         type="password"
         autoComplete="off"
         maxLength="150"
+=======
+      <input
+        id="search"
+        type="password"
+        autoComplete="off"
+        maxLength="150"
+        style={{
+          height: '40px',
+          width: '400px',
+          borderRadius: '6px',
+          padding: '12px',
+          backgroundColor: 'rgb(245,245,245)',
+          transition: 'all 0.5s',
+          cursor: 'text',
+        }}
+>>>>>>> f088cd8a04d737997a52c4e0a03d568a64d24852
         value={confPassText}
         onChange={handleConfPassChange}
         placeholder={'Confirm your Password'}
       />
       <div>
+<<<<<<< HEAD
         <input
           id="agreeTerms"
           className="checkbox"
@@ -163,9 +245,55 @@ const SignUp = ({ handleClickOther }) => {
       <div>
         Already have an account?
         <LogSignButton onClick={handleClickOther}>Log in</LogSignButton>
+=======
+        <input type="checkbox" />
+        Would you like to apply for chaity status?
+      </div>
+      <div>
+        <input type="checkbox" />I agree to the Greene Ocean{' '}
+        <u>Terms of Service</u> and <u>Privacy Policy</u>
+      </div>
+      <ButtonMD onClick={handleSignUp}>Sign up</ButtonMD>
+      <div>
+        Already have an account?
+        <LoginButton onClick={handleClickOther}>Log in</LoginButton>
+>>>>>>> f088cd8a04d737997a52c4e0a03d568a64d24852
       </div>
     </>
   );
 };
 
+<<<<<<< HEAD
+=======
+const LoginButton = styled.div`
+  font-weight: bold;
+  color: #37782c;
+  width: 100px;
+  &:hover {
+    cursor: pointer;
+    color: lightgreen;
+    text-decoration: underline;
+  }
+`;
+
+const ButtonMD = styled.button`
+  border: 1px solid rgba(11, 191, 125, 0.9);
+  border-radius: 6px;
+  padding: 10px 50px;
+  width: 400px;
+  text-align: center;
+  text-decoration: none;
+  color: #37782c;
+  background-color: transparent;
+  box-shadow: 5px 5px 12px -5px rgba(0, 0, 0, 0.2);
+  transition: all 0.5s;
+  &:hover {
+    cursor: pointer;
+    color: #fff;
+    background-color: #37782c;
+    box-shadow: 0px 5px 10px rgba(46, 229, 157, 0.4);
+  }
+`;
+
+>>>>>>> f088cd8a04d737997a52c4e0a03d568a64d24852
 export default SignUp;

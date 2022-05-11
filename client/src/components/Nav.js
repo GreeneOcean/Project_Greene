@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+<<<<<<< HEAD
 import styled, { css } from 'styled-components';
 import { TiThMenu } from 'react-icons/ti';
 import { GiBoxUnpacking } from 'react-icons/gi';
@@ -13,11 +14,25 @@ import {
 } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import Search from './Search';
+=======
+import styled, {css} from 'styled-components';
+import Search from './Search';
+import { TiThMenu } from 'react-icons/ti';
+import { GiBoxUnpacking } from 'react-icons/gi';
+import { AiOutlineClose, AiOutlineUser, AiOutlineUnorderedList, AiOutlinePlusCircle } from 'react-icons/ai';
+import {CgArrowsExchange} from 'react-icons/cg';
+import { BiMessageRounded } from 'react-icons/bi';
+import { Link } from 'react-router-dom';
+>>>>>>> f088cd8a04d737997a52c4e0a03d568a64d24852
 
 const Nav = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [isGreene, setIsGreene] = useState(false);
+<<<<<<< HEAD
   const [menu, setMenu] = useState(false);
+=======
+  const [menu, setMenu] = useState(false)
+>>>>>>> f088cd8a04d737997a52c4e0a03d568a64d24852
 
   useEffect(() => {
     const sideMenu = document.getElementById('sideMenu');
@@ -26,6 +41,7 @@ const Nav = () => {
     } else {
       sideMenu.style.transform = 'translate(100%,0)';
     }
+<<<<<<< HEAD
   }, [menu]);
 
   return (
@@ -48,11 +64,26 @@ const Nav = () => {
         </Link>
         <Search />
         <TiThMenu
+=======
+  }, [menu])
+
+  return (
+    <>
+    <NavContainer>
+      <Link
+        to="/"
+        style={{
+          color: 'white',
+        }}
+      >
+        <GiBoxUnpacking
+>>>>>>> f088cd8a04d737997a52c4e0a03d568a64d24852
           style={{
             color: 'white',
             padding: '0 1em',
             width: '4em',
             height: 'auto',
+<<<<<<< HEAD
             cursor: 'pointer',
           }}
           onClick={() => {
@@ -60,6 +91,26 @@ const Nav = () => {
           }}
         />
         {/* <div style={{ justifyContent: 'end', marginRight: '2 rem' }}>
+=======
+          }}
+        />
+      </Link>
+      <Search />
+      <TiThMenu
+        style={{
+          color: 'white',
+          padding: '0 1em',
+          width: '4em',
+          height: 'auto',
+          cursor: 'pointer',
+        }}
+
+        onClick={() => {
+          setMenu(!menu)
+        }}
+      />
+      {/* <div style={{ justifyContent: 'end', marginRight: '2 rem' }}>
+>>>>>>> f088cd8a04d737997a52c4e0a03d568a64d24852
         {loggedIn ? (
           <ButtonSM type="submit" onClick={() => console.log('Transactions')}>
             Transactions
@@ -77,12 +128,17 @@ const Nav = () => {
             null
           )}
       </div> */}
+<<<<<<< HEAD
         {/* <ul>
+=======
+      {/* <ul>
+>>>>>>> f088cd8a04d737997a52c4e0a03d568a64d24852
               <li>link1</li>
               <li>link2</li>
               <li>link3</li>
               <li>Login AUTH Link</li>
             </ul> */}
+<<<<<<< HEAD
       </NavContainer>
       <SideMenu id="sideMenu" display={menu}>
         <div style={{ width: '100%', display: 'flex', justifyContent: 'end' }}>
@@ -99,6 +155,22 @@ const Nav = () => {
           />
         </div>
         {/* {loggedIn ? (
+=======
+    </NavContainer>
+      <SideMenu id="sideMenu" display={menu}>
+      <div style={{width:'100%', display:'flex', justifyContent:'end'}}>
+        <AiOutlineClose style={{
+          width:'1.8em',
+          height:'auto',
+          color: 'black',
+          cursor: 'pointer'
+        }}
+        onClick={() => {
+          setMenu(!menu)
+        }}/>
+      </div>
+      {/* {loggedIn ? (
+>>>>>>> f088cd8a04d737997a52c4e0a03d568a64d24852
           <ButtonSM type="submit" onClick={() => console.log('Transactions')}>
             Transactions
           </ButtonSM>
@@ -114,6 +186,7 @@ const Nav = () => {
           ) : (
             null
           )} */}
+<<<<<<< HEAD
         <div>
           {loggedIn ? (
             <>
@@ -151,16 +224,53 @@ const Nav = () => {
         </div>
       </SideMenu>
     </>
+=======
+          <div>
+            {loggedIn ? (
+              <>
+                <StyledLink>
+                  <CgArrowsExchange />
+                <Link onClick={() => console.log('Transactions')}>
+                  Transactions
+                </Link>
+                </StyledLink>
+                <StyledLink>
+                  <BiMessageRounded />
+                <Link to="/">Messages</Link>
+                </StyledLink>
+              </>
+            ) : (
+              <StyledLink>
+                <AiOutlineUser/><Link to="/Auth">Log in</Link>
+              </StyledLink>
+            )}
+            <StyledLink>
+              <AiOutlineUnorderedList />
+              <Link to="/Browse">Browse</Link>
+            </StyledLink>
+            <StyledLink>
+              <AiOutlinePlusCircle />
+              <Link to="/Donate">Donate</Link>
+            </StyledLink>
+          </div>
+        </SideMenu>
+      </>
+>>>>>>> f088cd8a04d737997a52c4e0a03d568a64d24852
   );
 };
 
 // width:  ${({display}) => display ? '20%' : '0'};
 
 const SideMenu = styled.div`
+<<<<<<< HEAD
   min-width: 230px;
   top: 0;
   position: absolute;
   right: 0;
+=======
+  position:absolute;
+  right:0;
+>>>>>>> f088cd8a04d737997a52c4e0a03d568a64d24852
   width: 20%;
   max-width: 300px;
   height: 100vh;
@@ -214,10 +324,18 @@ const ButtonSM = styled.button`
 `;
 
 const StyledLink = styled.div`
+<<<<<<< HEAD
   padding: 0.1em 0;
   transition: all 0.5s;
 
   :hover {
+=======
+
+  padding: 0.1em 0;
+  transition: all 0.5s;
+
+  :hover{
+>>>>>>> f088cd8a04d737997a52c4e0a03d568a64d24852
     padding: 0.1em 1em;
   }
 
@@ -239,4 +357,8 @@ const StyledLink = styled.div`
 //   color:blue;
 // `;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> f088cd8a04d737997a52c4e0a03d568a64d24852
 export default Nav;

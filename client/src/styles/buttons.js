@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 const StyledButton = css`
   border-radius: 30px;
   border: 2px;
+  border-style: solid;
   border-color: var(--color1);
   padding: 10px 15px;
   cursor: pointer;
@@ -32,6 +33,7 @@ export const ButtonS = styled.button`
   font-size: 1em;
 `;
 
+<<<<<<< HEAD
 export const LogSignButton = styled.div`
   font-weight: bold;
   color: #37782c;
@@ -61,3 +63,6 @@ export const ButtonMD = styled.button`
     box-shadow: 0px 5px 10px rgba(46, 229, 157, 0.4);
   }
 `;
+=======
+export { ButtonL, ButtonM, ButtonS };
+>>>>>>> f088cd8a04d737997a52c4e0a03d568a64d24852
