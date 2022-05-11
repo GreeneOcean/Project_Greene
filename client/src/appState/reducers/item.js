@@ -14,6 +14,10 @@ function reducer(state, action) {
       newState = { ...state, ...payload };
       return newState;
 
+    case 'ADD_ITEM':
+      newState = {...state, ...payload};
+      return newState;
+
     default:
       return state;
   }

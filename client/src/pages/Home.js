@@ -2,9 +2,11 @@ import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { PageContainer } from "../styles/index.js";
+import Carousel from "../components/Carousel.js";
 
 function Home({ state, dispatch, init }) {
-  const { dev } = state;
+  const { dev, user, HomeData } = state;
+  const { lat, lng, local } = user;
 
   useEffect(() => {
     init().then((res) => {
@@ -26,13 +28,13 @@ function Home({ state, dispatch, init }) {
   return (
     <PageContainer>
       <h3>Home</h3>
-      <p>{`HomeData: ${state.HomeData}`} </p>
-      <Link to="/Auth">Auth</Link>
-      <Link to="/Browse">Browse</Link>
-      <Link to="/Donate">Donate</Link>
-      <Link to="/Item">Item</Link>
-      <Link to="/Transactions">Transactions</Link>
-      <Link to="/Chat">Chat</Link>
+      <p>{`HomeData: ${HomeData}`} </p>
+      <p>
+        {`user lat: ${lat ? lat : "loading"}   user lng: ${
+          lng ? lng : "loading"
+        }`}{" "}
+      </p>
+      <p>{`number of local: ${local ? local.length : "loading"}`}</p>
       <button onClick={toggleDevLogs}>Toggle logs</button>
     </PageContainer>
   );
