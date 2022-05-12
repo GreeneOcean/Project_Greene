@@ -73,7 +73,7 @@ const ToggleSwitch = ({on='', off='', defaultValue=false, onChange=()=>{}}) => {
       <InvisibleCheckbox name="charityOnly" type="checkbox" checked={defaultValue} isChecked={value} onChange={toggle}/>
       {value ? <ToggleSwitchOn className="charity-toggle"/> : <ToggleSwitchOff className="charity-toggle"/>}
     </Switch>
-    <span>{value ? on : off}</span>
+    <span className="toggle-span">{value ? on : off}</span>
     </SwitchContainer>
   );
 };

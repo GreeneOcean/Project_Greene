@@ -45,7 +45,7 @@ const DonateContainer = styled.div`
     margin: 0;
   }
 
-  span {
+  .toggle-span {
     margin-left: .4em;
   }
 `;
