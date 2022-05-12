@@ -48,13 +48,18 @@ const SignUp = ({ handleClickOther }) => {
     } else if (!agreeTerms) {
       console.log('Please agree to the Terms and Conditions')
     } else {
-      api.get
-        .login({
-          userName: userText,
-          attempt: passText,
-          charity: '',
-        })
-        .catch((err) => console.log(err));
+      console.log('Sign Up Clicked')
+      api.post.user({
+        user_name: userText,
+        first_name: firstName,
+        last_name: lastName,
+        password: passText,
+        lat: '30.267741514111805',
+        lng: '-97.83300335500589',
+        // lat: user.lat,
+        // lng: user.lng,
+      })
+      .catch((err) => console.log(err));
     }
 
   };

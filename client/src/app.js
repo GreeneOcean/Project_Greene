@@ -12,8 +12,7 @@ import Transactions from "./pages/Transactions";
 import api from "./api/index";
 import { AppContainer, LoadingContainer, Footer } from "./styles/index.js";
 import config from "../config.js";
-import Chat from './Chat/Chat';
-
+import Chat from './components/Chat/Chat';
 
 function App() {
   const [, dispatch] = useContext(DispatchContext);
@@ -83,7 +82,7 @@ function App() {
           }
         />
       </Routes>
-      <Chat socket={socket} />
+      <Chat />
       <Footer>
         <small>{"\u00a9 2022 Greene Inc. All rights reserved."}</small>
       </Footer>
