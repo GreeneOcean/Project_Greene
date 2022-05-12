@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link, useNavigate } from "react-router-dom"
-import { GoPlus } from 'react-icons/go';
+import { ImPlus } from 'react-icons/im';
 import { ButtonL, ButtonM, ButtonS } from '../styles/buttons.js';
 import TagsContainer from '../components/TagsContainer.js';
 import ToggleSwitch from '../components/ToggleSwitch.js';
@@ -106,10 +106,19 @@ const AddTagSection = styled.div`
 
   #add-tag-btn {
     height: 2.5em;
-    width: 10%;
+    width: 2.5em;
     background-color: #fff;
     border-radius: 50%;
     border: 2px solid var(--color1);
+    color: var(--color1);
+    display: grid;
+    align-items: center;
+    justify-items: center;
+
+    :hover {
+      background-color: var(--color1);
+      color: #fff;
+    }
   }
 `;
 
@@ -283,7 +292,7 @@ function Donate({ state, dispatch, init }) {
           <span>Add tags</span>
           <AddTagSection>
             <FieldInput type="text" name="tag" id="tag" value={tag} onChange={handleChange} onKeyDown={handleKeyDown} />
-            <button onClick={handleClick} id="add-tag-btn"><GoPlus/></button>
+            <button onClick={handleClick} id="add-tag-btn"><ImPlus/></button>
           </AddTagSection>
           {tags.length > 0 ? <span>Click to remove</span> : null}
           <TagsContainer tags={tags} onClick={removeTag} clickable={true}/>
