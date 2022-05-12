@@ -7,7 +7,6 @@ const FilterBar = ({ itemData, setSelectedItem, setFilteredItems }) => {
 
   useEffect(() => {
     if (itemData) {
-      console.log(itemData);
       const newCategories = itemData.reduce(
         (unique, item) =>
           unique.includes(item.category) ? unique : [...unique, item.category],
