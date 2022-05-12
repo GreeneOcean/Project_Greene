@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styled, {css} from 'styled-components';
+import styled, { css } from 'styled-components';
 import Search from './Search';
 import { TiThMenu } from 'react-icons/ti';
 import { GiBoxUnpacking } from 'react-icons/gi';
@@ -117,10 +117,7 @@ const Nav = ({ user }) => {
               <>
                 <StyledLink>
                   <CgArrowsExchange />
-                {isGreene && <Link to="/Admin">
-                  Admin
-                </Link>}
-                {!isGreene && <Link to="/Transactions">
+                <Link to='/Transactions'>
                   Transactions
                 </Link>}
                 </StyledLink>
@@ -151,11 +148,12 @@ const Nav = ({ user }) => {
 // width:  ${({display}) => display ? '20%' : '0'};
 
 const SideMenu = styled.div`
-  position: absolute;
-  right: 0;
-  min-width: 230px;
+  top:0;
+  position:absolute;
+  right:0;
   width: 20%;
   max-width: 300px;
+  min-width: 300px;
   height: 100vh;
   background: white;
   border-left: 2px solid var(--color1);
@@ -176,7 +174,7 @@ const NavContainer = styled.nav`
   align-items: center;
   font-size: 1.2rem;
   background: #37782c;
-  position: fixed;
+  position: sticky;
   top: 0;
 `;
 

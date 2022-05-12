@@ -1,8 +1,10 @@
-import React, { useContext, useEffect } from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { PageContainer } from "../styles/index.js";
-import Carousel from "../components/Carousel.js";
+import React, { useContext, useEffect } from 'react';
+import styled from 'styled-components';
+import { Link } from "react-router-dom"
+
+import { PageContainer } from '../styles/index.js';
+import Carousel from '../components/Carousel.js';
+import HomeItemsWidget from '../components/item/HomeItemsWidget';
 
 function Home({ state, dispatch, init }) {
   const { dev, user, HomeData } = state;
@@ -19,6 +21,7 @@ function Home({ state, dispatch, init }) {
   return (
     <PageContainer>
       <h3>Home</h3>
+      <Link to='/Auth'>Auth</Link>
       <p>{`HomeData: ${HomeData}`} </p>
       <p>
         {`user lat: ${lat ? lat : "loading"}   user lng: ${

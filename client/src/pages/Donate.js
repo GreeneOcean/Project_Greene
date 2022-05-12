@@ -33,16 +33,18 @@ const categories = [
   'Other'
 ];
 
-const PageContainer = styled.div`
-  width: 70%;
-  padding: 1em 0;
-  overflow-y: scroll;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: flex-start;
-  background-color: white;
-  color: black;
+const DonateContainer = styled.div`
+  * {
+    margin: .3em 0;
+  }
+
+  .charity-toggle {
+    margin: 0;
+  }
+
+  span {
+    margin-left: .4em;
+  }
 `;
 
 const StyledForm = styled.form`
@@ -156,7 +158,13 @@ function Donate({ state, dispatch, init }) {
     };
 
     if (validate(data)) {
-      api.post('/AddDonation', null, data);
+      api.post.donation(data)
+        .then((res) => {
+          console.log(JSON.parse(res));
+        })
+        .catch((err) => {
+          console.log(err);
+        })
     } else {
       setInvalid(true);
     }
@@ -178,7 +186,7 @@ function Donate({ state, dispatch, init }) {
   };
 
   return (
-    <PageContainer>
+    <DonateContainer>
       <h2>Tell us about your donation</h2>
       {
         invalid
@@ -233,7 +241,7 @@ function Donate({ state, dispatch, init }) {
         <ButtonS name="cancel" onClick={cancel}>Cancel</ButtonS>
         <ButtonS name="post" onClick={submitForm}>List Donation</ButtonS>
       </ButtonBox>
-    </PageContainer>
+    </DonateContainer>
   );
 }
 

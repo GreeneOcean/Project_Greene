@@ -14,7 +14,6 @@ import api from "./api/index";
 import { AppContainer, LoadingContainer, Footer } from "./styles/index.js";
 import config from "../config.js";
 
-
 function App() {
   const [, dispatch] = useContext(DispatchContext);
   const [state] = useContext(StateContext);
@@ -25,7 +24,7 @@ function App() {
   useEffect(() => {
     api.get.location(dispatch);
     const user = { userName: 'mgee', attempt: "shalom" };
-    api.get.login(user, dispatch);
+    api.get.login(user, dispatch); // Automatic Login user === mgee
   }, []);
 
   return (

@@ -29,9 +29,8 @@ body {
   overflow-x: hidden;
   min-height: 100%;
   height: 100%;
-  background-color: rgb(247, 193, 18);
+  background-color: white;
   font-family: 'Open Sans', sans-serif;
-  /* color: black; */
   --color1: #00933D;
   --color2: #00796F;
   --color3: #00586B;
@@ -46,7 +45,7 @@ body {
 
 #root {
   min-height: 100%;
-  height: 50%;
+  height: 100%;
 }
 
 code {

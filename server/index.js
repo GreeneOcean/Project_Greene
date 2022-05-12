@@ -84,6 +84,7 @@ app.use((req, res, next) => {
 // Routes
 app.get("/user/login", async (req, res) => {
   try {
+
     const [ userName, isAuthed ] = await auth.user(req.query)
     if ( isAuthed ) {
       console.log({ userName }, 'Authorized user')
