@@ -122,6 +122,12 @@ const AddTagSection = styled.div`
   }
 `;
 
+const RemoveTagMsg = styled.span`
+  font-size: 16px;
+  font-style: italic;
+  color: #666;
+`;
+
 const ButtonBox = styled.div`
   width: 100%;
   display: flex;
@@ -294,7 +300,7 @@ function Donate({ state, dispatch, init }) {
             <FieldInput type="text" name="tag" id="tag" value={tag} onChange={handleChange} onKeyDown={handleKeyDown} />
             <button onClick={handleClick} id="add-tag-btn"><ImPlus/></button>
           </AddTagSection>
-          {tags.length > 0 ? <span>Click to remove</span> : null}
+          {tags.length > 0 ? <RemoveTagMsg>Click to remove</RemoveTagMsg> : null}
           <TagsContainer tags={tags} onClick={removeTag} clickable={true}/>
         </FieldSection>
 
