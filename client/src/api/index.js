@@ -155,6 +155,10 @@ put.donation = ((data) => put('/donation', data))
 put.user = ((data) => put('/user', data))
 
 
+api.put.donation({
+
+})
+
 function putApproveUserClaim(data) {
   return put('/ApproveUserClaim', data)
 }
@@ -215,18 +219,24 @@ export default api
   // })
   // .catch(err => console.log('Post donation err', err.message))
 
+// // APPROVE USER
+//   api.put.donation({
+//     id: // required do not change
+//     approved_user: 'Dora', // new user from in interested users
+//     state: 'approved',
+//   })
+//   .then(postDonationRes => {
+//     console.log({ postDonationRes })
+//   })
+//   .catch(err => console.log('Post donation err', err.message))
 
-  // api.put.donation({
-  //   posted_by: 'Dora',
-  //   title: 'thank you for',
-  //   description: 'helping him that what im here for',
-  //   category: ['tests'],
-  //   pictures: [],
-  //   interested_users: [],
-  //   lat: user.lat,
-  //   lng: user.lng,
-  // })
-  // .then(postDonationRes => {
-  //   console.log({ postDonationRes })
-  // })
-  // .catch(err => console.log('Post donation err', err.message))
+// // CONFIRM DONATION/PICK UP
+//   api.put.donation({
+//     id: // required do not change
+//     taken_by: 'Dora', // user who recieved donation
+//     state: 'donated'
+//   })
+//   .then(postDonationRes => {
+//     console.log({ postDonationRes })
+//   })
+//   .catch(err => console.log('Post donation err', err.message))
