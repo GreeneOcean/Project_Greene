@@ -10,17 +10,12 @@ function Transaction({ state, dispatch, init }) {
 
   return (
     <PageContainer>
-<<<<<<< HEAD
       <h1>Transaction History</h1>
       {user.admin ?
         <Admin user={state.user}/> :
         <UserTransactions user={state.user}  />
        }
 
-=======
-      <h3>Transaction</h3>
-      <UserTransactions user={state.user}  />
->>>>>>> parent of a56d27c... Ib sy db (#34) adding location to server and route by url
     </PageContainer>
   );
 }

@@ -13,17 +13,10 @@ import { CgArrowsExchange } from 'react-icons/cg';
 import { BiMessageRounded } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 
-<<<<<<< HEAD
 const Nav = ({ user }) => {
   const [loggedIn, setLoggedIn] = useState(true);
   const [isGreene, setIsGreene] = useState(user.admin);
   const [menu, setMenu] = useState(false);
-=======
-const Nav = () => {
-  const [loggedIn, setLoggedIn] = useState(true);
-  const [isGreene, setIsGreene] = useState(false);
-  const [menu, setMenu] = useState(false)
->>>>>>> parent of a56d27c... Ib sy db (#34) adding location to server and route by url
 
   useEffect(() => {
     const sideMenu = document.getElementById('sideMenu');
@@ -34,13 +27,10 @@ const Nav = () => {
     }
   }, [menu]);
 
-<<<<<<< HEAD
   useEffect(() => {
     setIsGreene(user.admin);
   }, [user.admin]);
 
-=======
->>>>>>> parent of a56d27c... Ib sy db (#34) adding location to server and route by url
   return (
     <>
       <NavContainer>
@@ -74,7 +64,6 @@ const Nav = () => {
         />
       </NavContainer>
       <SideMenu id="sideMenu" display={menu}>
-<<<<<<< HEAD
         <div style={{ width: '100%', display: 'flex', justifyContent: 'end' }}>
           <AiOutlineClose
             style={{
@@ -107,45 +96,6 @@ const Nav = () => {
                 }}
               >
                 <Link to="/">
-=======
-      <div style={{width:'100%', display:'flex', justifyContent:'end'}}>
-        <AiOutlineClose style={{
-          width:'1.8em',
-          height:'auto',
-          color: 'black',
-          cursor: 'pointer'
-        }}
-        onClick={() => {
-          setMenu(!menu)
-        }}/>
-      </div>
-      {/* {loggedIn ? (
-          <ButtonSM type="submit" onClick={() => console.log('Transactions')}>
-            Transactions
-          </ButtonSM>
-        ) : (
-          <ButtonSM type="submit" onClick={() => console.log('Log in')}>
-            Log in
-          </ButtonSM>
-        )}
-        {isGreene ? (
-          <ButtonSM type="submit" onClick={() => console.log('Admin')}>
-            Admin
-          </ButtonSM>
-          ) : (
-            null
-          )} */}
-          <div>
-            {loggedIn ? (
-              <>
-                <StyledLink>
-                  <CgArrowsExchange />
-                <Link to='/Transactions'>
-                  Transactions
-                </Link>
-                </StyledLink>
-                <StyledLink>
->>>>>>> parent of a56d27c... Ib sy db (#34) adding location to server and route by url
                   <BiMessageRounded />
                   Messages
                 </Link>
