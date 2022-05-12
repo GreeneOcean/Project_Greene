@@ -33,18 +33,6 @@ const categories = [
   'Other'
 ];
 
-const PageContainer = styled.div`
-  width: 70%;
-  padding: 1em 0;
-  overflow-y: scroll;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: flex-start;
-  background-color: white;
-  color: black;
-`;
-
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
@@ -178,7 +166,7 @@ function Donate({ state, dispatch, init }) {
   };
 
   return (
-    <PageContainer>
+    <div id="donation-page-container">
       <h2>Tell us about your donation</h2>
       {
         invalid
@@ -233,7 +221,7 @@ function Donate({ state, dispatch, init }) {
         <ButtonS name="cancel" onClick={cancel}>Cancel</ButtonS>
         <ButtonS name="post" onClick={submitForm}>List Donation</ButtonS>
       </ButtonBox>
-    </PageContainer>
+    </div>
   );
 }
 

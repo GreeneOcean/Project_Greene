@@ -143,9 +143,9 @@ const Nav = () => {
 // width:  ${({display}) => display ? '20%' : '0'};
 
 const SideMenu = styled.div`
-  position: absolute;
-  right: 0;
-  min-width: 230px;
+  top:0;
+  position:absolute;
+  right:0;
   width: 20%;
   max-width: 300px;
   height: 100vh;
@@ -168,7 +168,7 @@ const NavContainer = styled.nav`
   align-items: center;
   font-size: 1.2rem;
   background: #37782c;
-  position: fixed;
+  position: sticky;
   top: 0;
 `;
 
