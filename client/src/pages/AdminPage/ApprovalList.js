@@ -1,45 +1,29 @@
 import React, { useState } from 'react';
 
 
-function ApprovalList() {
+function ApprovalList({ user }) {
   const [userApproved, setUserApproved] = useState(false);
   const [userDenied, setUserDenied] = useState(false);
 
-  const handleApproved = (value) => {
-    // userApproved ||
-    //   fetch(`/userApproved`, {
-    //     method: 'PUT',
-    //     body: JSON.stringify({content}),
-    //     headers: {"Content-Type": "application/json"}
-    //     })
-    //     .then(() => setUserApproved(true))
-    //     .catch(err => console.log(err, 'err PUT approved'));
+  const handleChoice = (value) => {
     if (value) {
       console.log('hit')
       setUserApproved(true)
+    } else {
+      setUserDenied(true)
     }
   };
 
-  // const handleDeny = () => {
-  //   userDeny ||
-  //     fetch(`/userDenied`, {
-  //       method: 'PUT',
-  //       body: JSON.stringify({content}),
-  //       headers: {"Content-Type": "application/json"}
-  //       })
-  //       .then(() => setUserDenied(true))
-  //       .catch(err => console.log(err, 'err PUT deny'));
-  // };
 
   return (
     <div>
-      <p>Users waiting for approval</p>
+      <p>Pending: {user}</p>
       <label>
-        {userApproved ? ('Approved') : (<button onClick={() => handleApproved(true)}>Approve</button>)}
+        {userApproved ? ('Approved') : (<button onClick={() => handleChoice(true)}>Approve</button>)}
 
       </label>
       <label>
-        {userDenied ? ('Denied') : (<button onClick={() => handleApproved(false)}>Deny</button>)}
+        {userDenied ? ('Denied') : (<button onClick={() => handleChoice(false)}>Deny</button>)}
 
       </label>
 

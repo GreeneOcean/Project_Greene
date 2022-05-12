@@ -88,7 +88,6 @@ const UserTransactions = ({ user }) =>{
                 />
               )
             })
-
           }
         </div>
         <div>{otherUser}</div>
