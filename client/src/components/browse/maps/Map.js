@@ -10,6 +10,8 @@ const Map = ({ lat, lng, data, selectedItem, setSelectedItem }) => {
     mapTypeControl: true,
     streetViewControl: false,
     scollWheel: true,
+    zoomControl: true,
+    hoverDistance: 30,
     styles: [
       {
         featureType: "poi",
