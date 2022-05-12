@@ -98,21 +98,21 @@ function Donate({ state, dispatch, init }) {
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState('Select a Category');
   const [tag, setTag] = useState('');
   const [tags, setTags] = useState([]);
   const [charityOnly, setCharityOnly] = useState(true);
   const [photo, setPhoto] = useState(null);
   const [valid, setValid] = useState(false);
 
-  const grabData = () => {
+  const grabData = (data) => {
     return {
       posted_by: state.user.user_name,
       lat: state.user.lat,
       lng: state.user.lng,
-      title: title,
-      description: description,
-      category: category,
+      title: data.title || title,
+      description: data.description || description,
+      category: data.category || category,
       tag: tags,
       charity_only: charityOnly,
       pictures: photo ? [photo] : []
@@ -124,15 +124,13 @@ function Donate({ state, dispatch, init }) {
       title: setTitle,
       description: setDescription,
       category: setCategory,
-      tag: setTag,
-      tags: setTags,
       charityOnly: setCharityOnly,
-      photo: setPhoto,
+      tag: setTag
     };
 
     let set = states[field];
     set(data);
-    setValid(validate(grabData()));
+    setValid(validate(grabData({[field]: data})));
   };
 
   const handleChange = (e) => {
@@ -187,11 +185,12 @@ function Donate({ state, dispatch, init }) {
   };
 
   const validate = (data) => {
+    console.log(data);
     if (data.title.length < 1) {
       return false;
     } else if (data.description.length < 1) {
       return false;
-    } else if (data.category.length < 1) {
+    } else if (data.category === 'Select a Category') {
       return false;
     } else if (data.user_name === null) {
       return false;
@@ -219,7 +218,7 @@ function Donate({ state, dispatch, init }) {
           <span>Category <Asterisk/></span>
           <select name="category" id="category" value={category} onChange={handleChange} required>
             {
-              ([<option key={'none'} value={''}>Select a Category</option>])
+              ([<option key="none" value="Select a Category">Select a Category</option>])
               .concat(
                 categories.map((category, i) => {
                   return <option key={i} value={category}>{category}</option>
