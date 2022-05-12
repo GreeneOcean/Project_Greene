@@ -46,7 +46,7 @@ const getLocal = async (latPosition, lngPosition, range = 100, count = 100, tabl
       SELECT *, (point(lng, lat) <@> point(${lngPosition}, ${latPosition})) AS distance
       FROM ${ sql(table) }
       WHERE (point(lng, lat) <@> point(${lngPosition}, ${latPosition})) < (${range})
-      ;` // removed ORDER BY distance;
+      ;` 
     }
     if(table === 'users') {
       local = await sql`
