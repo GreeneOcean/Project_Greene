@@ -7,25 +7,25 @@ import Carousel from '../components/Carousel.js';
 import HomeItemsWidget from '../components/item/HomeItemsWidget';
 
 function Home({ state, dispatch, init }) {
-  const { dev, user, HomeData } = state
-  const { lat, lng, local } = user
+  const { dev, user, HomeData } = state;
+  const { lat, lng, local } = user;
 
 
 
   useEffect(() => {
     init().then((res) => {
       dev.logs && console.log(`\nHome API init res`, res);
-      dev.logs && console.log('Home state', state);
+      dev.logs && console.log("Home state", state);
       dispatch({
         type: `HOME_INIT`,
-        payload: res,
+        payload: res
       });
     });
   }, []);
 
   const toggleDevLogs = (e) => {
     dispatch({
-      type: 'TOGGLE_LOGS',
+      type: "TOGGLE_LOGS"
     });
   };
 
