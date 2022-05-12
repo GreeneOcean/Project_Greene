@@ -98,10 +98,9 @@ const UserTransactions = ({ user }) => {
           );
         })}
       </div>
-      <div>{otherUser}</div>
 
-      {otherUser.length && (
-        <Chat currentUser={user.user_name} otherUser={otherUser} />
+      {!!otherUser.length && (
+        <StyledChat currentUser={user.user_name} otherUser={otherUser} />
       )}
     </TransactionContainer>
   );
@@ -123,7 +122,12 @@ font: 40px;
 justify-content: center; */
   font-size: 20px;
   flex-direction: column;
-  background-color: grey;
+  ${"" /* background-color: grey; */}
+`;
+
+const StyledChat = styled(Chat)`
+  background-color: green;
+  position: absolute;
 `;
 
 export default UserTransactions;

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import VideoPlayer from "./Dashboard/VideoPlayer";
 import io from "socket.io-client";
 const socket = io.connect("http://localhost:8080");
+import styled from "styled-components";
 
 function Chat() {
   const [currentMessage, setCurrentMessage] = useState("");
@@ -36,7 +37,7 @@ function Chat() {
   }, [socket]);
 
   return (
-    <div className="chat-window">
+    <ChatContainer className="chat-window">
       <div className="chat-header">
         <p>Live Chat</p>
       </div>
@@ -75,23 +76,12 @@ function Chat() {
 
         <VideoPlayer socket={socket} />
       </div>
-    </div>
+    </ChatContainer>
   );
 }
 
-// const ChatContainer = styled.nav`
-//   box-sizing: border-box;
-//   margin: 0;
-//   padding: 0;
-//   height: 60px;
-//   width: 100%;
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-//   font-size: 1.2rem;
-//   background: #37782c;
-//   position: fixed;
-//   bottom: 0;
-// `;
+const ChatContainer = styled.div`
+  background: green;
+`;
 
 export default Chat;
