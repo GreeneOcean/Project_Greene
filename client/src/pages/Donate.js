@@ -1,11 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link, useNavigate } from "react-router-dom"
+import { GoPlus } from 'react-icons/go';
 import { ButtonL, ButtonM, ButtonS } from '../styles/buttons.js';
 import TagsContainer from '../components/TagsContainer.js';
 import ToggleSwitch from '../components/ToggleSwitch.js';
 import ImageUploader from '../components/ImageUploader.js';
 import api from '../api/index.js';
+
+import { AuthInput } from '../styles/input.js';
 
 const categories = [
   'Accessories',
@@ -58,6 +61,56 @@ const FieldSection = styled.label`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+`;
+
+const FieldInput = styled.input`
+  height: 2.5em;
+  width: 100%;
+  padding: 0 1em;
+  border-radius: 1em;
+  background-color: #ebebeb;
+  cursor: text;
+
+  :focus {
+    background-color: #f5f5f5;
+  }
+`;
+
+const FieldDropdown = styled(FieldInput)`
+  cursor: default;
+`;
+
+const FieldTextArea = styled.textarea`
+  font-family: inherit;
+  height: 7.5em;
+  width: 100%;
+  padding: 1em;
+  border-radius: 1em;
+  background-color: #ebebeb;
+  cursor: text;
+  resize: none;
+
+  :focus {
+    background-color: #f5f5f5;
+  }
+`;
+
+const AddTagSection = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  #tag {
+    width: 90%;
+  }
+
+  #add-tag-btn {
+    height: 2.5em;
+    width: 10%;
+    background-color: #fff;
+    border-radius: 50%;
+    border: 2px solid var(--color1);
+  }
 `;
 
 const ButtonBox = styled.div`
@@ -204,17 +257,17 @@ function Donate({ state, dispatch, init }) {
       <h2>Tell us about your donation</h2>
       <StyledForm>
         <FieldSection htmlFor="title">
-          <span>Listing Title <Asterisk/></span>
-          <input type="text" name="title" id="title" value={title} onChange={handleChange} />
+          <span>Listing Title<Asterisk/></span>
+          <FieldInput type="text" name="title" id="title" value={title} onChange={handleChange} />
         </FieldSection>
 
         <FieldSection htmlFor="description">
-          <span>Description <Asterisk/></span>
-          <textarea name="description" id="description" value={description} onChange={handleChange} />
+          <span>Description<Asterisk/></span>
+          <FieldTextArea name="description" id="description" value={description} onChange={handleChange} />
         </FieldSection>
 
         <FieldSection htmlFor="category">
-          <span>Category <Asterisk/></span>
+          <span>Category<Asterisk/></span>
           <select name="category" id="category" value={category} onChange={handleChange} required>
             {
               ([<option key="none" value="Select a Category">Select a Category</option>])
@@ -228,10 +281,10 @@ function Donate({ state, dispatch, init }) {
 
         <FieldSection htmlFor="tag">
           <span>Add tags</span>
-          <span>
-            <input type="text" name="tag" id="tag" value={tag} onChange={handleChange} onKeyDown={handleKeyDown} />
-            <button onClick={handleClick}>+</button>
-          </span>
+          <AddTagSection>
+            <FieldInput type="text" name="tag" id="tag" value={tag} onChange={handleChange} onKeyDown={handleKeyDown} />
+            <button onClick={handleClick} id="add-tag-btn"><GoPlus/></button>
+          </AddTagSection>
           {tags.length > 0 ? <span>Click to remove</span> : null}
           <TagsContainer tags={tags} onClick={removeTag} clickable={true}/>
         </FieldSection>
