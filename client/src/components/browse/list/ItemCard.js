@@ -1,14 +1,16 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { DispatchContext } from "../../../appState/index";
-import { BsCardImage } from "react-icons/bs";
+// import { BsCardImage } from "react-icons/bs";
 
 const ItemCard = ({ item, selectedItem, setSelectedItem }) => {
   const [, dispatch] = useContext(DispatchContext);
 
   const navigate = useNavigate();
+  const photoNotFoundURL =
+    "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?format=jpg&quality=90&v=1530129081";
 
   const selectItemHandler = () => {
     setSelectedItem(item.id);
@@ -16,7 +18,7 @@ const ItemCard = ({ item, selectedItem, setSelectedItem }) => {
 
   const claimClickHandler = () => {
     dispatch({ type: "ADD_ITEM", payload: item });
-    navigate('/Item', {replace: true});
+    navigate("/Item", { replace: true });
   };
 
   return (
@@ -25,12 +27,12 @@ const ItemCard = ({ item, selectedItem, setSelectedItem }) => {
       onClick={selectItemHandler}
       isSelected={selectedItem === item.id}
     >
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <InnerItemContainer>
         <PhotoDiv>
-          {item.pictures && <StyledImage src={item.pictures[0]} />}
-          {!item.pictures && <BsCardImage />}
+          {(item.pictures && item.pictures.length) && <StyledImage src={item.pictures[0]} />}
+          {(!item.pictures || !item.pictures.length) && <StyledImage src={photoNotFoundURL}/>}
         </PhotoDiv>
-      </div>
+      </InnerItemContainer>
       <p>{item.title}</p>
       <p>{item.description}</p>
       {item.tag.map((tag, idx) => {
@@ -66,6 +68,7 @@ const StyledImage = styled.img`
   width: 100%;
 `;
 
-
-
-
+const InnerItemContainer = styled.div`
+  display: "flex";
+  justify-content: "space-between";
+`;

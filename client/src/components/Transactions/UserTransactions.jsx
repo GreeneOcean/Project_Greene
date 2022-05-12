@@ -19,45 +19,46 @@ const UserTransactions = ({ user }) =>{
     setOtherUser('')
   }
 
-  const filter = () => {
-
-    var newItems = [];
-
-    if (group === 'both') {
-      user.interested.forEach(item => {
-        if (item.state === status) {
-          newItems.push(item);
-        }
-      });
-      user.received.forEach(item => {
-        if (item.state === status) {
-          newItems.push(item);
-        }
-      });
-      user.donated.forEach(item => {
-        if (item.state === status) {
-          newItems.push(item);
-        }
-      });
-    } else if (group === 'received') {
-      user.received.forEach(item => {
-        if (item.state === status) {
-          newItems.push(item);
-        }
-        });
-    } else if (group === 'donations') {
-      user.donated.forEach(item => {
-        if (item.state === status) {
-          newItems.push(item);
-        }
-      });
-    }
-    setItems(newItems)
-  }
 
   useEffect(() => {
-    user && filter();
-  }, [group, status, user]);
+
+    var newItems = [];
+    const { interested, received, donated } = user
+
+    if ( interested && received && donated ) {
+      if (group === 'both') {
+        user.interested.forEach(item => {
+          if (item.state === status) {
+            newItems.push(item);
+          }
+        });
+        user.received.forEach(item => {
+          if (item.state === status) {
+            newItems.push(item);
+          }
+        });
+        user.donated.forEach(item => {
+          if (item.state === status) {
+            newItems.push(item);
+          }
+        });
+      } else if (group === 'received') {
+        user.received.forEach(item => {
+          if (item.state === status) {
+            newItems.push(item);
+          }
+          });
+      } else if (group === 'donations') {
+        user.donated.forEach(item => {
+          if (item.state === status) {
+            newItems.push(item);
+          }
+        });
+      }
+    }
+    setItems(newItems)
+
+  }, [group, status, user.interested, user.received, user.donated]);
 
   return (
 
@@ -88,7 +89,6 @@ const UserTransactions = ({ user }) =>{
                 />
               )
             })
-
           }
         </div>
         <div>{otherUser}</div>

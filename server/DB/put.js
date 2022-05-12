@@ -9,13 +9,13 @@ const PUT = async (newData, table) => {
   }
 }
 
-const updateInterestInDonation = async (username, donationID) => {
+const updateInterestInDonation = async ({ userName, donationId }) => {
 
   try {
     const res = await sql`
     UPDATE donations
-    SET interested_users = array_append(interested_users, ${username})
-    WHERE id = ${donationID} AND  ${username} != ALL(interested_users)`
+    SET interested_users = array_append(interested_users, ${userName})
+    WHERE id = ${donationId} AND  ${userName} != ALL(interested_users)`
     console.log('updateInterestInDonation res ', res)
     return res[0]
   } catch(err) {
@@ -24,10 +24,10 @@ const updateInterestInDonation = async (username, donationID) => {
   }
 }
 
-const updateApproveUserClaim = async (username, donationID, state) => {
+const updateApproveUserClaim = async ({ userName, donationId }, state) => {
   //state: claimed, pending, approved, completed,
   try {
-    const res = await sql`UPDATE donations SET taken_by = ${username}, state = ${state} WHERE id = ${donationID}`
+    const res = await sql`UPDATE donations SET taken_by = ${userName}, state = ${state} WHERE id = ${donationID}`
     console.log('updateApproveUserClaim res ', res)
     return res[0]
   } catch(err) {
@@ -38,7 +38,7 @@ const updateApproveUserClaim = async (username, donationID, state) => {
 
 
 
-const updateAdminApproveUser = async (username, state) => {
+const updateAdminApproveUser = async ({ userName, state }) => {
 
   try {
     const res = await sql`UPDATE users SET is_charity = ${state} WHERE user_name = ${username}`
