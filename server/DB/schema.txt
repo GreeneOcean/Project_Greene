@@ -18,10 +18,8 @@ CREATE TABLE base (
 
 CREATE TABLE sessions (
   id TEXT PRIMARY KEY NOT NULL,
-  user_name TEXT,
-  created_at TIMESTAMPTZ DEFAULT Now(),
-  updated_at TIMESTAMPTZ DEFAULT Now()
-);
+  user_name TEXT
+) INHERITS(base);
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
@@ -66,6 +64,8 @@ CREATE TABLE ratings (
   updated_at TIMESTAMPTZ DEFAULT Now()
 );
 
+
+CREATE INDEX sessions_id ON sessions USING hash(id);
 CREATE INDEX users_id ON users USING hash(id);
 CREATE INDEX users_user_name ON users USING hash(user_name);
 CREATE INDEX donations_id ON donations USING hash(id);

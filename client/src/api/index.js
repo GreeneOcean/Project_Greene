@@ -1,4 +1,3 @@
-
 import { getLocation } from './location'
 
 const BASE_URL = `http://localhost:8080`
@@ -151,11 +150,10 @@ function put(endpoint, data, params) {
   return runFetch(...buildPutOptions(endpoint, data))
 }
 
-function putInterestInDonation(data) {
-  return put('/InterestInDonation', data)
-}
-put.InterestInDonation = putInterestInDonation
 put.interest = ((data) => put('/interest', data))
+put.donation = ((data) => put('/donation', data))
+put.user = ((data) => put('/user', data))
+
 
 function putApproveUserClaim(data) {
   return put('/ApproveUserClaim', data)
@@ -168,8 +166,6 @@ function putAdminApproveUser(data) {
 put.AdminApproveUser = putAdminApproveUser
 
 
-put.donation = ((data) => put('/donation', data))
-put.user = ((data) => put('/user', data))
 
 const api = {
   get,
