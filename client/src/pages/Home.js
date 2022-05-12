@@ -8,16 +8,7 @@ function Home({ state, dispatch, init }) {
   const { dev, user, HomeData } = state;
   const { lat, lng, local } = user;
 
-  useEffect(() => {
-    init().then((res) => {
-      dev.logs && console.log(`\nHome API init res`, res);
-      dev.logs && console.log("Home state", state);
-      dispatch({
-        type: `HOME_INIT`,
-        payload: res
-      });
-    });
-  }, []);
+
 
   const toggleDevLogs = (e) => {
     dispatch({

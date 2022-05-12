@@ -112,7 +112,7 @@ const Nav = () => {
               <>
                 <StyledLink>
                   <CgArrowsExchange />
-                <Link onClick={() => console.log('Transactions')}>
+                <Link to="/Transactions">
                   Transactions
                 </Link>
                 </StyledLink>

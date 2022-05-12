@@ -6,16 +6,7 @@ import Nav from "../components/Nav";
 
 function Transaction({ state, dispatch, init }) {
   const { dev } = state;
-  useEffect(() => {
-    init().then((res) => {
-      dev.logs && console.log(`\nTransactions API init res`, res);
-      dev.logs && console.log("Transaction state", state);
-      dispatch({
-        type: `TRANSACTIONS_INIT`,
-        payload: res
-      });
-    });
-  }, []);
+
 
   return (
     <PageContainer>

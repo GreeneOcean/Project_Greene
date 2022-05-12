@@ -1,7 +1,7 @@
 
 import { getLocation } from './location'
 
-const BASE_URL = `http://localhost:3000`
+const BASE_URL = `http://localhost:8080`
 
 
 function addQueries(queries) {
@@ -123,34 +123,7 @@ function loginUser(query, dispatch) {
 get.login = loginUser
 
 
-function getAuth(queries) {
-  return get('/Auth', queries)
-}
-get.Auth = getAuth
 
-function getBrowse(queries) {
-  return get('/Browse', queries)
-}
-get.Browse = getBrowse
-function getDonate(queries) {
-  return get('/Donate', queries)
-}
-get.Donate = getDonate
-
-function getHome(queries) {
-  return get('/Home', queries)
-}
-get.Home = getHome
-
-function getItem(queries) {
-  return get('/Item', queries)
-}
-get.Item = getItem
-
-function getTransactions(queries) {
-  return get('/Transactions', queries)
-}
-get.Transactions = getTransactions
 
 
 //POST
@@ -172,6 +145,7 @@ post.user = ((data) => post('/user', data))
 
 
 
+
 //PUT
 function put(endpoint, data, params) {
   return runFetch(...buildPutOptions(endpoint, data))
@@ -181,6 +155,7 @@ function putInterestInDonation(data) {
   return put('/InterestInDonation', data)
 }
 put.InterestInDonation = putInterestInDonation
+put.interest = ((data) => put('/interest', data))
 
 function putApproveUserClaim(data) {
   return put('/ApproveUserClaim', data)
@@ -203,3 +178,59 @@ const api = {
 }
 
 export default api
+
+
+
+  // api.post.user({
+  //   user_name: 'Dora',
+  //   first_name: 'thank you for',
+  //   last_name: 'helping him that what im here for',
+  //   password: 'test',
+  //   lat: user.lat,
+  //   lng: user.lng,
+  // })
+  // .then(postUserRes => {
+  //   console.log({ postUserRes })
+  // })
+  // .catch(err => console.log('Post user err', err.message))
+
+  // api.put.user({
+  //   last_name: 'Smiterson',
+  //   lat: user.lat,
+  //   lng: user.lng,
+  // })
+  // .then(postUserRes => {
+  //   console.log({ postUserRes })
+  // })
+  // .catch(err => console.log('Put user err', err.message))
+
+  // api.post.donation({
+  //   posted_by: 'Dora',
+  //   title: 'thank you for',
+  //   description: 'helping him that what im here for',
+  //   category: ['tests'],
+  //   pictures: [],
+  //   interested_users: [],
+  //   lat: user.lat,
+  //   lng: user.lng,
+  // })
+  // .then(postDonationRes => {
+  //   console.log({ postDonationRes })
+  // })
+  // .catch(err => console.log('Post donation err', err.message))
+
+
+  // api.put.donation({
+  //   posted_by: 'Dora',
+  //   title: 'thank you for',
+  //   description: 'helping him that what im here for',
+  //   category: ['tests'],
+  //   pictures: [],
+  //   interested_users: [],
+  //   lat: user.lat,
+  //   lng: user.lng,
+  // })
+  // .then(postDonationRes => {
+  //   console.log({ postDonationRes })
+  // })
+  // .catch(err => console.log('Post donation err', err.message))

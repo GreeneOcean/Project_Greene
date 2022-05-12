@@ -10,7 +10,7 @@ const cookieParser = require("cookie-parser");
 const DB = require("./DB/index");
 const auth = require("./auth/index");
 
-const PORT = 3000;
+const PORT = 8080;
 
 app.use(cors());
 app.use(cookieParser());
@@ -72,34 +72,9 @@ app.get("/user/login", async (req, res) => {
   }
 });
 
-app.get("/Auth", (req, res) => {
-  res.status(200).send({ AuthData: true });
-});
 
-app.get("/Browse", (req, res) => {
-  res.status(200).send({ BrowseData: true });
-});
 
-app.get("/Donate", (req, res) => {
-  res.status(200).send({ DonateData: true });
-});
 
-app.get("/Home", (req, res) => {
-  res.status(200).send({ HomeData: true });
-});
-
-app.get("/Item", (req, res) => {
-  res.status(200).send({ ItemData: true });
-});
-
-app.get("/Transactions", (req, res) => {
-  res.status(200).send({ TransactionsData: true });
-});
-
-app.get("/Item", (req, res) => {
-  console.log(`Request at ${`/Item`}`);
-  res.status(200).send({ ItemData: true });
-});
 
 app.get('/data/*', async (req, res) => {
 

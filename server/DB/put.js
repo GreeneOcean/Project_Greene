@@ -67,6 +67,7 @@ PUT.donation = (async (updatedDonation) => {
   return await PUT(updatedDonation, 'donations')
 })
 
+PUT.interest = updateInterestInDonation
 
 
 
