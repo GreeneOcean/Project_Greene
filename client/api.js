@@ -1,91 +1,89 @@
-
-const BASE_URL = `http://localhost:3000`
+const BASE_URL = `http://localhost:3000`;
 
 function buildEndpoint(endpoint, params) {
-  return `${BASE_URL}${endpoint}`
+  return `${BASE_URL}${endpoint}`;
 }
 
 function buildGetOptions(endpoint, params = {}) {
   return [
     buildEndpoint(endpoint, params),
     {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json'
-      },
-    },
-  ]
+        "Content-Type": "application/json"
+      }
+    }
+  ];
 }
 
 function getLogin(query) {
-  return runFetch(...buildGetOptions('/user/login', query))
+  return runFetch(...buildGetOptions("/user/login", query));
 }
-get.login = getLogin
-
+get.login = getLogin;
 
 function buildPostOptions(endpoint, params = {}, data = {}) {
   return [
     buildEndpoint(endpoint, params),
     {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       },
       body: JSON.stringify(data)
-    },
-  ]
+    }
+  ];
 }
-
 
 function runFetch(url, options) {
   return fetch(url, options)
-    .then(res => res.json())
-    .catch(err => console.log(`FETCH err ${err.message} \nURL: ${url} \noptions: ${options}`))
+    .then((res) => res.json())
+    .catch((err) =>
+      console.log(
+        `FETCH err ${err.message} \nURL: ${url} \noptions: ${options}`
+      )
+    );
 }
 
-
 function get(endpoint, params) {
-  return runFetch(...buildGetOptions(endpoint, params))
+  return runFetch(...buildGetOptions(endpoint, params));
 }
 
 function getAuth(params) {
-  return get('/Auth', params)
+  return get("/Auth", params);
 }
-get.Auth = getAuth
+get.Auth = getAuth;
 
 function getBrowse(params) {
-  return get('/Browse', params)
+  return get("/Browse", params);
 }
-get.Browse = getBrowse
+get.Browse = getBrowse;
 function getDonate(params) {
-  return get('/Donate', params)
+  return get("/Donate", params);
 }
-get.Donate = getDonate
+get.Donate = getDonate;
 
 function getHome(params) {
-  return get('/Home', params)
+  return get("/Home", params);
 }
-get.Home = getHome
+get.Home = getHome;
 
 function getItem(params) {
-  return get('/Item', params)
+  return get("/Item", params);
 }
-get.Item = getItem
+get.Item = getItem;
 
 function getTransactions(params) {
-  return get('/Transactions', params)
+  return get("/Transactions", params);
 }
-get.Transactions = getTransactions
-
-
+get.Transactions = getTransactions;
 
 function post(endpoint, params, data) {
-  return runFetch(...buildPostOptions(endpoint, params, data))
+  return runFetch(...buildPostOptions(endpoint, params, data));
 }
 
 const api = {
   get,
   post
-}
+};
 
-export default api
+export default api;
