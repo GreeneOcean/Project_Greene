@@ -5,7 +5,7 @@ function Chat({ socket }) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
 
-  const sendMessage = async () => {
+  const sendMessage = () => {
     if (currentMessage !== "") {
       const messageData = {
         message: currentMessage,
@@ -14,10 +14,11 @@ function Chat({ socket }) {
           ":" +
           new Date(Date.now()).getMinutes()
       };
-      await socket.emit("send_message", messageData);
-      setMessageList((list) => [...list, messageData]);
-      setCurrentMessage("");
-    }
+      socket.emit("send_message", messageData, (res) => {
+        setMessageList((list) => [...list, messageData]);
+        setCurrentMessage("");
+      })
+    };
   };
 
   useEffect(() => {
@@ -49,7 +50,7 @@ function Chat({ socket }) {
           }}
         ></input>
         <button onClick={sendMessage}>Send</button>
-        <VideoPlayer socket={socket} />
+        {/* <VideoPlayer socket={socket} /> */}
       </div>
     </div>
   );

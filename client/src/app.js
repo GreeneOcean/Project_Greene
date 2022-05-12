@@ -13,6 +13,7 @@ import Transactions from "./pages/Transactions";
 import api from "./api/index";
 import { AppContainer, LoadingContainer, Footer } from "./styles/index.js";
 import config from "../config.js";
+import Chat from './Chat/Chat';
 
 const socket = io.connect("http://localhost:8080");
 
@@ -85,6 +86,7 @@ function App() {
         />
         {/* <Route path="Chat" element={<Chat socket={socket} />} /> */}
       </Routes>
+      <Chat socket={socket} />
       <Footer>
         <small>{"\u00a9 2022 Greene Inc. All rights reserved."}</small>
       </Footer>

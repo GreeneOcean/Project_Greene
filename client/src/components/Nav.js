@@ -143,8 +143,9 @@ const Nav = () => {
 // width:  ${({display}) => display ? '20%' : '0'};
 
 const SideMenu = styled.div`
-  position:absolute;
-  right:0;
+  position: absolute;
+  right: 0;
+  min-width: 230px;
   width: 20%;
   max-width: 300px;
   height: 100vh;
