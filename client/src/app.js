@@ -14,7 +14,6 @@ import Chat from "./pages/Chat";
 import api from "./api/index";
 import { AppContainer, LoadingContainer, Footer } from "./styles/index.js";
 import config from "../config.js";
-import Chat from './Chat/Chat';
 
 const socket = io.connect("http://localhost:8080");
 

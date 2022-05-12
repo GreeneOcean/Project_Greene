@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
-<<<<<<< HEAD:client/src/pages/Chat.js
-import VideoPlayer from "../components/VideoPlayer";
-=======
 import styled from "styled-components";
-import VideoPlayer from "./Dashboard/VideoPlayer";
->>>>>>> ba1f3cb1c0c0195c11d944864b2e17ad61eb9f66:client/src/Chat/Chat.js
+import VideoPlayer from "../components/VideoPlayer";
 
 function Chat({ socket }) {
   const [currentMessage, setCurrentMessage] = useState("");
@@ -35,7 +31,6 @@ function Chat({ socket }) {
 
   return (
     <ChatContainer>
-
       <div>
         <div className="chat-header">
           <p>Live Chat</p>
@@ -62,7 +57,6 @@ function Chat({ socket }) {
         </div>
       </div>
     </ChatContainer>
-
   );
 }
 
