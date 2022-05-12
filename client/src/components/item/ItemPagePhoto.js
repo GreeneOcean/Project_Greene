@@ -2,12 +2,16 @@ import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 
 const photoNotFoundURL =
-  "https://wellesleysocietyofartists.org/wp-content/uploads/2015/11/image-not-found.jpg";
+  "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?format=jpg&quality=90&v=1530129081";
 
-const ItemPagePhoto = ({pictures}) => {
+const ItemPagePhoto = ({ pictures }) => {
+
   return (
     <StyledDiv>
-      <StyledImage src={pictures ? pictures[0] : photoNotFoundURL} />
+      {pictures && pictures.length && <StyledImage src={pictures[0]} />}
+      {(!pictures || !pictures.length) && (
+        <StyledImage src={photoNotFoundURL} />
+      )}
     </StyledDiv>
   );
 };
@@ -27,5 +31,8 @@ const StyledDiv = styled.div`
 const StyledImage = styled.img`
   width: 100%;
   height: 100%;
-
 `;
+
+{
+  /* <StyledImage src={pictures ? pictures[0] : photoNotFoundURL} /> */
+}
