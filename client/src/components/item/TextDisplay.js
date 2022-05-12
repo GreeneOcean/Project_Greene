@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-
 import { useNavigate } from "react-router-dom";
-// import { DispatchContext } from "../../../appState/index";
+
+import api from '../../api/index';
 
 const TextDisplay = ({
   title,
@@ -13,14 +13,20 @@ const TextDisplay = ({
   posted_by,
   interested_users,
   tag,
+  state
 }) => {
   const [claimed, setClaimed] = useState(false);
-
+  const {user} = state;
   const navigate = useNavigate();
 
   const claimHandler = () => {
-    setClaimed(true);
-    //todo: probably a post request
+    api.put.interest({userName: user.user_name, donationId: state.id})
+    .then(res => {
+        setClaimed(true);
+      })
+      .catch(err => {
+        console.log(err.message);
+      })
   };
 
   const backToBrowse = () => {
