@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 import VideoPlayer from "./Dashboard/VideoPlayer";
 
 function Chat({ socket }) {
@@ -28,32 +29,51 @@ function Chat({ socket }) {
   }, [socket]);
 
   return (
-    <div>
-      <div className="chat-header">
-        <p>Live Chat</p>
+    <ChatContainer>
+
+      <div>
+        <div className="chat-header">
+          <p>Live Chat</p>
+        </div>
+        <div className="chat-body">
+          {messageList.map((messageContent) => {
+            return <h1>{messageContent.message}</h1>;
+          })}
+        </div>
+        <div className="chat-footer">
+          <input
+            type="text"
+            value={currentMessage}
+            placeholder="hey...."
+            onChange={(event) => {
+              setCurrentMessage(event.target.value);
+            }}
+            onKeyDown={(event) => {
+              event.key === "Enter" && sendMessage();
+            }}
+          ></input>
+          <button onClick={sendMessage}>Send</button>
+          <VideoPlayer socket={socket} />
+        </div>
       </div>
-      <div className="chat-body">
-        {messageList.map((messageContent) => {
-          return <h1>{messageContent.message}</h1>;
-        })}
-      </div>
-      <div className="chat-footer">
-        <input
-          type="text"
-          value={currentMessage}
-          placeholder="hey...."
-          onChange={(event) => {
-            setCurrentMessage(event.target.value);
-          }}
-          onKeyDown={(event) => {
-            event.key === "Enter" && sendMessage();
-          }}
-        ></input>
-        <button onClick={sendMessage}>Send</button>
-        {/* <VideoPlayer socket={socket} /> */}
-      </div>
-    </div>
+    </ChatContainer>
+
   );
 }
+
+const ChatContainer = styled.nav`
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  height: 60px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+  background: #37782c;
+  position: fixed;
+  bottom: 0;
+`;
 
 export default Chat;
