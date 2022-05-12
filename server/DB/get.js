@@ -10,6 +10,7 @@ const userFields = [
 
 const getUser = async ({ userName }) => {
   try {
+<<<<<<< HEAD
     const res = await sql`SELECT ${ sql(userFields) },
     ARRAY(SELECT d.id FROM donations AS d WHERE ${userName} = ANY(d.interested_users)) AS interested,
     ARRAY(SELECT d.id FROM donations AS d WHERE ${userName} = d.taken_by) AS received,
@@ -30,6 +31,32 @@ const getUser = async ({ userName }) => {
     return user
   } catch(err) {
     console.log('getUser err', err, 'for userName', userName)
+=======
+    const res = await sql`SELECT ${ sql(userFields) } FROM users WHERE user_name = 'guy'`
+    // const res = await sql`SELECT ${ sql(userFields) },
+    // ARRAY(SELECT d.id FROM donations AS d WHERE ${userName} = ANY(d.interested_users)) AS interested,
+    // ARRAY(SELECT d.id FROM donations AS d WHERE ${userName} = d.taken_by) AS received,
+    // ARRAY(SELECT d.id FROM donations AS d WHERE ${userName} = d.posted_by) AS donated
+    // FROM donations WHERE posted_by = 'guy'`
+    // const user = res[0]
+    // const { interested, received, donated } = user
+    // console.log(`Donation ids for user_name ${user_name}`, { interested, received, donated })
+    // const donatedRes = await Promise.all([
+    //   // sql`SELECT * FROM donations AS d WHERE d.id = ANY(${unclaimed})`,
+    //   sql`SELECT * FROM donations AS d WHERE d.id = ANY(${interested})`,
+    //   sql`SELECT * FROM donations AS d WHERE d.id = ANY(${received})`,
+    //   sql`SELECT * FROM donations AS d WHERE d.id = ANY(${donated})`,
+    // ])
+    // user.interested = donatedRes[0]
+    // user.received = donatedRes[1]
+    // user.donated = donatedRes[2]
+    // console.log({ user }, 'returned userData')
+    console.log({ res })
+    return res[0]
+    // return user
+  } catch(err) {
+    console.log('getUser err', err.message, 'for user_name', userName)
+>>>>>>> 111ed1850d5150cc00d602a4fe712fd9707db471
     return {}
   }
 }

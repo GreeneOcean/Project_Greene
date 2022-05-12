@@ -1,4 +1,3 @@
-const { session, sessionEnd } = require('./session')
 const { sql } = require('../DB/connect.js')
 let crypto;
 try {
@@ -45,4 +44,4 @@ const checkUser = async (user) => {
 }
 
 
-module.exports = { session, sessionEnd, user: checkUser, hashPassword }
+module.exports = { user: checkUser, hashPassword }
