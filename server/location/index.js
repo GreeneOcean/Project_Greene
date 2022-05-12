@@ -1,6 +1,6 @@
 
 const fetch = require('node-fetch'); // run "npm install node-fetch" to install
-const config = require('../../client/config')
+const config = require('../config.js');
 
 
 const getIPLocation = async () => {
