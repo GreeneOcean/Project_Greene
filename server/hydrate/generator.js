@@ -177,7 +177,7 @@ const genRandUser = (id, donoRange = 4) => {
     user_name,
     lat,
     lng,
-    password: auth.create('shalom'),
+    password: auth.hashPassword('shalom'),
     charity_state: charity_states[randInt(charity_states.length)],
   };
 };
