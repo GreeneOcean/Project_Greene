@@ -76,7 +76,12 @@ const FieldInput = styled.input`
   }
 `;
 
-const FieldDropdown = styled(FieldInput)`
+const FieldDropdown = styled.select`
+  height: 2.5em;
+  width: 100%;
+  padding: 0 1em;
+  border-radius: 1em;
+  background-color: #ebebeb;
   cursor: default;
 `;
 
@@ -283,7 +288,7 @@ function Donate({ state, dispatch, init }) {
 
         <FieldSection htmlFor="category">
           <span>Category<Asterisk/></span>
-          <select name="category" id="category" value={category} onChange={handleChange} required>
+          <FieldDropdown name="category" id="category" value={category} onChange={handleChange} required>
             {
               ([<option key="none" value="Select a Category">Select a Category</option>])
               .concat(
@@ -291,7 +296,7 @@ function Donate({ state, dispatch, init }) {
                   return <option key={i} value={category}>{category}</option>
                 }))
             }
-          </select>
+          </FieldDropdown>
         </FieldSection>
 
         <FieldSection htmlFor="tag">
