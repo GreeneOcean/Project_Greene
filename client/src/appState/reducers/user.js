@@ -12,10 +12,11 @@ function reducer(state, action) {
       return state;
 
     case 'LOG_OUT':
-      const { lat, lng } = state;
+      const { lat, lng, local } = state;
       Object.keys(state).forEach(key => delete state[key])
       state.lat = lat;
       state.lng = lng;
+      state.local = local;
       state.dev = dev;
       return state;
 

@@ -22,7 +22,7 @@ function Home({ state, dispatch, init }) {
     <PageContainer>
       <h3>Home</h3>
       <Link to='/Auth'>Auth</Link>
-      <p>{`HomeData: ${HomeData}`} </p>
+      <p>{`Welcome${user.user_name ? ' ' + user.user_name + '!!!' : ', please log in'}`} </p>
       <p>
         {`user lat: ${lat ? lat : "loading"}   user lng: ${
           lng ? lng : "loading"
