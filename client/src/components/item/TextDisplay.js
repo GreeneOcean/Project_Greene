@@ -1,16 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+
+import { useNavigate } from "react-router-dom";
+// import { DispatchContext } from "../../../appState/index";
 
 const TextDisplay = ({
   title,
   category,
   description,
   distance,
-  charity,
+  charity_only,
   posted_by,
   interested_users,
+  tag,
 }) => {
-  const claimHandler = () => {};
+  const [claimed, setClaimed] = useState(false);
+
+  const navigate = useNavigate();
+
+  const claimHandler = () => {
+    setClaimed(true);
+    //todo: probably a post request
+  };
+
+  const backToBrowse = () => {
+    navigate("/Browse", { replace: true });
+  };
 
   return (
     <TextDisplayContainer>
@@ -18,15 +33,25 @@ const TextDisplay = ({
         <TitleP>{title}</TitleP>
         <StyledP>{`<> ${category}`}</StyledP>
       </StyledSpan>
+
       <StyledP>{description}</StyledP>
+      {tag && tag.map((itemTag, idx) => <StyledP key={idx}>{itemTag}</StyledP>)}
       {interested_users && interested_users.length > 0 && (
         <StyledP>{`${interested_users.length} other users are interested in this item`}</StyledP>
       )}
+      <StyledP>{`Donated by ${posted_by}`}</StyledP>
+      {claimed && (
+        <p>
+          The owner of this donation has been notified, you will receive a
+          notification if they choose to donate to you.
+        </p>
+      )}
+
       <StyledSpan>
-        <StyledP>{`Donated by ${posted_by}`}</StyledP>
-        {charity && <StyledP>Charity Only</StyledP>}
+        {!claimed && <button onClick={claimHandler}>Claim</button>}
+        {charity_only && <StyledP>Charity Only</StyledP>}
+        <button onClick={backToBrowse}>Back to Browsing</button>
       </StyledSpan>
-      <ClaimButton onClick={claimHandler}>Claim</ClaimButton>
     </TextDisplayContainer>
   );
 };
@@ -61,5 +86,3 @@ const TitleP = styled.p`
 const StyledP = styled.p`
   margin: 5px;
 `;
-
-const ClaimButton = styled.button``;

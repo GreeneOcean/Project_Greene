@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import GoogleMapReact from "google-map-react";
 import styled from "styled-components";
-import { RiMapPin2Fill } from "react-icons/ri";
+// import { RiMapPin2Fill } from "react-icons/ri";
 
+import ItemPageMapMarker from './ItemPageMapMarker';
 import config from "../../../config.js";
 
 const Map = ({ lat, lng }) => {
@@ -36,7 +37,7 @@ const Map = ({ lat, lng }) => {
         options={mapOptions}
         hoverDistance={25}
       >
-        <RiMapPin2Fill lat={lat} lng={lng} style={{color: "blue", height: "25px", width: "25px"}}/>
+      <ItemPageMapMarker lat={lat} lng={lng} />
       </GoogleMapReact>
     </MapContainer>
   );

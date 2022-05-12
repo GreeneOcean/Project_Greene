@@ -10,8 +10,6 @@ import ItemPageMap from "../components/item/ItemPageMap";
 function Item({ state, dispatch, init }) {
   const { dev } = state;
 
-  console.log("itemState: ", state.interested_users);
-
   useEffect(() => {
     init().then((res) => {
       dev.logs && console.log(`\nItem API init res`, res);
@@ -23,6 +21,8 @@ function Item({ state, dispatch, init }) {
     });
   }, []);
 
+
+
   return (
     <PageContainer>
       <ItemPageContainer>
@@ -32,9 +32,10 @@ function Item({ state, dispatch, init }) {
           category={state.category}
           description={state.description}
           distance={state.distance}
-          charity={state.charity}
+          charity_only={state.charity_only}
           posted_by={state.posted_by}
           interested_users={state.interested_users}
+          tag={state.tag}
         />
       </ItemPageContainer>
       <p>{`${Math.ceil(state.distance)} ${state.distance > 1 ? "miles" : "mile"} from you`}</p>
@@ -48,4 +49,5 @@ export default Item;
 const ItemPageContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
+  margin-top: 10vh;
 `;
