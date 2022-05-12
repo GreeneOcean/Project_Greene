@@ -9,11 +9,14 @@ import Donate from "./pages/Donate";
 import Home from "./pages/Home";
 import Item from "./pages/Item";
 import Transactions from "./pages/Transactions";
-import Chat from "./pages/Chat";
+
 import api from "./api/index";
 import { AppContainer, LoadingContainer, Footer } from "./styles/index.js";
 import config from "../config.js";
+// import io from "socket.io-client";
+// import Chat from "./components/Chat/Chat";
 
+// const socket = io.connect("http://localhost:8080");
 
 function App() {
   const [, dispatch] = useContext(DispatchContext);
@@ -24,7 +27,7 @@ function App() {
 
   useEffect(() => {
     api.get.location(dispatch);
-    const user = { userName: 'guy', attempt: "shalom" };
+    const user = { userName: "guy", attempt: "shalom" };
     api.get.login(user, dispatch);
   }, []);
 
@@ -83,6 +86,7 @@ function App() {
           }
         />
       </Routes>
+      {/* <Chat socket={socket} /> */}
       <Footer>
         <small>{"\u00a9 2022 Greene Inc. All rights reserved."}</small>
       </Footer>
