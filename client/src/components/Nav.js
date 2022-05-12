@@ -8,6 +8,7 @@ import {CgArrowsExchange} from 'react-icons/cg';
 import { BiMessageRounded } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 
+
 const Nav = ({ user }) => {
   const [loggedIn, setLoggedIn] = useState(true);
   const [isGreene, setIsGreene] = useState(user.admin);
@@ -116,10 +117,10 @@ const Nav = ({ user }) => {
             {loggedIn ? (
               <>
                 <StyledLink>
+                  <Link to='/Transactions'>
+                   {isGreene ? 'Admin' : 'Transactions'}
+                  </Link>
                   <CgArrowsExchange />
-                <Link to='/Transactions'>
-                  Transactions
-                </Link>}
                 </StyledLink>
                 <StyledLink>
                   <BiMessageRounded />

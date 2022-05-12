@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 
 
-function ApprovalList({ user }) {
+function ApprovalList({ each }) {
   const [userApproved, setUserApproved] = useState(false);
   const [userDenied, setUserDenied] = useState(false);
+  console.log('in list each', each)
 
   const handleChoice = (value) => {
     if (value) {
@@ -17,7 +18,7 @@ function ApprovalList({ user }) {
 
   return (
     <div>
-      <p>Pending: {user}</p>
+      {/* <p>Pending: {each}</p> */}
       <label>
         {userApproved ? ('Approved') : (<button onClick={() => handleChoice(true)}>Approve</button>)}
 

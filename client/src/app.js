@@ -24,7 +24,7 @@ function App() {
   useEffect(() => {
     api.get.location(dispatch);
     const user = { userName: 'mgee', attempt: "shalom" };
-    api.get.login(user, dispatch); // Automatic Login user === mgee
+    // api.get.login(user, dispatch); // Automatic Login user === mgee
   }, []);
 
   return (
@@ -79,15 +79,6 @@ function App() {
           }
         />
 
-      <Route
-          path="Admin"
-          element={
-            <Admin
-              state={state.user}
-              dispatch={dispatch}
-            />
-          }
-        />
       </Routes>
 
       <Footer>

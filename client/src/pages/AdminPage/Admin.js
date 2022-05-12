@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import ApprovalList from './ApprovalList.js';
 
 
-function Admin({ state, dispatch }) {
+function Admin({ user }) {
   const [handleApprovalList, setHandleApprovalList] = useState(false);
-  console.log('Admin state', state)
+  console.log('Admin state', user)
 
   return (
     <div>
@@ -13,8 +13,8 @@ function Admin({ state, dispatch }) {
 
       {handleApprovalList &&
 
-      state.pendingList.map((user) => {
-        <ApprovalList user={user}/>
+      user.pendingList.map((each) => {
+        <ApprovalList each={each}/>
       })
      }
 
