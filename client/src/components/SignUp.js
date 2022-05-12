@@ -1,11 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import api from '../api';
+import { AuthInput } from '../styles/input';
 
 const SignUp = ({ handleClickOther }) => {
+  const [charityStatus, setCharityStatus] = useState(false);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [userText, setUserText] = useState('');
   const [passText, setPassText] = useState('');
   const [confPassText, setConfPassText] = useState('');
+  const [agreeTerms, setAgreeTerms] = useState(false);
+
+  const handeCharityStatusClick = (e) => {
+    setCharityStatus(!charityStatus);
+  }
+
+  const handleFirstNameChange = (e) => {
+    setFirstName(e.target.value);
+  }
+
+  const handleLastNameChange = (e) => {
+    setLastName(e.target.value);
+  }
 
   const handleUserChange = (e) => {
     setUserText(e.target.value);
@@ -19,83 +36,112 @@ const SignUp = ({ handleClickOther }) => {
     setConfPassText(e.target.value);
   };
 
+  const handeAgreeTermsClick = (e) => {
+    setAgreeTerms(!agreeTerms);
+  }
+
   const handleSignUp = () => {
-    api.get
-      .login({
-        userId: userText,
-        attempt: passText,
-        charity: '',
-      })
-      .then((res) => console.log(res))
-      // .then(res => dispatch(, payload))
-      .catch((err) => console.log(err));
+    if (firstName.length === 0 || lastName.length === 0 || userText.length === 0) {
+      console.log('Complete for and click Sign Up');
+    } else if (passText.length === 0 || passText !== confPassText) {
+      console.log('Make sure passwords match');
+    } else if (!agreeTerms) {
+      console.log('Please agree to the Terms and Conditions')
+    } else {
+      api.get
+        .login({
+          userName: userText,
+          attempt: passText,
+          charity: '',
+        })
+        .catch((err) => console.log(err));
+    }
+
   };
 
   return (
     <>
-      <h1>Create a new account</h1>
-      <input
-        id="search"
-        type="search"
-        autoComplete="off"
-        maxLength="150"
+      <h1
         style={{
-          height: '40px',
-          width: '400px',
-          borderRadius: '6px',
-          padding: '12px',
-          backgroundColor: 'rgb(245,245,245)',
-          transition: 'all 0.5s',
-          cursor: 'text',
+          marginBottom: '15px',
+        }}
+      >
+        Create a new account
+      </h1>
+      <div>
+        <input
+          type="checkbox"
+          onClick={handeCharityStatusClick}
+          style={{ marginBottom: '15px', }}
+        />
+        Would you like to apply for chaity status?
+      </div>
+      <AuthInput
+        id='firstNameSignUp'
+        type='text'
+        autoComplete='off'
+        maxLength='150'
+        style={{
+          marginBottom: '15px',
+        }}
+        value={firstName}
+        onChange={handleFirstNameChange}
+        placeholder={'First name'}
+      />
+      <AuthInput
+        id='lastNameSignUp'
+        type='text'
+        autoComplete='off'
+        maxLength='150'
+        style={{
+          marginBottom: '15px',
+        }}
+        value={lastName}
+        onChange={handleLastNameChange}
+        placeholder={'Last name'}
+      />
+      <AuthInput
+        id='usernameSignUp'
+        type='text'
+        autoComplete='off'
+        maxLength='150'
+        style={{
           marginBottom: '15px',
         }}
         value={userText}
         onChange={handleUserChange}
         placeholder={'Create your Username'}
       />
-      <input
-        id="search"
-        type="password"
-        autoComplete="off"
-        maxLength="150"
+      <AuthInput
+        id='passSignUp'
+        type='password'
+        autoComplete='off'
+        maxLength='150'
         style={{
-          height: '40px',
-          width: '400px',
-          borderRadius: '6px',
-          padding: '12px',
-          backgroundColor: 'rgb(245,245,245)',
-          transition: 'all 0.5s',
-          cursor: 'text',
           marginBottom: '15px',
         }}
         value={passText}
         onChange={handlePassChange}
         placeholder={'Create your Password'}
       />
-      <input
-        id="search"
-        type="password"
-        autoComplete="off"
-        maxLength="150"
+      <AuthInput
+        id='confPassSignUp'
+        type='password'
+        autoComplete='off'
+        maxLength='150'
         style={{
-          height: '40px',
-          width: '400px',
-          borderRadius: '6px',
-          padding: '12px',
-          backgroundColor: 'rgb(245,245,245)',
-          transition: 'all 0.5s',
-          cursor: 'text',
+          marginBottom: '15px',
         }}
         value={confPassText}
         onChange={handleConfPassChange}
         placeholder={'Confirm your Password'}
       />
-      <div>
-        <input type="checkbox" />
-        Would you like to apply for chaity status?
-      </div>
-      <div>
-        <input type="checkbox" />I agree to the Greene Ocean{' '}
+      <div
+        style={{
+          marginBottom: '15px',
+        }}
+      >
+        <input type="checkbox" onClick={handeAgreeTermsClick}/>I agree to the Greene Ocean{' '}
         <u>Terms of Service</u> and <u>Privacy Policy</u>
       </div>
       <ButtonMD onClick={handleSignUp}>Sign up</ButtonMD>

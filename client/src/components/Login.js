@@ -22,7 +22,7 @@ const Login = ({ handleClickOther }) => {
   const handleLogin = () => {
     api.get
       .login({
-        userName: userText,
+        user_name: userText,
         attempt: passText,
       })
       .catch((err) => console.log(err));
@@ -32,48 +32,25 @@ const Login = ({ handleClickOther }) => {
     <>
       <h1 style={{ marginBottom: '15px' }}>Welcome!</h1>
       <AuthInput
-        id="search"
-        type="search"
+        id='usernameLogin'
         autoComplete="off"
         maxLength="150"
-        style={{
-          height: '40px',
-          width: '400px',
-          borderRadius: '6px',
-          padding: '12px',
-          backgroundColor: 'rgb(245,245,245)',
-          transition: 'all 0.5s',
-          cursor: 'text',
-          marginBottom: '15px',
-        }}
         value={userText}
         onChange={handleUserChange}
         placeholder={'Enter your Username'}
       />
-      <input
-        id="search"
+      <AuthInput
+        id="passwordLogin"
         type="password"
         autoComplete="off"
         maxLength="150"
-        style={{
-          height: '40px',
-          width: '400px',
-          borderRadius: '6px',
-          padding: '12px',
-          backgroundColor: 'rgb(245,245,245)',
-          transition: 'all 0.5s',
-          cursor: 'text',
-          marginBottom: '15px',
-        }}
         value={passText}
         onChange={handlePassChange}
         placeholder={'Enter your Password'}
       />
       <ButtonMD
         onClick={handleLogin}
-        style={{
-          marginBottom: '15px',
-        }}
+        style={{ marginBottom: '15px' }}
       >
         Log in
       </ButtonMD>

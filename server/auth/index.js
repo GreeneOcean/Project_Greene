@@ -44,4 +44,4 @@ const checkUser = async (user) => {
 }
 
 
-module.exports = { session, sessionEnd, user: checkUser, create: hashPassword }
+module.exports = { session, sessionEnd, user: checkUser, hashPassword }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styled, {css} from 'styled-components';
+import styled, { css } from 'styled-components';
 import Search from './Search';
 import { TiThMenu } from 'react-icons/ti';
 import { GiBoxUnpacking } from 'react-icons/gi';

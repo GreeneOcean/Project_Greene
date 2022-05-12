@@ -30,15 +30,17 @@ const initUser = {
 
 const initAppState = {
   dev: initDev,
-  Auth: { AuthData: false },
-  Browse: { BrowseData: false },
-  Donate: { DonateData: false },
-  Home: { HomeData: false },
-  Item: { ItemData: false },
-  Transactions: { TransactionsData: false },
-  user: initUser
-};
-circleRef(["dev", "user"], initAppState);
+  Auth: {},
+  Browse: {},
+  Donate: {},
+  Home: {},
+  Item: {},
+  Transactions: {},
+  user: initUser,
+}
+circleRef([ 'dev', 'user' ], initAppState)
+
+
 
 const AppContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initAppState);
