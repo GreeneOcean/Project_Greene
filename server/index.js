@@ -251,14 +251,6 @@ app.put('/AdminApproveUser', async (req, res) => {
 })
 
 
-<<<<<<< HEAD
 server.listen(PORT, () => {
-=======
-
-
-
-
-app.listen(PORT, () => {
->>>>>>> 111ed1850d5150cc00d602a4fe712fd9707db471
   console.log(`Listening to port: ${PORT}`);
 });
