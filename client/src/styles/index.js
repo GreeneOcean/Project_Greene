@@ -25,15 +25,18 @@ const Footer = styled.footer`
   align-items: center;
   justify-content: center;
   background-color: white;
+  /* position:absolute;
+  bottom:0; */
 `;
 
 const PageContainer = styled.div`
   width: 90%;
-  height: 100vh;
+  min-height: 92vh;
+  padding-top: 5vh;
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   background-color: white;
 `;
 

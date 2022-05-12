@@ -10,18 +10,20 @@ const Cell = ({ status, group, user, item, setOther, clearOther }) =>{
 
     <Container>
 
-      <div>PHOTO: {item.pictures}</div>
-      <div onClick={() => clearOther()} >PRODUCT INFO: {item.title} {item.category} {item.description} </div>
-      <div onClick={() => setOther(item.posted_by)} >POSTED BY INFO: {item.posted_by} </div>
-      {(user.charity_state && (group === 'donations' && status === 'donated')) &&
-        <button onClick={() => setRate(!rate)}>Rate User</button>}
-      {rate &&
-        <Modal className='modal'>
-          <div>
-            MODAL TO RATE USER
-          </div>
-        </Modal>
-      }
+      <img src={item.pictures}/>
+        <div>
+        <h3 onClick={() => clearOther()} >{item.title} {item.category} {item.description} </h3>
+        <p onClick={() => setOther(item.posted_by)} >{item.posted_by} </p>
+        {(user.charity_state && (group === 'donations' && status === 'donated')) &&
+          <button onClick={() => setRate(!rate)}>Rate User</button>}
+        {rate &&
+          <Modal className='modal'>
+            <div>
+              MODAL TO RATE USER
+            </div>
+          </Modal>
+        }
+      </div>
     </Container>
 
   )
@@ -31,9 +33,12 @@ export default Cell;
 
 
 const Container = styled.div`
+margin: 1em 0;
 padding: 20px 16px;
-border-radius: 70, 100vh;
-background-color: black;
+border-radius: 20px;
+display:flex;
+align-items:center;
+border:2px solid var(--color1);
 `
 const Modal = styled.div`
 display: block;
