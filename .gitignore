@@ -1,6 +1,7 @@
 ## SPECIFIC FILES
 client/node_modules
 server/node_modules
+# server/config.env
 client/dist/bundle.js
 .DS_Store
 client/config.js
@@ -10,10 +11,6 @@ client/config.js
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> f871d0b06c585268ee9603efd82ad7c4f9378d25
 ## MAC files ##
 .DS_Store
 
@@ -23,27 +20,15 @@ npm-debug.log
 
 # User-specific files
 :*.rsuser
-<<<<<<< HEAD
-=======
-=======
->>>>>>> f871d0b06c585268ee9603efd82ad7c4f9378d25
 # User-specific files
 *.rsuser
->>>>>>> 5892e46d911436459f9879e7c158829d5ce5d060
 *.suo
 *.user
 *.userosscache
 *.sln.docstates
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 # User-specific files (MonoDevelop/Xamarin Studio)
-=======
-=======
-# User-specific files (MonoDevelop/Xamarin Studio)
->>>>>>> f871d0b06c585268ee9603efd82ad7c4f9378d25
 # User-specific files (MonoDevelop/Xagmarin Studio)
->>>>>>> 5892e46d911436459f9879e7c158829d5ce5d060
 *.userprefs
 
 # Mono auto generated files
@@ -381,15 +366,6 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> 5892e46d911436459f9879e7c158829d5ce5d060
-=======
 
 
 .env.config
->>>>>>> f871d0b06c585268ee9603efd82ad7c4f9378d25
