@@ -12,11 +12,12 @@ const Map = ({ lat, lng }) => {
     mapTypeControl: true,
     streetViewControl: false,
     scollWheel: true,
+    zoomControl: true,
     styles: [
       {
         featureType: "poi",
         elementType: "labels",
-        stylers: [{ visibility: "on" }],
+        stylers: [{ visibility: "off" }],
       },
     ],
   };

@@ -37,7 +37,7 @@ const getUser = async ({ userName }) => {
 
 
 
-const getLocal = async (latPosition, lngPosition, range = 10, count = 100, table = 'donations') => {
+const getLocal = async (latPosition, lngPosition, range = 100, count = 100, table = 'donations') => {
   // range = range * mileToKm * 1000
   try {
     var local;
@@ -46,7 +46,7 @@ const getLocal = async (latPosition, lngPosition, range = 10, count = 100, table
       SELECT *, (point(lng, lat) <@> point(${lngPosition}, ${latPosition})) AS distance
       FROM ${ sql(table) }
       WHERE (point(lng, lat) <@> point(${lngPosition}, ${latPosition})) < (${range})
-      ORDER BY distance;`
+      ;` 
     }
     if(table === 'users') {
       local = await sql`
