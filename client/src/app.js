@@ -22,8 +22,8 @@ function App() {
 
   useEffect(() => {
     api.get.location(dispatch);
-    const user = { userName: 'guy', attempt: "shalom" };
-    api.get.login(user, dispatch);
+    const user = { userName: 'mgee', attempt: "shalom" };
+    api.get.login(user, dispatch); // Automatic Login user === mgee
   }, []);
 
   return (
