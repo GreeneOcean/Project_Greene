@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styled, {css} from 'styled-components';
+import styled, { css } from 'styled-components';
 import Search from './Search';
 import { TiThMenu } from 'react-icons/ti';
 import { GiBoxUnpacking } from 'react-icons/gi';
@@ -112,7 +112,7 @@ const Nav = () => {
               <>
                 <StyledLink>
                   <CgArrowsExchange />
-                <Link to="/Transactions">
+                <Link to='/Transactions'>
                   Transactions
                 </Link>
                 </StyledLink>
@@ -148,6 +148,7 @@ const SideMenu = styled.div`
   right:0;
   width: 20%;
   max-width: 300px;
+  min-width: 300px;
   height: 100vh;
   background: white;
   border-left: 2px solid var(--color1);

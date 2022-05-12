@@ -1,4 +1,3 @@
-
 import { getLocation } from './location'
 
 const BASE_URL = `http://localhost:8080`

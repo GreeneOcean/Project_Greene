@@ -51,6 +51,7 @@ io.on("connection", (socket) => {
 // Routes
 app.get("/user/login", async (req, res) => {
   try {
+
     const [ userName, isAuthed ] = await auth.user(req.query)
     if ( isAuthed ) {
       const userData = await DB.GET.user({ userName })
@@ -214,10 +215,9 @@ app.put('/AdminApproveUser', async (req, res) => {
     res.status(500).send({ posted: false })
   }
 
-
 })
 
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Listening to port: ${PORT}`);
 });

@@ -1,11 +1,11 @@
 const { sql } = require('./connect')
 
 const userFields = [
- 'id',
- 'last_name',
- 'user_name',
- 'first_name',
- 'charity_state',
+  'id',
+  'last_name',
+  'user_name',
+  'first_name',
+  'charity_state',
 ]
 
 //ARRAY(SELECT id FROM donations AS d WHERE ${userName} = d.posted_by AND d.interested_user IS NULL) AS unclaimed,
