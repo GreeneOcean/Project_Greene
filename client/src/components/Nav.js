@@ -3,16 +3,27 @@ import styled, { css } from 'styled-components';
 import Search from './Search';
 import { TiThMenu } from 'react-icons/ti';
 import { GiBoxUnpacking } from 'react-icons/gi';
-import { AiOutlineClose, AiOutlineUser, AiOutlineUnorderedList, AiOutlinePlusCircle } from 'react-icons/ai';
-import {CgArrowsExchange} from 'react-icons/cg';
+import {
+  AiOutlineClose,
+  AiOutlineUser,
+  AiOutlineUnorderedList,
+  AiOutlinePlusCircle,
+} from 'react-icons/ai';
+import { CgArrowsExchange } from 'react-icons/cg';
 import { BiMessageRounded } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 
-
+<<<<<<< HEAD
 const Nav = ({ user }) => {
   const [loggedIn, setLoggedIn] = useState(true);
   const [isGreene, setIsGreene] = useState(user.admin);
+  const [menu, setMenu] = useState(false);
+=======
+const Nav = () => {
+  const [loggedIn, setLoggedIn] = useState(true);
+  const [isGreene, setIsGreene] = useState(false);
   const [menu, setMenu] = useState(false)
+>>>>>>> parent of a56d27c... Ib sy db (#34) adding location to server and route by url
 
   useEffect(() => {
     const sideMenu = document.getElementById('sideMenu');
@@ -21,71 +32,82 @@ const Nav = ({ user }) => {
     } else {
       sideMenu.style.transform = 'translate(100%,0)';
     }
-  }, [menu])
+  }, [menu]);
 
+<<<<<<< HEAD
   useEffect(() => {
-    setIsGreene(user.admin)
-  }, [user.admin])
+    setIsGreene(user.admin);
+  }, [user.admin]);
 
-
+=======
+>>>>>>> parent of a56d27c... Ib sy db (#34) adding location to server and route by url
   return (
     <>
-    <NavContainer>
-      <Link
-        to="/"
-        style={{
-          color: 'white',
-        }}
-      >
-        <GiBoxUnpacking
+      <NavContainer>
+        <Link
+          to="/"
+          style={{
+            color: 'white',
+          }}
+        >
+          <GiBoxUnpacking
+            style={{
+              color: 'white',
+              padding: '0 1em',
+              width: '4em',
+              height: 'auto',
+            }}
+          />
+        </Link>
+        <Search />
+        <TiThMenu
           style={{
             color: 'white',
             padding: '0 1em',
             width: '4em',
             height: 'auto',
+            cursor: 'pointer',
+          }}
+          onClick={() => {
+            setMenu(!menu);
           }}
         />
-      </Link>
-      <Search />
-      <TiThMenu
-        style={{
-          color: 'white',
-          padding: '0 1em',
-          width: '4em',
-          height: 'auto',
-          cursor: 'pointer',
-        }}
-
-        onClick={() => {
-          setMenu(!menu)
-        }}
-      />
-      {/* <div style={{ justifyContent: 'end', marginRight: '2 rem' }}>
-        {loggedIn ? (
-          <ButtonSM type="submit" onClick={() => console.log('Transactions')}>
-            Transactions
-          </ButtonSM>
-        ) : (
-          <ButtonSM type="submit" onClick={() => console.log('Log in')}>
-            Log in
-          </ButtonSM>
-        )}
-        {isGreene ? (
-          <ButtonSM type="submit" onClick={() => console.log('Admin')}>
-            Admin
-          </ButtonSM>
-          ) : (
-            null
-          )}
-      </div> */}
-      {/* <ul>
-              <li>link1</li>
-              <li>link2</li>
-              <li>link3</li>
-              <li>Login AUTH Link</li>
-            </ul> */}
-    </NavContainer>
+      </NavContainer>
       <SideMenu id="sideMenu" display={menu}>
+<<<<<<< HEAD
+        <div style={{ width: '100%', display: 'flex', justifyContent: 'end' }}>
+          <AiOutlineClose
+            style={{
+              width: '1.8em',
+              height: 'auto',
+              color: 'black',
+              cursor: 'pointer',
+            }}
+            onClick={() => {
+              setMenu(!menu);
+            }}
+          />
+        </div>
+        <div>
+          {loggedIn ? (
+            <>
+              <StyledLink
+                onClick={() => {
+                  setMenu(!menu);
+                }}
+              >
+                <Link to="/Transactions">
+                  <CgArrowsExchange />
+                  {!!isGreene ? 'Admin' : 'Transactions'}
+                </Link>
+              </StyledLink>
+              <StyledLink
+                onClick={() => {
+                  setMenu(!menu);
+                }}
+              >
+                <Link to="/">
+=======
       <div style={{width:'100%', display:'flex', justifyContent:'end'}}>
         <AiOutlineClose style={{
           width:'1.8em',
@@ -117,41 +139,62 @@ const Nav = ({ user }) => {
             {loggedIn ? (
               <>
                 <StyledLink>
-                  <Link to='/Transactions'>
-                   {isGreene ? 'Admin' : 'Transactions'}
-                  </Link>
                   <CgArrowsExchange />
+                <Link to='/Transactions'>
+                  Transactions
+                </Link>
                 </StyledLink>
                 <StyledLink>
+>>>>>>> parent of a56d27c... Ib sy db (#34) adding location to server and route by url
                   <BiMessageRounded />
-                <Link to="/">Messages</Link>
-                </StyledLink>
-              </>
-            ) : (
-              <StyledLink>
-                <AiOutlineUser/><Link to="/Auth">Log in</Link>
+                  Messages
+                </Link>
               </StyledLink>
-            )}
-            <StyledLink>
+            </>
+          ) : (
+            <StyledLink
+              onClick={() => {
+                setMenu(!menu);
+              }}
+            >
+              <Link to="/Auth">
+                <AiOutlineUser />
+                Log in
+              </Link>
+            </StyledLink>
+          )}
+          <StyledLink
+            onClick={() => {
+              setMenu(!menu);
+            }}
+          >
+            <Link to="/Browse">
               <AiOutlineUnorderedList />
-              <Link to="/Browse">Browse</Link>
-            </StyledLink>
-            <StyledLink>
+              Browse
+            </Link>
+          </StyledLink>
+          <StyledLink
+            onClick={() => {
+              setMenu(!menu);
+            }}
+          >
+            <Link to="/Donate">
               <AiOutlinePlusCircle />
-              <Link to="/Donate">Donate</Link>
-            </StyledLink>
-          </div>
-        </SideMenu>
-      </>
+              Donate
+            </Link>
+          </StyledLink>
+        </div>
+      </SideMenu>
+    </>
   );
 };
 
 // width:  ${({display}) => display ? '20%' : '0'};
 
 const SideMenu = styled.div`
-  top:0;
-  position:absolute;
-  right:0;
+  top: 0;
+  position: absolute;
+  right: 0;
   width: 20%;
   max-width: 300px;
   min-width: 300px;
@@ -162,13 +205,14 @@ const SideMenu = styled.div`
   transition: all 0.5s;
   transform-origin: center left;
   transform: translate(100%, 0);
+  z-index: 100;
 `;
 
 const NavContainer = styled.nav`
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  height: 60px;
+  height: 5vh;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -205,20 +249,26 @@ const ButtonSM = styled.button`
 `;
 
 const StyledLink = styled.div`
-  padding: 0.1em 0;
+  padding: 0.5em 0;
   transition: all 0.5s;
-  :hover{
-    padding: 0.1em 1em;
+  :hover {
+    padding: 0.5em 1em;
   }
   * {
     text-decoration: none;
     display: block;
     color: var(--color1);
-    font-size: 2em;
-    display: inline-block;
-    vertical-align: middle;
+    font-size: 1.5em;
+  }
+  svg {
+    font-size: 1em;
+    margin-right: 0.5em;
   }
   a {
+    display: flex;
+    flex-flow: row noWrap;
+    align-items: center;
+    flex-shrink: 0;
     padding-left: 0.5em;
   }
 `;
@@ -226,6 +276,5 @@ const StyledLink = styled.div`
 // const MenuIcons = css`
 //   color:blue;
 // `;
-
 
 export default Nav;

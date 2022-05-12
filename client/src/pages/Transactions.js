@@ -3,21 +3,24 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { PageContainer } from "../styles/index.js";
 import UserTransactions from '../components/Transactions/UserTransactions.jsx';
-import Admin from '../pages/AdminPage/Admin';
 
 function Transaction({ state, dispatch, init }) {
-  const { dev, user } = state;
-
+  const { dev } = state;
 
 
   return (
     <PageContainer>
-      <h3>Transaction</h3>
+<<<<<<< HEAD
+      <h1>Transaction History</h1>
       {user.admin ?
         <Admin user={state.user}/> :
         <UserTransactions user={state.user}  />
        }
 
+=======
+      <h3>Transaction</h3>
+      <UserTransactions user={state.user}  />
+>>>>>>> parent of a56d27c... Ib sy db (#34) adding location to server and route by url
     </PageContainer>
   );
 }
