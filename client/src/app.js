@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect } from "react";
-import io from "socket.io-client";
 import styled from "styled-components";
 import { StateContext, DispatchContext } from "./appState/index.js";
 import { Routes, Route, Link } from "react-router-dom";
@@ -14,7 +13,6 @@ import api from "./api/index";
 import { AppContainer, LoadingContainer, Footer } from "./styles/index.js";
 import config from "../config.js";
 
-const socket = io.connect("http://localhost:8080");
 
 function App() {
   const [, dispatch] = useContext(DispatchContext);
@@ -25,8 +23,8 @@ function App() {
 
   useEffect(() => {
     api.get.location(dispatch);
-    const user = { userName: config.USERNAME, attempt: "shalom" };
-    api.get.login.user(user, dispatch);
+    const user = { userName: 'guy', attempt: "shalom" };
+    api.get.login(user, dispatch);
   }, []);
 
   return (
@@ -83,7 +81,6 @@ function App() {
             />
           }
         />
-        {/* <Route path="Chat" element={<Chat socket={socket} />} /> */}
       </Routes>
       <Footer>
         <small>{"\u00a9 2022 Greene Inc. All rights reserved."}</small>

@@ -10,16 +10,6 @@ import ItemPageMap from "../components/item/ItemPageMap";
 function Item({ state, dispatch, init }) {
   const { dev } = state;
 
-  useEffect(() => {
-    init().then((res) => {
-      dev.logs && console.log(`\nItem API init res`, res);
-      dev.logs && console.log("Item state", state);
-      dispatch({
-        type: `ITEM_INIT`,
-        payload: res,
-      });
-    });
-  }, []);
 
 
 
