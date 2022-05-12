@@ -9,7 +9,7 @@ import { BiMessageRounded } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 
 const Nav = () => {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   const [isGreene, setIsGreene] = useState(false);
   const [menu, setMenu] = useState(false)
 
@@ -112,7 +112,7 @@ const Nav = () => {
               <>
                 <StyledLink>
                   <CgArrowsExchange />
-                <Link onClick={() => console.log('Transactions')}>
+                <Link to="/Transactions">
                   Transactions
                 </Link>
                 </StyledLink>
@@ -189,7 +189,6 @@ const ButtonSM = styled.button`
   background-color: transparent;
   box-shadow: 5px 5px 12px -5px rgba(0, 0, 0, 0.2);
   transition: all 0.5s;
-
   &:hover {
     cursor: pointer;
     color: #fff;
@@ -199,14 +198,11 @@ const ButtonSM = styled.button`
 `;
 
 const StyledLink = styled.div`
-
   padding: 0.1em 0;
   transition: all 0.5s;
-
   :hover{
     padding: 0.1em 1em;
   }
-
   * {
     text-decoration: none;
     display: block;
@@ -215,7 +211,6 @@ const StyledLink = styled.div`
     display: inline-block;
     vertical-align: middle;
   }
-
   a {
     padding-left: 0.5em;
   }

@@ -37,8 +37,6 @@ const PageContainer = styled.div`
   background-color: white;
 `;
 
-
-
 export {
   AppContainer,
   LoadingContainer,

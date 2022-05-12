@@ -68,17 +68,7 @@ const ErrorMessage = styled.div`
 
 function Donate({ state, dispatch, init }) {
   const { donate, dev } = state;
-  useEffect(() => {
-    init()
-      .then(res => {
-        dev.logs && console.log(`\nDonate API init res`, res)
-        dev.logs && console.log('Donate state', state)
-        dispatch({
-          type: `DONATE_INIT`,
-          payload: res
-        })
-      })
-  }, []);
+
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
