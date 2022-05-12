@@ -16,7 +16,7 @@ const Map = ({ lat, lng, data, selectedItem, setSelectedItem }) => {
       {
         featureType: "poi",
         elementType: "labels",
-        stylers: [{ visibility: "on" }],
+        stylers: [{ visibility: "off" }],
       },
     ],
   };
