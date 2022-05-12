@@ -132,17 +132,17 @@ const ButtonBox = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  padding: 2em;
+  justify-content: space-between;
+  padding: 2em 0;
 `;
 
 const SubmitButton = styled(ButtonS)`
   :disabled {
-    color: #999;
+    color: #666;
     border-color: #999;
 
     :hover {
-      color: #999;
+      color: #666;
       background: transparent;
     }
   }
