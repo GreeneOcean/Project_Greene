@@ -1,17 +1,19 @@
 const {v4 : uuidv4} = require('uuid')
 const DB  = require('../DB/index')
-
+const loc = require('../location/index')
 
 const newSession = async (req, res) => {
   const newSessionId = uuidv4()
   res.cookie('sessionId', newSessionId, { maxAge: 900000, httpOnly: true });
   const user_name  = req.query.userName || null
-  const newSession = { id: newSessionId, user_name }
+  const IP = await loc.IP()
+  const { latitude, longitude } = IP.location
+  const newSession = { id: newSessionId, user_name, lat: latitude, lng: longitude }
   req.session = newSession
   return DB.POST.session(newSession)
 }
 
-const session =  async (req, res, next) => {
+const sessionStart =  async (req, res, next) => {
 
   try {
 
@@ -46,11 +48,13 @@ const sessionEnd = async (req, res, next) => {
 
   res.on('finish', async () => {
 
-    const updatedSession = req.session
-    const { user } = req
+    const { user, session } = req
+    if ( req.path !== '/socket.io/' ) {
+      console.log({ user, session }, `REQ path: ${req.path} REQ query: `, req.query)
+    }
     if ( user ) {
-      updatedSession.user_name = user.user_name
-      DB.PUT.session(updatedSession)
+      session.user_name = user.user_name
+      DB.PUT.session(session)
     }
 
   });
@@ -58,6 +62,6 @@ const sessionEnd = async (req, res, next) => {
 
 }
 
-module.exports = { session, sessionEnd }
+module.exports = {  start: sessionStart, end: sessionEnd }
 
 
