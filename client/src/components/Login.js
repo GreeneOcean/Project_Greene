@@ -6,7 +6,7 @@ import { ButtonMD, LogSignButton } from '../styles/buttons';
 import { AuthInput } from '../styles/input';
 
 const Login = ({ handleClickOther }) => {
-  // const [ ,dispatch] = useContext(DispatchContext);
+  const [ ,dispatch] = useContext(DispatchContext);
   // const [state] = useContext(StateContext);
   const [userText, setUserText] = useState('');
   const [passText, setPassText] = useState('');
@@ -22,9 +22,9 @@ const Login = ({ handleClickOther }) => {
   const handleLogin = () => {
     api.get
       .login({
-        user_name: userText,
+        userName: userText,
         attempt: passText,
-      })
+      }, dispatch)
       .catch((err) => console.log(err));
   };
 

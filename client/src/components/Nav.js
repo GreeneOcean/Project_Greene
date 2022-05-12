@@ -112,7 +112,7 @@ const Nav = () => {
               <>
                 <StyledLink>
                   <CgArrowsExchange />
-                <Link onClick={() => console.log('Transactions')}>
+                <Link to='/Transactions'>
                   Transactions
                 </Link>
                 </StyledLink>
@@ -148,6 +148,7 @@ const SideMenu = styled.div`
   right:0;
   width: 20%;
   max-width: 300px;
+  min-width: 300px;
   height: 100vh;
   background: white;
   border-left: 2px solid var(--color1);

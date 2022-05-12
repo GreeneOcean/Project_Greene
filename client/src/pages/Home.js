@@ -19,6 +19,7 @@ function Home({ state, dispatch, init }) {
   return (
     <PageContainer>
       <h3>Home</h3>
+      <Link to='/Auth'>Auth</Link>
       <p>{`HomeData: ${HomeData}`} </p>
       <p>
         {`user lat: ${lat ? lat : "loading"}   user lng: ${

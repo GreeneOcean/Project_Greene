@@ -24,8 +24,10 @@ const checkPassword = (passwordToMatch, savedPassword) => {
 
 
 const checkUser = async (user) => {
-  const { userId, userName, attempt } = user
   try {
+    const { userId, userName, attempt } = user
+    console.log('userID', userId)
+    console.log({ userName });
     if (userId) {
       const getPassword = await sql`SELECT user_name, password FROM users WHERE id = ${userId}`
       const savedPassword = getPassword[0].password
