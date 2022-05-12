@@ -247,11 +247,7 @@ function Donate({ state, dispatch, init }) {
 
       <ButtonBox>
         <ButtonS name="cancel" onClick={cancel}>Cancel</ButtonS>
-        {
-          valid
-          ? <SubmitButton name="post" onClick={submitForm}>List Donation</SubmitButton>
-          : <SubmitButton name="post" disabled={true}>List Donation</SubmitButton>
-        }
+        <SubmitButton name="post" disabled={!valid}>List Donation</SubmitButton>
       </ButtonBox>
     </DonateContainer>
   );
