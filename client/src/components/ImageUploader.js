@@ -12,22 +12,26 @@ const UploadContainer = styled.div`
   color: #999;
   border: 3px solid #999;
   border-radius: 10%;
-  display: grid;
+  display: flex;
   justify-content: center;
-  align-content: center;
-  box-sizing: content-box;
+  align-items: center;
+  position: relative;
+
+  svg {
+    position: absolute;
+  }
 `;
 
 const ImageInput = styled.input`
   height: inherit;
   width: inherit;
   border-radius: inherit;
-  position: absolute;
   opacity: 0;
+  position: absolute;
 `;
 
 const PreviewImage = styled.img`
-  height: inherit;
+  height: 100%;
 `;
 
 const ImageUploader = ({upload = () => {} }) => {
