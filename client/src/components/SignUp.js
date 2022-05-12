@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import api from '../../api';
+import api from '../api';
 
 const SignUp = ({ handleClickOther }) => {
   const [userText, setUserText] = useState('');
