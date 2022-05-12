@@ -12,7 +12,6 @@ const Switch = styled.label`
   display: inline-block;
   width: 3em;
   height: 1.6em;
-  margin-right: .4em;
 `;
 
 const InvisibleCheckbox = styled.input`
@@ -21,7 +20,8 @@ const InvisibleCheckbox = styled.input`
   width: 0;
 `;
 
-const ToggleSwitchOff = styled.span`
+const ToggleSwitchOff = styled.div`
+  display: inline-block;
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -71,7 +71,7 @@ const ToggleSwitch = ({on='', off='', defaultValue=false, onChange=()=>{}}) => {
     <SwitchContainer>
     <Switch tabIndex="0" onKeyDown={handleKeyDown}>
       <InvisibleCheckbox name="charityOnly" type="checkbox" checked={defaultValue} isChecked={value} onChange={toggle}/>
-      {value ? <ToggleSwitchOn/> : <ToggleSwitchOff/>}
+      {value ? <ToggleSwitchOn className="charity-toggle"/> : <ToggleSwitchOff className="charity-toggle"/>}
     </Switch>
     <span>{value ? on : off}</span>
     </SwitchContainer>
