@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { PageContainer } from '../styles/index.js';
-import Nav from '../components/Nav';
 import Login from '../components/Login';
 import SignUp from '../components/SignUp';
 
@@ -18,15 +17,13 @@ function Auth({ state, dispatch, init }) {
 
 
   return (
-    <>
-      <PageContainer>
-        {isRegistered ? (
-          <Login handleClickOther={handleClickOther} />
-        ) : (
-          <SignUp handleClickOther={handleClickOther} />
-        )}
-      </PageContainer>
-    </>
+    <PageContainer>
+      {isRegistered ? (
+        <Login state={state} handleClickOther={handleClickOther} />
+      ) : (
+        <SignUp state={state} handleClickOther={handleClickOther} />
+      )}
+    </PageContainer>
   );
 }
 
