@@ -16,7 +16,6 @@ const hashPassword = (password) => {
 }
 
 
-
 const checkPassword = (passwordToMatch, savedPassword) => {
   passwordToMatch = crypto.createHash('sha256', salt)
     .update(passwordToMatch).digest('hex');
