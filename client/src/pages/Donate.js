@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useLinkClickHandler } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { ButtonL, ButtonM, ButtonS } from '../styles/buttons.js';
 import TagsContainer from '../components/TagsContainer.js';
 import ToggleSwitch from '../components/ToggleSwitch.js';
@@ -68,6 +68,18 @@ const ButtonBox = styled.div`
   padding: 2em;
 `;
 
+const SubmitButton = styled(ButtonS)`
+  :disabled {
+    color: #999;
+    border-color: #999;
+
+    :hover {
+      color: #999;
+      background: transparent;
+    }
+  }
+`;
+
 const StyledAsterisk = styled.span`
   color: red;
 `;
@@ -82,30 +94,43 @@ const ErrorMessage = styled.div`
 
 function Donate({ state, dispatch, init }) {
   const { donate, dev } = state;
-
+  let navigate = useNavigate();
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState('Select a Category');
   const [tag, setTag] = useState('');
   const [tags, setTags] = useState([]);
   const [charityOnly, setCharityOnly] = useState(true);
   const [photo, setPhoto] = useState(null);
-  const [invalid, setInvalid] = useState(false);
+  const [valid, setValid] = useState(false);
+
+  const grabData = (data) => {
+    return {
+      posted_by: state.user.user_name,
+      lat: state.user.lat,
+      lng: state.user.lng,
+      title: data.title || title,
+      description: data.description || description,
+      category: data.category || category,
+      tag: tags,
+      charity_only: charityOnly,
+      pictures: photo ? [photo] : []
+    };
+  };
 
   const setState = (field, data) => {
     const states = {
       title: setTitle,
       description: setDescription,
       category: setCategory,
-      tag: setTag,
-      tags: setTags,
       charityOnly: setCharityOnly,
-      photo: setPhoto,
+      tag: setTag
     };
 
     let set = states[field];
     set(data);
+    setValid(validate(grabData({[field]: data})));
   };
 
   const handleChange = (e) => {
@@ -140,33 +165,22 @@ function Donate({ state, dispatch, init }) {
 
   const cancel = (e) => {
     e.preventDefault();
-    useLinkClickHandler('Home');
+    navigate('/');
   };
 
   const submitForm = (e) => {
     e.preventDefault();
-    let data = {
-      posted_by: state.user.user_name,
-      lat: state.user.lat,
-      lng: state.user.lng,
-      title: title,
-      description: description,
-      category: category,
-      tag: tags,
-      charity_only: charityOnly,
-      pictures: photo ? [photo] : []
-    };
+    let data = grabData();
 
     if (validate(data)) {
       api.post.donation(data)
         .then((res) => {
-          console.log(JSON.parse(res));
+          console.log(res);
+          navigate('/Transactions');
         })
         .catch((err) => {
           console.log(err);
-        })
-    } else {
-      setInvalid(true);
+        });
     }
   };
 
@@ -175,7 +189,7 @@ function Donate({ state, dispatch, init }) {
       return false;
     } else if (data.description.length < 1) {
       return false;
-    } else if (data.category.length < 1) {
+    } else if (data.category === 'Select a Category') {
       return false;
     } else if (data.user_name === null) {
       return false;
@@ -188,13 +202,6 @@ function Donate({ state, dispatch, init }) {
   return (
     <DonateContainer>
       <h2>Tell us about your donation</h2>
-      {
-        invalid
-        ? <ErrorMessage>
-          <span>Please complete all required fields.</span>
-        </ErrorMessage>
-        : null
-      }
       <StyledForm>
         <FieldSection htmlFor="title">
           <span>Listing Title <Asterisk/></span>
@@ -210,7 +217,7 @@ function Donate({ state, dispatch, init }) {
           <span>Category <Asterisk/></span>
           <select name="category" id="category" value={category} onChange={handleChange} required>
             {
-              ([<option key={'none'} value={''}>Select a Category</option>])
+              ([<option key="none" value="Select a Category">Select a Category</option>])
               .concat(
                 categories.map((category, i) => {
                   return <option key={i} value={category}>{category}</option>
@@ -239,7 +246,7 @@ function Donate({ state, dispatch, init }) {
 
       <ButtonBox>
         <ButtonS name="cancel" onClick={cancel}>Cancel</ButtonS>
-        <ButtonS name="post" onClick={submitForm}>List Donation</ButtonS>
+        <SubmitButton name="post" disabled={!valid}>List Donation</SubmitButton>
       </ButtonBox>
     </DonateContainer>
   );
