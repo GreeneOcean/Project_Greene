@@ -9,7 +9,7 @@ import { BiMessageRounded } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 
 const Nav = () => {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   const [isGreene, setIsGreene] = useState(false);
   const [menu, setMenu] = useState(false)
 
@@ -112,7 +112,7 @@ const Nav = () => {
               <>
                 <StyledLink>
                   <CgArrowsExchange />
-                <Link onClick={() => console.log('Transactions')}>
+                <Link to="/Transactions">
                   Transactions
                 </Link>
                 </StyledLink>

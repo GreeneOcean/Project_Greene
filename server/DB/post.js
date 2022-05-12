@@ -18,17 +18,17 @@ POST.user = async (newUser) => {
   return await POST(newUser, 'users')
 }
 
-POST.donations = async (newDonation) => {
+POST.donation = async (newDonation) => {
   return await POST(newDonation, 'donations')
 }
 
-POST.donated = async (newDonated) => {
-  return await POST(newClaim, 'donated')
-}
 
 POST.session = async (newSession) => {
   return await POST(newSession, 'sessions')
 }
 
+POST.review = async (newReview) => {
+  return await POST(newReview, 'reviews')
+}
 
 module.exports = POST

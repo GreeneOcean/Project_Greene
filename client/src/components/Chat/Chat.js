@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import VideoPlayer from "./Dashboard/VideoPlayer";
+import io from "socket.io-client";
 
-function Chat({ socket }) {
+const socket = io.connect("http://localhost:8080");
+
+
+function Chat() {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
 
