@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-import api from '../../api/index';
+import api from "../../api/index";
 
 const TextDisplay = ({
   title,
@@ -13,20 +13,22 @@ const TextDisplay = ({
   posted_by,
   interested_users,
   tag,
-  state
+  state,
 }) => {
+
   const [claimed, setClaimed] = useState(false);
-  const {user} = state;
+  const { user } = state;
   const navigate = useNavigate();
 
   const claimHandler = () => {
-    api.put.interest({userName: user.user_name, donationId: state.id})
-    .then(res => {
+    api.put
+      .interest({ userName: user.user_name, donationId: state.id })
+      .then((res) => {
         setClaimed(true);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err.message);
-      })
+      });
   };
 
   const backToBrowse = () => {
