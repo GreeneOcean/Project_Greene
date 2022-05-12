@@ -185,7 +185,6 @@ function Donate({ state, dispatch, init }) {
   };
 
   const validate = (data) => {
-    console.log(data);
     if (data.title.length < 1) {
       return false;
     } else if (data.description.length < 1) {
