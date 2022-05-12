@@ -160,7 +160,7 @@ function Donate({ state, dispatch, init }) {
     if (validate(data)) {
       api.post.donation(data)
         .then((res) => {
-          console.log(JSON.parse(res));
+          console.log(res);
         })
         .catch((err) => {
           console.log(err);
