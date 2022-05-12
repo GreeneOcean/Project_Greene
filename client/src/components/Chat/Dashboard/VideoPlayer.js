@@ -13,6 +13,7 @@ const VideoPlayer = ({ socket }) => {
   useEffect(() => {
     socket.on("sdp", (data) => {
       pc.current.setRemoteDescription(new RTCSessionDescription(data.sdp));
+      // textRef.current.value = JSON.stringify(data.sdp);
       if (data.sdp.type === "offer") {
         setOfferVisible(false);
         setAnswerVisible(true);
@@ -30,7 +31,6 @@ const VideoPlayer = ({ socket }) => {
       audio: false,
       video: true
     };
-
     navigator.mediaDevices
       .getUserMedia(constraints)
       .then((stream) => {
@@ -131,13 +131,6 @@ const VideoPlayer = ({ socket }) => {
 
       {showHideButtons()}
       <div>{status}</div>
-      <button
-        onClick={() => {
-          socket.disconnect;
-        }}
-      >
-        Hang up
-      </button>
       {/* <textarea ref={textRef}></textarea> */}
       <br />
     </div>

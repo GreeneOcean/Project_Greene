@@ -15,16 +15,6 @@ function Auth({ state, dispatch, init }) {
     setIsRegistered(!isRegistered);
   };
 
-  useEffect(() => {
-    init().then((res) => {
-      dev.logs && console.log(`\nAuth API init res`, res);
-      dev.logs && console.log('Auth state', state);
-      dispatch({
-        type: 'AUTH_INIT',
-        payload: res,
-      });
-    });
-  }, []);
 
   return (
     <PageContainer>

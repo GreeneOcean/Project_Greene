@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import VideoPlayer from "../components/VideoPlayer";
+import VideoPlayer from "./Dashboard/VideoPlayer";
+import io from "socket.io-client";
 
-function Chat({ socket }) {
+const socket = io.connect("http://localhost:8080");
+
+
+function Chat() {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
 
@@ -15,12 +19,11 @@ function Chat({ socket }) {
           ":" +
           new Date(Date.now()).getMinutes()
       };
-
       socket.emit("send_message", messageData, (res) => {
         setMessageList((list) => [...list, messageData]);
         setCurrentMessage("");
-      });
-    }
+      })
+    };
   };
 
   useEffect(() => {
@@ -31,6 +34,7 @@ function Chat({ socket }) {
 
   return (
     <ChatContainer>
+
       <div>
         <div className="chat-header">
           <p>Live Chat</p>
@@ -57,6 +61,7 @@ function Chat({ socket }) {
         </div>
       </div>
     </ChatContainer>
+
   );
 }
 

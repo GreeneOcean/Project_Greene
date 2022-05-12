@@ -7,19 +7,6 @@ import { PageContainer } from "../styles/index.js";
 function Item({ state, dispatch, init }) {
   const { dev } = state;
 
-  console.log("itemState: ", state);
-
-  useEffect(() => {
-    init().then((res) => {
-      dev.logs && console.log(`\nItem API init res`, res);
-      dev.logs && console.log("Item state", state);
-      dispatch({
-        type: `ITEM_INIT`,
-        payload: res
-      });
-    });
-  }, []);
-
   return (
     <PageContainer>
       <h3>Item</h3>

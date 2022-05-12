@@ -2,17 +2,18 @@ import React, {useEffect, useState} from "react";
 import styled from 'styled-components';
 
 
-const Cell = (props) =>{
+const Cell = ({ status, group, user, item, setOther, clearOther }) =>{
   const [rate, setRate] = useState(false);
+
 
   return (
 
     <Container>
 
-      <div>PHOTO: {props.item.pictures}</div>
-      <div>PRODUCT INFO: {props.item.title} {props.item.category} {props.item.description} </div>
-      <div>USER INFO: {props.user.first_name} {props.user.last_name} {props.user.user_name}</div>
-      {(props.user.charity_state && (props.group === 'donations' && props.status === 'donated')) &&
+      <div>PHOTO: {item.pictures}</div>
+      <div onClick={() => clearOther()} >PRODUCT INFO: {item.title} {item.category} {item.description} </div>
+      <div onClick={() => setOther(item.posted_by)} >POSTED BY INFO: {item.posted_by} </div>
+      {(user.charity_state && (group === 'donations' && status === 'donated')) &&
         <button onClick={() => setRate(!rate)}>Rate User</button>}
       {rate &&
         <Modal className='modal'>
