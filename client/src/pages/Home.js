@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { PageContainer } from "../styles/index.js";
 import Carousel from "../components/Carousel.js";
-import Chat from "../Chat/Chat";
 
 function Home({ state, dispatch, init }) {
   const { dev, user, HomeData } = state;

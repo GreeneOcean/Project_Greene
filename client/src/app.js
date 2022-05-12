@@ -10,6 +10,7 @@ import Donate from "./pages/Donate";
 import Home from "./pages/Home";
 import Item from "./pages/Item";
 import Transactions from "./pages/Transactions";
+import Chat from "./pages/Chat";
 import api from "./api/index";
 import { AppContainer, LoadingContainer, Footer } from "./styles/index.js";
 import config from "../config.js";
@@ -83,8 +84,8 @@ function App() {
             />
           }
         />
-        {/* <Route path="Chat" element={<Chat socket={socket} />} /> */}
       </Routes>
+
       <Footer>
         <small>{"\u00a9 2022 Greene Inc. All rights reserved."}</small>
       </Footer>

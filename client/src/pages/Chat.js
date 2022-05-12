@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import VideoPlayer from "./Dashboard/VideoPlayer";
+import VideoPlayer from "../components/VideoPlayer";
 
 function Chat({ socket }) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
 
-  const sendMessage = async () => {
+  const sendMessage = () => {
     if (currentMessage !== "") {
       const messageData = {
         message: currentMessage,
@@ -15,9 +15,10 @@ function Chat({ socket }) {
           new Date(Date.now()).getMinutes()
       };
 
-      await socket.emit("send_message", messageData);
-      setMessageList((list) => [...list, messageData]);
-      setCurrentMessage("");
+      socket.emit("send_message", messageData, (res) => {
+        setMessageList((list) => [...list, messageData]);
+        setCurrentMessage("");
+      });
     }
   };
 

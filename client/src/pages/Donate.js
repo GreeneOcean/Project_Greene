@@ -1,36 +1,36 @@
-import React, { useContext, useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { useLinkClickHandler } from "react-router-dom"
-import { ButtonL, ButtonM, ButtonS } from '../styles/buttons.js';
-import TagsContainer from '../components/TagsContainer.js';
-import ToggleSwitch from '../components/ToggleSwitch.js';
-import ImageUploader from '../components/ImageUploader.js';
-import api from '../api/index.js';
+import React, { useContext, useEffect, useState } from "react";
+import styled from "styled-components";
+import { useLinkClickHandler } from "react-router-dom";
+import { ButtonL, ButtonM, ButtonS } from "../styles/buttons.js";
+import TagsContainer from "../components/TagsContainer.js";
+import ToggleSwitch from "../components/ToggleSwitch.js";
+import ImageUploader from "../components/ImageUploader.js";
+import api from "../api";
 
 const categories = [
-  'Accessories',
-  'Arts & Crafts',
-  'Baby',
-  'Books',
-  'Clothing',
-  'Education',
-  'Electronics',
-  'Food',
-  'Garden',
-  'Home & Furniture',
-  'Jewelry',
-  'Kitchenware',
-  'Movies',
-  'Music',
-  'Musical Instruments',
-  'Office & Stationery',
-  'Personal Care',
-  'Pet Supplies',
-  'Sports',
-  'Tools',
-  'Toys',
-  'Video Games',
-  'Other'
+  "Accessories",
+  "Arts & Crafts",
+  "Baby",
+  "Books",
+  "Clothing",
+  "Education",
+  "Electronics",
+  "Food",
+  "Garden",
+  "Home & Furniture",
+  "Jewelry",
+  "Kitchenware",
+  "Movies",
+  "Music",
+  "Musical Instruments",
+  "Office & Stationery",
+  "Personal Care",
+  "Pet Supplies",
+  "Sports",
+  "Tools",
+  "Toys",
+  "Video Games",
+  "Other"
 ];
 
 const PageContainer = styled.div`
@@ -70,32 +70,30 @@ const StyledAsterisk = styled.span`
   color: red;
 `;
 const Asterisk = () => {
-  return (<StyledAsterisk>*</StyledAsterisk>);
-}
+  return <StyledAsterisk>*</StyledAsterisk>;
+};
 
 const ErrorMessage = styled.div`
   color: red;
 `;
 
-
 function Donate({ state, dispatch, init }) {
   const { donate, dev } = state;
   useEffect(() => {
-    init()
-      .then(res => {
-        dev.logs && console.log(`\nDonate API init res`, res)
-        dev.logs && console.log('Donate state', state)
-        dispatch({
-          type: `DONATE_INIT`,
-          payload: res
-        })
-      })
+    init().then((res) => {
+      dev.logs && console.log(`\nDonate API init res`, res);
+      dev.logs && console.log("Donate state", state);
+      dispatch({
+        type: `DONATE_INIT`,
+        payload: res
+      });
+    });
   }, []);
 
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [category, setCategory] = useState('');
-  const [tag, setTag] = useState('');
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
+  const [tag, setTag] = useState("");
   const [tags, setTags] = useState([]);
   const [charityOnly, setCharityOnly] = useState(true);
   const [photo, setPhoto] = useState(null);
@@ -109,7 +107,7 @@ function Donate({ state, dispatch, init }) {
       tag: setTag,
       tags: setTags,
       charityOnly: setCharityOnly,
-      photo: setPhoto,
+      photo: setPhoto
     };
 
     let set = states[field];
@@ -124,7 +122,7 @@ function Donate({ state, dispatch, init }) {
     if (tag.length > 0 && !tags.includes(tag)) {
       const newTags = tags.slice().concat([tag]);
       setTags(newTags);
-      setTag('');
+      setTag("");
     }
   };
 
@@ -135,7 +133,7 @@ function Donate({ state, dispatch, init }) {
   };
 
   const handleKeyDown = (e) => {
-    if (e.code === 'Enter') {
+    if (e.code === "Enter") {
       e.preventDefault();
       addTag();
     }
@@ -144,11 +142,11 @@ function Donate({ state, dispatch, init }) {
   const handleClick = (e) => {
     e.preventDefault();
     addTag();
-  }
+  };
 
   const cancel = (e) => {
     e.preventDefault();
-    useLinkClickHandler('Home');
+    useLinkClickHandler("Home");
   };
 
   const submitForm = (e) => {
@@ -166,7 +164,7 @@ function Donate({ state, dispatch, init }) {
     };
 
     if (validate(data)) {
-      api.post('/AddDonation', null, data);
+      api.post("/AddDonation", null, data);
     } else {
       setInvalid(true);
     }
@@ -190,48 +188,87 @@ function Donate({ state, dispatch, init }) {
   return (
     <PageContainer>
       <h2>Tell us about your donation</h2>
-      {
-        invalid
-        ? <ErrorMessage>
+      {invalid ? (
+        <ErrorMessage>
           <span>Please complete all required fields.</span>
         </ErrorMessage>
-        : null
-      }
+      ) : null}
       <StyledForm>
         <FieldSection htmlFor="title">
-          <span>Listing Title <Asterisk/></span>
-          <input type="text" name="title" id="title" value={title} onChange={handleChange} />
+          <span>
+            Listing Title <Asterisk />
+          </span>
+          <input
+            type="text"
+            name="title"
+            id="title"
+            value={title}
+            onChange={handleChange}
+          />
         </FieldSection>
 
         <FieldSection htmlFor="description">
-          <span>Description <Asterisk/></span>
-          <textarea name="description" id="description" value={description} onChange={handleChange} />
+          <span>
+            Description <Asterisk />
+          </span>
+          <textarea
+            name="description"
+            id="description"
+            value={description}
+            onChange={handleChange}
+          />
         </FieldSection>
 
         <FieldSection htmlFor="category">
-          <span>Category <Asterisk/></span>
-          <select name="category" id="category" value={category} onChange={handleChange} required>
-            {
-              ([<option key={'none'} value={''}>Select a Category</option>])
-              .concat(
-                categories.map((category, i) => {
-                  return <option key={i} value={category}>{category}</option>
-                }))
-            }
+          <span>
+            Category <Asterisk />
+          </span>
+          <select
+            name="category"
+            id="category"
+            value={category}
+            onChange={handleChange}
+            required
+          >
+            {[
+              <option key={"none"} value={""}>
+                Select a Category
+              </option>
+            ].concat(
+              categories.map((category, i) => {
+                return (
+                  <option key={i} value={category}>
+                    {category}
+                  </option>
+                );
+              })
+            )}
           </select>
         </FieldSection>
 
         <FieldSection htmlFor="tag">
           <span>Add tags</span>
           <span>
-            <input type="text" name="tag" id="tag" value={tag} onChange={handleChange} onKeyDown={handleKeyDown} />
+            <input
+              type="text"
+              name="tag"
+              id="tag"
+              value={tag}
+              onChange={handleChange}
+              onKeyDown={handleKeyDown}
+            />
             <button onClick={handleClick}>+</button>
           </span>
           {tags.length > 0 ? <span>Click to remove</span> : null}
-          <TagsContainer tags={tags} onClick={removeTag} clickable={true}/>
+          <TagsContainer tags={tags} onClick={removeTag} clickable={true} />
         </FieldSection>
 
-        <ToggleSwitch on="Charity only" off="Available to everyone" defaultValue={true} onChange={setCharityOnly} />
+        <ToggleSwitch
+          on="Charity only"
+          off="Available to everyone"
+          defaultValue={true}
+          onChange={setCharityOnly}
+        />
 
         <FieldSection htmlFor="photo">
           <span>Click to add or drag in a photo</span>
@@ -240,8 +277,12 @@ function Donate({ state, dispatch, init }) {
       </StyledForm>
 
       <ButtonBox>
-        <ButtonS name="cancel" onClick={cancel}>Cancel</ButtonS>
-        <ButtonS name="post" onClick={submitForm}>List Donation</ButtonS>
+        <ButtonS name="cancel" onClick={cancel}>
+          Cancel
+        </ButtonS>
+        <ButtonS name="post" onClick={submitForm}>
+          List Donation
+        </ButtonS>
       </ButtonBox>
     </PageContainer>
   );
