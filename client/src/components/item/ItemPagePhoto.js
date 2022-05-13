@@ -19,20 +19,15 @@ const ItemPagePhoto = ({ pictures }) => {
 export default ItemPagePhoto;
 
 const StyledDiv = styled.div`
-
   width: auto;
   height: 100%;
   object-fit: contain;
-  border: solid;
-  border-width: 2px;
-  border-color: black;
-  margin: 10px;
+  margin-right:5em;
+  background-color: white;
 `;
 
 const StyledImage = styled.img`
   height: 100%;
 `;
 
-{
-  /* <StyledImage src={pictures ? pictures[0] : photoNotFoundURL} /> */
-}
+

@@ -13,7 +13,7 @@ function Item({ state, dispatch }) {
   return (
     <PageContainer>
       <ItemPageContainer>
-        <ItemPagePhoto pictures={state.pictures} />
+        <ItemPagePhoto pictures={state.pictures} category={state.category} />
         <TextDisplay
           title={state.title}
           category={state.category}
@@ -27,7 +27,13 @@ function Item({ state, dispatch }) {
         />
       </ItemPageContainer>
       <MapContainer>
-        <p>{`${Math.ceil(state.distance)} ${
+        <p
+          style={{
+            fontSize: "1.5em",
+            textAlign: "center",
+            marginBottom: "0.5em",
+          }}
+        >{`${Math.ceil(state.distance)} ${
           state.distance > 1 ? "miles" : "mile"
         } from you`}</p>
         <ItemPageMap lat={state.lat} lng={state.lng} state={state} />
@@ -40,20 +46,16 @@ export default Item;
 
 const ItemPageContainer = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
+  align-items: center;
   margin-top: 10vh;
-  height: 40vh;
+  min-height: 40vh;
   width: 70vw;
-
-  *{
-    margin: 0;
-    height:100%;
-  }
 `;
 
 const MapContainer = styled.div`
-
-height: 35vh;
-width: 60vh;
-margin-top: 10vh;
+  position: relative;
+  height: 35vh;
+  width: 60vh;
+  margin: 10vh 0;
 `;

@@ -85,9 +85,12 @@ const InnerItemContainer = styled.div`
   padding-left:1em;
   display:flex;
   flex-direction:column;
-  *{
-    font-size: 100%;
+  h1{
+    font-size: 150%;
     margin: 0.5em 0;
+  }
+  p{
+    font-size: 100%;
   }
 `;
 
