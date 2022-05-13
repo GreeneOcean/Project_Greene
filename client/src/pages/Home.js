@@ -12,12 +12,6 @@ function Home({ state, dispatch, init }) {
 
 
 
-  const toggleDevLogs = (e) => {
-    dispatch({
-      type: "TOGGLE_LOGS"
-    });
-  };
-
   return (
       <PageContainer >
 
@@ -25,7 +19,6 @@ function Home({ state, dispatch, init }) {
         <p>{`HomeData: ${HomeData}`} </p>
         <p>{`user lat: ${lat ? lat : 'loading'}   user lng: ${lng ? lng : 'loading'}`} </p>
         <p>{`number of local: ${local ? local.length : 'loading'}`}</p>
-        <button onClick={toggleDevLogs} >Toggle logs</button>
         <HomeItemsWidget localItems={local}/>
       </PageContainer>
   );
