@@ -11,8 +11,11 @@ import {
 import { CgArrowsExchange } from 'react-icons/cg';
 import { BiMessageRounded } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
+<<<<<<< HEAD
 import { DispatchContext } from '../appState';
 import Search from './Search';
+=======
+>>>>>>> b951756817f7382fe1559e3f91d2496f06cf0ed5
 
 const Nav = ({ user }) => {
   // const [loggedIn, setLoggedIn] = useState(!!user.user_name);
@@ -33,12 +36,15 @@ const Nav = ({ user }) => {
   useEffect(() => {
     setIsGreene(user.admin);
   }, [user.admin]);
+<<<<<<< HEAD
 
   useEffect(() => {
     setLoggedIn(!!user.user_name);
   }, [user.user_name]);
 
   const logoutClick = (() => dispatch({ type: 'LOG_OUT' }))
+=======
+>>>>>>> b951756817f7382fe1559e3f91d2496f06cf0ed5
 
   return (
     <>
@@ -135,13 +141,14 @@ const SideMenu = styled.div`
   transition: all 0.5s;
   transform-origin: center left;
   transform: translate(100%, 0);
+  z-index: 100;
 `;
 
 const NavContainer = styled.nav`
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  height: 60px;
+  height: 5vh;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -178,20 +185,30 @@ const ButtonSM = styled.button`
 `;
 
 const StyledLink = styled.div`
-  padding: 0.1em 0;
+  padding: 0.5em 0;
   transition: all 0.5s;
   :hover {
+<<<<<<< HEAD
     padding: 0.1em 1em;
+=======
+    padding: 0.5em 1em;
+>>>>>>> b951756817f7382fe1559e3f91d2496f06cf0ed5
   }
   * {
     text-decoration: none;
     display: block;
     color: var(--color1);
-    font-size: 2em;
-    display: inline-block;
-    vertical-align: middle;
+    font-size: 1.5em;
+  }
+  svg {
+    font-size: 1em;
+    margin-right: 0.5em;
   }
   a {
+    display: flex;
+    flex-flow: row noWrap;
+    align-items: center;
+    flex-shrink: 0;
     padding-left: 0.5em;
   }
 `;

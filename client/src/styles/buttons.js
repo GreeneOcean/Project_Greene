@@ -2,12 +2,13 @@ import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const StyledButton = css`
-  border-radius: 30px;
+  border-radius: 6px;
   border: 2px;
   border-style: solid;
   border-color: var(--color1);
   padding: 10px 15px;
   cursor: pointer;
+  margin: 0 0.5em;
 
   transition: all 0.5s;
   color: var(--color1);
@@ -21,17 +22,17 @@ const StyledButton = css`
 
 export const ButtonL = styled.button`
   ${StyledButton}
-  font-size: 3em;
+  font-size: 2em;
 `;
 
 export const ButtonM = styled.button`
   ${StyledButton}
-  font-size: 2em;
+  font-size: 1em;
 `;
 
 export const ButtonS = styled.button`
   ${StyledButton}
-  font-size: 1em;
+  font-size: 0.5em;
 `;
 
 export const LogSignButton = styled.div`

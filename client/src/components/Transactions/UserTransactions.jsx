@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Cell from './Cell.jsx'
 import styled from 'styled-components';
 import Chat from '../Chat/Chat';
-
+import { ButtonL, ButtonM, ButtonS } from '../../styles/buttons';
 
 const UserTransactions = ({ user }) =>{
   const [group, setGroup] = useState('both');
@@ -19,60 +19,66 @@ const UserTransactions = ({ user }) =>{
     setOtherUser('')
   }
 
-
-  useEffect(() => {
+  const filter = () => {
 
     var newItems = [];
-    const { interested, received, donated } = user
 
-    if ( interested && received && donated ) {
-      if (group === 'both') {
-        user.interested.forEach(item => {
-          if (item.state === status) {
-            newItems.push(item);
-          }
+    if (group === 'both') {
+      user.interested.forEach(item => {
+        if (item.state === status) {
+          newItems.push(item);
+        }
+      });
+      user.received.forEach(item => {
+        if (item.state === status) {
+          newItems.push(item);
+        }
+      });
+      user.donated.forEach(item => {
+        if (item.state === status) {
+          newItems.push(item);
+        }
+      });
+    } else if (group === 'received') {
+      user.received.forEach(item => {
+        if (item.state === status) {
+          newItems.push(item);
+        }
         });
-        user.received.forEach(item => {
-          if (item.state === status) {
-            newItems.push(item);
-          }
-        });
-        user.donated.forEach(item => {
-          if (item.state === status) {
-            newItems.push(item);
-          }
-        });
-      } else if (group === 'received') {
-        user.received.forEach(item => {
-          if (item.state === status) {
-            newItems.push(item);
-          }
-          });
-      } else if (group === 'donations') {
-        user.donated.forEach(item => {
-          if (item.state === status) {
-            newItems.push(item);
-          }
-        });
-      }
+    } else if (group === 'donations') {
+      user.donated.forEach(item => {
+        if (item.state === status) {
+          newItems.push(item);
+        }
+      });
     }
     setItems(newItems)
+  }
 
-  }, [group, status, user.interested, user.received, user.donated]);
+  useEffect(() => {
+    user && filter();
+  }, [group, status, user]);
 
   return (
 
       <TransactionContainer>
-        <div>
+        <StyledDropdown>
+          <select onChange={(e) => setGroup(e.target.value)}>
+            <option type="radio" value='both'>All</option>
+            <option type="radio" value='received'>Received</option>
+            <option type="radio" value='donations'>Donations</option>
+          </select>
+        </StyledDropdown>
+        {/* <div>
           <PlaceholderButton onClick={() => setGroup('both')}>Both</PlaceholderButton>
           <PlaceholderButton onClick={() => setGroup('received')}>Received</PlaceholderButton>
           <PlaceholderButton onClick={() => setGroup('donations')}>Donations</PlaceholderButton>
-        </div>
+        </div> */}
         <div>
-          <PlaceholderButton onClick={() => setStatus('approved')}>Pending</PlaceholderButton>
-          <PlaceholderButton onClick={() => setStatus('claimed')}>Claimed</PlaceholderButton>
-          <PlaceholderButton onClick={() => setStatus('unclaimed')}>Unclaimed</PlaceholderButton>
-          <PlaceholderButton onClick={() => setStatus('donated')}>History</PlaceholderButton>
+          <ButtonM onClick={() => setStatus('approved')}>Pending</ButtonM>
+          <ButtonM onClick={() => setStatus('claimed')}>Claimed</ButtonM>
+          <ButtonM onClick={() => setStatus('unclaimed')}>Unclaimed</ButtonM>
+          <ButtonM onClick={() => setStatus('donated')}>History</ButtonM>
         </div>
         <div>
           {
@@ -89,10 +95,11 @@ const UserTransactions = ({ user }) =>{
                 />
               )
             })
+
           }
         </div>
         <div>{otherUser}</div>
-        { otherUser.length && <Chat currentUser={user.user_name} otherUser={otherUser}/> }
+        { !!otherUser.length && <Chat currentUser={user.user_name} otherUser={otherUser}/> }
       </TransactionContainer>
 
   )
@@ -107,7 +114,6 @@ const PlaceholderButton = styled.button`
 
 const TransactionContainer = styled.div`
 width: 100%;
-height: 100%;
 display: flex;
 padding-top: 4em;
 /* align-items: center;
@@ -115,7 +121,19 @@ font: 40px;
 justify-content: center; */
 font-size: 20px;
 flex-direction: column;
-background-color: grey;
-`
+background-color: white;
+`;
+
+const StyledDropdown = styled.div`
+  margin: 1em 0;
+
+  *{
+    width:10em;
+    height: 3em;
+    border-radius:6px;
+    font-size: 0.8em;
+    padding: 0 1em;
+  }
+`;
 
 export default UserTransactions;
