@@ -5,14 +5,16 @@ const StyledButton = css`
   border-radius: 6px;
   border: 2px;
   border-style: solid;
-  border-color: var(--color1);
+  border-color: var(--color2);
   padding: 10px 15px;
   cursor: pointer;
   margin: 0 0.5em;
+  filter: drop-shadow(0 10px 10px rgba(0,0,0,0.5));
+
 
   transition: all 0.5s;
-  color: var(--color1);
-  background: transparent;
+  color: var(--color2);
+  background: white;
 
   :hover {
     background: var(--color1);
@@ -32,7 +34,7 @@ export const ButtonM = styled.button`
 
 export const ButtonS = styled.button`
   ${StyledButton}
-  font-size: 0.5em;
+  font-size: 0.8em;
 `;
 
 export const LogSignButton = styled.div`

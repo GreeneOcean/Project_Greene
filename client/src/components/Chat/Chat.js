@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import VideoPlayer from "./Dashboard/VideoPlayer";
 import io from "socket.io-client";
-const socket = io.connect("http://localhost:8080");
+// const socket = io.connect("http://localhost:8080");
+const socket = io.connect("https://nealtest.herokuapp.com/");
 import styled from "styled-components";
 
 function Chat() {

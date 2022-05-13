@@ -66,16 +66,19 @@ export default function Carousel(props) {
 
 const MainContainer = styled.section`
   position: relative;
-  width: 100%;
-  height: 300px;
+  width: 60%;
+  height: 50vh;
   background: var(--color3);
-display: flex;
-align-items:center;
-justify-content:center;
+  display: flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:5em;
 `;
 
 const Dot = styled(GoPrimitiveDot)`
   color: white;
+  width: 2em;
+  height: auto;
   fill:${({active}) => active ? 'white' : 'transparent'};
   stroke-width:1;
   cursor: pointer;
@@ -113,13 +116,13 @@ const StyledArrow = css`
   display: inline-block;
   vertical-align: middle;
   color:white;
-  width:3em;
+  width:6em;
   height:auto;
   cursor: pointer;
   transition: all 0.5s;
 
   :hover {
-    width: 3.5em;
+    width: 8em;
   }
 `;
 

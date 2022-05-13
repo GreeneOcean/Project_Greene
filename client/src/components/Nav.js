@@ -45,13 +45,10 @@ const Nav = ({ user }) => {
       <NavContainer>
         <Link
           to="/"
-          style={{
-            color: 'white',
-          }}
         >
           <GiBoxUnpacking
             style={{
-              color: 'white',
+              color:'var(--color2)',
               padding: '0 1em',
               width: '4em',
               height: 'auto',
@@ -61,7 +58,7 @@ const Nav = ({ user }) => {
         <Search />
         <TiThMenu
           style={{
-            color: 'white',
+            color: 'var(--color2)',
             padding: '0 1em',
             width: '4em',
             height: 'auto',
@@ -128,7 +125,7 @@ const SideMenu = styled.div`
   min-width: 350px;
   height: 100vh;
   background: white;
-  border-left: 2px solid var(--color1);
+  border-left: 3px solid var(--color2);
   padding: 1em;
   transition: all 0.5s;
   transform-origin: center left;
@@ -146,9 +143,11 @@ const NavContainer = styled.nav`
   justify-content: space-between;
   align-items: center;
   font-size: 1.2rem;
-  background: #37782c;
+  background: white;
   position: sticky;
   top: 0;
+  z-index:99;
+  filter: drop-shadow(0 1px 5px #000);
 `;
 
 const Logo = styled.div`
@@ -179,16 +178,18 @@ const ButtonSM = styled.button`
 const StyledLink = styled.div`
   padding: 0.5em 0;
   transition: all 0.5s;
+  color: var(--color2);
   :hover {
     padding: 0.5em 1em;
   }
   * {
     text-decoration: none;
     display: block;
-    color: var(--color1);
+    color: var(--color2);
     font-size: 1.5em;
   }
   svg {
+    color: var(--color2);
     font-size: 1em;
     margin-right: 0.5em;
   }
@@ -200,5 +201,6 @@ const StyledLink = styled.div`
     padding-left: 0.5em;
   }
 `;
+
 
 export default Nav;

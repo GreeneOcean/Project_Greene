@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
+import { ButtonS } from '../../../styles/buttons'
 import { useNavigate } from "react-router-dom";
 
 import { DispatchContext } from "../../../appState/index";
@@ -39,7 +40,7 @@ const ItemCard = ({ item, selectedItem, setSelectedItem }) => {
         return <p key={idx}>{tag}</p>;
       })}
       {selectedItem === item.id && (
-        <button onClick={claimClickHandler}>View</button>
+        <ViewButton onClick={claimClickHandler}>View</ViewButton>
       )}
     </ItemContainer>
   );
@@ -48,17 +49,26 @@ const ItemCard = ({ item, selectedItem, setSelectedItem }) => {
 export default ItemCard;
 
 const ItemContainer = styled.div`
-  min-width: 150px;
-  max-width: 150px;
-  height: 150px;
+  min-width: 300px;
+  width: 40%;
   margin: 10px;
+  display: flex;
+  border-radius: 10px;
+  padding:2em;
   cursor: pointer;
-  background-color: ${({ isSelected }) => (isSelected ? "red" : "blue")};
+  background-color: white;
+  font-size: 100%;
+  box-shadow: ${({isSelected}) => isSelected ? 'inset 0 0 2em var(--color1)' : 'none'};
 `;
+//width: ${({isSelected}) => isSelected ? '70%' : '40%'};
+
+//  font-size: ${({isSelected}) => isSelected ? '2em' : '1em'};
+  // background-color: ${({ isSelected }) => (isSelected ? "var(--color1)" : "white")};`;
+// background-color: ${({ isSelected }) => (isSelected ? "red" : "blue")};
 
 const PhotoDiv = styled.div`
-  width: 40px;
-  height: 40px;
+  width:50%;
+  height:100%;
   overflow: hidden;
   object-fit: contain;
 `;
@@ -69,6 +79,11 @@ const StyledImage = styled.img`
 `;
 
 const InnerItemContainer = styled.div`
-  display: "flex";
-  justify-content: "space-between";
+  width:50%;
+  padding-left:1em;
+`;
+
+const ViewButton = styled(ButtonS)`
+  margin-top: 1em;
+  filter: none;
 `;
