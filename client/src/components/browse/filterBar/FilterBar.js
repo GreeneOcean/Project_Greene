@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-const FilterBar = ({ itemData, setSelectedItem, setFilteredItems }) => {
+const FilterBar = ({ itemData, setSelectedItem, setFilteredItems, charity_state }) => {
   const [tags, setTags] = useState([]);
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     if (itemData) {
-      console.log(itemData);
       const newCategories = itemData.reduce(
         (unique, item) =>
           unique.includes(item.category) ? unique : [...unique, item.category],
@@ -29,7 +28,9 @@ const FilterBar = ({ itemData, setSelectedItem, setFilteredItems }) => {
   }, [itemData]);
 
   const filterItems = () => {
-    let filteredItems = itemData;
+    let filteredItems = itemData.filter(item => {
+      return !(['false', 'denied'].includes(charity_state) && item.charity_only)
+    });
     if (document.getElementById("distance").value !== "--Select Distance--") {
       filteredItems = filteredItems.filter((item) => {
         return item.distance <= document.getElementById("distance").value;

@@ -3,15 +3,20 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { PageContainer } from "../styles/index.js";
 import UserTransactions from '../components/Transactions/UserTransactions.jsx';
+import Admin from './AdminPage/Admin.js'
 
 function Transaction({ state, dispatch, init }) {
-  const { dev } = state;
+  const { dev, user } = state;
 
 
   return (
     <PageContainer>
-      <h3>Transaction</h3>
-      <UserTransactions user={state.user}  />
+      <h1>Transaction History</h1>
+      {user.admin ?
+        <Admin user={state.user}/> :
+        <UserTransactions user={state.user}  />
+       }
+
     </PageContainer>
   );
 }
