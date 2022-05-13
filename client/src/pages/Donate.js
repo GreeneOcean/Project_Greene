@@ -55,7 +55,6 @@ const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: left;
-  width: 80%;
 `;
 
 const FieldSection = styled.label`
