@@ -11,11 +11,8 @@ import {
 import { CgArrowsExchange } from 'react-icons/cg';
 import { BiMessageRounded } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
-<<<<<<< HEAD
 import { DispatchContext } from '../appState';
 import Search from './Search';
-=======
->>>>>>> b951756817f7382fe1559e3f91d2496f06cf0ed5
 
 const Nav = ({ user }) => {
   // const [loggedIn, setLoggedIn] = useState(!!user.user_name);
@@ -36,15 +33,12 @@ const Nav = ({ user }) => {
   useEffect(() => {
     setIsGreene(user.admin);
   }, [user.admin]);
-<<<<<<< HEAD
 
   useEffect(() => {
     setLoggedIn(!!user.user_name);
   }, [user.user_name]);
 
   const logoutClick = (() => dispatch({ type: 'LOG_OUT' }))
-=======
->>>>>>> b951756817f7382fe1559e3f91d2496f06cf0ed5
 
   return (
     <>
@@ -125,15 +119,13 @@ const Nav = ({ user }) => {
   );
 };
 
-// width:  ${({display}) => display ? '20%' : '0'};
-
 const SideMenu = styled.div`
   top: 0;
   position: absolute;
   right: 0;
   width: 20%;
-  max-width: 300px;
-  min-width: 300px;
+  max-width: 350px;
+  min-width: 350px;
   height: 100vh;
   background: white;
   border-left: 2px solid var(--color1);
@@ -188,11 +180,7 @@ const StyledLink = styled.div`
   padding: 0.5em 0;
   transition: all 0.5s;
   :hover {
-<<<<<<< HEAD
-    padding: 0.1em 1em;
-=======
     padding: 0.5em 1em;
->>>>>>> b951756817f7382fe1559e3f91d2496f06cf0ed5
   }
   * {
     text-decoration: none;
@@ -212,9 +200,5 @@ const StyledLink = styled.div`
     padding-left: 0.5em;
   }
 `;
-
-// const MenuIcons = css`
-//   color:blue;
-// `;
 
 export default Nav;
