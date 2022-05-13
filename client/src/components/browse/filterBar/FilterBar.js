@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { ButtonM } from '../../../styles/buttons';
 
 const FilterBar = ({ itemData, setSelectedItem, setFilteredItems,findNearest, setFindNearest }) => {
   const [tags, setTags] = useState([]);
@@ -54,31 +55,31 @@ const FilterBar = ({ itemData, setSelectedItem, setFilteredItems,findNearest, se
 
   return (
     <FilterBarForm>
-      <select id="distance" onChange={filterItems}>
+      <StyledSelect id="distance" onChange={filterItems}>
         <option>--Select Distance--</option>
         <option value={5}>5 miles</option>
         <option value={10}>10 miles</option>
         <option value={25}>25 miles</option>
         <option value={50}>50 miles</option>
         <option value={100}>100 miles</option>
-      </select>
-      <select id="category" onChange={filterItems}>
+      </StyledSelect>
+      <StyledSelect id="category" onChange={filterItems}>
         <option>--Select Category--</option>
         {categories.map((category, idx) => (
           <option key={idx}>{category}</option>
         ))}
-      </select>
-      <select id="tag" onChange={filterItems}>
+      </StyledSelect>
+      <StyledSelect id="tag" onChange={filterItems}>
         <option>--Select Tag--</option>
         {tags.map((tag, idx) => (
           <option key={idx}>{tag}</option>
         ))}
-      </select>
-      <button type="reset" onClick={clearFilter}>
+      </StyledSelect>
+      <StyledButton type="reset" onClick={clearFilter}>
         Clear
-      </button>
-      {findNearest && <button onClick={() => {setFindNearest(!findNearest)}}>Return to your area</button>}
-      {!findNearest && <button onClick={() => {setFindNearest(!findNearest)}}>Find Nearest Items</button>}
+      </StyledButton>
+      {findNearest && <StyledButton onClick={() => {setFindNearest(!findNearest)}}>Return to your area</StyledButton>}
+      {!findNearest && <StyledButton onClick={() => {setFindNearest(!findNearest)}}>Find Nearest Items</StyledButton>}
     </FilterBarForm>
   );
 };
@@ -87,5 +88,26 @@ export default FilterBar;
 
 const FilterBarForm = styled.form`
   display: flex;
+  align-items:center;
   margin: 10px;
+`;
+
+const StyledSelect = styled.select`
+  display: flex;
+  margin: 10px;
+  font-size:1.5em;
+  background:white;
+  padding: 0.4em 0.5em;
+  border-radius:60px;
+  color: var(--color2);
+  filter: drop-shadow(0 10px 10px rgba(0,0,0,0.5));
+
+  option {
+    background:white;
+  }
+`;
+
+const StyledButton = styled(ButtonM)`
+  font-size:1.5em;
+  padding: 0.4em 0.5em;
 `;

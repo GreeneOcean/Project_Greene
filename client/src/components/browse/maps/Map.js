@@ -23,7 +23,7 @@ const Map = ({ lat, lng, data, selectedItem, setSelectedItem, findNearest }) => 
 
   return (
     // Important! Always set the container height explicitly
-    <div style={{ height: "600px", width: "750px" }}>
+    <div style={{ width: '50%'}}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: config.GOOGLE_MAPS_API_KEY }}
         defaultCenter={{ lat: 42.55, lng: -99.86 }}

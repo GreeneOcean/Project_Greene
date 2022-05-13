@@ -19,7 +19,7 @@ const HomeItemsWidget = ({localItems}) => {
     <StyledDiv>
       {filteredItems.map((item, idx) => {
         return (
-          <ItemCard
+          <StyledCard
             item={item}
             key={idx}
             selectedItem={selectedItem}
@@ -35,11 +35,14 @@ export default HomeItemsWidget;
 
 const StyledDiv = styled.div`
   scroll-behavior: smooth;
-  height: 300px;
-  width: 85%;
-  background-color: yellow;
+  width: 70vw;
+  height: 80vh;
   display: flex;
-  overflow: scroll;
+  overflow: auto;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  margin: 10em 0;
+`;
+
+const StyledCard = styled(ItemCard)`
 `;

@@ -15,7 +15,7 @@ function Browse({ state, user, dispatch, init }) {
 
 
   return (
-    <div>
+    <Container>
       <FilterBar
         itemData={state.user.local}
         setSelectedItem={setSelectedItem}
@@ -39,7 +39,7 @@ function Browse({ state, user, dispatch, init }) {
           setSelectedItem={setSelectedItem}
         />
       </BrowsePageContainer>
-    </div>
+    </Container>
   );
 };
 
@@ -48,4 +48,15 @@ export default Browse;
 const BrowsePageContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
+  width:80vw;
+  height: 60vh;
+`;
+
+const Container = styled.div`
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding-top: 10em;
 `;

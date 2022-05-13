@@ -7,7 +7,7 @@ const ItemList = ({ items, selectedItem, setSelectedItem }) => {
   useEffect(() => {
     if (selectedItem) {
       const myElement = document.getElementById(selectedItem.toString());
-      document.getElementById("itemList").scrollTop = myElement.offsetTop - 130;
+      myElement.scrollIntoView();
     }
   }, [selectedItem]);
 
@@ -31,10 +31,11 @@ export default ItemList;
 
 const ItemListContainer = styled.div`
   scroll-behavior: smooth;
-  height: 600px;
-  width: 550px;
-  background-color: yellow;
+  width: 50%;
+  background-color: rgba(255,255,255,0.3);
   display: flex;
-  overflow: scroll;
+  overflow: auto;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 `;

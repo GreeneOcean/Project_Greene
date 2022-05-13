@@ -6,7 +6,6 @@ const AppContainer = styled.div`
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  background-color: white;
 `;
 
 const LoadingContainer = styled.div`
@@ -25,12 +24,12 @@ const Footer = styled.footer`
   align-items: center;
   justify-content: center;
   background-color: white;
-  /* position:absolute;
-  bottom:0; */
+  position:absolute;
+  bottom:0;
 `;
 
 const PageContainer = styled.div`
-  width: 90%;
+  width: 100%;
   min-height: 92vh;
   padding-top: 5vh;
   display: flex;
