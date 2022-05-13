@@ -13,7 +13,6 @@ const VideoPlayer = ({ socket }) => {
   useEffect(() => {
     socket.on("sdp", (data) => {
       pc.current.setRemoteDescription(new RTCSessionDescription(data.sdp));
-      // textRef.current.value = JSON.stringify(data.sdp);
       if (data.sdp.type === "offer") {
         setOfferVisible(false);
         setAnswerVisible(true);
@@ -125,7 +124,6 @@ const VideoPlayer = ({ socket }) => {
       <video
         style={{ width: 240, height: 240, margin: 5, backgroundColor: "black" }}
         ref={remoteVideoRef}
-        autoPlay
       ></video>
       <br />
 

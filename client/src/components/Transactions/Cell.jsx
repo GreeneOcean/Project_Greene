@@ -1,13 +1,10 @@
-import React, {useEffect, useState} from "react";
-import styled from 'styled-components';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 
-
-const Cell = ({ status, group, user, item, setOther, clearOther }) =>{
+const Cell = ({ status, group, user, item, setOther, clearOther }) => {
   const [rate, setRate] = useState(false);
 
-
   return (
-
     <Container>
 
       <img src={item.pictures}/>
@@ -25,12 +22,10 @@ const Cell = ({ status, group, user, item, setOther, clearOther }) =>{
         }
       </div>
     </Container>
-
-  )
-}
+  );
+};
 
 export default Cell;
-
 
 const Container = styled.div`
 margin: 1em 0;
@@ -41,8 +36,8 @@ align-items:center;
 border:2px solid var(--color1);
 `
 const Modal = styled.div`
-display: block;
-width: 100%;
-height: 100%;
-background-color: blue;
-`
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: blue;
+`;

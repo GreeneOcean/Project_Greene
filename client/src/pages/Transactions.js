@@ -3,9 +3,10 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { PageContainer } from "../styles/index.js";
 import UserTransactions from '../components/Transactions/UserTransactions.jsx';
+import Admin from './AdminPage/Admin.js'
 
 function Transaction({ state, dispatch, init }) {
-  const { dev } = state;
+  const { dev, user } = state;
 
 
   return (

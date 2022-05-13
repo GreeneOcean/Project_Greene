@@ -14,6 +14,7 @@ import api from "./api/index";
 import { AppContainer, LoadingContainer, Footer } from "./styles/index.js";
 import config from "../config.js";
 
+
 function App() {
   const [, dispatch] = useContext(DispatchContext);
   const [state] = useContext(StateContext);
@@ -24,7 +25,7 @@ function App() {
 
   useEffect(() => {
     api.get.location(dispatch);
-    const user = { userName: 'mgee', attempt: "shalom" }; // Automatic Login user === mgee
+    const user = { userName: 'lol', attempt: "shalom" };
     api.get.login(user, dispatch); // Automatic Login user === mgee
   }, []);
 
@@ -85,7 +86,6 @@ function App() {
         />
 
       </Routes>
-
       <Footer>
         <small>{"\u00a9 2022 Greene Inc. All rights reserved."}</small>
       </Footer>

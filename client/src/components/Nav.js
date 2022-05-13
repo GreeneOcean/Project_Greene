@@ -22,11 +22,11 @@ const Nav = ({ user }) => {
   const [menu, setMenu] = useState(false);
 
   useEffect(() => {
-    const sideMenu = document.getElementById('sideMenu');
+    const sideMenu = document.getElementById("sideMenu");
     if (menu) {
-      sideMenu.style.transform = 'translate(0, 0)';
+      sideMenu.style.transform = "translate(0, 0)";
     } else {
-      sideMenu.style.transform = 'translate(100%,0)';
+      sideMenu.style.transform = "translate(100%,0)";
     }
   }, [menu]);
 
