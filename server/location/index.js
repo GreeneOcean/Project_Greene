@@ -1,4 +1,3 @@
-
 const fetch = require('node-fetch'); // run "npm install node-fetch" to install
 const config = require('../config.js');
 
