@@ -26,10 +26,12 @@ function Item({ state, dispatch }) {
           state={state}
         />
       </ItemPageContainer>
-      <p>{`${Math.ceil(state.distance)} ${
-        state.distance > 1 ? "miles" : "mile"
-      } from you`}</p>
-      <ItemPageMap lat={state.lat} lng={state.lng} state={state} />
+      <MapContainer>
+        <p>{`${Math.ceil(state.distance)} ${
+          state.distance > 1 ? "miles" : "mile"
+        } from you`}</p>
+        <ItemPageMap lat={state.lat} lng={state.lng} state={state} />
+      </MapContainer>
     </PageContainer>
   );
 }
@@ -40,4 +42,18 @@ const ItemPageContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   margin-top: 10vh;
+  height: 40vh;
+  width: 70vw;
+
+  *{
+    margin: 0;
+    height:100%;
+  }
+`;
+
+const MapContainer = styled.div`
+
+height: 35vh;
+width: 60vh;
+margin-top: 10vh;
 `;
