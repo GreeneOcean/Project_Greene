@@ -10,8 +10,6 @@ function Home({ state, dispatch, init }) {
   const { dev, user, HomeData } = state;
   const { lat, lng, local } = user;
 
-
-
   const toggleDevLogs = (e) => {
     dispatch({
       type: "TOGGLE_LOGS"

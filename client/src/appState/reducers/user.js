@@ -8,12 +8,12 @@ function reducer(state, action) {
   switch (type) {
 
     case 'USER_INIT':
-      Object.entries(payload).forEach(keyValue => { state[keyValue[0]] = keyValue[1] })
+      Object.entries(payload).forEach(keyValue => { state[keyValue[0]] = keyValue[1] });
       return state;
 
     case 'LOG_OUT':
       const { lat, lng, local } = state;
-      Object.keys(state).forEach(key => delete state[key])
+      Object.keys(state).forEach(key => delete state[key]);
       state.lat = lat;
       state.lng = lng;
       state.local = local;

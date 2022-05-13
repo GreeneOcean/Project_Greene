@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import api from '../api';
 import { AuthInput } from '../styles/input';
+import { StateContext, DispatchContext } from '../appState';
 
 const SignUp = ({ handleClickOther }) => {
+  const [ ,dispatch] = useContext(DispatchContext);
+  const [state] = useContext(StateContext);
   const [charityStatus, setCharityStatus] = useState(false);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -42,26 +45,33 @@ const SignUp = ({ handleClickOther }) => {
 
   const handleSignUp = () => {
     if (firstName.length === 0 || lastName.length === 0 || userText.length === 0) {
-      console.log('Complete for and click Sign Up');
+      console.log('Complete form and click Sign Up');
     } else if (passText.length === 0 || passText !== confPassText) {
       console.log('Make sure passwords match');
     } else if (!agreeTerms) {
       console.log('Please agree to the Terms and Conditions')
     } else {
-      console.log('Sign Up Clicked')
-      api.post.user({
+      const newUser = {
         user_name: userText,
         first_name: firstName,
         last_name: lastName,
+        charity_state: charityStatus ? 'pending' : 'false',
         password: passText,
-        lat: '30.267741514111805',
-        lng: '-97.83300335500589',
-        // lat: user.lat,
-        // lng: user.lng,
+        lat: state.user.lat,
+        lng: state.user.lng,
+      };
+      console.log('Sign Up Clicked, info: ', newUser);
+      api.post.user(newUser)
+      .then(res => {
+        console.log(res);
+        api.get
+        .login({
+          userName: newUser.user_name,
+          attempt: newUser.password,
+        }, dispatch);
       })
-      .catch((err) => console.log(err));
+      .catch(err => console.log(err));
     }
-
   };
 
   return (
