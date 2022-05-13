@@ -12,13 +12,14 @@ function Browse({ state, user, dispatch, init }) {
   const [filteredItems, setFilteredItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
 
-
+  const charity_states = ['true', 'false', 'pending', 'denied']
   return (
     <div>
       <FilterBar
         itemData={state.user.local}
         setSelectedItem={setSelectedItem}
         setFilteredItems={setFilteredItems}
+        charity_state={state.user.charity_state}
       />
       <BrowsePageContainer>
         <Map

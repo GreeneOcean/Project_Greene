@@ -1,45 +1,37 @@
 import React, { useState } from 'react';
+import api from '../../api/index';
 
-
-function ApprovalList() {
+function ApprovalList({ each }) {
   const [userApproved, setUserApproved] = useState(false);
   const [userDenied, setUserDenied] = useState(false);
 
-  const handleApproved = (value) => {
-    // userApproved ||
-    //   fetch(`/userApproved`, {
-    //     method: 'PUT',
-    //     body: JSON.stringify({content}),
-    //     headers: {"Content-Type": "application/json"}
-    //     })
-    //     .then(() => setUserApproved(true))
-    //     .catch(err => console.log(err, 'err PUT approved'));
+  const handleChoice = (value) => {
     if (value) {
-      console.log('hit')
       setUserApproved(true)
+      each.charity_state = 'true'
+      api.put.user(each)
+        .then(res => console.log('Approved user', res))
+        .catch(err => console.log('Err in approve user', err.message))
+    } else {
+      setUserDenied(true)
+      each.charity_state = 'denied'
+      api.put.user(each)
+        .then(res => console.log('Denied user', res))
+        .catch(err => console.log("Err in denied user", err.messsage))
     }
   };
 
-  // const handleDeny = () => {
-  //   userDeny ||
-  //     fetch(`/userDenied`, {
-  //       method: 'PUT',
-  //       body: JSON.stringify({content}),
-  //       headers: {"Content-Type": "application/json"}
-  //       })
-  //       .then(() => setUserDenied(true))
-  //       .catch(err => console.log(err, 'err PUT deny'));
-  // };
+
 
   return (
     <div>
-      <p>Users waiting for approval</p>
+      <p>Pending: {each.user_name}</p>
       <label>
-        {userApproved ? ('Approved') : (<button onClick={() => handleApproved(true)}>Approve</button>)}
+        {userApproved ? ('Approved') : (<button onClick={() => handleChoice(true)}>Approve</button>)}
 
       </label>
       <label>
-        {userDenied ? ('Denied') : (<button onClick={() => handleApproved(false)}>Deny</button>)}
+        {userDenied ? ('Denied') : (<button onClick={() => handleChoice(false)}>Deny</button>)}
 
       </label>
 

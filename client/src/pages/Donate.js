@@ -153,6 +153,18 @@ const SubmitButton = styled(ButtonS)`
   }
 `;
 
+const SubmitButton = styled(ButtonS)`
+  :disabled {
+    color: #999;
+    border-color: #999;
+
+    :hover {
+      color: #999;
+      background: transparent;
+    }
+  }
+`;
+
 const StyledAsterisk = styled.span`
   color: red;
 `;
