@@ -9,8 +9,7 @@ const HomeItemsWidget = ({localItems}) => {
 
   useEffect(() => {
     if (localItems) {
-      let items = localItems;
-      items = items.filter((item) => item.distance < 10);
+      let items = localItems.filter((item) => item.distance < 10);
       setFilteredItems(items);
     }
   }, [localItems]);
