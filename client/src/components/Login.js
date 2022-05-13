@@ -31,9 +31,7 @@ const Login = ({ handleClickOther }) => {
           dispatch,
         )
         .then(() => {
-          if (true) {
-            setDisplayErrorMessage(true);
-          }
+          setDisplayErrorMessage(true);
         })
         .catch((err) => console.log(err));
     }
@@ -50,9 +48,7 @@ const Login = ({ handleClickOther }) => {
           dispatch,
         )
         .then(() => {
-          if (true) {
-            setDisplayErrorMessage(true);
-          }
+          setDisplayErrorMessage(true);
         })
         .catch((err) => console.log(err));
     }
