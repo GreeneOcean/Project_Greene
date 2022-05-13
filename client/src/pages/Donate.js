@@ -164,7 +164,7 @@ const ErrorMessage = styled.div`
 
 
 function Donate({ state, dispatch, init }) {
-  const { donate, dev } = state;
+  const { donate, dev, user } = state;
   let navigate = useNavigate();
 
   const [title, setTitle] = useState('');
@@ -178,9 +178,9 @@ function Donate({ state, dispatch, init }) {
 
   const grabData = (data) => {
     return {
-      posted_by: state.user.user_name,
-      lat: state.user.lat,
-      lng: state.user.lng,
+      posted_by: user.user_name,
+      lat: user.lat,
+      lng: user.lng,
       title: data.title || title,
       description: data.description || description,
       category: data.category || category,
@@ -241,7 +241,7 @@ function Donate({ state, dispatch, init }) {
 
   const submitForm = (e) => {
     e.preventDefault();
-    let data = grabData();
+    let data = grabData({});
 
     if (validate(data)) {
       api.post.donation(data)
@@ -317,7 +317,7 @@ function Donate({ state, dispatch, init }) {
 
       <ButtonBox>
         <ButtonS name="cancel" onClick={cancel}>Cancel</ButtonS>
-        <SubmitButton name="post" disabled={!valid}>List Donation</SubmitButton>
+        <SubmitButton name="post" onClick={submitForm} disabled={!valid}>List Donation</SubmitButton>
       </ButtonBox>
     </DonateContainer>
   );
