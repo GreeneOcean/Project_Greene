@@ -307,7 +307,7 @@ function Donate({ state, dispatch, init }) {
         <FieldSection htmlFor="tag">
           <span>Add tags</span>
           <AddTagSection>
-            <FieldInput type="text" name="tag" id="tag" value={tag} onChange={handleChange} onKeyDown={handleKeyDown} />
+            <FieldInput type="text" name="tag" id="tag" value={tag} maxLength="25" onChange={handleChange} onKeyDown={handleKeyDown} />
             <button onClick={handleClick} id="add-tag-btn"><ImPlus/></button>
           </AddTagSection>
           {tags.length > 0 ? <RemoveTagMsg>Click to remove</RemoveTagMsg> : null}
