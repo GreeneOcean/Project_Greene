@@ -224,8 +224,9 @@ function Donate({ state, dispatch, init }) {
   };
 
   const removeTag = (e) => {
-    let tagIndex = e.target.id.slice(4);
-    const newTags = tags.slice(0, tagIndex).concat(tags.slice(tagIndex + 1));
+    let tagIndex = Number(e.target.id.slice(4));
+    const newTags = tags.slice();
+    newTags.splice(tagIndex, 1);
     setTags(newTags);
   };
 
