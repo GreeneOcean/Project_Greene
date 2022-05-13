@@ -155,21 +155,6 @@ put.donation = ((data) => put('/donation', data))
 put.user = ((data) => put('/user', data))
 
 
-api.put.donation({
-
-})
-
-function putApproveUserClaim(data) {
-  return put('/ApproveUserClaim', data)
-}
-put.ApproveUserClaim = putApproveUserClaim
-
-function putAdminApproveUser(data) {
-  return put('/AdminApproveUser', data)
-}
-put.AdminApproveUser = putAdminApproveUser
-
-
 
 const api = {
   get,

@@ -42,7 +42,7 @@ CREATE TABLE donations (
   title TEXT NOT NULL,
   category TEXT NOT NULL,
   description TEXT NOT NULL,
-  approved_user INT,
+  approved_user TEXT,
   charity_only BOOL DEFAULT false,
   interested_users TEXT[],
   state TEXT DEFAULT 'unclaimed'

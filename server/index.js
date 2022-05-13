@@ -185,6 +185,7 @@ app.put('/user', async (req, res) => {
   try {
     console.log(`PUT Request at ${`/user`}`)
     const updatedUser = req.body
+    console.log({ updatedUser })
     const addRes = await DB.PUT.user(updatedUser)
     res.status(201).send({ posted: true })
 

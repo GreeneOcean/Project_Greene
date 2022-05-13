@@ -56,7 +56,7 @@ const UserTransactions = ({ user }) =>{
   }
 
   useEffect(() => {
-    user && filter();
+    user.interested && filter();
   }, [group, status, user]);
 
   return (
