@@ -35,6 +35,9 @@ const categories = [
 ];
 
 const DonateContainer = styled.div`
+  background-color: white;
+  padding: 1em 3em;
+
   * {
     margin: .3em 0;
   }
@@ -52,7 +55,6 @@ const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: left;
-  width: 80%;
 `;
 
 const FieldSection = styled.label`
@@ -137,6 +139,10 @@ const ButtonBox = styled.div`
   flex-direction: row;
   justify-content: space-between;
   padding: 2em 0;
+
+  button {
+    filter: none;
+  }
 `;
 
 const SubmitButton = styled(ButtonS)`
@@ -164,7 +170,7 @@ const ErrorMessage = styled.div`
 
 
 function Donate({ state, dispatch, init }) {
-  const { donate, dev } = state;
+  const { donate, dev, user } = state;
   let navigate = useNavigate();
 
   const [title, setTitle] = useState('');
@@ -178,9 +184,9 @@ function Donate({ state, dispatch, init }) {
 
   const grabData = (data) => {
     return {
-      posted_by: state.user.user_name,
-      lat: state.user.lat,
-      lng: state.user.lng,
+      posted_by: user.user_name,
+      lat: user.lat,
+      lng: user.lng,
       title: data.title || title,
       description: data.description || description,
       category: data.category || category,
@@ -217,8 +223,9 @@ function Donate({ state, dispatch, init }) {
   };
 
   const removeTag = (e) => {
-    let tagIndex = e.target.id.slice(4);
-    const newTags = tags.slice(0, tagIndex).concat(tags.slice(tagIndex + 1));
+    let tagIndex = Number(e.target.id.slice(4));
+    const newTags = tags.slice();
+    newTags.splice(tagIndex, 1);
     setTags(newTags);
   };
 
@@ -241,7 +248,7 @@ function Donate({ state, dispatch, init }) {
 
   const submitForm = (e) => {
     e.preventDefault();
-    let data = grabData();
+    let data = grabData({});
 
     if (validate(data)) {
       api.post.donation(data)
@@ -300,7 +307,7 @@ function Donate({ state, dispatch, init }) {
         <FieldSection htmlFor="tag">
           <span>Add tags</span>
           <AddTagSection>
-            <FieldInput type="text" name="tag" id="tag" value={tag} onChange={handleChange} onKeyDown={handleKeyDown} />
+            <FieldInput type="text" name="tag" id="tag" value={tag} maxLength="25" onChange={handleChange} onKeyDown={handleKeyDown} />
             <button onClick={handleClick} id="add-tag-btn"><ImPlus/></button>
           </AddTagSection>
           {tags.length > 0 ? <RemoveTagMsg>Click to remove</RemoveTagMsg> : null}
@@ -317,7 +324,7 @@ function Donate({ state, dispatch, init }) {
 
       <ButtonBox>
         <ButtonS name="cancel" onClick={cancel}>Cancel</ButtonS>
-        <SubmitButton name="post" disabled={!valid}>List Donation</SubmitButton>
+        <SubmitButton name="post" onClick={submitForm} disabled={!valid}>List Donation</SubmitButton>
       </ButtonBox>
     </DonateContainer>
   );

@@ -37,6 +37,7 @@ const Map = ({ lat, lng }) => {
         yesIWantToUseGoogleMapApiInternals
         options={mapOptions}
         hoverDistance={25}
+        style={{width: '100%', height:'100%'}}
       >
       <ItemPageMapMarker lat={lat} lng={lng} />
       </GoogleMapReact>
@@ -47,6 +48,7 @@ const Map = ({ lat, lng }) => {
 export default Map;
 
 const MapContainer = styled.div`
-  height: 35vh;
-  width: 60vh;
+position: relative;
+  width:100%;
+  height: 100%;
 `;
