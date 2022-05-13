@@ -13,7 +13,6 @@ function Home({ state, dispatch, init }) {
 
   return (
       <PageContainer >
-
         <h3>Home</h3>
         <p>{`HomeData: ${HomeData}`} </p>
         <p>{`user lat: ${lat ? lat : 'loading'}   user lng: ${lng ? lng : 'loading'}`} </p>
