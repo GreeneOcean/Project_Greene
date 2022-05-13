@@ -12,11 +12,8 @@
     "socket.io-client": "^4.5.0"
   },
   "scripts": {
-    "web:dev": "env-cmd -f .env.config  webpack --config webpack.dev.js --watch",
-    "web:prod": "env-cmd -f .env.config  webpack  --config webpack.prod.js",
-    "build:dev": "env-cmd -f .env.config npm run web:dev",
-    "build:prod": "env-cmd -f .env.config npm run web:prod",
-    "build:staging": "env-cmd -f .env.src.staging npm run build:prod"
+    "build:dev": " webpack --config webpack.dev.js --watch",
+    "build:prod": " webpack  --config webpack.prod.js"
   },
   "eslintConfig": {
     "extends": [
