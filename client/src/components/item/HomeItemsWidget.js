@@ -12,7 +12,7 @@ const HomeItemsWidget = ({ localItems, charity_state }) => {
       let items = localItems.filter((item) => {
         return (
           item.distance <= 10 &&
-          !(["false", "denied"].includes(charity_state) && charity_only)
+          !(["false", "denied"].includes(charity_state) && item.charity_only)
         );
       });
       setFilteredItems(items);
