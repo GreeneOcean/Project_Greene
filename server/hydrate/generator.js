@@ -158,7 +158,7 @@ const genRandUserName = (maxNumberOfFrags = 3) => {
 const genRandDonationForUser = (userId, lat, lng, maxTags = 3) => {
   const { titlesL, descriptionsL, categoriesL, tagsL, locationsL } =
     claimableLengths;
-    let tags = ['new', 'like-new', 'used', 'value', 'old', 'colorful', 'heavy', 'clean', 'tropical', 'winter', 'summer', 'spring', 'fall', 'rechargable', 'single-use', 'tight', 'loose', 'exotic', 'domestic', 'cheap', 'western', 'traditional', 'civilized', 'lean', 'stoic', 'natural', 'flatulent', 'acrid', 'amorphous', 'rare', 'scarce', 'plentiful', 'metal', 'plastic', 'wooden', 'pretentious', 'chivalrous', 'over-intellectual', 'unselfish', 'genuine', 'indigenous', 'criminal', 'deadly', 'cerebral', 'bleak', 'characteristic', 'volcanic', 'mineral', 'byzantine', 'slimy', 'gelatinous', 'incorporeal', 'nutritious', 'military-grade', 'mercurial', 'legitimate', 'national' ]
+    let tags = ['new', 'like-new', 'used', 'value', 'old', 'colorful', 'heavy', 'clean', 'tropical', 'winter', 'summer', 'spring', 'fall' ]
     let numTags = randInt(maxTags, "round");
     let newTags= [];
 
