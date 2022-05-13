@@ -7,7 +7,6 @@ export default function Carousel(props) {
   const [images, setImages] = useState([]);
   const [current, setCurrent] = useState(0);
 
-
   useEffect(() => {
     let newImages = [];
     newImages.push(['https://images.unsplash.com/photo-1608686207856-001b95cf60ca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2268&q=80']);
@@ -21,13 +20,11 @@ export default function Carousel(props) {
   const nextImage = () => {
     setCurrent((current === images.length - 1) ? 0 : current + 1);
     // clearInterval(compMoveInterval)
-
   }
 
   const prevImage = () => {
     setCurrent((current === 0) ? images.length - 1 : current - 1);
     // clearInterval(compMoveInterval)
-
   }
 
   useEffect(() => {

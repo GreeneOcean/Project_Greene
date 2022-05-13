@@ -40,8 +40,6 @@ const initAppState = {
 }
 circleRef([ 'dev', 'user' ], initAppState)
 
-
-
 const AppContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initAppState);
 
