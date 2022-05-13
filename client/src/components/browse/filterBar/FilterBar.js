@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-const FilterBar = ({ itemData, setSelectedItem, setFilteredItems,findNearest, setFindNearest }) => {
+const FilterBar = ({ itemData, setSelectedItem, setFilteredItems, charity_state }) => {
   const [tags, setTags] = useState([]);
   const [categories, setCategories] = useState([]);
 
@@ -28,7 +28,9 @@ const FilterBar = ({ itemData, setSelectedItem, setFilteredItems,findNearest, se
   }, [itemData]);
 
   const filterItems = () => {
-    let filteredItems = itemData;
+    let filteredItems = itemData.filter(item => {
+      return !(['false', 'denied'].includes(charity_state) && item.charity_only)
+    });
     if (document.getElementById("distance").value !== "--Select Distance--") {
       filteredItems = filteredItems.filter((item) => {
         return item.distance <= document.getElementById("distance").value;
@@ -77,8 +79,6 @@ const FilterBar = ({ itemData, setSelectedItem, setFilteredItems,findNearest, se
       <button type="reset" onClick={clearFilter}>
         Clear
       </button>
-      {findNearest && <button onClick={() => {setFindNearest(!findNearest)}}>Return to your area</button>}
-      {!findNearest && <button onClick={() => {setFindNearest(!findNearest)}}>Find Nearest Items</button>}
     </FilterBarForm>
   );
 };

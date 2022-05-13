@@ -4,7 +4,14 @@ import GoogleMapReact from "google-map-react";
 import config from "../../../../config.js";
 import MapMarker from "./MapMarker.js";
 
-const Map = ({ lat, lng, data, selectedItem, setSelectedItem, findNearest }) => {
+const Map = ({
+  lat,
+  lng,
+  data,
+  selectedItem,
+  setSelectedItem,
+  charity_state,
+}) => {
   const mapOptions = {
     disableDefaultUI: true,
     mapTypeControl: true,
@@ -27,14 +34,10 @@ const Map = ({ lat, lng, data, selectedItem, setSelectedItem, findNearest }) => 
       <GoogleMapReact
         bootstrapURLKeys={{ key: config.GOOGLE_MAPS_API_KEY }}
         defaultCenter={{ lat: 42.55, lng: -99.86 }}
-        center={
-          findNearest
-            ? { lat: 30.2672, lng: -97.7431 }
-            : {
-                lat: lat,
-                lng: lng,
-              }
-        }
+        center={{
+          lat: lat,
+          lng: lng,
+        }}
         defaultZoom={4}
         zoom={lat ? 12 : 4}
         yesIWantToUseGoogleMapApiInternals

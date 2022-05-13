@@ -14,6 +14,7 @@ import api from "./api/index";
 import { AppContainer, LoadingContainer, Footer } from "./styles/index.js";
 import config from "../config.js";
 
+
 function App() {
   const [, dispatch] = useContext(DispatchContext);
   const [state] = useContext(StateContext);
@@ -80,7 +81,6 @@ function App() {
         />
 
       </Routes>
-
       <Footer>
         <small>{"\u00a9 2022 Greene Inc. All rights reserved."}</small>
       </Footer>

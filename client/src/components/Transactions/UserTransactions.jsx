@@ -8,52 +8,50 @@ const UserTransactions = ({ user }) =>{
   const [group, setGroup] = useState('both');
   const [status, setStatus] = useState('approved');
   const [items, setItems] = useState([]);
-  const [otherUser, setOtherUser] = useState('')
-
+  const [otherUser, setOtherUser] = useState("");
 
   const setOther = (userName) => {
-    setOtherUser(userName)
-  }
+    setOtherUser(userName);
+  };
 
   const clearOther = () => {
-    setOtherUser('')
-  }
+    setOtherUser("");
+  };
 
   const filter = () => {
-
     var newItems = [];
 
-    if (group === 'both') {
-      user.interested.forEach(item => {
+    if (group === "both") {
+      user.interested.forEach((item) => {
         if (item.state === status) {
           newItems.push(item);
         }
       });
-      user.received.forEach(item => {
+      user.received.forEach((item) => {
         if (item.state === status) {
           newItems.push(item);
         }
       });
-      user.donated.forEach(item => {
+      user.donated.forEach((item) => {
         if (item.state === status) {
           newItems.push(item);
         }
       });
-    } else if (group === 'received') {
-      user.received.forEach(item => {
+    } else if (group === "received") {
+      user.received.forEach((item) => {
         if (item.state === status) {
           newItems.push(item);
         }
-        });
-    } else if (group === 'donations') {
-      user.donated.forEach(item => {
+      });
+    } else if (group === "donations") {
+      user.donated.forEach((item) => {
         if (item.state === status) {
           newItems.push(item);
         }
       });
     }
-    setItems(newItems)
-  }
+    setItems(newItems);
+  };
 
   useEffect(() => {
     user.interested && filter();
@@ -107,10 +105,10 @@ const UserTransactions = ({ user }) =>{
 
 
 const PlaceholderButton = styled.button`
-  padding: .5em;
-  margin: .2em;
+  padding: 0.5em;
+  margin: 0.2em;
   font-size: 13px;
-`
+`;
 
 const TransactionContainer = styled.div`
 width: 100%;
