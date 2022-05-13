@@ -7,7 +7,7 @@ const ItemList = ({ items, selectedItem, setSelectedItem }) => {
   useEffect(() => {
     if (selectedItem) {
       const myElement = document.getElementById(selectedItem.toString());
-      document.getElementById("itemList").scrollTop = myElement.offsetTop - 130;
+      myElement.scrollIntoView();
     }
   }, [selectedItem]);
 

@@ -54,6 +54,7 @@ export default function Carousel(props) {
       <NavDiv>
         {images.map((image, index) => (
           <Dot
+          key={index}
           active={current === index}
           onClick={() => {
             setCurrent(index);
