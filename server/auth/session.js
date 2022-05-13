@@ -30,13 +30,16 @@ const sessionStart =  async (req, res, next) => {
       else {
         await newSession (req, res)
       }
-      next()
+
     }
 
     else {
       await newSession(req, res)
-      next()
     }
+
+    console.log('\nSession START', { session: req.session })
+    console.log('User START', { user: req.user } )
+    next()
 
   } catch(err) {
     console.log(err, 'Err in GET Cookie Session')
@@ -56,7 +59,8 @@ const sessionEnd = async (req, res, next) => {
       session.user_name = user.user_name
       DB.PUT.session(session)
     }
-
+    console.log('\nSession END', { session: req.session })
+    console.log('User END', { user: req.user } )
   });
   next();
 

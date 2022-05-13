@@ -11,17 +11,15 @@ function Browse({ state, user, dispatch, init }) {
   const { dev } = state
   const [filteredItems, setFilteredItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
-  const [findNearest, setFindNearest] = useState(false);
 
-
+  const charity_states = ['true', 'false', 'pending', 'denied']
   return (
     <div>
       <FilterBar
         itemData={state.user.local}
         setSelectedItem={setSelectedItem}
         setFilteredItems={setFilteredItems}
-        findNearest={findNearest}
-        setFindNearest={setFindNearest}
+        charity_state={state.user.charity_state}
       />
       <BrowsePageContainer>
         <Map
@@ -30,7 +28,6 @@ function Browse({ state, user, dispatch, init }) {
           setSelectedItem={setSelectedItem}
           lat={state.user.lat}
           lng={state.user.lng}
-          findNearest={findNearest}
         />
 
         <ItemList

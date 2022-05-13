@@ -3,14 +3,18 @@ import styled from "styled-components";
 
 import ItemCard from "../browse/list/ItemCard";
 
-const HomeItemsWidget = ({localItems}) => {
+const HomeItemsWidget = ({ localItems, charity_state }) => {
   const [filteredItems, setFilteredItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
 
   useEffect(() => {
     if (localItems) {
-      let items = localItems;
-      items = items.filter((item) => item.distance < 10);
+      let items = localItems.filter((item) => {
+        return (
+          item.distance <= 10 &&
+          !(["false", "denied"].includes(charity_state) && charity_only)
+        );
+      });
       setFilteredItems(items);
     }
   }, [localItems]);
