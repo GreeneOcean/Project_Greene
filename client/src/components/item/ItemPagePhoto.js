@@ -19,8 +19,9 @@ const ItemPagePhoto = ({ pictures }) => {
 export default ItemPagePhoto;
 
 const StyledDiv = styled.div`
-  width: 40vw;
-  height: 40vw;
+
+  width: auto;
+  height: 100%;
   object-fit: contain;
   border: solid;
   border-width: 2px;
@@ -29,7 +30,6 @@ const StyledDiv = styled.div`
 `;
 
 const StyledImage = styled.img`
-  width: 100%;
   height: 100%;
 `;
 

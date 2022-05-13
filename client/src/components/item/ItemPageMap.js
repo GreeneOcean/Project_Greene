@@ -47,6 +47,4 @@ const Map = ({ lat, lng }) => {
 export default Map;
 
 const MapContainer = styled.div`
-  height: 35vh;
-  width: 60vh;
 `;
