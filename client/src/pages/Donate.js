@@ -141,18 +141,6 @@ const ButtonBox = styled.div`
 
 const SubmitButton = styled(ButtonS)`
   :disabled {
-    color: #666;
-    border-color: #999;
-
-    :hover {
-      color: #666;
-      background: transparent;
-    }
-  }
-`;
-
-const SubmitButton = styled(ButtonS)`
-  :disabled {
     color: #999;
     border-color: #999;
 
