@@ -5,6 +5,7 @@ import { Link } from "react-router-dom"
 import { PageContainer } from '../styles/index.js';
 import Carousel from '../components/Carousel.js';
 import HomeItemsWidget from '../components/item/HomeItemsWidget';
+import DonateButton from '../components/DonateButton'
 
 function Home({ state, dispatch, init }) {
   const { dev, user, HomeData } = state;
@@ -12,14 +13,10 @@ function Home({ state, dispatch, init }) {
 
 
   return (
-      <PageContainer style={{padding:'0'}} >
-          <Container>
-        <h3>Home</h3>
-        <p>{`Welcome${user.user_name ? ' ' + user.user_name + '!!!' : ', please log in'}`} </p>
-        <p>{`user lat: ${lat ? lat : 'loading'}   user lng: ${lng ? lng : 'loading'}`} </p>
-        <p>{`number of local: ${local ? local.length : 'loading'}`}</p>
+      <PageContainer >
+        <DonateButton/>
         <HomeItemsWidget localItems={local} charity_state={charity_state}/>
-        </Container>
+        <Carousel />
       </PageContainer>
   );
 }
@@ -35,7 +32,6 @@ function Home({ state, dispatch, init }) {
 //   background-color: transparent;
 //   box-shadow: 5px 5px 12px -5px rgba(0, 0, 0, 0.2);
 //   transition: all 0.5s;
-
 //   &:hover {
 //     cursor: pointer;
 //     color: #fff;
@@ -43,32 +39,6 @@ function Home({ state, dispatch, init }) {
 //     box-shadow: 0px 5px 10px rgba(46, 229, 157, 0.4);
 //   }
 // `;
-
-const GradientBG = keyframes`
-  0%{
-    background-size: 100% 100%;
-  }
-  50%{
-    background-size: 300% 300%;
-  }
-  100%{
-    background-size: 100% 100%;
-  }
-`;
-
-const Container = styled.div`
-  width:100%;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  background: linear-gradient(-45deg, var(--color1), var(--color2), var(--color3), var(--color4));
-  background-size: 100% 100%;
-  animation: ${GradientBG};
-  animation-duration: 10s;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out;
-`;
 
 
 export default Home;
