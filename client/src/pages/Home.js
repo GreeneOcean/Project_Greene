@@ -8,8 +8,7 @@ import HomeItemsWidget from '../components/item/HomeItemsWidget';
 
 function Home({ state, dispatch, init }) {
   const { dev, user, HomeData } = state;
-  const { lat, lng, local } = user;
-
+  const { lat, lng, local, charity_state } = user;
 
 
   const toggleDevLogs = (e) => {
@@ -26,7 +25,7 @@ function Home({ state, dispatch, init }) {
         <p>{`user lat: ${lat ? lat : 'loading'}   user lng: ${lng ? lng : 'loading'}`} </p>
         <p>{`number of local: ${local ? local.length : 'loading'}`}</p>
         <button onClick={toggleDevLogs} >Toggle logs</button>
-        <HomeItemsWidget localItems={local}/>
+        <HomeItemsWidget localItems={local} charity_state={charity_state}/>
       </PageContainer>
   );
 }
