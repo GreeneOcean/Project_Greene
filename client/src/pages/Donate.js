@@ -35,6 +35,9 @@ const categories = [
 ];
 
 const DonateContainer = styled.div`
+  background-color: white;
+  padding: 1em 3em;
+
   * {
     margin: .3em 0;
   }
@@ -137,6 +140,10 @@ const ButtonBox = styled.div`
   flex-direction: row;
   justify-content: space-between;
   padding: 2em 0;
+
+  button {
+    filter: none;
+  }
 `;
 
 const SubmitButton = styled(ButtonS)`
