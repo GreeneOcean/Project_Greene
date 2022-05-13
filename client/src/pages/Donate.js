@@ -8,8 +8,6 @@ import ToggleSwitch from '../components/ToggleSwitch.js';
 import ImageUploader from '../components/ImageUploader.js';
 import api from '../api/index.js';
 
-import { AuthInput } from '../styles/input.js';
-
 const categories = [
   'Accessories',
   'Arts & Crafts',
