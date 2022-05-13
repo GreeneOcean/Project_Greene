@@ -31,10 +31,11 @@ export default ItemList;
 
 const ItemListContainer = styled.div`
   scroll-behavior: smooth;
-  height: 600px;
-  width: 550px;
-  background-color: yellow;
+  width: 50%;
+  background-color: rgba(255,255,255,0.3);
   display: flex;
-  overflow: scroll;
+  overflow: auto;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 `;

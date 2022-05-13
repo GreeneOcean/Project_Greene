@@ -1,7 +1,3 @@
-
-
-
-
 function reducer(state, action) {
   let newState;
   const { type, payload } = action

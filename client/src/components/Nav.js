@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled, { css } from 'styled-components';
-import Search from './Search';
 import { TiThMenu } from 'react-icons/ti';
 import { GiBoxUnpacking } from 'react-icons/gi';
 import {
@@ -12,9 +11,13 @@ import {
 import { CgArrowsExchange } from 'react-icons/cg';
 import { BiMessageRounded } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
+import { DispatchContext } from '../appState';
+import Search from './Search';
 
 const Nav = ({ user }) => {
-  const [loggedIn, setLoggedIn] = useState(true);
+  // const [loggedIn, setLoggedIn] = useState(!!user.user_name);
+  const [, dispatch] = useContext(DispatchContext);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [isGreene, setIsGreene] = useState(user.admin);
   const [menu, setMenu] = useState(false);
 
@@ -31,18 +34,21 @@ const Nav = ({ user }) => {
     setIsGreene(user.admin);
   }, [user.admin]);
 
+  useEffect(() => {
+    setLoggedIn(!!user.user_name);
+  }, [user.user_name]);
+
+  const logoutClick = (() => dispatch({ type: 'LOG_OUT' }))
+
   return (
     <>
       <NavContainer>
         <Link
           to="/"
-          style={{
-            color: 'white',
-          }}
         >
           <GiBoxUnpacking
             style={{
-              color: 'white',
+              color:'var(--color2)',
               padding: '0 1em',
               width: '4em',
               height: 'auto',
@@ -52,7 +58,7 @@ const Nav = ({ user }) => {
         <Search />
         <TiThMenu
           style={{
-            color: 'white',
+            color: 'var(--color2)',
             padding: '0 1em',
             width: '4em',
             height: 'auto',
@@ -80,58 +86,29 @@ const Nav = ({ user }) => {
         <div>
           {loggedIn ? (
             <>
-              <StyledLink
-                onClick={() => {
-                  setMenu(!menu);
-                }}
-              >
-                <Link to="/Transactions">
-                  <CgArrowsExchange />
-                  {!!isGreene ? 'Admin' : 'Transactions'}
-                </Link>
+              <StyledLink>
+                <Link to='/' onClick={logoutClick}>Log out</Link>
               </StyledLink>
-              <StyledLink
-                onClick={() => {
-                  setMenu(!menu);
-                }}
-              >
-                <Link to="/">
-                  <BiMessageRounded />
-                  Messages
+              <StyledLink>
+                <Link to="/Transactions">
+                  {isGreene ? 'Admin' : 'Transactions'}
                 </Link>
+                <CgArrowsExchange />
               </StyledLink>
             </>
           ) : (
-            <StyledLink
-              onClick={() => {
-                setMenu(!menu);
-              }}
-            >
-              <Link to="/Auth">
-                <AiOutlineUser />
-                Log in
-              </Link>
+            <StyledLink>
+              <AiOutlineUser />
+              <Link to="/Auth">Log in</Link>
             </StyledLink>
           )}
-          <StyledLink
-            onClick={() => {
-              setMenu(!menu);
-            }}
-          >
-            <Link to="/Browse">
-              <AiOutlineUnorderedList />
-              Browse
-            </Link>
+          <StyledLink>
+            <AiOutlineUnorderedList />
+            <Link to="/Browse">Browse</Link>
           </StyledLink>
-          <StyledLink
-            onClick={() => {
-              setMenu(!menu);
-            }}
-          >
-            <Link to="/Donate">
-              <AiOutlinePlusCircle />
-              Donate
-            </Link>
+          <StyledLink>
+            <AiOutlinePlusCircle />
+            <Link to="/Donate">Donate</Link>
           </StyledLink>
         </div>
       </SideMenu>
@@ -139,18 +116,16 @@ const Nav = ({ user }) => {
   );
 };
 
-// width:  ${({display}) => display ? '20%' : '0'};
-
 const SideMenu = styled.div`
   top: 0;
   position: absolute;
   right: 0;
   width: 20%;
-  max-width: 300px;
-  min-width: 300px;
+  max-width: 350px;
+  min-width: 350px;
   height: 100vh;
   background: white;
-  border-left: 2px solid var(--color1);
+  border-left: 3px solid var(--color2);
   padding: 1em;
   transition: all 0.5s;
   transform-origin: center left;
@@ -168,9 +143,11 @@ const NavContainer = styled.nav`
   justify-content: space-between;
   align-items: center;
   font-size: 1.2rem;
-  background: #37782c;
+  background: white;
   position: sticky;
   top: 0;
+  z-index:99;
+  filter: drop-shadow(0 1px 5px #000);
 `;
 
 const Logo = styled.div`
@@ -201,16 +178,18 @@ const ButtonSM = styled.button`
 const StyledLink = styled.div`
   padding: 0.5em 0;
   transition: all 0.5s;
+  color: var(--color2);
   :hover {
     padding: 0.5em 1em;
   }
   * {
     text-decoration: none;
     display: block;
-    color: var(--color1);
+    color: var(--color2);
     font-size: 1.5em;
   }
   svg {
+    color: var(--color2);
     font-size: 1em;
     margin-right: 0.5em;
   }
@@ -223,8 +202,5 @@ const StyledLink = styled.div`
   }
 `;
 
-// const MenuIcons = css`
-//   color:blue;
-// `;
 
 export default Nav;

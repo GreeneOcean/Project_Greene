@@ -7,7 +7,6 @@ export default function Carousel(props) {
   const [images, setImages] = useState([]);
   const [current, setCurrent] = useState(0);
 
-
   useEffect(() => {
     let newImages = [];
     newImages.push(['https://images.unsplash.com/photo-1608686207856-001b95cf60ca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2268&q=80']);
@@ -21,13 +20,11 @@ export default function Carousel(props) {
   const nextImage = () => {
     setCurrent((current === images.length - 1) ? 0 : current + 1);
     // clearInterval(compMoveInterval)
-
   }
 
   const prevImage = () => {
     setCurrent((current === 0) ? images.length - 1 : current - 1);
     // clearInterval(compMoveInterval)
-
   }
 
   useEffect(() => {
@@ -40,7 +37,6 @@ export default function Carousel(props) {
   }, [current])
 
   return (
-    <>
     <MainContainer>
       {images.map((image, index) => (
         <ImageContainer id='test' active={index === current}>
@@ -65,22 +61,24 @@ export default function Carousel(props) {
         ))}
       </NavDiv>
     </MainContainer>
-    </>
   );
 }
 
 const MainContainer = styled.section`
   position: relative;
-  width: 100%;
-  height: 300px;
+  width: 60%;
+  height: 50vh;
   background: var(--color3);
-display: flex;
-align-items:center;
-justify-content:center;
+  display: flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:5em;
 `;
 
 const Dot = styled(GoPrimitiveDot)`
   color: white;
+  width: 2em;
+  height: auto;
   fill:${({active}) => active ? 'white' : 'transparent'};
   stroke-width:1;
   cursor: pointer;
@@ -118,13 +116,13 @@ const StyledArrow = css`
   display: inline-block;
   vertical-align: middle;
   color:white;
-  width:3em;
+  width:6em;
   height:auto;
   cursor: pointer;
   transition: all 0.5s;
 
   :hover {
-    width: 3.5em;
+    width: 8em;
   }
 `;
 

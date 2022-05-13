@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { StateContext, DispatchContext } from '../appState';
 import styled from 'styled-components';
+import { StateContext, DispatchContext } from '../appState';
 import api from '../api';
 import { ButtonMD, LogSignButton } from '../styles/buttons';
 import { AuthInput } from '../styles/input';
@@ -19,13 +19,15 @@ const Login = ({ handleClickOther }) => {
     setPassText(e.target.value);
   };
 
-  const handleLogin = () => {
-    api.get
+  const handleLogin = (e) => {
+    if (e.keyCode === 13 && passText.length && userText.length) {
+      api.get
       .login({
         userName: userText,
         attempt: passText,
       }, dispatch)
-      .catch((err) => console.log(err));
+      .catch(err => console.log(err));
+    }
   };
 
   return (
@@ -38,6 +40,7 @@ const Login = ({ handleClickOther }) => {
         value={userText}
         onChange={handleUserChange}
         placeholder={'Enter your Username'}
+        onKeyDown={handleLogin}
       />
       <AuthInput
         id="passwordLogin"
@@ -47,6 +50,7 @@ const Login = ({ handleClickOther }) => {
         value={passText}
         onChange={handlePassChange}
         placeholder={'Enter your Password'}
+        onKeyDown={handleLogin}
       />
       <ButtonMD
         onClick={handleLogin}

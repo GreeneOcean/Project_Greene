@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import styled from "styled-components";
 import { StateContext, DispatchContext } from "./appState/index.js";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import Nav from "./components/Nav";
 import Auth from "./pages/Auth";
 import Browse from "./pages/Browse";
@@ -18,15 +18,20 @@ import config from "../config.js";
 function App() {
   const [, dispatch] = useContext(DispatchContext);
   const [state] = useContext(StateContext);
+  const navigate = useNavigate();
   const { dev } = state;
   dev.logs && console.log("App state", state);
-  console.log("App state", state);
+  // console.log("App state", state);
 
   useEffect(() => {
     api.get.location(dispatch);
     const user = { userName: 'lol', attempt: "shalom" };
     api.get.login(user, dispatch); // Automatic Login user === mgee
   }, []);
+
+  useEffect(() => {
+    navigate('/');
+  }, [state.user.user_name])
 
   return (
     <AppContainer>

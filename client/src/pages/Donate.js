@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link, useNavigate } from "react-router-dom"
+import { ImPlus } from 'react-icons/im';
 import { ButtonL, ButtonM, ButtonS } from '../styles/buttons.js';
 import TagsContainer from '../components/TagsContainer.js';
 import ToggleSwitch from '../components/ToggleSwitch.js';
@@ -42,7 +43,7 @@ const DonateContainer = styled.div`
     margin: 0;
   }
 
-  span {
+  .toggle-span {
     margin-left: .4em;
   }
 `;
@@ -60,21 +61,91 @@ const FieldSection = styled.label`
   align-items: flex-start;
 `;
 
+const FieldInput = styled.input`
+  height: 2.5em;
+  width: 100%;
+  padding: 0 1em;
+  border-radius: 1em;
+  background-color: #ebebeb;
+  cursor: text;
+
+  :focus {
+    background-color: #f5f5f5;
+  }
+`;
+
+const FieldDropdown = styled.select`
+  height: 2.5em;
+  width: 100%;
+  padding: 0 1em;
+  border-radius: 1em;
+  background-color: #ebebeb;
+  cursor: default;
+`;
+
+const FieldTextArea = styled.textarea`
+  font-family: inherit;
+  height: 7.5em;
+  width: 100%;
+  padding: 1em;
+  border-radius: 1em;
+  background-color: #ebebeb;
+  cursor: text;
+  resize: none;
+
+  :focus {
+    background-color: #f5f5f5;
+  }
+`;
+
+const AddTagSection = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  #tag {
+    width: 90%;
+  }
+
+  #add-tag-btn {
+    height: 2.5em;
+    width: 2.5em;
+    background-color: #fff;
+    border-radius: 50%;
+    border: 2px solid var(--color1);
+    color: var(--color1);
+    display: grid;
+    align-items: center;
+    justify-items: center;
+
+    :hover {
+      background-color: var(--color1);
+      color: #fff;
+    }
+  }
+`;
+
+const RemoveTagMsg = styled.span`
+  font-size: 16px;
+  font-style: italic;
+  color: #666;
+`;
+
 const ButtonBox = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  padding: 2em;
+  justify-content: space-between;
+  padding: 2em 0;
 `;
 
 const SubmitButton = styled(ButtonS)`
   :disabled {
-    color: #999;
+    color: #666;
     border-color: #999;
 
     :hover {
-      color: #999;
+      color: #666;
       background: transparent;
     }
   }
@@ -204,18 +275,18 @@ function Donate({ state, dispatch, init }) {
       <h2>Tell us about your donation</h2>
       <StyledForm>
         <FieldSection htmlFor="title">
-          <span>Listing Title <Asterisk/></span>
-          <input type="text" name="title" id="title" value={title} onChange={handleChange} />
+          <span>Listing Title<Asterisk/></span>
+          <FieldInput type="text" name="title" id="title" value={title} onChange={handleChange} />
         </FieldSection>
 
         <FieldSection htmlFor="description">
-          <span>Description <Asterisk/></span>
-          <textarea name="description" id="description" value={description} onChange={handleChange} />
+          <span>Description<Asterisk/></span>
+          <FieldTextArea name="description" id="description" value={description} onChange={handleChange} />
         </FieldSection>
 
         <FieldSection htmlFor="category">
-          <span>Category <Asterisk/></span>
-          <select name="category" id="category" value={category} onChange={handleChange} required>
+          <span>Category<Asterisk/></span>
+          <FieldDropdown name="category" id="category" value={category} onChange={handleChange} required>
             {
               ([<option key="none" value="Select a Category">Select a Category</option>])
               .concat(
@@ -223,16 +294,16 @@ function Donate({ state, dispatch, init }) {
                   return <option key={i} value={category}>{category}</option>
                 }))
             }
-          </select>
+          </FieldDropdown>
         </FieldSection>
 
         <FieldSection htmlFor="tag">
           <span>Add tags</span>
-          <span>
-            <input type="text" name="tag" id="tag" value={tag} onChange={handleChange} onKeyDown={handleKeyDown} />
-            <button onClick={handleClick}>+</button>
-          </span>
-          {tags.length > 0 ? <span>Click to remove</span> : null}
+          <AddTagSection>
+            <FieldInput type="text" name="tag" id="tag" value={tag} onChange={handleChange} onKeyDown={handleKeyDown} />
+            <button onClick={handleClick} id="add-tag-btn"><ImPlus/></button>
+          </AddTagSection>
+          {tags.length > 0 ? <RemoveTagMsg>Click to remove</RemoveTagMsg> : null}
           <TagsContainer tags={tags} onClick={removeTag} clickable={true}/>
         </FieldSection>
 
