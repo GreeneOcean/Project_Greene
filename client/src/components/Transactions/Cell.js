@@ -3,6 +3,7 @@ import styled from "styled-components";
 import api from '../../api/index';
 import { ButtonS } from '../../styles/buttons.js';
 import { DispatchContext } from '../../appState/index'
+import imageUrls from "../item/imageUrls"
 
 const Cell = ({ status, group, user, item }) => {
   const [, dispatch] = useContext(DispatchContext)
@@ -12,6 +13,18 @@ const Cell = ({ status, group, user, item }) => {
   const charity_state = user.charity_state === 'true';
   const [rating, setRating] = useState(1);
   const [comment, setComment] = useState('');
+  const [image, setImage] = useState(imageUrls.Other)
+
+
+  useEffect(() => {
+    if (pictures && pictures.length) {
+      if (pictures[0] === imageUrls.dbPhotoUrl) {
+        setImage(imageUrls[category]);
+      } else {
+        setImage(item.pictures[0]);
+      }
+    }
+  }, [pictures]);
 
   const ratingChange = (e) => {
     setRating(Number(e.target.value));
@@ -60,7 +73,10 @@ const Cell = ({ status, group, user, item }) => {
 
   return (
     <Container>
-      <img src={pictures}/>
+
+      <PhotoDiv >
+        <StyledImage src={image} />
+      </PhotoDiv>
       <div>
 
         <p>Category: {category} </p>
@@ -71,7 +87,7 @@ const Cell = ({ status, group, user, item }) => {
           <button style={{color: 'var(--color3)', cursor: 'pointer'}} onClick={() => toggleChat(posted_by)} >Chat with {posted_by} </button>
           <p>Interested users</p>
           <InterestedUsers>
-            {interested_users.map((user, ind) => {
+            {interested_users && interested_users.map((user, ind) => {
               if (user !== approved_user) {
                 return (
                   <InterestedUser
@@ -130,6 +146,19 @@ const Modal = styled.div`
   background-color: blue;
 `;
 
+const PhotoDiv = styled.div`
+  width:40vh;
+  height:100%;
+  margin-right: 5%;
+  padding: 5%;
+  overflow: hidden;
+  object-fit: contain;
+`;
+
+const StyledImage = styled.img`
+  height: 100%;
+  width: 100%;
+`;
 
 const InterestedUsers = styled.div`
   display: flex;
