@@ -10,6 +10,7 @@ import {
 } from 'react-icons/ai';
 import { CgArrowsExchange } from 'react-icons/cg';
 import { BiMessageRounded } from 'react-icons/bi';
+import { ImExit } from 'react-icons/im';
 import { Link } from 'react-router-dom';
 import { DispatchContext } from '../appState';
 import Search from './Search';
@@ -71,9 +72,11 @@ const Nav = ({ user }) => {
       </NavContainer>
       <SideMenu id="sideMenu" display={menu}>
         <div style={{ width: '100%', display: 'flex', justifyContent: 'end' }}>
-          <AiOutlineClose
+        <AiOutlineClose
             style={{
-              width: '1.8em',
+              width: '4em',
+              paddingLeft: '20px',
+              paddingRight: '20px',
               height: 'auto',
               color: 'black',
               cursor: 'pointer',
@@ -100,6 +103,7 @@ const Nav = ({ user }) => {
           {loggedIn ? (
             <>
               <StyledLink onClick={() => {setMenu(!menu);}}>
+                <ImExit />
                 <Link to='/' onClick={logoutClick}>Log out</Link>
               </StyledLink>
               <StyledLink onClick={() => {setMenu(!menu);}}>
