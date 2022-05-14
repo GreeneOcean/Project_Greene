@@ -77,30 +77,23 @@ const SignUp = ({ handleClickOther }) => {
 
   return (
     <>
-      <h1
-        style={{
-          marginBottom: '15px',
-          color: 'white',
-        }}
-      >
+      <h1 style={{ marginBottom: '15px', marginTop: '50px', color: 'white' }}>
         Create a new account
       </h1>
-      <div>
+      <div style={{ color: 'white' }}>
         <input
           type="checkbox"
           onClick={handeCharityStatusClick}
-          style={{ marginBottom: '15px', color: 'white' }}
+          style={{ marginBottom: '15px', background: 'var(--color1)' }}
         />
-        Would you like to apply for chaity status?
+        {' Would you like to apply for chaity status?'}
       </div>
       <AuthInput
         id='firstNameSignUp'
         type='text'
         autoComplete='off'
         maxLength='150'
-        style={{
-          marginBottom: '15px',
-        }}
+        style={{ marginBottom: '15px' }}
         value={firstName}
         onChange={handleFirstNameChange}
         placeholder={'First name'}
@@ -110,9 +103,7 @@ const SignUp = ({ handleClickOther }) => {
         type='text'
         autoComplete='off'
         maxLength='150'
-        style={{
-          marginBottom: '15px',
-        }}
+        style={{ marginBottom: '15px' }}
         value={lastName}
         onChange={handleLastNameChange}
         placeholder={'Last name'}
@@ -122,9 +113,7 @@ const SignUp = ({ handleClickOther }) => {
         type='text'
         autoComplete='off'
         maxLength='150'
-        style={{
-          marginBottom: '15px',
-        }}
+        style={{ marginBottom: '15px' }}
         value={userText}
         onChange={handleUserChange}
         placeholder={'Create your Username'}
@@ -134,9 +123,7 @@ const SignUp = ({ handleClickOther }) => {
         type='password'
         autoComplete='off'
         maxLength='150'
-        style={{
-          marginBottom: '15px',
-        }}
+        style={{ marginBottom: '15px' }}
         value={passText}
         onChange={handlePassChange}
         placeholder={'Create your Password'}
@@ -146,25 +133,22 @@ const SignUp = ({ handleClickOther }) => {
         type='password'
         autoComplete='off'
         maxLength='150'
-        style={{
-          marginBottom: '15px',
-        }}
+        style={{ marginBottom: '15px' }}
         value={confPassText}
         onChange={handleConfPassChange}
         placeholder={'Confirm your Password'}
       />
-      <div
-        style={{
-          marginBottom: '15px',
-        }}
-      >
-        <input type="checkbox" onClick={handeAgreeTermsClick}/>I agree to the Greene Ocean{' '}
+      <div style={{ marginBottom: '15px', color: 'white' }}>
+        <input
+          type="checkbox"
+          onClick={handeAgreeTermsClick}
+          style={{ background: 'var(--color1)' }}
+        />
+        {' I agree to the Greene Ocean '}
         <u>Terms of Service</u> and <u>Privacy Policy</u>
       </div>
       <ButtonMD onClick={handleSignUp}>Sign up</ButtonMD>
-      <div style={{
-        color: 'white'
-      }}>
+      <div style={{ color: 'white' }}>
         Already have an account?
         <LogSignButton onClick={handleClickOther}>Log in</LogSignButton>
       </div>

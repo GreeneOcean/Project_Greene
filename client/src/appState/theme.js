@@ -3,7 +3,7 @@ import { createGlobalStyle, css, keyframes } from 'styled-components';
 
 const ThemeProvider = ({ STYLES, dimensions }) => {
   return (
-    <GlobalStyles  />
+    <GlobalStyles />
   )
 }
 
@@ -42,15 +42,13 @@ body {
   overflow-x: hidden;
   min-height: 100%;
   height: 100%;
-  font-family: 'Open Sans', sans-serif;
-  --color1: #00C753;
+  font-family: 'Poppins', sans-serif;  --color1: #00C753;
   --color2: #009185;
   --color3: #00819E;
   --color4: #4A738C;
 
   background: linear-gradient(-45deg, var(--color1), var(--color2), var(--color3), var(--color4));
   background-size: 100% 100%;
-
 
   animation: ${GradientBG};
   animation-duration: 10s;

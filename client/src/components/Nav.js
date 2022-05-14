@@ -15,7 +15,6 @@ import { DispatchContext } from '../appState';
 import Search from './Search';
 
 const Nav = ({ user }) => {
-  // const [loggedIn, setLoggedIn] = useState(!!user.user_name);
   const [, dispatch] = useContext(DispatchContext);
   const [loggedIn, setLoggedIn] = useState(false);
   const [isGreene, setIsGreene] = useState(user.admin);
@@ -38,14 +37,12 @@ const Nav = ({ user }) => {
     setLoggedIn(!!user.user_name);
   }, [user.user_name]);
 
-  const logoutClick = (() => dispatch({ type: 'LOG_OUT' }))
+  const logoutClick = (() => dispatch({ type: 'LOG_OUT' }));
 
   return (
     <>
       <NavContainer>
-        <Link
-          to="/"
-        >
+        <Link to="/">
           <GiBoxUnpacking
             style={{
               color:'var(--color2)',
@@ -75,14 +72,12 @@ const Nav = ({ user }) => {
             style={{
               width: '4em',
               paddingLeft: '20px',
-              paddingRight: '20px',
+              paddingRight: '15px',
               height: 'auto',
-              color: 'black',
+              color: 'var(--color2)',
               cursor: 'pointer',
             }}
-            onClick={() => {
-              setMenu(!menu);
-            }}
+            onClick={() => { setMenu(!menu) }}
           />
         </div>
         {loggedIn ? (
@@ -92,7 +87,8 @@ const Nav = ({ user }) => {
               color: 'var(--color2)',
               fontSize: '1em',
               fontWeight: 'bold',
-              textDecoration: 'underline'
+              textDecoration: 'underline',
+              marginBottom: '5%'
             }}
           >
             Hello {user.user_name}!
@@ -108,7 +104,7 @@ const Nav = ({ user }) => {
 
                 <CgArrowsExchange />
                 <Link to="/Transactions">
-                  {isGreene ? 'Admin' : 'Transactions'}
+                  {isGreene ? 'Admin' : 'History'}
                 </Link>
               </StyledLink>
             </>
@@ -137,13 +133,11 @@ const SideMenu = styled.div`
   position: absolute;
   right: 0;
   width: var(--SideMenuWidth);
-  /* max-width: 350px; */
-  /* min-width: 350px; */
   height: 100vh;
   background: white;
   border-left: 3px solid var(--color2);
   padding: 1em;
-  transition: all 0.5s;
+  transition: all 0.3s;
   transform-origin: center left;
   transform: translate(100%, 0);
   z-index: 100;
@@ -152,8 +146,8 @@ const SideMenu = styled.div`
 const NavContainer = styled.nav`
   box-sizing: border-box;
   margin: 0;
-  padding:  0.5em 0;
-  height: 5vh;
+  padding: 0.5em 0;
+  height: 55px;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -219,6 +213,5 @@ const StyledLink = styled.div`
     padding-left: 0.5em;
   }
 `;
-
 
 export default Nav;

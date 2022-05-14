@@ -1,22 +1,72 @@
 import React, { useState, useEffect } from "react";
-import { ButtonM } from '../../../styles/buttons'
 import styled from "styled-components";
+import { ButtonM } from "../../../styles/buttons";
 
-const FilterBar = ({ itemData, setSelectedItem, setFilteredItems, charity_state }) => {
+const FilterBar = ({ itemData, dispatch, searchTerm, setSelectedItem, setFilteredItems, charity_state }) => {
   const [tags, setTags] = useState([]);
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     if (itemData) {
-      const newCategories = itemData.reduce(
-        (unique, item) =>
-          unique.includes(item.category) ? unique : [...unique, item.category],
-        []
-      );
-      setCategories(newCategories);
+      filterItems();
+    }
+  }, [itemData, searchTerm]);
 
-      const newTags = [];
-      itemData.forEach((item) => {
+  const clearFilter = () => {
+    setFilteredItems(itemData);
+    setSelectedItem(null);
+    dispatch({
+      type: "SET_SEARCH",
+      payload: ''
+    });
+  };
+
+  const filterItems = () => {
+
+    let innerFilteredItems = itemData.filter(item => {
+      return !(['false', 'denied'].includes(charity_state) && item.charity_only)
+    });
+    if (searchTerm.length > 2) {
+      const searchTerms = searchTerm.toLowerCase().split(' ');
+      searchTerms.forEach(term => {
+        if (term.length > 2) {
+          innerFilteredItems = innerFilteredItems.filter(item => {
+            if (item.category.toLowerCase().includes(term) ||
+                item.description.toLowerCase().includes(term) ||
+                item.title.toLowerCase().includes(term) ||
+                item.tag.includes(term)) {
+                  return true;
+                }
+          });
+        }
+      });
+    }
+    if (document.getElementById("distance").value !== "--Select Distance--") {
+      innerFilteredItems = innerFilteredItems.filter((item) => {
+        return item.distance <= document.getElementById("distance").value;
+      });
+    }
+    if (document.getElementById("category").value !== "--Select Category--") {
+      innerFilteredItems = innerFilteredItems.filter((item) => {
+        return item.category === document.getElementById("category").value;
+      });
+    }
+    if (document.getElementById("tag").value !== "--Select Tag--") {
+      innerFilteredItems = innerFilteredItems.filter((item) => {
+        return item.tag.includes(document.getElementById("tag").value);
+      });
+    }
+    setFilteredItems(innerFilteredItems);
+
+    const newCategories = innerFilteredItems.reduce(
+      (unique, item) =>
+        unique.includes(item.category) ? unique : [...unique, item.category],
+      []
+    );
+    setCategories(newCategories);
+
+    const newTags = [];
+      innerFilteredItems.forEach((item) => {
         item.tag.forEach((tag) => {
           if (!newTags.includes(tag)) {
             newTags.push(tag);
@@ -24,35 +74,6 @@ const FilterBar = ({ itemData, setSelectedItem, setFilteredItems, charity_state 
         });
       });
       setTags(newTags);
-      filterItems();
-    }
-  }, [itemData]);
-
-  const filterItems = () => {
-    let filteredItems = itemData.filter(item => {
-      return !(['false', 'denied'].includes(charity_state) && item.charity_only)
-    });
-    if (document.getElementById("distance").value !== "--Select Distance--") {
-      filteredItems = filteredItems.filter((item) => {
-        return item.distance <= document.getElementById("distance").value;
-      });
-    }
-    if (document.getElementById("category").value !== "--Select Category--") {
-      filteredItems = filteredItems.filter((item) => {
-        return item.category === document.getElementById("category").value;
-      });
-    }
-    if (document.getElementById("tag").value !== "--Select Tag--") {
-      filteredItems = filteredItems.filter((item) => {
-        return item.tag.includes(document.getElementById("tag").value);
-      });
-    }
-    setFilteredItems(filteredItems);
-  };
-
-  const clearFilter = () => {
-    setFilteredItems(itemData);
-    setSelectedItem(null);
   };
 
   return (
@@ -95,18 +116,18 @@ const FilterBarForm = styled.form`
 const StyledSelect = styled.select`
   display: flex;
   margin: 10px;
-  font-size:1.5em;
-  background:white;
+  font-size: 1em;
+  background: white;
   padding: 0.4em 0.5em;
-  border-radius:60px;
+  border-radius: 6px;
   color: var(--color2);
   filter: drop-shadow(0 10px 10px rgba(0,0,0,0.5));
   option {
-    background:white;
+    background: white;
   }
 `;
 
 const StyledButton = styled(ButtonM)`
-  font-size:1.5em;
-  padding: 0.4em 0.5em;
+  font-size: 1em;
+  padding: 0.4em 1em;
 `;

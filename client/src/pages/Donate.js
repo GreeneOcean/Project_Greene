@@ -35,9 +35,8 @@ const categories = [
 ];
 
 const DonateContainer = styled.div`
-  background-color: white;
   padding: 1em 3em;
-
+  background: rgba(255,255,255,0.4);
   * {
     margin: .3em 0;
   }
@@ -49,6 +48,7 @@ const DonateContainer = styled.div`
   .toggle-span {
     margin-left: .4em;
   }
+  border-radius: 0 0 6px 6px;
 `;
 
 const StyledForm = styled.form`
@@ -67,8 +67,8 @@ const FieldInput = styled.input`
   height: 2.5em;
   width: 100%;
   padding: 0 1em;
-  border-radius: 1em;
-  background-color: #ebebeb;
+  border-radius: 6px;
+  background-color: white;
   cursor: text;
 
   :focus {
@@ -80,7 +80,7 @@ const FieldDropdown = styled.select`
   height: 2.5em;
   width: 100%;
   padding: 0 1em;
-  border-radius: 1em;
+  border-radius: 6px;
   background-color: #ebebeb;
   cursor: default;
 `;
@@ -90,7 +90,7 @@ const FieldTextArea = styled.textarea`
   height: 7.5em;
   width: 100%;
   padding: 1em;
-  border-radius: 1em;
+  border-radius: 6px;
   background-color: #ebebeb;
   cursor: text;
   resize: none;
@@ -113,7 +113,7 @@ const AddTagSection = styled.div`
     height: 2.5em;
     width: 2.5em;
     background-color: #fff;
-    border-radius: 50%;
+    border-radius: 6px;
     border: 2px solid var(--color1);
     color: var(--color1);
     display: grid;
@@ -279,20 +279,20 @@ function Donate({ state, dispatch, init }) {
 
   return (
     <DonateContainer>
-      <h2>Tell us about your donation</h2>
+      <h2 style={{ color: 'white', marginTop: '50px' }}>Tell us about your donation</h2>
       <StyledForm>
         <FieldSection htmlFor="title">
-          <span>Listing Title<Asterisk/></span>
+          <span style={{ color: 'white' }}>Listing Title<Asterisk/></span>
           <FieldInput type="text" name="title" id="title" value={title} onChange={handleChange} />
         </FieldSection>
 
         <FieldSection htmlFor="description">
-          <span>Description<Asterisk/></span>
+          <span style={{ color: 'white' }}>Description<Asterisk/></span>
           <FieldTextArea name="description" id="description" value={description} onChange={handleChange} />
         </FieldSection>
 
         <FieldSection htmlFor="category">
-          <span>Category<Asterisk/></span>
+          <span style={{ color: 'white' }}>Category<Asterisk/></span>
           <FieldDropdown name="category" id="category" value={category} onChange={handleChange} required>
             {
               ([<option key="none" value="Select a Category">Select a Category</option>])
@@ -305,7 +305,7 @@ function Donate({ state, dispatch, init }) {
         </FieldSection>
 
         <FieldSection htmlFor="tag">
-          <span>Add tags</span>
+          <span style={{ color: 'white' }}>Add tags</span>
           <AddTagSection>
             <FieldInput type="text" name="tag" id="tag" value={tag} maxLength="25" onChange={handleChange} onKeyDown={handleKeyDown} />
             <button onClick={handleClick} id="add-tag-btn"><ImPlus/></button>
@@ -314,17 +314,23 @@ function Donate({ state, dispatch, init }) {
           <TagsContainer tags={tags} onClick={removeTag} clickable={true}/>
         </FieldSection>
 
-        <ToggleSwitch on="Charity only" off="Available to everyone" defaultValue={true} onChange={setCharityOnly} />
+        <ToggleSwitch
+          style={{ color: 'white' }}
+          on="Charity only"
+          off="Available to everyone"
+          defaultValue={true}
+          onChange={setCharityOnly}
+        />
 
         <FieldSection htmlFor="photo">
-          <span>Click to add or drag in a photo</span>
+          <span style={{ color: 'white' }}>Click to add or drag in a photo</span>
           <ImageUploader upload={setPhoto} />
         </FieldSection>
       </StyledForm>
 
       <ButtonBox>
         <ButtonS name="cancel" onClick={cancel}>Cancel</ButtonS>
-        <SubmitButton name="post" onClick={submitForm} disabled={!valid}>List Donation</SubmitButton>
+        <ButtonS name="post" onClick={submitForm} disabled={!valid}>List Donation</ButtonS>
       </ButtonBox>
     </DonateContainer>
   );

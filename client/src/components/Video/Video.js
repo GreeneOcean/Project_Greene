@@ -18,6 +18,7 @@ const VideoPlayer = ({ socket, user }) => {
 
   useEffect(() => {
     socket.on("sdp", (data) => {
+
       pc.current.setRemoteDescription(new RTCSessionDescription(data.sdp));
       if (data.sdp.type === "offer") {
         setOfferVisible(false);
@@ -29,6 +30,7 @@ const VideoPlayer = ({ socket, user }) => {
     });
 
     socket.on("candidate", (candidate) => {
+      console.log('SDP candidate', candidate)
       pc.current.addIceCandidate(new RTCIceCandidate(candidate));
     });
 
@@ -39,6 +41,7 @@ const VideoPlayer = ({ socket, user }) => {
     navigator.mediaDevices
       .getUserMedia(constraints)
       .then((stream) => {
+        console.log('SDP stream', stream)
         localVideoRef.current.srcObject = stream;
         stream.getTracks().forEach((track) => {
           _pc.addTrack(track, stream);
@@ -51,6 +54,7 @@ const VideoPlayer = ({ socket, user }) => {
     const _pc = new RTCPeerConnection(null);
 
     _pc.onicecandidate = (e) => {
+      console.log('SDP onicecandidate')
       if (e.candidate) {
         console.log(JSON.stringify(e.candidate));
         socket.emit("candidate", e.candidate);
@@ -63,6 +67,7 @@ const VideoPlayer = ({ socket, user }) => {
 
     _pc.ontrack = (e) => {
       // we get remote stream.....
+      console.log('SDP ontrack')
       remoteVideoRef.current.srcObject = e.streams[0];
     };
     pc.current = _pc;
@@ -75,6 +80,7 @@ const VideoPlayer = ({ socket, user }) => {
         offerToReceiveVideo: 1
       })
       .then((sdp) => {
+        console.log('SDP CREATE OFFER', { sdp })
         pc.current.setLocalDescription(sdp);
         socket.emit("sdp", { sdp });
         setOfferVisible(false);
@@ -92,6 +98,7 @@ const VideoPlayer = ({ socket, user }) => {
         offerToReceiveVideo: 1
       })
       .then((sdp) => {
+        console.log('SDP CREATE ANSWER', { sdp })
         pc.current.setLocalDescription(sdp);
         socket.emit("sdp", { sdp });
         setAnswerVisible(false);
@@ -135,6 +142,7 @@ const VideoPlayer = ({ socket, user }) => {
           <video
             style={{ width: sideValue, height: sideValue, backgroundColor: "black" }}
             ref={remoteVideoRef}
+            autoPlay
           />
         </VideoContainer>
         <FooterButtonContainer>

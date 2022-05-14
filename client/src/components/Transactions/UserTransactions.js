@@ -17,8 +17,6 @@ import { ButtonL, ButtonM, ButtonS } from '../../styles/buttons';
 // -- received
 // -- donations
 
-
-
 const allFilters = [
   ['unclaimed', 'All donations'],
   ['claimed', 'All donations with interested users'],

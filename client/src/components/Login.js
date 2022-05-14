@@ -60,7 +60,7 @@ const Login = ({ handleClickOther }) => {
 
   return (
     <>
-      <h1 style={{ marginBottom: '15px', color: 'white' }}>Log in</h1>
+      <h1 style={{ marginBottom: '15px', marginTop: '80px', color: 'white' }}>Log in</h1>
       <AuthInput
         id="usernameLogin"
         autoComplete="off"
@@ -92,7 +92,9 @@ const Login = ({ handleClickOther }) => {
       <ButtonMD onClick={handleLoginClick} style={{ marginBottom: '15px' }}>
         Log in
       </ButtonMD>
-      <div>Don't have an account? </div>
+      <div style={{
+        color: 'white'
+      }}>Don't have an account?</div>
       <LogSignButton onClick={handleClickOther}>Sign Up</LogSignButton>
     </>
   );

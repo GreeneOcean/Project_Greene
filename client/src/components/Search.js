@@ -1,13 +1,11 @@
 import React, { useContext } from "react";
 import { DispatchContext } from '../appState/index'
 import styled from 'styled-components';
+import { useNavigate } from "react-router-dom";
 
 const Search = ({ user }) =>{
     const [, dispatch] = useContext(DispatchContext);
-
-    // useEffect(() => {
-    //   handleSearchFilter(searchText);
-    // }, [searchText]);
+    const navigate = useNavigate();
 
     const handleSearchChange = (e) => {
       dispatch({
@@ -16,35 +14,46 @@ const Search = ({ user }) =>{
       })
     };
 
+    const handleSearchSubmit = (e) => {
+      if (e.keyCode === 13) {
+        navigate('/Browse');
+      }
+    }
+
     return (
-      <div style={{
-        width:'50%',
-        height:'100%'
-      }}>
-        <input
+      <Header >
+        <SearchInput
           id="search"
           type="search"
           autoComplete="off"
           maxLength="150"
-          style={{
-            height: '40px',
-            width: '100%',
-            borderRadius: '6px',
-            padding: '12px',
-            backgroundColor: 'rgb(245,245,245)',
-            // border: '2px solid rgb(169,169,169)',
-            transition: 'all 0.5s',
-            cursor: 'text',
-            // backgroundColor: 'rgba(11, 191, 125, 0.9)';
-            // box-shadow: '0px 5px 10px rgba(46, 229, 157, 0.4)';
-          }}
           value={user.searchTerm}
           onChange={handleSearchChange}
           placeholder={'Search donations...'}
+          onKeyDown={handleSearchSubmit}
         />
         <i role="presentation" />
-      </div>
+      </Header>
     )
 }
+
+const Header = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+`
+
+const SearchInput = styled.input`
+  height: 70%;
+  min-height: 40px;
+  width: 45%;
+  border-radius: 6px;
+  padding: 12px;
+  background-color: rgb(233,233,233);
+  transition: 'all 0.5s';
+  cursor: 'text';
+`
 
 export default Search

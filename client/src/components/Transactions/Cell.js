@@ -2,7 +2,8 @@ import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import api from '../../api/index';
 import { ButtonS } from '../../styles/buttons.js';
-import { DispatchContext } from '../../appState/index'
+import { DispatchContext } from '../../appState/index';
+import imageUrls from "../item/imageUrls";
 
 const Cell = ({ status, group, user, item }) => {
   const [, dispatch] = useContext(DispatchContext)
@@ -12,6 +13,19 @@ const Cell = ({ status, group, user, item }) => {
   const charity_state = user.charity_state === 'true';
   const [rating, setRating] = useState(1);
   const [comment, setComment] = useState('');
+  const [image, setImage] = useState(imageUrls.Other);
+  const [approveButton, setApproveButton] = useState(false);
+
+
+  useEffect(() => {
+    if (pictures && pictures.length) {
+      if (pictures[0] === imageUrls.dbPhotoUrl) {
+        setImage(imageUrls[category]);
+      } else {
+        setImage(item.pictures[0]);
+      }
+    }
+  }, [pictures]);
 
   const ratingChange = (e) => {
     setRating(Number(e.target.value));
@@ -28,7 +42,7 @@ const Cell = ({ status, group, user, item }) => {
       posted_by_name: user.user_name,
       value: rating,
       message: comment
-     })
+    })
       .then((res) => {
         console.log('Rated user', res);
         setRate(false);
@@ -38,14 +52,16 @@ const Cell = ({ status, group, user, item }) => {
   };
 
   const handleApproveUser = (approved_user) => {
+    setApproveButton(true)
     api.put.donation({ id, approved_user, state: 'approved' })
       .then(res => console.log('Approved user', res))
       .catch(err => console.log('Err in approving user', err.message))
   }
 
   const handleUnApproveUser = () => {
-    api.put.donation({ id, approved_user: null, state: 'claimed' })
-      .then(res => console.log('UnApproved user', res))
+    const userUn = { id, approved_user: null, state: 'claimed' }
+    api.put.donation(userUn)
+      .then(res => console.log('Unapproved user', res))
       .catch(err => console.log('Err in unapproving user', err.message))
   }
 
@@ -60,24 +76,27 @@ const Cell = ({ status, group, user, item }) => {
 
   return (
     <Container>
-      <img src={pictures}/>
+      <PhotoDiv >
+        <StyledImage src={image} />
+      </PhotoDiv>
       <div>
 
         <p>Category: {category} </p>
         <h1 onClick={() => clearOther()} >{title} </h1>
         <p style={{fontSize: '0.8em'}}>Donated by {posted_by} </p>
-        <p style={{fontSize: '1.2em'}}>Description: {description} </p>
+        <p style={{fontSize: '1.2em', marginTop: '1em'}}>Description: {description} </p>
         <div style={{marginTop: '1em'}}>
           <button style={{color: 'var(--color3)', cursor: 'pointer'}} onClick={() => toggleChat(posted_by)} >Chat with {posted_by} </button>
           <p>Interested users</p>
           <InterestedUsers>
-            {interested_users.map((user, ind) => {
+            {interested_users && interested_users.map((user, ind) => {
               if (user !== approved_user) {
                 return (
-                  <InterestedUser
+                  approveButton ? (`Approved user ${user}`) :
+                  ( <InterestedUser
                     id={ind}
                     onClick={() => handleApproveUser(user)}
-                  > {user} click to Approve </InterestedUser>
+                  > {user}: click to Approve </InterestedUser>)
                 )
               }
               return (
@@ -105,10 +124,6 @@ const Cell = ({ status, group, user, item }) => {
           </Modal>
         }
       </div>
-<<<<<<< HEAD
-=======
-
->>>>>>> ffa1374f7126342a915cc2f18d206df54afa4bb2
        </Container>
   );
 };
@@ -125,10 +140,6 @@ const Container = styled.div`
   border:2px solid var(--color1);
   background:white;
   margin: 3vh 0;
-<<<<<<< HEAD
-=======
-
->>>>>>> ffa1374f7126342a915cc2f18d206df54afa4bb2
 `
 const Modal = styled.div`
   width: 100px;
@@ -159,3 +170,17 @@ const InterestedUser = styled.div`
     cursor: pointer;
   }
 `
+
+const PhotoDiv = styled.div`
+  width:40vh;
+  height:100%;
+  margin-right: 5%;
+  padding: 5%;
+  overflow: hidden;
+  object-fit: contain;
+`;
+
+const StyledImage = styled.img`
+  height: 100%;
+  width: 100%;
+`;

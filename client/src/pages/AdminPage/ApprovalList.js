@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import api from '../../api/index';
 import styled from "styled-components";
+import { ButtonM } from '../../styles/buttons';
 
 
 function ApprovalList({ each }) {
@@ -28,15 +29,14 @@ function ApprovalList({ each }) {
   return (
     <EachContainer>
       <p>Pending: {each.user_name}</p>
-      <label>
-        {userApproved ? ('Approved') : (<ApproveDenyButton onClick={() => handleChoice(true)}>Approve</ApproveDenyButton>)}
-
-      </label>
-      <label>
-        {userDenied ? ('Denied') : (<ApproveDenyButton onClick={() => handleChoice(false)}>Deny</ApproveDenyButton>)}
-
-      </label>
-
+      <ButtonFooter>
+        <label>
+          {userApproved ? ('Approved') : (<ApproveDenyButton onClick={() => handleChoice(true)}>Approve</ApproveDenyButton>)}
+        </label>
+        <label>
+          {userDenied ? ('Denied') : (<ApproveDenyButton onClick={() => handleChoice(false)}>Deny</ApproveDenyButton>)}
+        </label>
+      </ButtonFooter>
     </EachContainer>
   )
 }
@@ -45,14 +45,29 @@ export default ApprovalList;
 
 const EachContainer = styled.div`
   padding: 1em;
-  padding-right: 2em;
-  padding-left: 2em;
-  border-radius: 20px;
-  width: 80%;
-  display:flex;
+  padding-right: 1.5em;
+  padding-left: 1.5em;
+  border-radius: 10px;
+  width: 50%;
+  display: flex;
   align-items: center;
-  border:2px solid var(--color1);
+  /* flex-direction: column; */
+  justify-content: space-around;
+  border: 1px solid white;
+  background-color: rgba(255, 255, 255, 0.95);
 `
-const ApproveDenyButton = styled.button`
+const ButtonFooter = styled.div`
+  width: 100%;
+  padding: 1em;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+`
 
+
+const ApproveDenyButton = styled(ButtonM)`
+  border: 1px solid white;
+  box-shadow: 0;
+  min-width: 10em;
 `
