@@ -4,17 +4,30 @@ const auth = require("../auth/index");
 // DONATION table
 // title TEXT NOT NULL,
 const titles = [
-  "this probably doenst match",
+  "This probably doesn't match",
   "chinos",
   "My old things",
-  "LIKE NEW"
+  "Kids's Stuff",
+  "Spring Cleaning",
+  "White Elephant Gems",
+  "Christmas Stuff",
+  "Halloween Things",
+  "Mostly junk",
+  "downsizing"
+
 ];
 // description TEXT NOT NULL,
 const descriptions = [
   "even cooler",
   "super cool",
   "Just need to get rid of",
-  "Regifted ughhh"
+  "Regifted ughhh",
+  "Cleaning out my garage",
+  "I like giving to charity",
+  "This is a cool website!",
+  "ex-boyfriend stuff",
+  "I'm leaving town",
+  "Really good stuff in here"
 ];
 // category TEXT NOT NULL,
 const categories = [
