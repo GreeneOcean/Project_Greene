@@ -101,6 +101,7 @@ const UserTransactions = ({ user }) => {
     })
   }
 
+
   return (
 
       <TransactionContainer>

@@ -16,6 +16,7 @@ const VideoPlayer = ({ socket, user }) => {
   const [status, setStatus] = useState("Available");
   const { user_name, otherUser } = user
 
+
   useEffect(() => {
     socket.on("sdp", (data) => {
       pc.current.setRemoteDescription(new RTCSessionDescription(data.sdp));

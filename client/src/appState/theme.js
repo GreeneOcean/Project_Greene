@@ -66,6 +66,7 @@ body {
   @media (min-width: ${media.laptopM} ) {
     --SideMenuWidth: 17%
   }
+
 }
 
 body {

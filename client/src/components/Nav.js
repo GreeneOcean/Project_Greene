@@ -103,6 +103,7 @@ const Nav = ({ user }) => {
                 <Link to='/' onClick={logoutClick}>Log out</Link>
               </StyledLink>
               <StyledLink onClick={() => {setMenu(!menu);}}>
+
                 <CgArrowsExchange />
                 <Link to="/Transactions">
                   {isGreene ? 'Admin' : 'Transactions'}
