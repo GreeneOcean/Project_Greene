@@ -60,7 +60,7 @@ const Login = ({ handleClickOther }) => {
 
   return (
     <>
-      <h1 style={{ marginBottom: '15px' }}>Welcome!</h1>
+      <h1 style={{ marginBottom: '15px', color: 'white' }}>Log in</h1>
       <AuthInput
         id="usernameLogin"
         autoComplete="off"

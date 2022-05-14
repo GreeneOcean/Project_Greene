@@ -1,17 +1,28 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import styled from "styled-components";
 import { ButtonS } from '../../../styles/buttons'
 import { useNavigate } from "react-router-dom";
 
 import { DispatchContext } from "../../../appState/index";
-// import { BsCardImage } from "react-icons/bs";
+import imageUrls from "../../item/imageUrls";
 
 const ItemCard = ({ item, selectedItem, setSelectedItem }) => {
   const [, dispatch] = useContext(DispatchContext);
+  const [image, setImage] = useState(
+    "https://cdn-icons-png.flaticon.com/512/679/679720.png"
+  );
 
   const navigate = useNavigate();
-  const photoNotFoundURL =
-    "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?format=jpg&quality=90&v=1530129081";
+
+  useEffect(() => {
+    if (item.pictures && item.pictures.length) {
+      if (item.pictures[0] === imageUrls.dbPhotoUrl) {
+        setImage(imageUrls[item.category]);
+      } else {
+        setImage(item.pictures[0]);
+      }
+    }
+  }, [item.pictures]);
 
   const selectItemHandler = () => {
     setSelectedItem(item.id);
@@ -22,28 +33,34 @@ const ItemCard = ({ item, selectedItem, setSelectedItem }) => {
     navigate("/Item", { replace: true });
   };
 
+
   return (
     <ItemContainer
       id={item.id}
       onClick={selectItemHandler}
       isSelected={selectedItem === item.id}
     >
-        <PhotoDiv>
-          {(item.pictures && item.pictures.length) && <StyledImage src={item.pictures[0]} />}
-          {(!item.pictures || !item.pictures.length) && <StyledImage src={photoNotFoundURL}/>}
-        </PhotoDiv>
+      <PhotoDiv>
+        {(item.pictures || !item.pictures.length) && (
+          <StyledImage src={image} />
+        )}
+        {(!item.pictures || !item.pictures.length) && (
+          <StyledImage src={imageUrls.notFound} />
+        )}
+      </PhotoDiv>
 
       <InnerItemContainer>
-      <h1>{item.title}</h1>
-      <p>{item.description}</p>
-      {item.tag.map((tag, idx) => {
-        return <p key={idx}>{tag}</p>;
-      })}
-      {selectedItem === item.id && (
-        <ViewButton onClick={claimClickHandler}>View</ViewButton>
-      )}
-
-</InnerItemContainer>
+        <h1>{item.title}</h1>
+        <p>{item.description}</p>
+        <div style={{display: 'flex', flexFlow: 'row wrap', marginTop: '1em'}}>
+          {item.tag.map((tag, idx) => {
+            return <Tag style={{marginRight: '0.5em'}} key={idx}>{tag}</Tag>;
+          })}
+        </div>
+        {selectedItem === item.id && (
+          <ViewButton onClick={claimClickHandler}>View</ViewButton>
+        )}
+      </InnerItemContainer>
     </ItemContainer>
   );
 };
@@ -97,4 +114,14 @@ const InnerItemContainer = styled.div`
 const ViewButton = styled(ButtonS)`
   margin-top: 1em;
   filter: none;
+`;
+
+const Tag = styled.div`
+  color: white;
+  background: var(--color1);
+  font-size: 1em;
+  font-weight: bold;
+  padding: 0.5em 1em;
+  border-radius: 30px;
+  margin-right: 0.2em;
 `;

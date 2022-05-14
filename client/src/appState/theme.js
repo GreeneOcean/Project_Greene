@@ -67,7 +67,6 @@ body {
     --SideMenuWidth: 17%
   }
 
-
 }
 
 body {
