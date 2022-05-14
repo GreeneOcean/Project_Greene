@@ -19,6 +19,7 @@ function Browse({ state, user, dispatch, init }) {
       <FilterBar
         itemData={state.user.local}
         searchTerm={searchTerm}
+        dispatch={dispatch}
         setSelectedItem={setSelectedItem}
         setFilteredItems={setFilteredItems}
         charity_state={state.user.charity_state}

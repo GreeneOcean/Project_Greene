@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import {ButtonM} from "../../../styles/buttons";
 
-const FilterBar = ({ itemData, searchTerm, setSelectedItem, setFilteredItems, charity_state }) => {
+const FilterBar = ({ itemData, dispatch, searchTerm, setSelectedItem, setFilteredItems, charity_state }) => {
   const [tags, setTags] = useState([]);
   const [categories, setCategories] = useState([]);
 
@@ -13,14 +13,20 @@ const FilterBar = ({ itemData, searchTerm, setSelectedItem, setFilteredItems, ch
     }
   }, [itemData, searchTerm]);
 
-
+  const clearFilter = () => {
+    setFilteredItems(itemData);
+    setSelectedItem(null);
+    dispatch({
+      type: "SET_SEARCH",
+      payload: ''
+    });
+  };
 
   const filterItems = () => {
 
     let innerFilteredItems = itemData.filter(item => {
       return !(['false', 'denied'].includes(charity_state) && item.charity_only)
     });
-
     if (searchTerm.length > 2) {
       const searchTerms = searchTerm.toLowerCase().split(' ');
       searchTerms.forEach(term => {
@@ -36,7 +42,6 @@ const FilterBar = ({ itemData, searchTerm, setSelectedItem, setFilteredItems, ch
         }
       });
     }
-
     if (document.getElementById("distance").value !== "--Select Distance--") {
       innerFilteredItems = innerFilteredItems.filter((item) => {
         return item.distance <= document.getElementById("distance").value;
@@ -70,11 +75,6 @@ const FilterBar = ({ itemData, searchTerm, setSelectedItem, setFilteredItems, ch
         });
       });
       setTags(newTags);
-  };
-
-  const clearFilter = () => {
-    setFilteredItems(itemData);
-    setSelectedItem(null);
   };
 
   return (
