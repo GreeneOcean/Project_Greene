@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Cell from './Cell'
 import FilterOptions from './FilterOptions'
 import styled from 'styled-components';
-import Chat from '../Video/Chat';
-
+import { DispatchContext } from '../../appState/index'
 import { ButtonL, ButtonM, ButtonS } from '../../styles/buttons';
 
 //STATES
@@ -48,7 +47,7 @@ const filters = {
   donations: donationsFilters,
 }
 
-const UserTransactions = ({ user }) =>{
+const UserTransactions = ({ user }) => {
   const [group, setGroup] = useState('all');
   const [itemFilter, setItemFilter] = useState(null);
   const [renderedItems, setRenderedItems] = useState([]);
@@ -95,6 +94,13 @@ const UserTransactions = ({ user }) =>{
   }, [group, itemFilter, donated, interested, received]);
 
 
+  const openChat = (newUserName) => {
+    dispatch({
+      type: 'TOGGLE_CHAT',
+      payload: newUserName
+    })
+  }
+
   return (
 
       <TransactionContainer>
@@ -123,15 +129,12 @@ const UserTransactions = ({ user }) =>{
                   user={user}
                   item={item}
                   key={i}
-                  setOther={setOther}
-                  clearOther={clearOther}
                 />
               )
             })
 
           }
         </ItemContainer>
-         <Chat currentUser={user.user_name} setOtherUser={setOtherUser} otherUser={otherUser}/>
       </TransactionContainer>
 
   )
@@ -145,16 +148,12 @@ const PlaceholderButton = styled.button`
 `;
 
 const TransactionContainer = styled.div`
-width: 100%;
+width: 80vw;
 display: flex;
 padding-top: 4em;
 position: relative;
-/* align-items: center;
-font: 40px;
-justify-content: center; */
 font-size: 20px;
 flex-direction: column;
-background-color: white;
 `;
 
 const ItemContainer = styled.div`
@@ -164,14 +163,12 @@ padding-top: 4em;
 align-items: center;
 justify-content: center;
 flex-direction: column;
-/* background-color: white; */
 `;
 
 const StyledDropdown = styled.div`
   margin: 1em 0;
 
   *{
-    width:10em;
     height: 3em;
     border-radius:6px;
     font-size: 0.8em;

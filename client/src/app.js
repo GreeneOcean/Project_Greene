@@ -13,11 +13,17 @@ import Admin from './pages/AdminPage/Admin.js';
 import api from "./api/index";
 import { AppContainer, LoadingContainer, Footer } from "./styles/index.js";
 import config from "../config.js";
-
+import io from "socket.io-client";
+const socket = io.connect("https://nealtest.herokuapp.com/");
+import Chat from './components/Video/Chat'
+import Video from './components/Video/Video'
 
 function App() {
   const [, dispatch] = useContext(DispatchContext);
   const [state] = useContext(StateContext);
+  const [showChat, setShowChat] = useState(false)
+  const [showVideo, setShowVideo] = useState(false)
+
   const navigate = useNavigate();
   const { dev } = state;
   dev.logs && console.log("App state", state);
@@ -32,6 +38,28 @@ function App() {
   useEffect(() => {
     navigate('/');
   }, [state.user.user_name])
+
+  useEffect(() => {
+    if ( !state.user.videoChat ) {
+      setTimeout(() => {
+        setShowVideo(state.user.videoChat)
+      }, 300)
+    }
+    else {
+      setShowVideo(state.user.videoChat)
+    }
+  }, [state.user.videoChat])
+
+  useEffect(() => {
+    if( !state.user.chat ) {
+      setTimeout(() => {
+        setShowChat(state.user.chat)
+      }, 300)
+    }
+    else {
+      setShowChat(state.user.chat)
+    }
+  }, [state.user.chat])
 
   return (
     <AppContainer>
@@ -86,6 +114,8 @@ function App() {
         />
 
       </Routes>
+      {showChat && <Chat socket={socket} user={state.user} />}
+      {showVideo && <Video socket={socket} user={state.user}  />  }
       <Footer>
         <small>{"\u00a9 2022 Greene Inc. All rights reserved."}</small>
       </Footer>
