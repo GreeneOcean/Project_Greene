@@ -6,7 +6,6 @@ import { DispatchContext } from '../../appState/index'
 
 const Cell = ({ status, group, user, item }) => {
   const [, dispatch] = useContext(DispatchContext)
-
   const [rate, setRate] = useState(false);
   const [rated, setRated] = useState(false);
   const { id, posted_by, category, description, title,  pictures, interested_users, approved_user, taken_by } = item
@@ -106,6 +105,10 @@ const Cell = ({ status, group, user, item }) => {
           </Modal>
         }
       </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> ffa1374f7126342a915cc2f18d206df54afa4bb2
        </Container>
   );
 };
@@ -122,6 +125,10 @@ const Container = styled.div`
   border:2px solid var(--color1);
   background:white;
   margin: 3vh 0;
+<<<<<<< HEAD
+=======
+
+>>>>>>> ffa1374f7126342a915cc2f18d206df54afa4bb2
 `
 const Modal = styled.div`
   width: 100px;
