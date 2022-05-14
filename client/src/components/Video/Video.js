@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
+import styled, { keyframes, css } from 'styled-components'
 
-const VideoPlayer = ({ socket }) => {
+const Video = ({ socket }) => {
   const localVideoRef = useRef();
   const remoteVideoRef = useRef();
   const pc = useRef(new RTCPeerConnection(null));
@@ -112,27 +113,137 @@ const VideoPlayer = ({ socket }) => {
       );
     }
   };
-
+  const sideValue = 500
   return (
-    <div style={{ margin: 10 }}>
-      <br />
-      <video
-        style={{ width: 240, height: 240, margin: 5, backgroundColor: "black" }}
-        ref={localVideoRef}
-        autoPlay
-      ></video>
-      <video
-        style={{ width: 240, height: 240, margin: 5, backgroundColor: "black" }}
-        ref={remoteVideoRef}
-      ></video>
-      <br />
-
-      {showHideButtons()}
-      <div>{status}</div>
-      {/* <textarea ref={textRef}></textarea> */}
-      <br />
-    </div>
+    <Modal animate={showVideo}>
+      <VideoPlayerContainer >
+        <VideoContainer>
+          <video
+            style={{ width: sideValue, height: sideValue, backgroundColor: "black" }}
+            ref={localVideoRef}
+            autoPlay
+          />
+          <video
+            style={{ width: sideValue, height: sideValue, backgroundColor: "black" }}
+            ref={remoteVideoRef}
+          />
+        </VideoContainer>
+        <FooterButtonContainer>
+          {showHideButtons()}
+          <FooterButton onClick={() => setShowVideo(false)}>Close</FooterButton>
+          <StatusTag>{status}</StatusTag>
+        </FooterButtonContainer>
+      </VideoPlayerContainer>
+    </Modal>
   );
 };
 
 export default VideoPlayer;
+
+
+const fadeTime = 300
+const fadeOptions = `${fadeTime}ms ease-out forwards`
+
+const chatSlideUp = keyframes`
+  0% {
+    opacity: 0;
+    /* transform: translateY(100%); */
+  }
+  100% {
+    opacity: 1;
+    /* transform: translateY(0%); */
+  }
+`
+const chatSlideDown = keyframes`
+  0% {
+    opacity: 1;
+    /* transform: translateY(0%); */
+  }
+  100% {
+    opacity: 0;
+    /* transform: translateY(100%); */
+  }
+`
+
+
+
+const Modal = styled.div`
+  position: relative;
+  /* right: 0; */
+  top: -45vh;
+  height: 100vh;
+  width: 100vw;
+  /* height: 1000px; */
+  /* width: 1000px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: ${({ animate }) => animate ? css`${chatSlideUp} ${fadeOptions}` : css`${chatSlideDown} ${fadeOptions}` };
+  /* background: transparent; */
+  background-color: var(--color3);
+  opacity: 0.9;
+`
+
+
+const VideoPlayerContainer = styled.div`
+  height: 50vh;
+  width: 50vw;
+  background-color: var(--color3);
+  border-radius: 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`
+
+const VideoContainer = styled.div`
+  height: 80%;
+  width: 100%;
+  display: flex;
+  justify-content:  space-around;
+  align-items: center;
+`
+
+const FooterButtonContainer = styled.div`
+  display: flex;
+  /* align-items: center; */
+  justify-content: space-around;
+  /* background-color: var(--color4); */
+  width: 100%;
+  height: 20%;
+`
+
+const FooterButton = styled.button`
+  display: flex;
+  font-size: 16px;
+  color: white;
+  padding: .2em;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  background: transparent;
+  border: white 0.5px solid;
+  height: 60%;
+
+  &:hover{
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+`
+
+const StatusTag = styled.div`
+  display: flex;
+  font-size: 16px;
+  color: white;
+  padding: .2em;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  background: transparent;
+  border: white 0.5px solid;
+  height: 60%;
+
+  &:hover{
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
+`

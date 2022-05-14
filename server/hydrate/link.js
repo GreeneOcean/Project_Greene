@@ -24,7 +24,8 @@ const link = async (maxConnections = 3) => {
 
 
   const reduced = randomUsernamesPerDonation.map((usernames, idx) => {
-    const user = { interested_users: usernames.map(({ user_name }) =>  user_name ? user_name : 'butts') }
+    const state = usernames.length ? 'claimed' : 'claimed'
+    const user = { state,  interested_users: usernames.map(({ user_name }) =>  user_name ? user_name : 'butts') }
     return [idx + 1, user]
   })
 

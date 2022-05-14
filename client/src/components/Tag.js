@@ -6,7 +6,10 @@ const TagSpan = styled.span`
   background: var(--color2);
   padding: .2em .5em;
   border-radius: .6em;
-  margin-right: .3em;
+
+  && {
+    margin-right: .3em;
+  }
 `;
 
 const ClickableTagSpan = styled(TagSpan)`

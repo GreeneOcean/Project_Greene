@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Tag from './Tag.js';
 
 const TagBox = styled.div`
-  width: 100%;
+  width: 25em;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
