@@ -12,7 +12,7 @@ function Browse({ state, user, dispatch, init }) {
   const [filteredItems, setFilteredItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
 
-  const charity_states = ['true', 'false', 'pending', 'denied']
+
   return (
     <Container>
       <FilterBar

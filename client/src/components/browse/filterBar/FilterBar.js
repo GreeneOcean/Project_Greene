@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { ButtonM } from '../../../styles/buttons'
 import styled from "styled-components";
+
+import {ButtonM} from "../../../styles/buttons";
 
 const FilterBar = ({ itemData, setSelectedItem, setFilteredItems, charity_state }) => {
   const [tags, setTags] = useState([]);
@@ -8,15 +9,41 @@ const FilterBar = ({ itemData, setSelectedItem, setFilteredItems, charity_state 
 
   useEffect(() => {
     if (itemData) {
-      const newCategories = itemData.reduce(
-        (unique, item) =>
-          unique.includes(item.category) ? unique : [...unique, item.category],
-        []
-      );
-      setCategories(newCategories);
+      filterItems();
+    }
+  }, [itemData]);
 
-      const newTags = [];
-      itemData.forEach((item) => {
+  const filterItems = () => {
+
+    let innerFilteredItems = itemData.filter(item => {
+      return !(['false', 'denied'].includes(charity_state) && item.charity_only)
+    });
+    if (document.getElementById("distance").value !== "--Select Distance--") {
+      innerFilteredItems = innerFilteredItems.filter((item) => {
+        return item.distance <= document.getElementById("distance").value;
+      });
+    }
+    if (document.getElementById("category").value !== "--Select Category--") {
+      innerFilteredItems = innerFilteredItems.filter((item) => {
+        return item.category === document.getElementById("category").value;
+      });
+    }
+    if (document.getElementById("tag").value !== "--Select Tag--") {
+      innerFilteredItems = innerFilteredItems.filter((item) => {
+        return item.tag.includes(document.getElementById("tag").value);
+      });
+    }
+    setFilteredItems(innerFilteredItems);
+
+    const newCategories = innerFilteredItems.reduce(
+      (unique, item) =>
+        unique.includes(item.category) ? unique : [...unique, item.category],
+      []
+    );
+    setCategories(newCategories);
+
+    const newTags = [];
+      innerFilteredItems.forEach((item) => {
         item.tag.forEach((tag) => {
           if (!newTags.includes(tag)) {
             newTags.push(tag);
@@ -24,30 +51,6 @@ const FilterBar = ({ itemData, setSelectedItem, setFilteredItems, charity_state 
         });
       });
       setTags(newTags);
-      filterItems();
-    }
-  }, [itemData]);
-
-  const filterItems = () => {
-    let filteredItems = itemData.filter(item => {
-      return !(['false', 'denied'].includes(charity_state) && item.charity_only)
-    });
-    if (document.getElementById("distance").value !== "--Select Distance--") {
-      filteredItems = filteredItems.filter((item) => {
-        return item.distance <= document.getElementById("distance").value;
-      });
-    }
-    if (document.getElementById("category").value !== "--Select Category--") {
-      filteredItems = filteredItems.filter((item) => {
-        return item.category === document.getElementById("category").value;
-      });
-    }
-    if (document.getElementById("tag").value !== "--Select Tag--") {
-      filteredItems = filteredItems.filter((item) => {
-        return item.tag.includes(document.getElementById("tag").value);
-      });
-    }
-    setFilteredItems(filteredItems);
   };
 
   const clearFilter = () => {
