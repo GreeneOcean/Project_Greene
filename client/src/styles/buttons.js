@@ -39,7 +39,7 @@ export const ButtonS = styled.button`
 
 export const LogSignButton = styled.div`
   font-weight: bold;
-  color: #37782c;
+  color: white;
   width: 100px;
   &:hover {
     cursor: pointer;

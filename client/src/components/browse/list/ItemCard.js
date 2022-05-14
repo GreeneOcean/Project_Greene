@@ -28,13 +28,13 @@ const ItemCard = ({ item, selectedItem, setSelectedItem }) => {
       onClick={selectItemHandler}
       isSelected={selectedItem === item.id}
     >
-      <InnerItemContainer>
         <PhotoDiv>
           {(item.pictures && item.pictures.length) && <StyledImage src={item.pictures[0]} />}
           {(!item.pictures || !item.pictures.length) && <StyledImage src={photoNotFoundURL}/>}
         </PhotoDiv>
-      </InnerItemContainer>
-      <p>{item.title}</p>
+
+      <InnerItemContainer>
+      <h1>{item.title}</h1>
       <p>{item.description}</p>
       {item.tag.map((tag, idx) => {
         return <p key={idx}>{tag}</p>;
@@ -42,6 +42,8 @@ const ItemCard = ({ item, selectedItem, setSelectedItem }) => {
       {selectedItem === item.id && (
         <ViewButton onClick={claimClickHandler}>View</ViewButton>
       )}
+
+</InnerItemContainer>
     </ItemContainer>
   );
 };
@@ -81,6 +83,15 @@ const StyledImage = styled.img`
 const InnerItemContainer = styled.div`
   width:50%;
   padding-left:1em;
+  display:flex;
+  flex-direction:column;
+  h1{
+    font-size: 150%;
+    margin: 0.5em 0;
+  }
+  p{
+    font-size: 100%;
+  }
 `;
 
 const ViewButton = styled(ButtonS)`

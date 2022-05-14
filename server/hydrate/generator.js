@@ -155,17 +155,17 @@ const genRandUserName = (maxNumberOfFrags = 3) => {
   return newUserName;
 };
 
-
-const genRandDonationForUser = (userId, lat, lng, maxTags = 4) => {
+const genRandDonationForUser = (userId, lat, lng, maxTags = 3) => {
   const { titlesL, descriptionsL, categoriesL, tagsL, locationsL } =
     claimableLengths;
+    let tags = ['new', 'like-new', 'used', 'value', 'old', 'colorful', 'heavy', 'clean', 'tropical', 'winter', 'summer', 'spring', 'fall' ]
+    let numTags = randInt(maxTags, "round");
+    let newTags= [];
 
-    let newTags = []
-    let numTags = randInt(maxTags, "round")
-    while( numTags-- ) {
-      newTags.push(tags[randInt(tagsL)])
+    while( numTags > 0 ) {
+      newTags.push(tags[randInt(tags.length - 1, "floor")])
+      numTags--;
     }
-
   return {
     posted_by: userId,
     title: titles[randInt(titlesL)],

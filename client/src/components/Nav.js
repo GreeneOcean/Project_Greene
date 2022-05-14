@@ -188,7 +188,7 @@ const StyledLink = styled.div`
     text-decoration: none;
     display: block;
     color: var(--color2);
-    font-size: 150%;
+    font-size: 1.5em;
   }
   svg {
     color: var(--color2);

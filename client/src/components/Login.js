@@ -6,10 +6,11 @@ import { ButtonMD, LogSignButton } from '../styles/buttons';
 import { AuthInput } from '../styles/input';
 
 const Login = ({ handleClickOther }) => {
-  const [ ,dispatch] = useContext(DispatchContext);
+  const [, dispatch] = useContext(DispatchContext);
   // const [state] = useContext(StateContext);
   const [userText, setUserText] = useState('');
   const [passText, setPassText] = useState('');
+  const [displayErrorMessage, setDisplayErrorMessage] = useState(false);
 
   const handleUserChange = (e) => {
     setUserText(e.target.value);
@@ -19,14 +20,41 @@ const Login = ({ handleClickOther }) => {
     setPassText(e.target.value);
   };
 
-  const handleLogin = (e) => {
+  const handleLoginEnter = (e) => {
     if (e.keyCode === 13 && passText.length && userText.length) {
       api.get
-      .login({
-        userName: userText,
-        attempt: passText,
-      }, dispatch)
-      .catch(err => console.log(err));
+        .login(
+          {
+            userName: userText,
+            attempt: passText,
+          },
+          dispatch,
+        )
+        .then(() => {
+          if (true) {
+            setDisplayErrorMessage(true);
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
+  const handleLoginClick = () => {
+    if (passText.length && userText.length) {
+      api.get
+        .login(
+          {
+            userName: userText,
+            attempt: passText,
+          },
+          dispatch,
+        )
+        .then(() => {
+          if (true) {
+            setDisplayErrorMessage(true);
+          }
+        })
+        .catch((err) => console.log(err));
     }
   };
 
@@ -34,13 +62,13 @@ const Login = ({ handleClickOther }) => {
     <>
       <h1 style={{ marginBottom: '15px' }}>Welcome!</h1>
       <AuthInput
-        id='usernameLogin'
+        id="usernameLogin"
         autoComplete="off"
         maxLength="150"
         value={userText}
         onChange={handleUserChange}
         placeholder={'Enter your Username'}
-        onKeyDown={handleLogin}
+        onKeyDown={handleLoginEnter}
       />
       <AuthInput
         id="passwordLogin"
@@ -50,12 +78,18 @@ const Login = ({ handleClickOther }) => {
         value={passText}
         onChange={handlePassChange}
         placeholder={'Enter your Password'}
-        onKeyDown={handleLogin}
+        onKeyDown={handleLoginEnter}
       />
-      <ButtonMD
-        onClick={handleLogin}
-        style={{ marginBottom: '15px' }}
-      >
+      {displayErrorMessage ? (
+        <div
+          style={{
+            color: 'red',
+          }}
+        >
+          <span>The username or password you entered is incorrect.</span>
+        </div>
+      ) : null}
+      <ButtonMD onClick={handleLoginClick} style={{ marginBottom: '15px' }}>
         Log in
       </ButtonMD>
       <div>Don't have an account? </div>
