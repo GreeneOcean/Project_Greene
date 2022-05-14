@@ -1,20 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
+import { DispatchContext } from '../appState/index'
 import styled from 'styled-components';
 
-const Search = () =>{
-    const [searchText, setSearchText] = useState('');
+const Search = ({ user }) =>{
+    const [, dispatch] = useContext(DispatchContext);
 
     // useEffect(() => {
     //   handleSearchFilter(searchText);
     // }, [searchText]);
 
     const handleSearchChange = (e) => {
-      setSearchText(e.target.value);
+      dispatch({
+        type: 'SET_SEARCH',
+        payload: e.target.value
+      })
     };
 
     return (
       <div style={{
-        width:'50%'
+        width:'50%',
+        height:'100%'
       }}>
         <input
           id="search"
@@ -33,7 +38,7 @@ const Search = () =>{
             // backgroundColor: 'rgba(11, 191, 125, 0.9)';
             // box-shadow: '0px 5px 10px rgba(46, 229, 157, 0.4)';
           }}
-          value={searchText}
+          value={user.searchTerm}
           onChange={handleSearchChange}
           placeholder={'Search donations...'}
         />

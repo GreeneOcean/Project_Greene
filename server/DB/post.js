@@ -27,8 +27,8 @@ POST.session = async (newSession) => {
   return await POST(newSession, 'sessions')
 }
 
-POST.review = async (newReview) => {
-  return await POST(newReview, 'reviews')
+POST.rating = async (newRating) => {
+  return await POST(newRating, 'ratings')
 }
 
 module.exports = POST

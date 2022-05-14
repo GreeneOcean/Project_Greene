@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import api from '../../api/index';
+import styled from "styled-components";
+
 
 function ApprovalList({ each }) {
   const [userApproved, setUserApproved] = useState(false);
@@ -24,20 +26,33 @@ function ApprovalList({ each }) {
 
 
   return (
-    <div>
+    <EachContainer>
       <p>Pending: {each.user_name}</p>
       <label>
-        {userApproved ? ('Approved') : (<button onClick={() => handleChoice(true)}>Approve</button>)}
+        {userApproved ? ('Approved') : (<ApproveDenyButton onClick={() => handleChoice(true)}>Approve</ApproveDenyButton>)}
 
       </label>
       <label>
-        {userDenied ? ('Denied') : (<button onClick={() => handleChoice(false)}>Deny</button>)}
+        {userDenied ? ('Denied') : (<ApproveDenyButton onClick={() => handleChoice(false)}>Deny</ApproveDenyButton>)}
 
       </label>
 
-    </div>
+    </EachContainer>
   )
 }
 
 export default ApprovalList;
 
+const EachContainer = styled.div`
+  padding: 1em;
+  padding-right: 2em;
+  padding-left: 2em;
+  border-radius: 20px;
+  width: 80%;
+  display:flex;
+  align-items: center;
+  border:2px solid var(--color1);
+`
+const ApproveDenyButton = styled.button`
+
+`
