@@ -9,6 +9,7 @@ import ItemList from "../components/browse/list/ItemList"
 
 function Browse({ state, user, dispatch, init }) {
   const { dev } = state
+  const { searchTerm } = state.user
   const [filteredItems, setFilteredItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
 
@@ -17,6 +18,7 @@ function Browse({ state, user, dispatch, init }) {
     <Container>
       <FilterBar
         itemData={state.user.local}
+        searchTerm={searchTerm}
         setSelectedItem={setSelectedItem}
         setFilteredItems={setFilteredItems}
         charity_state={state.user.charity_state}

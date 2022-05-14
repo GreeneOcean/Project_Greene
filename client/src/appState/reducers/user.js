@@ -34,7 +34,7 @@ function reducer(state, action) {
       return state;
 
     case 'SET_SEARCH':
-      state.searchTerm =  payload.value
+      state.searchTerm =  payload
       return state;
 
     default:
