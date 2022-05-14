@@ -176,7 +176,7 @@ app.put("/user", async (req, res) => {
 app.post("/review", async (req, res) => {
   try {
     const newReview = req.body;
-    const addRes = await DB.POST.review(newReview);
+    const addRes = await DB.POST.rating(newReview);
     console.log(`Request at ${`/review`}`);
     res.status(201).send({ posted: true, post: newReview });
   } catch (err) {

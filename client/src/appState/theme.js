@@ -10,9 +10,10 @@ const ThemeProvider = ({ STYLES, dimensions }) => {
 const media = {
   mobile: '425px',
   tablet: '768px',
-  laptop: '1024px',
-  /* laptopL: '1440px',
-  desktop: '2560px' */
+  laptopS: '1024px',
+  laptopM: '1080px',
+  laptopL: '1440px',
+  desktop: '2560px'
 }
 
 const GradientBG = keyframes`
@@ -55,6 +56,17 @@ body {
   animation-duration: 10s;
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
+
+  --SideMenuWidth: 40%;
+
+  @media (min-width: ${media.tablet} ) {
+    --SideMenuWidth: 27%
+  }
+
+  @media (min-width: ${media.laptopM} ) {
+    --SideMenuWidth: 17%
+  }
+
 
 }
 

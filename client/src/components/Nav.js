@@ -55,7 +55,7 @@ const Nav = ({ user }) => {
             }}
           />
         </Link>
-        <Search />
+        <Search user={user} />
         <TiThMenu
           style={{
             color: 'var(--color2)',
@@ -90,10 +90,10 @@ const Nav = ({ user }) => {
                 <Link to='/' onClick={logoutClick}>Log out</Link>
               </StyledLink>
               <StyledLink>
+                <CgArrowsExchange />
                 <Link to="/Transactions">
                   {isGreene ? 'Admin' : 'Transactions'}
                 </Link>
-                <CgArrowsExchange />
               </StyledLink>
             </>
           ) : (
@@ -120,9 +120,9 @@ const SideMenu = styled.div`
   top: 0;
   position: absolute;
   right: 0;
-  width: 20%;
-  max-width: 350px;
-  min-width: 350px;
+  width: var(--SideMenuWidth);
+  /* max-width: 350px; */
+  /* min-width: 350px; */
   height: 100vh;
   background: white;
   border-left: 3px solid var(--color2);
@@ -136,7 +136,7 @@ const SideMenu = styled.div`
 const NavContainer = styled.nav`
   box-sizing: border-box;
   margin: 0;
-  padding: 0;
+  padding:  0.5em 0;
   height: 5vh;
   width: 100%;
   display: flex;
@@ -176,6 +176,8 @@ const ButtonSM = styled.button`
 `;
 
 const StyledLink = styled.div`
+  display: flex;
+  align-items: center;
   padding: 0.5em 0;
   transition: all 0.5s;
   color: var(--color2);

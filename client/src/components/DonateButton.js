@@ -1,29 +1,22 @@
 import React from 'react';
-import styled, {keyframes} from 'styled-components';
-import {ButtonL} from '../styles/buttons';
+import styled from 'styled-components';
+import { useNavigate } from "react-router-dom"
+import { ButtonL } from '../styles/buttons';
 
 const DonateButton = function () {
+  let navigate = useNavigate();
+  const handleClick = () => {
+    navigate('/Donate');
+  }
 
   return(
     <Container>
-      <StyledButton>
+      <StyledButton onClick={handleClick}>
       Donate +
       </StyledButton>
     </Container>
   );
 }
-
-const GradientBG = keyframes`
-  0%{
-    background-size: 100% 100%;
-  }
-  50%{
-    background-size: 300% 300%;
-  }
-  100%{
-    background-size: 100% 100%;
-  }
-`;
 
 
 const Container = styled.div`

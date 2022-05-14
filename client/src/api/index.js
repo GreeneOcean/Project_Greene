@@ -119,24 +119,14 @@ get.login = loginUser;
 function post(endpoint, data, params) {
   return runFetch(...buildPostOptions(endpoint, data, params));
 }
-
-function postDonation(data) {
-  return post("/donation", data);
-}
-post.donation = postDonation;
-
-function postReview(data) {
-  return post("/review", data);
-}
-post.review = postReview;
-
+post.donation = (data) => post("/donation", data);
+post.review = (data) => post("/review", data);
 post.user = (data) => post("/user", data);
 
 //PUT
 function put(endpoint, data, params) {
   return runFetch(...buildPutOptions(endpoint, data));
 }
-
 put.interest = ((data) => put('/interest', data))
 put.donation = ((data) => put('/donation', data))
 put.user = ((data) => put('/user', data))
