@@ -24,10 +24,12 @@ function reducer(state, action) {
       return state;
 
     case 'TOGGLE_CHAT':
+      state.otherUser = payload || ''
       state.chat =  !state.chat
       return state;
 
     case 'TOGGLE_VIDEO_CHAT':
+      state.otherUser = payload  || ''
       state.videoChat =  !state.videoChat
       return state;
 

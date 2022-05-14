@@ -83,13 +83,27 @@ const Nav = ({ user }) => {
             }}
           />
         </div>
+        {loggedIn ? (
+          <div
+            style={{
+              textAlign: 'center',
+              color: 'var(--color2)',
+              fontSize: '1em',
+              fontWeight: 'bold',
+              textDecoration: 'underline'
+            }}
+          >
+            Hello {user.user_name}!
+          </div>
+        ) : null}
         <div>
           {loggedIn ? (
             <>
-              <StyledLink>
+              <StyledLink onClick={() => {setMenu(!menu);}}>
                 <Link to='/' onClick={logoutClick}>Log out</Link>
               </StyledLink>
-              <StyledLink>
+              <StyledLink onClick={() => {setMenu(!menu);}}>
+
                 <CgArrowsExchange />
                 <Link to="/Transactions">
                   {isGreene ? 'Admin' : 'Transactions'}
@@ -97,16 +111,16 @@ const Nav = ({ user }) => {
               </StyledLink>
             </>
           ) : (
-            <StyledLink>
+            <StyledLink onClick={() => {setMenu(!menu);}}>
               <AiOutlineUser />
               <Link to="/Auth">Log in</Link>
             </StyledLink>
           )}
-          <StyledLink>
+          <StyledLink onClick={() => {setMenu(!menu);}}>
             <AiOutlineUnorderedList />
             <Link to="/Browse">Browse</Link>
           </StyledLink>
-          <StyledLink>
+          <StyledLink onClick={() => {setMenu(!menu);}}>
             <AiOutlinePlusCircle />
             <Link to="/Donate">Donate</Link>
           </StyledLink>

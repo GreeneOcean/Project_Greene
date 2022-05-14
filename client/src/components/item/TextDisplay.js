@@ -69,7 +69,6 @@ const TextDisplay = ({
 export default TextDisplay;
 
 const TextDisplayContainer = styled.div`
-  width: 100%;
   height: 100%;
   background-color: white;
   border-radius: 10px;
@@ -78,7 +77,6 @@ const TextDisplayContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  padding: 3%;
 `;
 
 const Header = styled.div`
@@ -92,9 +90,9 @@ const Header = styled.div`
 `;
 
 const StyledSpan = styled.div`
+  margin-top: 1em;
   display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: center;
 
   *{

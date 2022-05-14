@@ -25,7 +25,11 @@ const initUser = {
   user_name: null,
   lat: null,
   lng: null,
-  dev: initDev
+  chat: null,
+  videoChat: null,
+  otherUser: '',
+  searchTerm: '',
+  dev: initDev,
 };
 
 const initAppState = {
