@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import api from '../../api/index';
 import { ButtonS } from '../../styles/buttons.js';
+import { DispatchContext } from '../../appState/index'
 
-const Cell = ({ status, group, user, item, setOther, clearOther }) => {
+const Cell = ({ status, group, user, item }) => {
+  const [, dispatch] = useContext(DispatchContext)
   const [rate, setRate] = useState(false);
   const [rated, setRated] = useState(false);
   const { id, posted_by, category, description, title,  pictures, interested_users, approved_user, taken_by } = item
@@ -47,33 +49,46 @@ const Cell = ({ status, group, user, item, setOther, clearOther }) => {
       .catch(err => console.log('Err in unapproving user', err.message))
   }
 
+  const toggleChat = (newUser) => {
+    dispatch({
+      type: 'TOGGLE_CHAT',
+      payload: newUser
+    })
+  }
+
+
+
   return (
     <Container>
       <img src={pictures}/>
-        <h3 onClick={() => clearOther()} >{title} </h3>
-        <p>Donated by {posted_by} </p>
+      <div>
+
         <p>Category: {category} </p>
-        <p>Description: {description} </p>
-        <button onClick={() => setOther(posted_by)} >Chat with {posted_by} </button>
-        <p>Interested users</p>
-        <InterestedUsers>
-          {interested_users.map((user, ind) => {
-            if (user !== approved_user) {
+        <h1 onClick={() => clearOther()} >{title} </h1>
+        <p style={{fontSize: '0.8em'}}>Donated by {posted_by} </p>
+        <p style={{fontSize: '1.2em'}}>Description: {description} </p>
+        <div style={{marginTop: '1em'}}>
+          <button style={{color: 'var(--color3)', cursor: 'pointer'}} onClick={() => toggleChat(posted_by)} >Chat with {posted_by} </button>
+          <p>Interested users</p>
+          <InterestedUsers>
+            {interested_users.map((user, ind) => {
+              if (user !== approved_user) {
+                return (
+                  <InterestedUser
+                    id={ind}
+                    onClick={() => handleApproveUser(user)}
+                  > {user} click to Approve </InterestedUser>
+                )
+              }
               return (
                 <InterestedUser
                   id={ind}
-                  onClick={() => handleApproveUser(user)}
-                > {user} click to Approve </InterestedUser>
+                  onClick={() => handleUnApproveUser(null)}
+                > Click to unapprove {user} </InterestedUser>
               )
-            }
-            return (
-              <InterestedUser
-                id={ind}
-                onClick={() => handleUnApproveUser(null)}
-              > Click to unapprove {user} </InterestedUser>
-            )
-          })}
-        </InterestedUsers>
+            })}
+          </InterestedUsers>
+        </div>
         {charity_state && group === 'donations' && status === 'donated' && !rated &&
           < button onClick={() => setRate(!rate)}>{rate ? <span>Cancel</span>: <span>Rate User</span>}</button>
         }
@@ -89,6 +104,7 @@ const Cell = ({ status, group, user, item, setOther, clearOther }) => {
             <ButtonS onClick={handleRating}>Rate</ButtonS>
           </Modal>
         }
+      </div>
 
        </Container>
   );
@@ -104,6 +120,9 @@ const Container = styled.div`
   display:flex;
   align-items: center;
   border:2px solid var(--color1);
+  background:white;
+  margin: 3vh 0;
+
 `
 const Modal = styled.div`
   width: 100px;
