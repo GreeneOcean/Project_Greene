@@ -50,7 +50,9 @@ const ItemPageContainer = styled.div`
   align-items: center;
   margin-top: 10vh;
   min-height: 40vh;
-  width: 70vw;
+  background: white;
+  border-radius: 10px;
+  padding: 3%;
 `;
 
 const MapContainer = styled.div`

@@ -1,22 +1,24 @@
-import React, { useState, useEffect, useRef } from 'react';
-import VideoPlayer from './Dashboard/VideoPlayer';
-import io from 'socket.io-client';
-// const socket = io.connect('http://localhost:8080');
-const socket = io.connect('https://nealtest.herokuapp.com/');
+import React, { useState, useEffect, useRef, useContext } from 'react';
+// import VideoPlayer from './Dashboard/VideoPlayer';
 import styled, { css, keyframes } from 'styled-components';
+import { DispatchContext } from '../../appState/index'
 
 
 
-function Chat({ socket,  currentUser, setOthe }) {
+function Chat({ socket, user }) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
-  // for hiding and showing chat
+  const [ , dispatch] = useContext(DispatchContext)
+
+
   const [showVideo, setShowVideo] = useState(false);
-  console.log("currentuser", currentUser);
+  const { user_name, otherUser } = user
+
+
   const sendMessage = () => {
     if (currentMessage !== "") {
       const messageData = {
-        name: currentUser,
+        name: user_name,
         message: currentMessage,
         time:
           new Date(Date.now()).getHours() +
@@ -28,28 +30,36 @@ function Chat({ socket,  currentUser, setOthe }) {
       setCurrentMessage("");
     }
   };
+
   useEffect(() => {
     socket.on("receive_message", (data) => {
       setMessageList((list) => [...list, data]);
     });
   }, [socket]);
-  const initCall = () => {
-    setShowVideo(true);
-  };
+
+  const openVideoChat = (newUserChat) => {
+    dispatch({
+      type: 'TOGGLE_VIDEO_CHAT',
+      payload: newUserChat
+    })
+  }
+
+  const closeChat = () => {
+    dispatch({ type: 'TOGGLE_CHAT' })
+  }
+
   return (
-    <ChatContainer animate={ !!otherUser.length } >
-      {showVideo && <VideoPlayer socket={socket} showVideo={showVideo}  setShowVideo={setShowVideo} />}
-      {/* <VideoPlayer socket={socket} showVideo={showVideo} setShowVideo={setShowVideo} /> */}
+    <ChatContainer animate={user.chat} >
       <ChatBody>
       <ChatHeader>
         <p>{otherUser}</p>
       </ChatHeader>
         {messageList.map((messageContent, i) => {
           const { time, message } = messageContent
-          const user = name === currentUser
+          const currentUser = name === user_name
           return (
-            <MessageContainer side={user}  id={i}>
-              <UserMessage user={user} >
+            <MessageContainer side={currentUser ? 'end' : 'start'}  id={i}>
+              <UserMessage user={currentUser} >
               <p>{time}</p>
               <p>{message}</p>
               </UserMessage>
@@ -66,8 +76,8 @@ function Chat({ socket,  currentUser, setOthe }) {
         />
         <FooterButtonContainer>
           <FooterButton onClick={sendMessage}> Send </FooterButton>
-          <FooterButton onClick={() => setShowVideo(true)}>Video Call</FooterButton>
-          <FooterButton onClick={() => setOtherUser('')}>Close chat</FooterButton>
+          <FooterButton onClick={() => openVideoChat(otherUser)}>Video Call</FooterButton>
+          <FooterButton onClick={closeChat}>Close chat</FooterButton>
         </FooterButtonContainer>
       </Footer>
     </ChatContainer>
@@ -101,11 +111,10 @@ const chatSlideDown = keyframes`
 const ChatContainer = styled.div`
   background: var(--color3);
   border-radius: 5px;
-  position: sticky;
-  left: 2vw;
+  position: absolute;
+  left: 5%;
   bottom: 1.5em;
   display: flex;
-  /* justify-content: center; */
   align-items: center;
   flex-direction: column;
   padding: 0.75em;

@@ -1,15 +1,21 @@
-import React, { useState, useEffect, useRef } from "react";
-import styled, { keyframes, css } from 'styled-components'
 
-const Video = ({ socket }) => {
+import React, { useState, useEffect, useRef, useContext } from "react";
+import styled, { keyframes, css } from 'styled-components'
+import { DispatchContext } from '../../appState/index'
+
+const VideoPlayer = ({ socket, user }) => {
   const localVideoRef = useRef();
   const remoteVideoRef = useRef();
   const pc = useRef(new RTCPeerConnection(null));
   const textRef = useRef();
+  const [ , dispatch] = useContext(DispatchContext)
+
 
   const [offerVisible, setOfferVisible] = useState(true);
   const [answerVisible, setAnswerVisible] = useState(false);
-  const [status, setStatus] = useState("Make a call now");
+  const [status, setStatus] = useState("Available");
+  const { user_name, otherUser } = user
+
 
   useEffect(() => {
     socket.on("sdp", (data) => {
@@ -113,9 +119,13 @@ const Video = ({ socket }) => {
       );
     }
   };
-  const sideValue = 500
+
+  const closeVideo = () => {
+    dispatch({ type: 'TOGGLE_VIDEO_CHAT' })
+  }
+  const sideValue = 400
   return (
-    <Modal animate={showVideo}>
+    <Modal animate={!!otherUser.length}>
       <VideoPlayerContainer >
         <VideoContainer>
           <video
@@ -129,9 +139,10 @@ const Video = ({ socket }) => {
           />
         </VideoContainer>
         <FooterButtonContainer>
-          {showHideButtons()}
-          <FooterButton onClick={() => setShowVideo(false)}>Close</FooterButton>
-          <StatusTag>{status}</StatusTag>
+          {offerVisible && <FooterButton onClick={createOffer} > Call </FooterButton>}
+          {answerVisible && <FooterButton onClick={createAnswer} > Answer </FooterButton>}
+          <FooterButton onClick={closeVideo}>Close</FooterButton>
+          <FooterButton>{status}</FooterButton>
         </FooterButtonContainer>
       </VideoPlayerContainer>
     </Modal>
@@ -168,27 +179,27 @@ const chatSlideDown = keyframes`
 
 
 const Modal = styled.div`
-  position: relative;
-  /* right: 0; */
-  top: -45vh;
-  height: 100vh;
-  width: 100vw;
-  /* height: 1000px; */
-  /* width: 1000px; */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  /* height: 100vh;
+  width: 100vw; */
   display: flex;
   justify-content: center;
   align-items: center;
   animation: ${({ animate }) => animate ? css`${chatSlideUp} ${fadeOptions}` : css`${chatSlideDown} ${fadeOptions}` };
-  /* background: transparent; */
-  background-color: var(--color3);
-  opacity: 0.9;
+  background: transparent;
+  /* background-color: var(--color3); */
 `
 
 
 const VideoPlayerContainer = styled.div`
-  height: 50vh;
-  width: 50vw;
-  background-color: var(--color3);
+  height: 60vh;
+  width: 75vw;
+  background-color: black;
+  /* background-color: var(--color3); */
   border-radius: 7px;
   display: flex;
   justify-content: center;
@@ -197,7 +208,7 @@ const VideoPlayerContainer = styled.div`
 `
 
 const VideoContainer = styled.div`
-  height: 80%;
+  height: 85%;
   width: 100%;
   display: flex;
   justify-content:  space-around;
@@ -206,11 +217,14 @@ const VideoContainer = styled.div`
 
 const FooterButtonContainer = styled.div`
   display: flex;
-  /* align-items: center; */
+  align-items: center;
   justify-content: space-around;
   /* background-color: var(--color4); */
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+  background-color: var(--color3);
   width: 100%;
-  height: 20%;
+  height: 15%;
 `
 
 const FooterButton = styled.button`
@@ -223,8 +237,8 @@ const FooterButton = styled.button`
   border-radius: 5px;
   background: transparent;
   border: white 0.5px solid;
-  height: 60%;
-
+  height: 40%;
+  min-width: 5em;
   &:hover{
     background-color: rgba(255, 255, 255, 0.2);
   }

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import api from '../api';
 import { AuthInput } from '../styles/input';
 import { StateContext, DispatchContext } from '../appState';
+import { ButtonMD, LogSignButton } from '../styles/buttons';
 
 const SignUp = ({ handleClickOther }) => {
   const [ ,dispatch] = useContext(DispatchContext);
@@ -79,6 +80,7 @@ const SignUp = ({ handleClickOther }) => {
       <h1
         style={{
           marginBottom: '15px',
+          color: 'white',
         }}
       >
         Create a new account
@@ -87,7 +89,7 @@ const SignUp = ({ handleClickOther }) => {
         <input
           type="checkbox"
           onClick={handeCharityStatusClick}
-          style={{ marginBottom: '15px', }}
+          style={{ marginBottom: '15px', color: 'white' }}
         />
         Would you like to apply for chaity status?
       </div>
@@ -160,42 +162,14 @@ const SignUp = ({ handleClickOther }) => {
         <u>Terms of Service</u> and <u>Privacy Policy</u>
       </div>
       <ButtonMD onClick={handleSignUp}>Sign up</ButtonMD>
-      <div>
+      <div style={{
+        color: 'white'
+      }}>
         Already have an account?
-        <LoginButton onClick={handleClickOther}>Log in</LoginButton>
+        <LogSignButton onClick={handleClickOther}>Log in</LogSignButton>
       </div>
     </>
   );
 };
-
-const LoginButton = styled.div`
-  font-weight: bold;
-  color: #37782c;
-  width: 100px;
-  &:hover {
-    cursor: pointer;
-    color: lightgreen;
-    text-decoration: underline;
-  }
-`;
-
-const ButtonMD = styled.button`
-  border: 1px solid rgba(11, 191, 125, 0.9);
-  border-radius: 6px;
-  padding: 10px 50px;
-  width: 400px;
-  text-align: center;
-  text-decoration: none;
-  color: #37782c;
-  background-color: transparent;
-  box-shadow: 5px 5px 12px -5px rgba(0, 0, 0, 0.2);
-  transition: all 0.5s;
-  &:hover {
-    cursor: pointer;
-    color: #fff;
-    background-color: #37782c;
-    box-shadow: 0px 5px 10px rgba(46, 229, 157, 0.4);
-  }
-`;
 
 export default SignUp;
