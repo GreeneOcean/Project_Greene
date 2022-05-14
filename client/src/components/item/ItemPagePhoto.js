@@ -1,16 +1,29 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 
-const photoNotFoundURL =
-  "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?format=jpg&quality=90&v=1530129081";
+import imageUrls from "./imageUrls";
 
-const ItemPagePhoto = ({ pictures }) => {
+const ItemPagePhoto = ({ pictures, category }) => {
+  const [image, setImage] = useState(
+    "https://cdn-icons-png.flaticon.com/512/679/679720.png"
+  );
+
+
+  useEffect(() => {
+    if (pictures && pictures.length) {
+      if (pictures[0] === imageUrls.dbPhotoUrl) {
+        setImage(imageUrls[category]);
+      } else {
+        setImage(item.pictures[0]);
+      }
+    }
+  }, [pictures]);
 
   return (
     <StyledDiv>
-      {pictures && pictures.length && <StyledImage src={pictures[0]} />}
+      {pictures && pictures.length && <StyledImage src={image} />}
       {(!pictures || !pictures.length) && (
-        <StyledImage src={photoNotFoundURL} />
+        <StyledImage src={imageUrls.notFound} />
       )}
     </StyledDiv>
   );
@@ -20,10 +33,12 @@ export default ItemPagePhoto;
 
 const StyledDiv = styled.div`
   width: auto;
-  height: 100%;
+  height: 50%;
   object-fit: contain;
   margin-right:5em;
   background-color: white;
+  border-radius: 10px;
+  padding: 1em;
 `;
 
 const StyledImage = styled.img`
