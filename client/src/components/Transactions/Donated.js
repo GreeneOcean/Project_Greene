@@ -26,7 +26,7 @@ const Donated = ({ status, group, user, item, setOther, clearOther }) => {
       posted_by_name: user.user_name,
       value: rating,
       message: comment
-     })
+    })
       .then((res) => {
         console.log('Rated user', res);
         setRate(false);
@@ -50,44 +50,43 @@ const Donated = ({ status, group, user, item, setOther, clearOther }) => {
   return (
     <Container>
       <img src={pictures}/>
-        <h3 onClick={() => clearOther()} >{title} </h3>
-        <p>Donated by {posted_by} </p>
-        <p>Category: {category} </p>
-        <p>Description: {description} </p>
-        <p>Interested users</p>
-        <InterestedUsers>
-          {interested_users.map((user, ind) => {
-            if (user !== approved_user) {
-              return (
-                <InterestedUser
-                  key={ind}
-                  onClick={() => handleApproveUser(user)}
-                > {user} click to Approve </InterestedUser>
-              )
-            }
+      <h3 onClick={() => clearOther()} >{title} </h3>
+      <p>Donated by {posted_by} </p>
+      <p>Category: {category} </p>
+      <p>Description: {description} </p>
+      <p>Interested users</p>
+      <InterestedUsers>
+        {interested_users.map((user, ind) => {
+          if (user !== approved_user) {
             return (
               <InterestedUser
                 key={ind}
-                onClick={() => handleUnApproveUser(null)}
-              > Click to unapprove {user} </InterestedUser>
+                onClick={() => handleApproveUser(user)}
+              > {user} click to Approve </InterestedUser>
             )
+          }
+          return (
+            <InterestedUser
+              key={ind}
+              onClick={() => handleUnApproveUser(null)}
+            > Click to unapprove {user} </InterestedUser>
+          )
+        })}
+      </InterestedUsers>
+      {charity_state && group === 'donations' && status === 'donated' && !rated &&
+        < button onClick={() => setRate(!rate)}>{rate ? <span>Cancel</span>: <span>Rate User</span>}</button>
+      }
+
+      <Modal>
+        <input type="text" name="comment" value={comment} onChange={commentChange} placeholder="Add a comment"/>
+        <select name="rating" value={rating} onChange={ratingChange}>
+          {([1,2,3,4,5]).map((rating) => {
+            return <option key={rating} value={rating}>{rating}</option>;
           })}
-        </InterestedUsers>
-        {charity_state && group === 'donations' && status === 'donated' && !rated &&
-          < button onClick={() => setRate(!rate)}>{rate ? <span>Cancel</span>: <span>Rate User</span>}</button>
-        }
-
-
-        <Modal>
-          <input type="text" name="comment" value={comment} onChange={commentChange} placeholder="Add a comment"/>
-          <select name="rating" value={rating} onChange={ratingChange}>
-            {([1,2,3,4,5]).map((rating) => {
-              return <option key={rating} value={rating}>{rating}</option>;
-            })}
-          </select>
-          <ButtonS onClick={handleRating}>Rate</ButtonS>
-        </Modal>
-       </Container>
+        </select>
+        <ButtonS onClick={handleRating}>Rate</ButtonS>
+      </Modal>
+    </Container>
   );
 };
 

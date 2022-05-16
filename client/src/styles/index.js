@@ -25,8 +25,9 @@ const Footer = styled.footer`
   align-items: center;
   justify-content: center;
   background-color: white;
-  position:absolute;
-  bottom:0;
+  position: fixed;
+  bottom: 0;
+  color: var(--color2);
 `;
 
 const PageContainer = styled.div`

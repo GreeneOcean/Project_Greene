@@ -1,12 +1,12 @@
 import React, { useContext, useState, useEffect } from "react";
 import styled from "styled-components";
-import { ButtonS } from '../../../styles/buttons'
+import { ButtonS } from '../../styles/buttons'
 import { useNavigate } from "react-router-dom";
 
-import { DispatchContext } from "../../../appState/index";
-import imageUrls from "../../item/imageUrls";
+import { DispatchContext } from "../../appState/index";
+import imageUrls from "../item/imageUrls";
 
-const ItemCard = ({ item, selectedItem, setSelectedItem }) => {
+const HomeCard = ({ item, selectedItem, setSelectedItem }) => {
   const [, dispatch] = useContext(DispatchContext);
   const [image, setImage] = useState(
     "https://cdn-icons-png.flaticon.com/512/679/679720.png"
@@ -50,36 +50,42 @@ const ItemCard = ({ item, selectedItem, setSelectedItem }) => {
       </PhotoDiv>
 
       <InnerItemContainer>
-        <h1>{item.title}</h1>
+        <h2>{item.title}</h2>
         <p>{item.description}</p>
+        <p> {`${Math.ceil(item.distance)} ${
+          item.distance > 1 ? "miles" : "mile"
+        } from you`} </p>
         <div style={{display: 'flex', marginTop: '1em'}}>
           {item.tag.map((tag, idx) => {
             return <Tag style={{marginRight: '0.5em'}} key={idx}>{tag}</Tag>;
           })}
         </div>
-        {selectedItem === item.id && (
-          <ViewButton onClick={claimClickHandler}>View</ViewButton>
-        )}
       </InnerItemContainer>
+      <Footer>
+        <ViewButton onClick={claimClickHandler}>View</ViewButton>
+      </Footer>
     </ItemContainer>
   );
 };
 
-export default ItemCard;
+export default HomeCard;
 
 const ItemContainer = styled.div`
   min-width: 300px;
-  width: 40%;
+  width: 20%;
   margin: 10px;
   display: flex;
+  flex-direction: column;
   border-radius: 10px;
-  padding:2em;
+  padding: 1.75em;
   cursor: pointer;
   background-color: white;
-  flex-direction: column;
   font-size: 100%;
   box-shadow: ${({isSelected}) => isSelected ? 'inset 0 0 2em var(--color1)' : 'none'};
-`;
+  :hover {
+    width:25%;
+  }
+  `;
 //width: ${({isSelected}) => isSelected ? '70%' : '40%'};
 
 //  font-size: ${({isSelected}) => isSelected ? '2em' : '1em'};
@@ -96,13 +102,13 @@ const PhotoDiv = styled.div`
 const StyledImage = styled.img`
   height: 100%;
   width: 100%;
+  object-fit: contain;
 `;
 
 const InnerItemContainer = styled.div`
   width:100%;
-  padding-left:1em;
-  display:flex;
-  flex-direction:column;
+  padding:0.25em;
+  /* display: flex; */
 
   overflow: auto;
   padding-top: 2em;
@@ -118,8 +124,15 @@ const InnerItemContainer = styled.div`
   }
 `;
 
+const Footer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+`
+
 const ViewButton = styled(ButtonS)`
-  margin-top: 1em;
+  width: 70%;
+  margin-top: 0.8em;
   filter: none;
 `;
 
@@ -128,7 +141,7 @@ const Tag = styled.div`
   background: var(--color1);
   font-size: 1em;
   font-weight: bold;
-  padding: 0.5em 1em;
+  padding: 0.5em 0.8em;
   border-radius: 30px;
   margin-right: 0.2em;
 `;

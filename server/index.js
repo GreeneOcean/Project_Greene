@@ -25,33 +25,33 @@ app.use(session.start);
 app.use(session.end);
 
 // ===========for Chat====================================
-// const io = new Server(server, {
-//   cors: {
-//     origin: "*",
-//     methods: ["GET", "POST"]
-//   }
-// });
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"]
+  }
+});
 
-// io.on("connection", (socket) => {
-//   console.log(`User connected 😀: ${socket.id}`);
+io.on("connection", (socket) => {
+  console.log(`User connected 😀: ${socket.id}`);
 
-//   socket.on("send_message", (data) => {
-//     console.log(data);
-//     socket.broadcast.emit("receive_message", data);
-//   });
+  socket.on("send_message", (data) => {
+    console.log(data);
+    socket.broadcast.emit("receive_message", data);
+  });
 
-//   socket.on("disconnect", () => {
-//     console.log("User disconnected 🥸", socket.id);
-//   });
+  socket.on("disconnect", () => {
+    console.log("User disconnected 🥸", socket.id);
+  });
 
-//   socket.on("sdp", (data) => {
-//     socket.broadcast.emit("sdp", data);
-//   });
+  socket.on("sdp", (data) => {
+    socket.broadcast.emit("sdp", data);
+  });
 
-//   socket.on("candidate", (data) => {
-//     socket.broadcast.emit("candidate", data);
-//   });
-// });
+  socket.on("candidate", (data) => {
+    socket.broadcast.emit("candidate", data);
+  });
+});
 
 
 
