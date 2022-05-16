@@ -55,12 +55,12 @@ function Chat({ socket, user }) {
         <p>{otherUser}</p>
       </ChatHeader>
         {messageList.map((messageContent, i) => {
-          const { time, message } = messageContent
+          const { time, message, name } = messageContent
           const currentUser = name === user_name
           return (
-            <MessageContainer side={currentUser ? 'end' : 'start'}  id={i}>
+            <MessageContainer side={currentUser ? 'start' : 'end'}  id={i}>
               <UserMessage user={currentUser} >
-              <p>{time}</p>
+              {/* <p>{time}</p> */}
               <p>{message}</p>
               </UserMessage>
             </MessageContainer>
@@ -109,7 +109,7 @@ const chatSlideDown = keyframes`
 `
 
 const ChatContainer = styled.div`
-  background: var(--color3);
+  background: var(--color4);
   border-radius: 5px;
   position: absolute;
   left: 5%;
@@ -149,7 +149,6 @@ const ChatBody = styled.div`
 
 const MessageContainer = styled.div`
   display: flex;
-  /* justify-content: center; */
   justify-content: ${({ side }) => css`flex-${side}`};
   background: transparent;
   color: white;
@@ -161,14 +160,13 @@ const MessageContainer = styled.div`
 const UserMessage = styled.div`
   display: flex;
   justify-content: center;
-  /* flex-direction: column; */
-  font-size: 0.725em;
+  font-size: 0.95em;
   align-items: center;
   border-radius: 4px;
   background-color: ${({ user }) => user ? css`var(--color3)` : css`var(--color2)`} ;
   opacity: 0.8;
   color: white;
-  padding: 0.3em;
+  padding: 0.35em;
   animation: ${css`${chatSlideUp} ${fadeOptions}`};
 `
 

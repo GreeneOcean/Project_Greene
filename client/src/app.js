@@ -15,6 +15,8 @@ import { AppContainer, LoadingContainer, Footer } from "./styles/index.js";
 import config from "../config.js";
 import io from "socket.io-client";
 const socket = io.connect("https://nealtest.herokuapp.com/");
+// const socket = io.connect("http://localhost:8080");
+
 import Chat from './components/Video/Chat'
 import Video from './components/Video/Video'
 
@@ -31,7 +33,7 @@ function App() {
 
   useEffect(() => {
     api.get.location(dispatch);
-    const user = { userName: 'mgee', attempt: "shalom" };
+    const user = { userName: 'lol', attempt: "shalom" };
     api.get.login(user, dispatch); // Automatic Login user === mgee
   }, []);
 
@@ -117,7 +119,7 @@ function App() {
       {showChat && <Chat socket={socket} user={state.user} />}
       {showVideo && <Video socket={socket} user={state.user}  />  }
       <Footer>
-        <small>{"\u00a9 2022 Greene Inc. All rights reserved."}</small>
+        <small>{"\u00a9 2022 Greene Ocean Inc. All rights reserved."}</small>
       </Footer>
     </AppContainer>
   );

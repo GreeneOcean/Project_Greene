@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-import ItemCard from "../browse/list/ItemCard";
+import HomeCard from "./HomeCard";
 
 const HomeItemsWidget = ({ localItems, charity_state }) => {
   const [filteredItems, setFilteredItems] = useState([]);
@@ -23,12 +23,14 @@ const HomeItemsWidget = ({ localItems, charity_state }) => {
     <StyledDiv>
       {filteredItems.map((item, idx) => {
         return (
-          <StyledCard
+          <HomeCard
             item={item}
             key={idx}
             selectedItem={selectedItem}
             setSelectedItem={setSelectedItem}
-          />
+          >
+
+          </HomeCard>
         );
       })}
     </StyledDiv>
@@ -38,15 +40,24 @@ const HomeItemsWidget = ({ localItems, charity_state }) => {
 export default HomeItemsWidget;
 
 const StyledDiv = styled.div`
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth;
   width: 70vw;
-  height: 80vh;
   display: flex;
   overflow: auto;
-  flex-wrap: wrap;
+  flex-flow: row noWrap;
   justify-content: space-evenly;
-  margin: 10em 0;
+  margin: 10em 0; */
+
+  height: auto;
+  display: flex;
+  padding: 2em;
+  overflow: auto;
+  padding-top: 2em;
+  align-items: center;
+  white-space: nowrap;
+  width: 95%;
+  margin-bottom: 10vh;
+
+
 `;
 
-const StyledCard = styled(ItemCard)`
-`;

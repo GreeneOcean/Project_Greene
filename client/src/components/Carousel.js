@@ -17,14 +17,31 @@ export default function Carousel(props) {
     setImages(newImages);
   }, []);
 
+  const dummyCharities =[
+    {
+      title: "Toys for Tots",
+      description: 'Filling kids voids with toys'
+    },
+    {
+      title: "Boy's and Girl's Club of America",
+      description: 'Empower the youth of today with your gifts'
+    },
+    {
+      title: "Care for the Elderly",
+      description: 'Feed their love for the vintage'
+    },
+    {
+      title: "Midtown Theatre Alliance",
+      description: 'Donate to the arts and keep drama alive'
+    },
+    ]
+
   const nextImage = () => {
     setCurrent((current === images.length - 1) ? 0 : current + 1);
-    // clearInterval(compMoveInterval)
   }
 
   const prevImage = () => {
     setCurrent((current === 0) ? images.length - 1 : current - 1);
-    // clearInterval(compMoveInterval)
   }
 
   useEffect(() => {
@@ -46,8 +63,14 @@ export default function Carousel(props) {
             height:'100%',
             backgroundSize:'cover',
             backgroundImage: `url(${image})`,
-          }} />}
-      </ImageContainer>
+            borderRadius: '6px',
+            }} >
+            <TextDiv >
+            <h1>{dummyCharities[index].title}</h1>
+            <p>{dummyCharities[index].description}</p>
+            </TextDiv>
+            </Slide>}
+         </ImageContainer>
       ))}
       <RightArrow onClick={nextImage}/>
       <LeftArrow onClick={prevImage}/>
@@ -67,13 +90,13 @@ export default function Carousel(props) {
 
 const MainContainer = styled.section`
   position: relative;
-  width: 60%;
+  width: 75%;
   height: 50vh;
   background: var(--color3);
   display: flex;
-  align-items:center;
-  justify-content:center;
-  margin-bottom:5em;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5em;
 `;
 
 const Dot = styled(GoPrimitiveDot)`
@@ -99,16 +122,33 @@ const ImageContainer = styled.div`
   background:var(--color3);
 `;
 
+const TextDiv = styled.div`
+background: rgba(255,255,255,0.8);
+width: content-fit;
+height: content-fit;
+padding: 2em;
+color: var(--color1);
+
+h1{
+  font-size: 3em;
+}
+
+p{
+  margin: 1.5em 0;
+  font-size: 1.5em;
+}
+`;
+
 const Slide = styled.div`
-  display:block;
-  width:100%;
-  height:100%;
+  display: block;
+  width: 100%;
+  height: 100%;
   animation-name: fade-in;
   animation-duration: 2s;
 
   @keyframes fade-in{
     0% {opacity: 0}
-    100%{opacity: 1}
+    100% {opacity: 1}
   }
 `
 
@@ -116,9 +156,9 @@ const StyledArrow = css`
   position: absolute;
   display: inline-block;
   vertical-align: middle;
-  color:white;
-  width:6em;
-  height:auto;
+  color: white;
+  width: 6em;
+  height: auto;
   cursor: pointer;
   transition: all 0.5s;
 

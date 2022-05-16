@@ -9,8 +9,8 @@ const UploadContainer = styled.div`
   font-size: 64px;
   height: 400px;
   width: 450px;
-  color: #999;
-  border: 3px solid #999;
+  color: white;
+  border: 3px solid white;
   border-radius: 10%;
   display: flex;
   justify-content: center;

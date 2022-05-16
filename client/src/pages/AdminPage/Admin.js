@@ -2,25 +2,17 @@ import React, { useState } from 'react';
 import ApprovalList from './ApprovalList.js';
 import api from '../../api/index';
 import styled from "styled-components";
-
+import { ButtonM } from '../../styles/buttons';
 
 function Admin({ user }) {
   const [handleApprovalList, setHandleApprovalList] = useState(false);
 
-
-
   return (
     <AdminContainer>
-
       <ShowListButton onClick={() => {setHandleApprovalList(true)}}>Waiting for approval</ShowListButton>
-
-      {handleApprovalList &&
-
-      user.pendingList.map((each) => {
+      {handleApprovalList && user.pendingList.map((each) => {
         return <ApprovalList api={api.put} each={each}/>
-      })
-     }
-
+      })}
     </AdminContainer>
   )
 }
@@ -32,14 +24,12 @@ const AdminContainer = styled.div`
   display: flex;
   padding-top: 4em;
   position: relative;
-  /* align-items: center;
-  font: 40px;
-  justify-content: center; */
+  align-items: center;
+  justify-content: space-around;
   font-size: 20px;
   flex-direction: column;
-  background-color: white;
 `
 
-const ShowListButton = styled.button`
+const ShowListButton = styled(ButtonM)`
 
 `
