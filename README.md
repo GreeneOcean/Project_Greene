@@ -7,13 +7,13 @@ This project was created by eight engineers working closely over the course of o
 
 ## User Stories
 - As a user you should be able to sign-up/login with a secure username and password.
-![image](client/images/login.jpg)
+![image](images/login.jpg)
 - As a signed in user you should be able to donate items.
-![image](client/images/donate.gif)
+![image](images/donate.gif)
 - As a signed in user you should be able to browse items in your area.
-![image](client/images/map.gif)
+![image](images/map.gif)
 - As a signed in user you should be able to view your donated items, items you'd expressed interest in, approved items, history of your transactions and chat with other users.
-![image](client/images/videoChat.gif)
+![image](images/videoChat.gif)
 
 <img src="https://i.imgur.com/KLruRtZ.png" alt="Green ocean landing page" width="49%" height="auto" />  <img src="https://i.imgur.com/tucUhtK.png" alt="Green ocean browse page" width="49%" height="auto" />
 
