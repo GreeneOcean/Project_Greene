@@ -1,16 +1,19 @@
 # Project_Greene
 
-## About 
-Greene Ocean seeks connect people in need with those more fortunate through technology. Our web application provides a platform for perspective donors to create an account (authentication achieved without the use of an external API), post their donations and upload photos of their donations. Donors have the ability to live chat and/or video chat with perspective recipients before approving the transaction, allowing greater control over where their donation is going. Likewise, donation recipients have the ability to browse available donations in their area and claim items based on their individual needs and circumstances. Integration with Google Maps API makes browsing easy. Charities have the option to claim exclusive donations marked as for charity only. 
+## About
+Greene Ocean seeks connect people in need with those more fortunate through technology. Our web application provides a platform for perspective donors to create an account (authentication achieved without the use of an external API), post their donations and upload photos of their donations. Donors have the ability to live chat and/or video chat with perspective recipients before approving the transaction, allowing greater control over where their donation is going. Likewise, donation recipients have the ability to browse available donations in their area and claim items based on their individual needs and circumstances. Integration with Google Maps API makes browsing easy. Charities have the option to claim exclusive donations marked as for charity only.
 
 This project was created by eight engineers working closely over the course of one week to meet the requests of a client based in Austin, Texas. As a team, we believe that tools like our website will inspire generosity among those in your local community and connect everyone on a deep and fundamental level.
 
 ## User Stories
-- As a user you should be able to sign-up/login with a secure username and password. 
+- As a user you should be able to sign-up/login with a secure username and password.
+![image](images/login.jpg)
 - As a signed in user you should be able to donate items.
-- As a signed in user you should be able to browse items in your area. 
-- As a signed in user you should be able to view your donated items, items you'd expressed interest in, approved items and history of your transactions. 
-
+![image](images/donate.gif)
+- As a signed in user you should be able to browse items in your area.
+![image](images/map.gif)
+- As a signed in user you should be able to view your donated items, items you'd expressed interest in, approved items, history of your transactions and chat with other users.
+![image](images/videoChat.gif)
 
 <img src="https://i.imgur.com/KLruRtZ.png" alt="Green ocean landing page" width="49%" height="auto" />  <img src="https://i.imgur.com/tucUhtK.png" alt="Green ocean browse page" width="49%" height="auto" />
 
@@ -24,7 +27,7 @@ This project was created by eight engineers working closely over the course of o
 ![Socket.io](https://img.shields.io/badge/Socket.io-010101?&style=for-the-badge&logo=Socket.io&logoColor=white)
 ![Heroku](https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white)
 
-## Contributors 
+## Contributors
 * [Elfric Dexter](https://github.com/7socks)
 * [Colin Fitzhenry](https://github.com/cgf5033)
 * [Cory Finkbeiner](https://github.com/coryFinkbeiner)
@@ -36,9 +39,11 @@ This project was created by eight engineers working closely over the course of o
 
 ## Usage
 
+
+
 ### Available Scripts
 
-In the client project directory, you can run: 
+In the client project directory, you can run:
 #### `npm run build:dev`
 
 Runs the app in the development mode.
