@@ -1,7 +1,7 @@
 # Project_Greene
 
 ## About
-Greene Ocean seeks connect people in need with those more fortunate through technology. Our web application provides a platform for perspective donors to create an account (authentication achieved without the use of an external API), post their donations and upload photos of their donations. Donors have the ability to live chat and/or video chat with perspective recipients before approving the transaction, allowing greater control over where their donation is going. Likewise, donation recipients have the ability to browse available donations in their area and claim items based on their individual needs and circumstances. Integration with Google Maps API makes browsing easy. Charities have the option to claim exclusive donations marked as for charity only.
+Greene Ocean seeks connect people in need with those more fortunate through technology. Our web application provides a platform for prospective donors to create an account (authentication achieved without the use of an external API), post their donations and upload photos of their donations. Donors have the ability to live chat and/or video chat with perspective recipients before approving the transaction, allowing greater control over where their donation is going. Likewise, donation recipients have the ability to browse available donations in their area and claim items based on their individual needs and circumstances. Integration with Google Maps API makes browsing easy. Charities have the option to claim exclusive donations marked as for charity only.
 
 <img src="https://i.imgur.com/KLruRtZ.png" alt="Green ocean landing page" width="49%" height="auto" />  <img src="https://i.imgur.com/tucUhtK.png" alt="Green ocean browse page" width="49%" height="auto" />
 
